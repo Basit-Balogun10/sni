@@ -473,7 +473,7 @@ a {
 
 @media only screen and (min-width: 970px) {
     #logo {
-        margin-right: 4vw;
+        margin-left: 0vw;
     }
     nav a {
         color: white;
@@ -484,7 +484,7 @@ a {
     nav {
         background: #002657;
         color: white;
-        padding: 2.45vw;
+        padding: 2.45vw 0vw;
         margin-bottom: 2vw;
         border-bottom: 0.2rem solid #C582EB;
     }
@@ -493,23 +493,24 @@ a {
     }
     ul.navigation {
         display: inline-block;
-        margin-left: 5vw;
+        margin-left: 6vw;
         margin-bottom: 1.8vw;
     }
     nav li {
         float: left;
         margin: 0vw 1.5vw;
-        font-size: 1.3rem;
+        font-size: 1.5rem;
         font-weight: 500;
         list-style: none;
         font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif;
         cursor: pointer;
-        transition: font-size 0.3s;
+        transition: font-size 0.1s;
     }
     nav li:hover {
-        font-size: 1.5rem;
+        font-size: 1.6rem;
         font-weight: bolder;
     }
+    
     .grid-container {
         display: inline-grid;
         grid-template-columns: auto auto;
@@ -518,14 +519,10 @@ a {
     }
     .grid-item {
         background-color: #002657;
+        border: none;
         padding: 2vw;
         font-size: 1rem;
         text-align: center;
-    }
-    img#first-image {
-        width: 500vw;
-        height: 500vw;
-        border: 0.1rem solid red;
     }
     footer {
         background-color: #002657;
