@@ -493,7 +493,6 @@ a {
         font-size: 2rem;
         text-align: center;
     }
-    h4 {}
     h3 em {
         color: white;
         font-size: 1.2rem;
@@ -526,8 +525,7 @@ a {
         background: #002657;
         color: white;
         padding: 2.45vw 0vw;
-        margin-bottom: 2vw;
-        border-bottom: 0.2rem solid #C582EB;
+        margin-bottom: 0.65vw;
     }
     .wrapper {
         text-align: center;
@@ -552,18 +550,83 @@ a {
         font-weight: bolder;
     }
 
+    main{
+        background: #C582EB; /* For browsers that do not support gradients */    
+        background: -webkit-linear-gradient(left top, #C582EB, #002657); /* For Safari 5.1 to 6.0 */
+        background: -o-linear-gradient(top right, #C582EB, #002657); /* For Opera 11.1 to 12.0 */
+        background: -moz-linear-gradient(top right, #C582EB, #002657); /* For Firefox 3.6 to 15 */
+        /*background: linear-gradient(5deg, #f85ff0, #002657); */
+        background: linear-gradient(75deg, #f85ff0, #002657); /* Standard syntax (must be last) */
+    }
+
     .grid-container {
         display: inline-grid;
         grid-template-columns: auto auto;
-        background-color: #002657;
+        /* background-color: #002657; */
+        width: 100%;
         padding: 1vw;
+        margin-top: 10vw;
+    }
+
+    .grid-container .grid-item.first-item{
+        padding: 14vw 6vw 14vw 2vw;
+    }
+
+    .grid-container .grid-item.first-item h1{
+        color: #ffffff;
+        font-family: "Varela Round", Sans-serif;
+        font-size: 3.516vw;
+        font-weight: 100;
+        text-shadow: none;
+        text-transform: capitalize;
+        line-height: 4.219vw;
+        display: block;
+        margin-bottom: 3vw;
+        margin-top: 1vw;
+    }
+
+    .grid-container .grid-item.first-item h3{
+        color: #ffffff;
+        font-family: "Montserrat", Sans-serif;
+        font-size: 2rem;
+        text-shadow: none;
+        font-weight: lighter;
+        text-transform: capitalize;
+
+    }
+
+    .grid-container .grid-item.first-item a{
+        width: 12.004vw;
+        height: 3.516vw;
+        font-family: "Montserrat", Sans-serif;
+        font-size: 1.5rem;
+        font-weight: 500;
+        text-transform: capitalize;
+        color: #ffffff;
+        background-color: #00dafc;
+        border-radius: 3rem;
+        box-shadow: 0rem 0rem 3rem 0rem rgb(53 56 240 / 50%);
+        padding: 1.093vw 3.047vw;
+        transition: background-color 1s;
+        cursor: pointer;
+        text-align: center;
+    }
+    .grid-container .grid-item.first-item a:hover{
+        background-color: #4632DA;
+    }
+
+    #first-image{
+        width: 42.114vw;
+        height: 42.114vw;
+        border-radius: 30rem 10rem 10rem 10rem;
+        box-shadow: 0rem 0rem 3rem 0rem rgb(0 0 0 / 12%);
     }
     .grid-item {
-        background-color: #002657;
+        /* background-color: #002657; */
         border: none;
         padding: 2vw;
         font-size: 1rem;
-        text-align: center;
+        /* text-align: center; */
     }
     footer {
         background-color: #002657;
