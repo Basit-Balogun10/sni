@@ -1,205 +1,3 @@
-/* html,
-body {
-    font-size: 62.5%;
-    font-family: "Montserrat", Sans-serif;
-    max-width: 100%;
-    background-color: #002657;
-    color: white;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box
-}
-
-.clear {
-    clear: both
-}
-
-a {
-    text-decoration: none;
-}
-
-#logo {
-    margin-left: 10rem
-}
-
-ul {
-    padding-inline-start: 0rem;
-}
-
-nav a {
-    color: white;
-}
-
-nav {
-    background: #002657;
-    color: white;
-    padding: 3.5rem;
-}
-
-nav ul {
-    float: right;
-    margin-top: 2rem;
-    margin-right: 8rem;
-}
-
-nav li {
-    float: left;
-    margin: 0rem 2rem;
-    font-size: 1.4rem;
-    font-weight: 500;
-    list-style: none;
-    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif;
-    cursor: pointer;
-    transition: font-size 0.3s;
-}
-
-nav li:hover {
-    font-size: 1.5rem;
-    font-weight: bolder;
-}
-
-p:first-letter {
-    float: left;
-    font-size: 6rem;
-    font-weight: 700;
-    line-height: 2.5rem;
-    padding-top: 0.3rem;
-    padding-right: 0.4rem;
-    padding-left: 0.3rem;
-}
-
-.grid-container {
-    display: inline-grid;
-    grid-template-columns: auto auto;
-    background-color: #002657;
-    padding: 1rem;
-}
-
-.grid-item {
-    background-color: #002657;
-    border: none;
-    padding: 2rem;
-    font-size: 1rem;
-    text-align: center;
-}
-
-.grid-container2 {
-    max-width: 100%;
-    display: inline-grid;
-    grid-template-columns: auto auto auto auto;
-    background-color: #002657;
-    width: 100%;
-    height: 32.6424rem;
-}
-
-.grid-item2 {
-    background-color: #002657;
-    color: rgba(255, 255, 255, 0.38);
-    border: none;
-    padding-left: 1rem;
-    font-size: 1.4rem;
-    font-family: apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif;
-    font-weight: 300;
-    width: 20.826rem;
-}
-
-.grid-item2 li {
-    list-style: none;
-}
-
-.grid-item2 ul {
-    margin: none
-}
-
-.grid-item2.overview {
-    width: 55.194rem;
-    padding: 0rem 9rem;
-}
-
-.grid-item2 a {
-    color: rgba(255, 255, 255, 0.38);
-    transition: font-size 0.3s;
-}
-
-.grid-item2 a:hover {
-    color: white;
-    font-size: 1.5rem;
-    font-weight: bolder;
-}
-
-.grid-item2 h2 {
-    color: #C582EB;
-    font-size: 1.8rem;
-    font-weight: 500;
-}
-
-footer {
-    max-width: 100%;
-    background-color: #002657;
-    padding-top: 3rem;
-    border-top: 1rem solid #C582EB;
-}
-
-ul.footer-icons {
-    float: left;
-    margin-right: 0rem;
-    width: 20rem;
-}
-
-#footer-icons {
-    padding-left: 33rem;
-    width: 120rem;
-    height: 1rem;
-}
-
-.footer-icons a {
-    color: #C582EB;
-    font-size: 1.4rem;
-}
-
-.footer-icons li {
-    float: left;
-    padding-right: 1rem;
-    padding-left: 2.4rem;
-    padding-bottom: 0rem;
-    padding-top: 7rem;
-    list-style: none;
-    margin-top: 3rem;
-}
-
-h4.footer-motto {
-    color: white;
-    font-size: 4.5rem;
-    width: 100rem;
-    padding-left: 10rem;
-    padding-bottom: 7rem;
-    margin-left: 8rem;
-}
-
-h4 {
-    text-align: center;
-}
-
-h3 em {
-    color: white;
-    font-size: 1.5rem;
-    margin-bottom: 3rem;
-}
-
-h3.credit {
-    text-align: right;
-}
-
-h6 {
-    color: white;
-    font-size: 1rem;
-    font-weight: lighter;
-    text-align: center; 
-} */
-
 html,
 body {
     font-size: 62.5%;
@@ -225,6 +23,176 @@ a {
 .dropdown{
     display: none;
 }
+main{
+    background: #C582EB; /* For browsers that do not support gradients */    
+    background: -webkit-linear-gradient(left top, #C582EB, #002657); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(top right, #C582EB, #002657); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(top right, #C582EB, #002657); /* For Firefox 3.6 to 15 */
+    /*background: linear-gradient(5deg, #f85ff0, #002657); */
+    background: linear-gradient(75deg, #f85ff0, #002657); /* Standard syntax (must be last) */
+}
+
+.grid-container {
+    display: inline-grid;
+    grid-template-columns: 55% 45%;
+    background: #C582EB; /* For browsers that do not support gradients */    
+    background: -webkit-linear-gradient(left top, #C582EB, #002657); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(top right, #C582EB, #002657); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(top right, #C582EB, #002657); /* For Firefox 3.6 to 15 */
+    /*background: linear-gradient(5deg, #f85ff0, #002657); */
+    background: linear-gradient(75deg, #f85ff0, #002657); /* Standard syntax (must be last) */
+    width: 100%;
+    padding: 1vw;
+    margin-top: 15rem;
+    border-bottom-left-radius: 38vw;
+    border-top-right-radius: 50vw;
+}
+
+.grid-item {
+    /* background-color: #002657; */
+    border: none;
+    /* padding: 2.5rem; */
+    font-size: 1rem;
+    /* text-align: center; */
+}
+
+.grid-container .grid-item.first-item h1{
+    color: #ffffff;
+    font-family: "Varela Round", Sans-serif;
+    font-size: 4.5rem;
+    font-weight: 100;
+    text-shadow: none;
+    text-transform: capitalize;
+    line-height: 4.219vw;
+    display: block;
+    margin-bottom: 3.5rem;
+    margin-top: 1vw;
+}
+
+.grid-container .grid-item.first-item h3{
+    color: #ffffff;
+    font-family: "Montserrat", Sans-serif;
+    font-size: 2rem;
+    text-shadow: none;
+    font-weight: lighter;
+    text-transform: capitalize;
+
+}
+
+.grid-container .grid-item.first-item a{
+    width: 15.364rem;
+    height: 4.5rem;
+    font-family: "Montserrat", Sans-serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+    text-transform: capitalize;
+    color: #ffffff;
+    background-color: #00dafc;
+    border-radius: 3rem;
+    box-shadow: 0rem 0rem 3rem 0rem rgb(53 56 240 / 50%);
+    padding: 1.4rem 3.9rem;
+    transition: background-color 1s;
+    cursor: pointer;
+    text-align: center;
+}
+.grid-container .grid-item.first-item a:hover{
+    background-color: #4632DA;
+}
+
+#first-image{
+    width: 42.114vw;
+    height: 42.114vw;
+    border-radius: 30rem 10rem 10rem 10rem;
+    box-shadow: 0rem 0rem 3rem 0rem rgb(0 0 0 / 12%);
+}
+
+.grid-container2 {
+    display: inline-grid;
+    grid-template-columns: 50% 50%;
+    background: #002657; /* For browsers that do not support gradients */    
+    background: -webkit-linear-gradient(left top, #002657, #C582EB); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(top right, #002657, #C582EB); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(top right, #002657, #C582EB); /* For Firefox 3.6 to 15 */
+    /*background: linear-gradient(5deg, #f85ff0, #002657); */
+    background: linear-gradient(75deg, #002657, #C582EB); /* Standard syntax (must be last) */
+    width: 100%;
+    padding: 1vw;
+    /* margin-top: 10vw; */
+    border-top-left-radius: 38vw;
+    border-bottom-right-radius: 30vw;
+}
+
+.grid-item2 {
+    /* background-color: #002657; */
+    border: none;
+    padding: 3vw;
+    font-size: 1rem;
+    /* text-align: center; */
+}
+
+.grid-item2:nth-child(1) {
+    padding-top: 19vw;
+}
+
+.grid-container2 .grid-item2 h2{
+    color: #4632da;
+    font-family: "Varela Round", Sans-serif;
+    font-size: 4.5rem;
+    font-weight: 300;
+    text-transform: capitalize;
+    line-height: 4.8rem;
+    margin-bottom: 2.1rem;
+}
+
+.grid-container2 .grid-item2 p{
+    color: rgb(255, 255, 255, 0.65);
+    font-family: "Montserrat", Sans-serif;
+    font-size: 1.6rem;
+    font-weight: 100;
+    line-height: 2rem;
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.grid-container2 .grid-item2 p span.first-char{
+    float: left;
+    font-family: "Montserrat", Sans-serif;
+    font-size: 7.5rem;
+    line-height: 5rem;
+    padding-top: 0.4rem;
+    padding-right: 0.8rem;
+    padding-left: 0.3rem;
+}
+
+#second-image{
+    width: 42.114vw;
+    height: 42.114vw;
+    border-radius: 100rem 100rem 300rem 100rem;
+    box-shadow: 0rem 0rem 30rem 0rem rgb(0 0 0 / 12%)
+}
+#dummy-second-image {
+    display: none;
+}
+
+.schedule {
+    padding: 2rem 0rem;
+}
+
+.schedule h3{
+    color: #4632da;
+    font-family: "Montserrat", Sans-serif;
+    font-size: 2rem;
+    font-weight: 300;
+    text-transform: capitalize;
+}
+.schedule h2{
+    color: #3d4459;
+    font-family: "Varela Round", Sans-serif;
+    font-size: 4.5rem;
+    font-weight: 300;
+    text-transform: capitalize;
+    line-height: 1.2em;
+}
 
 @media only screen and (max-width: 969px) {
     nav {
@@ -232,7 +200,6 @@ a {
         color: white;
         padding: 3.5vw 3.5vw;
         margin: 0% 1vw;
-        border-bottom: 0.2rem solid #C582EB;
     }
     #logo {
         margin-left: 30vw;
@@ -273,11 +240,24 @@ a {
             font-weight: bolder;
             color: #C582EB;
         }
+        .grid-container {
+            margin-top: 10rem;
+        }
+        .grid-item.first-item{
+            margin-top: 10rem;
+            padding-left: 2rem;
+        }
+        .grid-container2 .grid-item2 h2{
+            font-size: 3.7rem;
+        }
+        .grid-item2:nth-child(2) {
+            padding-top: 8vw;
+        }
     }
     @media only screen and (max-width: 671px) {
         .wrapper {
-            margin-bottom: 1rem;
             text-align: center;
+        
         }
         #logo {
          /* margin-left: 3vw; */
@@ -292,7 +272,7 @@ a {
         }
         nav {
             padding: 4% 0% 0% 0%;
-            margin-bottom: 8vw;
+            margin-bottom: 4vw;
         }
         ul.navigation {
             display: none;
@@ -333,13 +313,14 @@ a {
             text-align: left;
             text-decoration: none;
             display: block;
+            transition: color 1s, background-color 1s, font-size 1s
             /* border: 0.1rem solid #C582EB; */
         }
         
         /* Change color of dropdown links on hover */
         .dropdown-content a:hover {background-color: #C582EB;
         color: white;
-        /* font-size: 1.7rem; */
+        font-size: 1.7rem;
         }
         
         /* Show the dropdown menu on hover */
@@ -351,34 +332,80 @@ a {
         .dropdown:hover .dropbtn {
             display: none;
         }
+        .schedule h3{
+            font-size: 1.8rem;
+        }
+        .schedule h2{
+            font-size: 3.2rem;
+            line-height: 1.2em;
+        }
+        .schedule {
+            padding: 2rem 0rem;
+            text-align: center;
+        }
+        .grid-container {
+            grid-template-columns: auto;
+        }
+        .grid-item {
+            padding: 2.5rem;
+            text-align: center;
+        }
+        .grid-item.first-item{
+            margin-bottom: 30rem;
+        }
+        #first-image{
+            width: 39rem;
+            height: 39rem;
+        }
+        .grid-container2 {
+            grid-template-columns: auto;
+        }
+        .grid-item2 {
+            margin-top: 3rem;
+            text-align: center;
+            /* --translateY: 18.4px;
+            transform: translateY(var(--translateY));
+            opacity: 0.264;
+            will-change: 1; */
+        }
+        .grid-container2 .grid-item2 h2{
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: bolder;
+        }
+        .grid-item2:nth-child(1) {
+            padding-top: 0rem;
+        }
+        #second-image{
+            display: none;
+        }
+        #dummy-second-image {
+            display: block;
+            width: 39rem;
+            height: 39rem;
+            border-radius: 100rem 100rem 300rem 100rem;
+            box-shadow: 0rem 0rem 30rem 0rem rgb(0 0 0 / 12%)
+        }
     }
-    .grid-container {
-        display: inline-grid;
-        grid-template-columns: auto auto;
-        background-color: #002657;
-        padding: 1.6%;
-    }
-    .grid-item {
-        background-color: #002657;
-        border: none;
-        padding: 3.2%;
-        font-size: 1rem;
-        text-align: center;
+    .grid-container .grid-item.first-item h1{
+            font-size: 3rem;
+        }
+    .grid-container .grid-item.first-item h3{
+            font-size: 1.8rem;
     }
     footer {
         max-width: 100%;
         background-color: #002657;
         padding-top: 3%;
-        border-top: 0.3rem solid #C582EB;
     }
-    .grid-container2 {
+    .grid-container3 {
         width: 100%;
         display: inline-grid;
         grid-template-columns: auto auto auto;
         background-color: #002657;
         align-content: center;
     }
-    .grid-item2 {
+    .grid-item3 {
         background-color: #002657;
         color: rgba(255, 255, 255, 0.38);
         color: white;
@@ -435,24 +462,24 @@ a {
         margin-left: 18%;
         border-bottom: none;
     }
-    .grid-item2 a {
+    .grid-item3 a {
         color: skyblue;
         transition: color 0.1s;
     }
-    .grid-item2 li {
+    .grid-item3 li {
         list-style: none;
         margin: 1vw 0vw;
     }
-    .grid-item2 a:hover {
+    .grid-item3 a:hover {
         color: rgb(197, 130, 235, 0.8);
     }
-    .grid-item2 h2 {
+    .grid-item3 h2 {
         font-weight: 500;
         margin: 1vw 0vw;
         padding-bottom: 1vw;
         font-size: 1.5rem;
     }
-    #item5.grid-item2 {
+    #item5.grid-item3 {
         grid-column-start: 1;
         grid-column-end: 4;
         /* padding: 1%;*/
@@ -560,106 +587,64 @@ a {
     }
 
     .grid-container {
-        display: inline-grid;
-        grid-template-columns: auto auto;
-        /* background-color: #002657; */
-        width: 100%;
-        padding: 1vw;
-        margin-top: 10vw;
+        border-bottom-left-radius: 38.5rem;
+        border-top-right-radius: 64rem;
     }
 
-    .grid-container .grid-item.first-item{
-        padding: 14vw 6vw 14vw 2vw;
+    .grid-item.first-item{
+        margin-top: 20rem;
+        padding-left: 2rem;
     }
 
-    .grid-container .grid-item.first-item h1{
-        color: #ffffff;
-        font-family: "Varela Round", Sans-serif;
-        font-size: 3.516vw;
-        font-weight: 100;
-        text-shadow: none;
-        text-transform: capitalize;
-        line-height: 4.219vw;
-        display: block;
-        margin-bottom: 3vw;
-        margin-top: 1vw;
+    .grid-container2 {
+        border-top-left-radius: 25.6rem;
+        border-bottom-right-radius: 38.5rem;
     }
 
-    .grid-container .grid-item.first-item h3{
-        color: #ffffff;
-        font-family: "Montserrat", Sans-serif;
-        font-size: 2rem;
-        text-shadow: none;
-        font-weight: lighter;
-        text-transform: capitalize;
-
+    .grid-item2 {
+        padding: 6vw 3vw 3vw 3vw;
     }
 
-    .grid-container .grid-item.first-item a{
-        width: 12.004vw;
-        height: 3.516vw;
-        font-family: "Montserrat", Sans-serif;
-        font-size: 1.5rem;
-        font-weight: 500;
-        text-transform: capitalize;
-        color: #ffffff;
-        background-color: #00dafc;
-        border-radius: 3rem;
-        box-shadow: 0rem 0rem 3rem 0rem rgb(53 56 240 / 50%);
-        padding: 1.093vw 3.047vw;
-        transition: background-color 1s;
-        cursor: pointer;
-        text-align: center;
-    }
-    .grid-container .grid-item.first-item a:hover{
-        background-color: #4632DA;
+    .grid-item2:nth-child(1) {
+        padding-top: 6vw;
     }
 
-    #first-image{
-        width: 42.114vw;
-        height: 42.114vw;
-        border-radius: 30rem 10rem 10rem 10rem;
-        box-shadow: 0rem 0rem 3rem 0rem rgb(0 0 0 / 12%);
+    .grid-container2 .grid-item2 p{
+        line-height: 2.4rem;
     }
-    .grid-item {
-        /* background-color: #002657; */
-        border: none;
-        padding: 2vw;
-        font-size: 1rem;
-        /* text-align: center; */
+
+    .grid-container2 .grid-item2 p span.first-char{
+        line-height: 6rem;
     }
+
+
     footer {
         background-color: #002657;
         padding-top: 3vw;
-        border-top: 0.2rem solid #C582EB;
     }
-    /* .footer-wrapper {
-        text-align: center;
-    } */
-    .grid-container2 {
+    .grid-container3 {
         display: inline-grid;
         grid-template-columns: auto auto auto auto;
     }
-    .grid-item2 {
-        /* text-align: left; */
+    .grid-item3 {
         font-size: 1.2rem;
         margin-right: 7vw;
     }
-    .grid-item2 h2 {
+    .grid-item3 h2 {
         font-weight: 500;
         margin: 1vw 0vw;
         padding-bottom: 1vw;
         font-size: 1.5rem;
     }
-    .grid-item2 li {
+    .grid-item3 li {
         list-style: none;
         margin: 1vw 0vw;
     }
-    .grid-item2 a {
+    .grid-item3 a {
         color: skyblue;
         transition: color, font-size 0.5s;
     }
-    .grid-item2 a:hover {
+    .grid-item3 a:hover {
         color: rgb(197, 130, 235, 0.8);
         font-size: 1.3rem;
     }
