@@ -21,13 +21,28 @@ body {
 a {
     text-decoration: none;
 }
+
+
 nav a:active{
     text-decoration:underline;
 }
 
+
 nav {
     position: fixed
 }
+
+li.active {
+    border-bottom: 0.2rem solid skyblue;
+}
+
+li.active a{
+    color: skyblue;
+}
+li.active a:hover{
+    color: skyblue;
+}
+
 .dropdown{
     display: none;
 }
