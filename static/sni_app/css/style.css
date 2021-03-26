@@ -237,35 +237,57 @@ main{
     ul.navigation {
         display: inline-block;
     }
-    #myBtn {
-        display: none; /* Hidden by default */
-        position: fixed; /* Fixed/sticky position */
-        bottom: 7rem; /* Place the button at the bottom of the page */
-        right: 3rem; /* Place the button 30px from the right */
+    #toTop-btn {
+        display: none;
+        position: fixed;
+        bottom: 5rem;
+        right: 3rem;
         z-index: 99; 
-        border: none; /* Remove borders */
-        outline: none; /* Remove outline */
-        background-color: #C582EB; /* Set a background color */
-        color: white; /* Text color */
-        cursor: pointer; /* Add a mouse pointer on hover */
-        border-radius: 50%; /* Rounded corners */
+        border: none;
+        outline: none;
+        background-color: #C582EB;
+        color: #002657;
+        cursor: pointer;
+        border-radius: 50%;
         width: 5rem;
         height: 5rem;
-        font-size: 1.8rem; /* Increase font size */
-        text-align: center;
         opacity: 0.5;
+        box-shadow: 0rem 0rem 3rem 0rem #002657;
       }
 
-      #myBtn:hover {
-        background-color: #002657; /* Add a dark-grey background on hover */
+      #toTop-btn:hover {
+        background-color: #002657;
+        box-shadow: 0rem 0rem 3rem 0rem #C582EB;
       }
 
-      #myBtn i{
-        color: #002657;
-      }
-
-      #myBtn:hover i {
+      #toTop-btn:hover i {
           color: #C582EB;
+      }
+
+    #toBottom-btn {
+        display: block;
+        position: fixed;
+        top: 14rem;
+        right: 3rem;
+        z-index: 99; 
+        border: none;
+        outline: none;
+        background-color: #002657;
+        color: #C582EB;
+        cursor: pointer;
+        border-radius: 50%;
+        width: 5rem;
+        height: 5rem;
+        opacity: 0.5;
+        box-shadow: 0rem 0rem 3rem 0rem #C582EB;
+      }
+
+      #toBottom-btn:hover {
+        background-color: #C582EB; /* Add a dark-grey background on hover */
+      }
+
+      #toBottom-btn:hover i {
+          color: #002657;
       }
 
     @media only screen and (min-width: 672px) {
