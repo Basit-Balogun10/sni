@@ -13,12 +13,12 @@
 </head>
 
 <body>
-<header>
-    <nav>
-        <div class="wrapper">
+<header id="header">
+    <nav id="navBar">
+        <div class="wrapper" id="nav-wrapper">
             <a href="/"><img alt="SNI-Logo" height="69.47" id="logo"
                              src="static/sni_app/images/SNI-Logo-Transparent-1536x368.png" width="290"></a>
-            <ul class="navigation" id="navigation">
+            <ul class="navigation" id="myTopnav">
                 <li class="route active"><a href="/" title="Go To The Home Page">Home</a></li>
                 <li class="route"><a href="/#about" title="About Us">About</a></li>
                 <li class="route"><a href="/#schedule">Schedule</a></li>
@@ -27,19 +27,8 @@
                 <li class="route"><a href="/#venue">Venue</a></li>
                 <li class="route"><a href="/#sponsors">Sponsors</a></li>
             </ul>
-            <div class="dropdown">
-                <button class="dropbtn" id="dropbtn"><span style="color: #C582EB"><i
-                        class="fas fa-bars fa-2x"></i></span></button>
-                <div class="dropdown-content">
-                    <a href="#home">Home</a>
-                    <a href="#about">About</a>
-                    <a href="#schedule">Schedule</a>
-                    <a href="#speakers">Speakers</a>
-                    <a href="#organizer">Organizer</a>
-                    <a href="#venue">Venue</a>
-                    <a href="#sponsors">Sponsors</a>
-                </div>
-            </div>
+            <a class="icon" href="javascript:void(0);" id="dropdownIcon" onclick="routesDisplay()"><i
+                    class="fas fa-bars fa-5x"></i></a>
         </div>
         <div class="clear"></div>
     </nav>
@@ -54,7 +43,8 @@
         <div class="grid-item first-item">
             <h3>Empowering Youth.</h3>
             <h1>Change. Progress. Success.</h1>
-            <a href="#about" role="button" title="About Us">About Us<i class="fas fa-arrow-down"></i></a>
+            <a href="#about" role="button" title="About Us">About Us<i class="fas fa-arrow-down"
+                                                                       style="margin-left: 1rem"></i></a>
         </div>
         <div class="grid-item">
             <img alt="" id="first-image" src="static/sni_app/images/Hero-Home-page-new.png">
@@ -94,7 +84,7 @@
     </div>
 </main>
 
-<footer>
+<footer id="pageFooter">
     <div class="grid-container3">
         <div class="grid-item3" id="item1">
             <a href="/"><img alt="" height="75" src="static/sni_app/images/SNI-Logo-Transparent-1536x368.png"
