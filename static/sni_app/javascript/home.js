@@ -1,3 +1,35 @@
+// Get the container element
+var routeContainer = document.getElementById("myTopnav");
+
+var routes = routeContainer.getElementsByClassName("route");
+
+var navLinks = [
+  "Home",
+  "#about",
+  "#schedule",
+  "speakers",
+  "organizer",
+  "venue",
+  "sponsors",
+];
+url = window.location.href;
+console.log(url);
+
+if (url == "http://127.0.0.1:8000/") {
+  console.log(0 + "Home-->" + routes[0].innerText + " true");
+  routes[0].className += " active";
+} else {
+  for (var i = 1; i < navLinks.length; ) {
+    if (url.includes(navLinks[i])) {
+      console.log(i + navLinks[i] + "-->" + routes[i].innerText + " true");
+      routes[i].className += " active";
+      break;
+    } else {
+      console.log(i + navLinks[i] + "-->" + routes[i].innerText);
+    }
+    i += 1;
+  }
+}
 //Get the button:
 topbutton = document.getElementById("toTop-btn");
 
@@ -22,6 +54,7 @@ function topFunction() {
 
 bottombutton = document.getElementById("toBottom-btn");
 myHeader = document.getElementById("header");
+navBar = document.getElementById("navBar");
 
 function bottomscrollFunction() {
   if (
@@ -31,11 +64,13 @@ function bottomscrollFunction() {
   ) {
     bottombutton.style.display = "none";
     if (window.innerWidth >= 970) {
-      myHeader.style.display = "none";
+      navBar.style.top = "-100rem";
+      //      myHeader.style.display = "none";
     }
   } else {
     bottombutton.style.display = "block";
-    myHeader.style.display = "block";
+    navBar.style.top = "0";
+    //    myHeader.style.display = "block";
   }
 }
 
@@ -46,11 +81,6 @@ function bottomFunction() {
     document.body.scrollHeight || document.documentElement.scrollHeight
   );
 }
-
-// Get the container element
-var routeContainer = document.getElementById("myTopnav");
-
-var routes = routeContainer.getElementsByClassName("route");
 
 // Loop through the buttons and add the active class to the current/clicked button
 for (var i = 0; i < routes.length; i++) {
@@ -76,18 +106,19 @@ function routesDisplay() {
 }
 
 footer = document.getElementById("pageFooter");
-navBar = document.getElementById("navBar");
 
 var observer = new IntersectionObserver(
   function (entries) {
     if (entries[0].isIntersecting === true) {
       if (window.innerWidth < 970) {
         navBar.style.display = "none";
+        // navBar.style.top = "-100rem";
         bottombutton.style.marginTop = "-10rem";
       }
     } else {
-      bottombutton.style.marginTop = "0rem";
       navBar.style.display = "block";
+      bottombutton.style.marginTop = "0rem";
+      // navBar.style.top = "0";
     }
   },
   { threshold: [0] }
