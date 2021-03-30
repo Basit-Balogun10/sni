@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 
 <head>
@@ -7,33 +8,13 @@
     <title>Home - Synergy Network International</title>
     <meta content="Synergy Network International aspires to be the consolidation of global youth leadership and potential. Our vision is to be a center for the empowerment of"
           name="description">
-    <link href="static/sni_app/images/cropped-SNI-Favicon-32x32.png" rel="icon" sizes="32x32">
-    <link href="static/sni_app/css/style.css" rel="stylesheet" type="text/css">
+    <link href="{% static 'sni_app/images/cropped-SNI-Favicon-32x32.png' %}" rel="icon" sizes="32x32">
+    <link href="{% static 'sni_app/css/home.css' %}" rel="stylesheet" type="text/css">
     <script crossorigin="anonymous" src="https://kit.fontawesome.com/8e8ce04397.js"></script>
 </head>
 
 <body>
-<header id="header">
-    <nav id="navBar">
-        <div class="wrapper" id="nav-wrapper">
-            <a href="/"><img alt="SNI-Logo" height="69.47" id="logo"
-                             src="static/sni_app/images/SNI-Logo-Transparent-1536x368.png" width="290"></a>
-            <ul class="navigation" id="myTopnav">
-                <li class="route active"><a href="/" title="Go To The Home Page">Home</a></li>
-                <li class="route"><a href="/#about" title="About Us">About</a></li>
-                <li class="route"><a href="/#schedule">Schedule</a></li>
-                <li class="route"><a href="/#speakers">Speakers</a></li>
-                <li class="route"><a href="/#organizer">Organizer</a></li>
-                <li class="route"><a href="/#venue">Venue</a></li>
-                <li class="route"><a href="/#sponsors">Sponsors</a></li>
-            </ul>
-            <a class="icon" href="javascript:void(0);" id="dropdownIcon" onclick="routesDisplay()"><i
-                    class="fas fa-bars fa-5x"></i></a>
-        </div>
-        <div class="clear"></div>
-    </nav>
-</header>
-
+{% include "header.html" %}
 <main>
     <button id="toTop-btn" onclick="topFunction()" title="Jump to top of page"><i class="fas fa-angle-up fa-3x"></i>
     </button>
@@ -47,13 +28,13 @@
                                                                        style="margin-left: 1rem"></i></a>
         </div>
         <div class="grid-item">
-            <img alt="" id="first-image" src="static/sni_app/images/Hero-Home-page-new.png">
+            <img alt="" id="first-image" src="{% static 'sni_app/images/Hero-Home-page-new.png' %}">
         </div>
     </div>
 
     <div class="grid-container2" id="about">
         <div class="grid-item2">
-            <img alt="" id="second-image" src="static/sni_app/images/Intro-Home-page-new.png">
+            <img alt="" id="second-image" src="{% static 'sni_app/images/Intro-Home-page-new.png' %}">
         </div>
         <div class="grid-item2">
             <h2>Voice The Youth.</h2>
@@ -74,7 +55,7 @@
                 standing with one another as a mechanism for success so that, together, we make this a better place.</p>
         </div>
         <div class="grid-item2">
-            <img alt="" id="dummy-second-image" src="static/sni_app/images/Intro-Home-page-new.png">
+            <img alt="" id="dummy-second-image" src="{% static 'sni_app/images/Intro-Home-page-new.png' %}">
         </div>
     </div>
 
@@ -83,78 +64,9 @@
         <h2>Schedule</h2>
     </div>
 </main>
-
-<footer id="pageFooter">
-    <div class="grid-container3">
-        <div class="grid-item3" id="item1">
-            <a href="/"><img alt="" height="75" src="static/sni_app/images/SNI-Logo-Transparent-1536x368.png"
-                             width="300"></a>
-            <p>
-                Synergy Network International aspires to be the consolidation of global youth leadership and potential.
-                Our vision is to be a center for the empowerment of youth voices through a network of young leaders each
-                supporting one another in one common bond:
-                to change the world.
-            </p>
-            <ul class="overview-icons">
-                <li><a href="/" target="_blank" title="Reach Us On Facebook"><span style="color: #4267B2"><i
-                        class="fab fa-facebook"></i></span></a></li>
-                <li><a href="/" target="_blank" title="Reach Us On Twitter"><span style="color: #1DA1F2"><i
-                        class="fab fa-twitter"></i></span></a></li>
-                <li><a href="/" target="_blank" title="Reach Us On Dribbble"><span style="color: #EA4C89"><i
-                        class="fab fa-dribbble"></i></span></a></li>
-                <li><a href="/" target="_blank" title="Reach Us On YouTube"><span style="color: #FF0000"><i
-                        class="fab fa-youtube"></i></span></a></li>
-                <li><a href="/" target="_blank" title="Reach Us On Pinterest"><span style="color: #E60023"><i
-                        class="fab fa-pinterest"></i></span></a></li>
-                <li><a href="/" target="_blank" title="Reach Us On Medium"><span style="color: black"><i
-                        class="fab fa-medium"></i></span></a></li>
-            </ul>
-        </div>
-
-        <div class="grid-item3" id="item2">
-            <h2>Get Started</h2>
-            <ul>
-                <li><a href="/">Tutorials</a></li>
-                <li><a href="/">Resources</a></li>
-                <li><a href="/">Guides</a></li>
-                <li><a href="/">Examples</a></li>
-                <li><a href="/">Docs</a></li>
-            </ul>
-        </div>
-
-        <div class="grid-item3" id="item3">
-            <h2>About</h2>
-            <ul>
-                <li><a href="/">Stories</a></li>
-                <li><a href="/">Community</a></li>
-                <li><a href="/">Blog</a></li>
-                <li><a href="/">Careers</a></li>
-                <li><a href="/">Brand Assets</a></li>
-            </ul>
-        </div>
-
-        <div class="grid-item3" id="item4">
-            <h2>Downloads</h2>
-            <ul>
-                <li><a href="/">Flex UI Kit</a></li>
-                <li><a href="/">Modern UI Kit</a></li>
-                <li><a href="/">Framer UI Kit</a></li>
-                <li><a href="/">Gradients UI Kit</a></li>
-                <li><a href="/">Black & White UI Kit</a></li>
-            </ul>
-        </div>
-    </div>
-    <h4 class="footer-motto"><span class="purple-dot" style="color: #C582EB">•</span>Change<span class="purple-dot"
-                                                                                                 style="color: #C582EB">•</span><span
-            class="purple-dot" style="color: #C582EB">Progress</span><span class="purple-dot"
-                                                                           style="color: #C582EB">•</span>Success<span
-            class="purple-dot" style="color: #C582EB">•</span></h4>
-
-    <h3 class="credit"><em>~Credit: Gérman Cousillas & Basit Balogun~</em></h3>
-    <h6 class="copyright">Synergy Network International 2021 © All rights reserved</h6>
-</footer>
+{% include "footer.html" %}
 </body>
 
-<script src="static/sni_app/javascript/home.js" type="text/javascript"></script>
+<script src="{% static 'sni_app/javascript/home.js' %}" type="text/javascript"></script>
 </html>
-<!-- c:/Users/acer/Documents/PycharmProjects/pythonProject/venv/Scripts/activate.bat -->
+

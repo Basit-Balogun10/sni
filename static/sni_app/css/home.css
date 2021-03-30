@@ -1,4 +1,4 @@
-html,
+    html,
 body {
     scroll-behavior: smooth;
     font-size: 62.5%;
@@ -22,8 +22,13 @@ a {
     text-decoration: none;
 }
 
+#header {
+    transition: top 2s;
+}
+
 nav {
-    position: fixed
+    position: fixed;
+    transition: top 2s;
 }
 
 li.active {
@@ -773,11 +778,11 @@ main{
     }
     .grid-item3 a {
         color: skyblue;
-        transition: color, font-size 0.5s;
+        transition: color, font-size 0.1s;
     }
     .grid-item3 a:hover {
         color: rgb(197, 130, 235, 0.8);
-        font-size: 1.3rem;
+        font-size: 1.25rem;
     }
     div#item1 {
         text-align: center;

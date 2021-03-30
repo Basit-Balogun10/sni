@@ -1,0 +1,22 @@
+{% load static %}
+<header id="header">
+    <nav id="navBar">
+        <div class="wrapper" id="nav-wrapper">
+            <a href="/"><img alt="SNI-Logo" height="69.47" id="logo"
+                             src="{% static 'sni_app/images/SNI-Logo-Transparent-1536x368.png' %}" width="290"></a>
+            <ul class="navigation" id="myTopnav">
+                <li class="route"><a href="/" title="Go To The Home Page">Home</a></li>
+                <li class="route"><a href="/#about" title="About Us">About</a></li>
+                <li class="route"><a href="/#schedule">Schedule</a></li>
+                <li class="route"><a href="{% url 'speakers' %}">Speakers</a></li>
+                <li class="route"><a href="/organizer">Organizer</a></li>
+                <li class="route"><a href="/venue">Venue</a></li>
+                <li class="route"><a href="/sponsors">Sponsors</a></li>
+            </ul>
+            <a class="icon" href="javascript:void(0);" id="dropdownIcon" onclick="routesDisplay()"><i
+                    class="fas fa-bars fa-5x"></i></a>
+        </div>
+        <div class="clear"></div>
+    </nav>
+</header>
+<!-- c:/Users/acer/Documents/PycharmProjects/pythonProject/venv/Scripts/activate.bat -->
