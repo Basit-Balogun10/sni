@@ -26,11 +26,6 @@ a {
     transition: top 2s;
 }
 
-nav {
-    position: fixed;
-    transition: top 2s;
-}
-
 li.active {
     border-bottom: 0.2rem solid skyblue;
 }
@@ -44,62 +39,6 @@ li.active a:hover{
 nav div.wrapper a.icon{
     display: none;
 }
-
-.dropdown{
-    display: none;
-}
-#toTop-btn {
-        display: none;
-        position: fixed;
-        bottom: 5rem;
-        right: 3rem;
-        z-index: 99; 
-        border: none;
-        outline: none;
-        background-color: #C582EB;
-        color: #002657;
-        cursor: pointer;
-        border-radius: 50%;
-        width: 5rem;
-        height: 5rem;
-        opacity: 0.5;
-        box-shadow: 0rem 0rem 3rem 0rem #002657;
-      }
-
-      #toTop-btn:hover {
-        background-color: #002657;
-        box-shadow: 0rem 0rem 3rem 0rem #C582EB;
-      }
-
-      #toTop-btn:hover i {
-          color: #C582EB;
-      }
-
-    #toBottom-btn {
-        display: block;
-        position: fixed;
-        top: 14rem;
-        right: 3rem;
-        z-index: 99; 
-        border: none;
-        outline: none;
-        background-color: #002657;
-        color: #C582EB;
-        cursor: pointer;
-        border-radius: 50%;
-        width: 5rem;
-        height: 5rem;
-        opacity: 0.5;
-        box-shadow: 0rem 0rem 3rem 0rem #C582EB;
-      }
-
-      #toBottom-btn:hover {
-        background-color: #C582EB; /* Add a dark-grey background on hover */
-      }
-
-      #toBottom-btn:hover i {
-          color: #002657;
-      }
 
 main{
     background: #C582EB; /* For browsers that do not support gradients */
@@ -299,7 +238,7 @@ main{
         nav {
             padding: 4% 0% 0% 0%;
             margin: 0 0;
-            width: 100%;
+            overflow-x: hidden;
         }
         nav li {
             float: left;
@@ -319,9 +258,6 @@ main{
             font-size: 1.5rem;
             font-weight: bolder;
             color: #C582EB;
-        }
-        #toBottom-btn {
-            top: 17rem;
         }
         .grid-container {
             margin-top: 30rem;
@@ -355,7 +291,6 @@ main{
         nav {
             padding: 4% 0% 4% 0%;
             margin: 0 0;
-            width: 100%;
         }
         ul.navigation {
             display: none;
@@ -408,63 +343,7 @@ main{
             display: block;
             text-align: left;
         }
-        .dropbtn {
-            background-color: inherit;
-            /* color: white; */
-            border: none;
-            cursor: pointer;
-            float: right;
-            /* margin-left: 15vw; */
-            /* margin-bottom: 3vw; */
-        }
 
-        /* The container <div> - needed to position the dropdown content */
-        .dropdown {
-            position: relative;
-            display: inline-block;
-            margin-left: 15vw;
-            margin-bottom: 3vw;
-            transition: display 5s;
-        }
-
-        /* Dropdown Content (Hidden by Default) */
-        .dropdown-content {
-            display: none;
-            /* position: absolute; */
-            /* background-color: #f9f9f9; */
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.3);
-            max-width: 94vw;
-        }
-
-        /* Links inside the dropdown */
-        .dropdown-content a {
-            background: #002657;
-            color: #C582EB;
-            padding: 2.4vw 92vw 2.4vw 2.4vw;
-            margin-right: 55vw;
-            font-size: 1.4rem;
-            text-align: left;
-            text-decoration: none;
-            display: block;
-            transition: color 1s, background-color 1s, font-size 1s
-            /* border: 0.1rem solid #C582EB; */
-        }
-
-        /* Change color of dropdown links on hover */
-        .dropdown-content a:hover {background-color: #C582EB;
-        color: white;
-        font-size: 1.7rem;
-        }
-
-        /* Show the dropdown menu on hover */
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-
-        /* Change the background color of the dropdown button when the dropdown content is shown */
-        .dropdown:hover .dropbtn {
-            display: none;
-        }
         .schedule h3{
             font-size: 1.8rem;
         }
@@ -687,7 +566,6 @@ main{
         color: white;
         padding: 2.45vw 0vw;
         margin-bottom: 0.65vw;
-        width: 100vw;
     }
     .wrapper {
         text-align: center;
