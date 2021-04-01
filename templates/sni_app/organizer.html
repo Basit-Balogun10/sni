@@ -1,24 +1,36 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <title>Organizer - Synergy Network International</title>
+    <meta
+      content="Synergy Network International aspires to be the consolidation of global youth leadership and potential. Our vision is to be a center for the empowerment of"
+      name="description"
+    />
+    <link
+      href="{% static 'sni_app/images/cropped-SNI-Favicon-32x32.png' %}"
+      rel="icon"
+      sizes="32x32"
+    />
+    <link
+      href="{% static 'sni_app/css/home.css' %}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script
+      crossorigin="anonymous"
+      src="https://kit.fontawesome.com/8e8ce04397.js"
+    ></script>
+  </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta content="width=device-width, initial-scale=1" name="viewport">
-    <title>Home - Synergy Network International</title>
-    <meta content="Synergy Network International aspires to be the consolidation of global youth leadership and potential. Our vision is to be a center for the empowerment of"
-          name="description">
-    <link href="{% static 'sni_app/images/cropped-SNI-Favicon-32x32.png' %}" rel="icon" sizes="32x32">
-    <link href="{% static 'sni_app/css/home.css' %}" rel="stylesheet" type="text/css">
-    <script crossorigin="anonymous" src="https://kit.fontawesome.com/8e8ce04397.js"></script>
-</head>
+  <body>
+    <main>{% include "header.html" %} {% include "footer.html" %}</main>
+  </body>
 
-<body>
-<main>
-    {% include "header.html" %}
-    {% include "footer.html" %}
-</main>
-</body>
-
-<script src="{% static 'sni_app/javascript/home.js' %}" type="text/javascript"></script>
+  <script
+    src="{% static 'sni_app/javascript/home.js' %}"
+    type="text/javascript"
+  ></script>
 </html>
