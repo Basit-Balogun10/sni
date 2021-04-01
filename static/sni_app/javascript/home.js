@@ -6,7 +6,7 @@ var routes = routeContainer.getElementsByClassName("route");
 var navLinks = [
   "Home",
   "#about",
-  "#schedule",
+  "schedule",
   "speakers",
   "organizer",
   "venue",

@@ -16,8 +16,8 @@ def organizer(request):
 
 
 def schedule(request):
-    # return render(request, 'sni_app/schedule.html')
-    return HttpResponse('Schedule View is working')
+    return render(request, 'sni_app/schedule.html')
+    # return HttpResponse('Schedule View is working')
 
 
 def speakers(request):
