@@ -25,7 +25,7 @@ SECRET_KEY = 'zkeh2o32!chn^=+lgz8!7^x-+1izt83)dtey+lh7z5b$pru8&l'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '162.243.164.63']
 
 # Application definition
 
@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'sni_app',
 ]
+
+AUTH_USER_MODEL = 'account.Account'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -114,4 +116,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (BASE_DIR / 'static',)
+# STATICFILES_DIRS = (BASE_DIR / 'static',)
+
+STATIC_ROOT = (BASE_DIR / 'static_cdn',)
