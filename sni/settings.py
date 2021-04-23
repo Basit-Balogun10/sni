@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'sni_app',
 ]
 
-AUTH_USER_MODEL = 'account.Account'
+# AUTH_USER_MODEL = 'account.Account'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
