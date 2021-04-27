@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
+from decouple import config
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -21,11 +22,13 @@ TEMPLATE_DIR = BASE_DIR / 'templates'
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'zkeh2o32!chn^=+lgz8!7^x-+1izt83)dtey+lh7z5b$pru8&l'
+# SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+# DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '162.243.164.63']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'sni.world', 'www.sni.world']
 
 # Application definition
 
@@ -37,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'sni_app',
+    'storages',
 ]
 
 # AUTH_USER_MODEL = 'account.Account'
@@ -119,3 +123,18 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (BASE_DIR / 'static',)
 
 STATIC_ROOT = BASE_DIR / 'static_cdn'
+
+# AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
+# AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
+# AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
+# AWS_S3_ENDPOINT_URL = config('AWS_S3_ENDPOINT_URL')
+# AWS_S3_OBJECT_PARAMETERS = {
+#     'CacheControl': 'max-age=86400',
+# }
+# AWS_LOCATION = config('AWS_LOCATION')
+
+
+# STATICFILES_DIRS = (BASE_DIR / 'static',)
+# STATIC_URL = 'https://%s/%s/' % (AWS_S3_ENDPOINT_URL, AWS_LOCATION)
+# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
