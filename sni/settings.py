@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
-from decouple import config
+# from decouple import config
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -30,6 +30,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'sni.world', 'www.sni.world']
 
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # During development only
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -41,9 +44,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'sni_app',
     'storages',
+    'personal',
+    'account',
+    'blog',
+
 ]
 
-# AUTH_USER_MODEL = 'account.Account'
+AUTH_USER_MODEL = 'account.Account'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -123,6 +130,9 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (BASE_DIR / 'static',)
 
 STATIC_ROOT = BASE_DIR / 'static_cdn'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media_cdn'
 
 # AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
 # AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')

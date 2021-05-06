@@ -1,8 +1,12 @@
 from django.urls import path
 from . import views
+from personal.views import (
+    home_screen_view,
+)
 
 urlpatterns = [
-    path('', views.home, name='home'),
+    path('', views.home, name='sni_home'),
+    path('trending', home_screen_view, name="home"),
     path('schedule', views.schedule, name='schedule'),
     path('organizer', views.organizer, name='organizer'),
     path('speakers', views.speakers, name='speakers'),
