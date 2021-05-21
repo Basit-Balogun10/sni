@@ -1,0 +1,55 @@
+<!-- FILTERED Pagination -->
+
+
+<style>
+  li a.page-link {
+    font-size: 1.8rem;
+    border: 2px solid #002656;
+    padding: 6px;
+    background: #002657
+  }
+
+  .d-flex.flex-column.m-auto.pagination.mt-5 {
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }
+
+  nav#page-navigation {
+    background: none;
+  }
+
+</style>
+<div class="d-flex flex-column m-auto pagination mt-5">
+    <nav aria-label="Page navigation" id="page-navigation">
+        <ul class="pagination pg-grey justify-content-center">
+            {% if blog_posts.has_previous %}
+            <li class="page-item">
+                <a class="page-link"
+                   href="?{% if query %}q={{query}}&{% endif %}page={{ blog_posts.previous_page_number }}">&laquo;
+                    Previous</a>
+            </li>
+            {% endif %}
+            {% for i in blog_posts.paginator.page_range %}
+            {% if blog_posts.number == i %}
+            <li class="page-item active"><a class="page-link">{{ i }}</a></li>
+            {% else %}
+            <li class="page-item">
+                <a class="page-link" href="?{% if query %}q={{query}}&{% endif %}page={{ i }}">{{ i }}</a>
+            </li>
+            {% endif %}
+            {% endfor %}
+            {% if blog_posts.has_next %}
+            <li class="page-item">
+                <a class="page-link"
+                   href="?{% if query %}q={{query}}&{% endif %}page={{ blog_posts.next_page_number }}">Next</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link"
+                   href="?{% if query %}q={{query}}&{% endif %}page={{ blog_posts.paginator.num_pages }}">Last
+                    &raquo;</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
+<!-- end pagination-->

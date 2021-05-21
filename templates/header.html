@@ -7,43 +7,54 @@
             <ul class="navigation" id="myTopnav">
                 <li class="route"><a href="/" title="Go To The Home Page">Home</a></li>
                 <li class="route"><a href="/#about" title="About Us">About</a></li>
-                <li class="route"><a href="{% url 'schedule' %}">Schedule</a></li>
-                <li class="route"><a href="{% url 'speakers' %}">Speakers</a></li>
-                <li class="route"><a href="{% url 'organizer' %}">Organizer</a></li>
-                <li class="route"><a href="{% url 'venue' %}">Venue</a></li>
-                <li class="route"><a href="{% url 'sponsors' %}">Sponsors</a></li>
+                <li class="route"><a href="{% url 'sni_app:schedule' %}">Schedule</a></li>
+                <li class="route"><a href="{% url 'sni_app:speakers' %}">Speakers</a></li>
+                <li class="route"><a href="{% url 'sni_app:organizer' %}">Organizer</a></li>
+                <li class="route"><a href="{% url 'sni_app:venue' %}">Venue</a></li>
+                <li class="route"><a href="{% url 'sni_app:sponsors' %}">Sponsors</a></li>
             </ul>
             <a class="icon" href="javascript:void(0);" id="dropdownIcon" onclick="routesDisplay()"><i
                     class="fas fa-bars fa-5x"></i></a>
 
-            {% comment %}
-            <div
-                    class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 border-bottom shadow-sm"
-                    id="blog-nav-container">
+            <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 border-bottom shadow-sm"
+                 id="blog-nav-container">
+                {% comment %}
                 <h5 class="my-0 mr-md-auto font-weight-normal">
+
                     {% if request.user.is_authenticated %}
                     <p class="m-auto" id="greeting">Hello, {{request.user.username}}</p>
                     {% endif %}
                 </h5>
-                <div class="search-bar mt-sm-2 mr-2">
-                    <form method="get">
-                        <input class="form-control" id="id_q" name="q" placeholder="Search..." type="text"/>
-                    </form>
-                </div>
+                {% endcomment %}
+                {% comment %}
                 <nav class="my-2 my-md-0 mr-md-3" id="blog-nav">
                     {% if request.user.is_authenticated %}
-                    <a class="p-2" href="{% url 'home' %}">Home</a>
-                    <a class="p-2" href="{% url 'account' %}">Account</a>
+                    {% comment %} <a class="p-2" href="{% url 'home' %}">Home</a> {% endcomment %}
+                    {% comment %} <a class="p-2" href="{% url 'account' %}">Account</a>
                     <a class="p-2" href="{% url 'logout' %}">Logout</a>
                     {% else %}
-                    <a class="p-2" href="{% url 'home' %}">Home</a>
+                    {% comment %} <a class="p-2" href="{% url 'home' %}">Home</a>
                     <a class="p-2" href="{% url 'login' %}">Login</a>
-                    <a class="btn btn-outline-primary" href="{% url 'register' %}">Register</a>
+                    <a class="btn btn-outline-primary" href="{% url 'register' %}">Sign Up</a>
                     {% endif %}
                 </nav>
+                {% endcomment %}
             </div>
-            {% endcomment %}
 
+            <ul class="auth">
+                {% if request.user.is_authenticated %}
+                {% comment %} <a class="p-2" href="{% url 'home' %}">Home</a> {% endcomment %}
+                {% comment %} <a class="p-2" href="{% url 'account' %}">Account</a> {% endcomment %}
+                <li class="greeting">
+                    <p class="m-auto" id="greeting">Hello, {{request.user.username}}</p>
+                </li>
+                <li><a class="auth" href="{% url 'logout' %}">Logout</a></li>
+                {% else %}
+                {% comment %} <a class="p-2" href="{% url 'home' %}">Home</a> {% endcomment %}
+                <li><a class="auth" href="{% url 'login' %}">Login</a></li>
+                <li><a class="auth" href="{% url 'register' %}">Sign Up</a></li>
+                {% endif %}
+            </ul>
         </div>
 
 

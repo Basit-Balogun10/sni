@@ -32,8 +32,9 @@ from account.views import (
 )
 
 urlpatterns = [
-    path('', include('sni_app.urls')),
+    path('', include('sni_app.urls', 'sni_app')),
     path('admin/', admin.site.urls),
+    path('tinymce/', include('tinymce.urls')),  # new
     path('account/', account_view, name="account"),
     path('blog/', include('blog.urls', 'blog')),
     path('login/', login_view, name="login"),

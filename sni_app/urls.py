@@ -4,6 +4,8 @@ from personal.views import (
     home_screen_view,
 )
 
+app_name = 'sni_app'
+
 urlpatterns = [
     path('', views.home, name='sni_home'),
     path('trending', home_screen_view, name="home"),
