@@ -15,7 +15,10 @@ function deactivateDiv(postContainer) {
 }
 
 function replyComment(object) {
-    if (object.nextElementSibling.style.display === "none") {
+    if (
+        (object.nextElementSibling.style.display === "none") |
+        (object.nextElementSibling.style.display === "")
+    ) {
         replyButtons = document.getElementsByClassName("reply-button");
         for (var button = 0; button < replyButtons.length; button++) {
             if (
@@ -33,5 +36,6 @@ function replyComment(object) {
         console.log(typeof replyDiv.style.display);
     } else {
         object.nextElementSibling.style.display = "none";
+        console.log("now none");
     }
 }

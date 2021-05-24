@@ -36,7 +36,7 @@ def create_blog_view(request):
 def like(request):
     if request.method == 'GET':
         post_id = request.GET['post_id']
-        likedpost = Post.objects.get(id=post_id)
+        # likedpost = Post.objects.get(id=post_id)
         m = Like(post=likedpost)
         m.save()
         return HttpResponse('success')
@@ -74,6 +74,7 @@ def detail_blog_view(request, category, year, month, day, time, identity, title)
 
     action = request.POST.get('action')
     print(action)
+    context['CommentModel'] = Comment.objects
 
     if request.method == 'POST':
         if action == 'to_comment':

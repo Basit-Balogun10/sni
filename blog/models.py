@@ -102,6 +102,28 @@ class Reply(models.Model):
         return '{} by {}'.format(self.body, self.replier)
 
 
+class Report(models.Model):
+    TITLES = (())
+    title = models.CharField(max_length=50, blank=True, null=True, choices=TITLES)
+    reporter = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    # custom_title = models.CharField(max_length=100, blank=True, null=True)
+    created_on = models.DateTimeField(auto_now_add=True)
+
+
+active = models.BooleanField(default=True)
+new = models.BooleanField(default=True)
+accepted = models.BooleanField(default=True)
+discarded = models.BooleanField(default=False)
+
+
+class Meta:
+    ordering = ['created_on']
+
+
+def __str__(self):
+    return '{} by {}'.format(self.title, self.reporter)
+
+
 @receiver(post_delete, sender=BlogPost)
 def submission_delete(sender, instance, **kwargs):
     instance.image.delete(False)
