@@ -124,7 +124,6 @@
     color: antiquewhite;
     font-size: 1.5rem;
   }
-
 </style>
 
 {% if blog_post %}
@@ -158,11 +157,6 @@
                 {{blog_post.body|safe|truncatechars:180}}
             </p>
         </a>
-            {% comment %} {% if blog_post.author == request.user %}
-            <a class="btn btn-primary" href="{% url 'blog:edit' blog_post.category %}">Update</a>
-            <a class="btn btn-primary"
-               href="{% url 'blog:edit' blog_post.category blog_post.date_published.year blog_post.date_published.month blog_post.date_published.day blog_time_published blog_post.id blog_post.title|slugify %}">Update</a>
-            {% endif %} {% endcomment %}
 
 
     </div>

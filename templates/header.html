@@ -3,7 +3,7 @@
     <nav id="navBar">
         <div class="wrapper" id="nav-wrapper">
             <a href="/"><img alt="SNI-Logo" height="69.47" id="logo"
-                             src="{% static 'sni_app/images/SNI-Logo-Transparent-1536x368.png' %}" width="290"></a>
+                    src="{% static 'sni_app/images/SNI-Logo-Transparent-1536x368.png' %}" width="290"></a>
             <ul class="navigation" id="myTopnav">
                 <li class="route"><a href="/" title="Go To The Home Page">Home</a></li>
                 <li class="route"><a href="/#about" title="About Us">About</a></li>
@@ -17,7 +17,7 @@
                     class="fas fa-bars fa-5x"></i></a>
 
             <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 border-bottom shadow-sm"
-                 id="blog-nav-container">
+                id="blog-nav-container">
                 {% comment %}
                 <h5 class="my-0 mr-md-auto font-weight-normal">
 
@@ -48,6 +48,7 @@
                 <li class="greeting">
                     <p class="m-auto" id="greeting">Hello, {{request.user.username}}</p>
                 </li>
+                <li><a class="auth" href="{% url 'account' %}">Account</a></li>
                 <li><a class="auth" href="{% url 'logout' %}">Logout</a></li>
                 {% else %}
                 {% comment %} <a class="p-2" href="{% url 'home' %}">Home</a> {% endcomment %}

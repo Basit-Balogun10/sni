@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load account_extras %}
 
 
 {% block content %}
@@ -54,6 +55,13 @@
     <input class="form-control" id="inputUsername" name="username" placeholder="Username" required type="text"
            value="{{account_form.initial.username}}">
 
+    <input autofocus class="form-control" id="inputFirstname" name="fistname" placeholder="First name" required
+           type="text"
+           value={{account_form.initial.firstname}}>
+
+    <input class="form-control" id="inputLastname" name="lastname" placeholder="Last name" required type="text"
+           value="{{account_form.initial.lastname}}">
+
     {% for field in account_form %}
     <p>
         {% for error in field.errors %}
@@ -87,7 +95,11 @@
             {% if blog_posts %}
             <ul class="list-group">
                 {% for post in blog_posts %}
-                <a href="{% url 'blog:detail' post.category %}" style="text-decoration: none;">
+                {% concat_all post.date_published.hour|stringformat:"i" '-' post.date_published.minute|stringformat:"i"
+                '-' post.date_published.second|stringformat:"i" '-' post.date_published.microsecond|stringformat:"i" as
+                blog_time_published %}
+                <a href="{% url 'blog:detail' post.category post.date_published.year post.date_published.month post.date_published.day blog_time_published post.id post.title|slugify %}"
+                   style="text-decoration: none;">
                     <li class="list-group-item">{{post}}</li>
                 </a>
                 {% endfor %}

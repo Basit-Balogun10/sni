@@ -115,6 +115,10 @@
 		margin-bottom: 2%;
 	}
 
+	.reply-div {
+		display: none;
+	}
+
 	#reply-div {
 		display: none;
 	}
@@ -216,9 +220,6 @@
 			<div class="card-body mt-2 mb-2">
 				<h2 class="card-title">{{blog_post.title}}</h2>
 				<p class="card-text">{{blog_post.body|safe}}</p>
-				{% if blog_post.author == request.user %}
-				<a href="{% url 'blog:edit' blog_post.category %}" class="btn btn-primary">Update</a>
-				{% endif %}
 			</div>
 			<div class="card-footer text-muted">
 				Updated on {{blog_post.date_updated}} by {{blog_post.author}}
@@ -231,27 +232,27 @@
 	<div class="grid-container5">
 		<div class="main-article">
 			<div class="post-header">
-				<div class="post-info">
-					{% if blog_post.date_published != blog_post.date_updated %}
-					<p><span class="info-head">Date Published: </span>{{blog_post.date_published|myfunc|upper}} <span
-							class="published author">by
+                <div class="post-info">
+                    {% if blog_post.date_published != blog_post.date_updated %}
+                    <p><span class="info-head">Date Published: </span>{{blog_post.date_published|myfunc}} <span
+                            class="published author">by
 							{{blog_post.author}}</span></p>
-					<br>
-					<p><span class="info-head">Date Updated: </span>{{blog_post.date_updated|myfunc|upper}} <span
-							class="updated author">by
+                    <br>
+                    <p><span class="info-head">Date Updated: </span>{{blog_post.date_updated|myfunc}} <span
+                            class="updated author">by
 							{{blog_post.author}}</span></p>
-					{% else %}
-					<p><span class="info-head">Date Published: </span>{{blog_post.date_published|myfunc|upper}} <span
-							class="published author">by
+                    {% else %}
+                    <p><span class="info-head">Date Published: </span>{{blog_post.date_published|myfunc}} <span
+                            class="published author">by
 							{{blog_post.author}}</span></p>
-					{% endif %}
+                    {% endif %}
 
-					<p class="post-category"><span class="info-head">Category: </span><span
-							class="category">{{ blog_post.category|upper }}</span></p>
-					<a class="likebutton btn btn-{{like_color}} btn-lg" id="like{{ blog_post.id }}" href="#"
-						data-catid="{{ blog_post.id }}" data-value="{{blog_post.num_likes}}">{{blog_post.num_likes}} <i
-							class="fa fa-thumbs-up"></i></a>
-					<a class="dislikebutton btn btn-{{dislike_color}} btn-lg" id="dislike{{ blog_post.id }}" href="#"
+                    <p class="post-category"><span class="info-head">Category: </span><span
+                            class="category">{{ blog_post.category|upper }}</span></p>
+                    <a class="likebutton btn btn-{{like_color}} btn-lg" id="like{{ blog_post.id }}" href="#"
+                       data-catid="{{ blog_post.id }}" data-value="{{blog_post.num_likes}}">{{blog_post.num_likes}} <i
+                            class="fa fa-thumbs-up"></i></a>
+                    <a class="dislikebutton btn btn-{{dislike_color}} btn-lg" id="dislike{{ blog_post.id }}" href="#"
 						data-catid="{{ blog_post.id }}"
 						data-value="{{blog_post.num_dislikes}}">{{blog_post.num_dislikes}} <i
 							class="fa fa-thumbs-down"></i></a>
@@ -263,9 +264,6 @@
 			<div class="post-content">
 				<img class="post-img" src="{{blog_post.image.url}}">
 				<p class="post-text">{{blog_post.body|safe}}</p>
-				{% if blog_post.author == request.user %}
-				<a href="{% url 'blog:edit' blog_post.category %}" class="btn btn-primary">Update</a>
-				{% endif %}
 			</div>
 
 			<div class="container">
@@ -275,27 +273,29 @@
 							<!-- comments -->
 							<h2 id="comments-count" data-value={{comments.count}}>{{ comments.count }} comments</h2>
 
-							<div id="comment-container">
-								{% for comment in comments %}
-								<div class="comments" style="padding: 10px;">
-									<p class="font-weight-bold">
-										{{ comment.commenter }}
-										<span class=" text-muted font-weight-normal">
-											{{ comment.created_on }}
+                            <div id="comment-container">
+                                {% for comment in comments %}
+                                <div class="comments" id="{{comment.id}}" style="padding: 10px;">
+                                    <p class="font-weight-bold">
+                                        {{ comment.commenter }}
+                                        <span class=" text-muted font-weight-normal">
+											{{ comment.created_on|myfunc }}
 										</span>
-									</p>
-									{{ comment.body | linebreaks }}
-									<a href="javascript:void(0)" class="reply-button" id="reply-button"
-										onclick="replyComment(this)" title="Reply to this comment">Reply</a>
-									<div class="reply-div" id="reply-div">
-										<form method="post" style="margin-top: 1.3em;">
-											{% csrf_token %}
-											{{ reply_form.as_p }}
-											<input type="hidden" name="parent_id" value="{{comment.id}}">
-											<button type="submit" class="btn btn-primary btn-lg reply-button"
-												name="action" value="to_reply">Submit</button>
-										</form>
-									</div>
+                                    </p>
+                                    {{ comment.body | linebreaks }}
+                                    <a class="reply-button" href="javascript:void(0)" id="show_reply_form"
+                                       onclick="replyComment(this)" title="Reply to this comment">Reply</a>
+                                    <div class="reply-div" id="reply-div">
+                                        <form id="reply-form" method="post" name="r-form" style="margin-top: 1.3em;"
+                                              value="{{comment.id}}">
+                                            {% csrf_token %}
+                                            {{ reply_form.as_p }}
+                                            <input type="hidden" name="parent_id" value="{{comment.id}}">
+                                            <input name="action" type="hidden" value="to_reply">
+                                            <a class="btn btn-primary btn-lg reply-button" href="javascript:void(0)"
+                                               id="reply-button">Submit</a>
+                                        </form>
+                                    </div>
 									{% for reply in comment.replies.all %}
 									<div class="reply">
 										<p class="font-weight-bold">
@@ -322,12 +322,13 @@
 							{% else %}
 							{% concat_all post.date_published.hour|stringformat:"i" '-' post.date_published.minute|stringformat:"i" '-' post.date_published.second|stringformat:"i" '-' post.date_published.microsecond|stringformat:"i"  as blog_time_published %}
 							<h3>Leave a comment</h3>
-							<form method="post" style="margin-top: 1.3em;" id="comment-form">
-								{% csrf_token %}
-								{{ comment_form.as_p }}
-								<a type="submit" class="btn btn-primary btn-lg comment-button" name="action"
-									value="to_comment">Submit</a>
-							</form>
+                            <form method="post" style="margin-top: 1.3em;" id="comment-form">
+                                {% csrf_token %}
+                                {{ comment_form.as_p }}
+                                <input name="action" type="hidden" value="to_comment">
+                                <a class="btn btn-primary btn-lg comment-button" href="javascript:void(0)"
+                                   id="comment-button">Submit</a>
+                            </form>
 							{% endif %}
 						</div>
 					</div>
@@ -606,36 +607,105 @@
 	// 	}
 	// });
 
-	$(document).ready(function() {
-		console.log('ready')
-    $("#comment-form").submit(function(event) {
-       event.preventDefault();
-	   console.log('submitted')
-	   var commentsCount, commentContainer;
-	   form = $("#comment-form");
-	   commentsCount = document.getElementById('comments-count');
-	   count = $('#comments-count').data("value");
-	   commentContainer = document.getElementById('comment-container');
-       $.ajax({ data: $(this).serialize(), 
-                type: "POST", 
-                url: "",
-				'csrfmiddlewaretoken': '{{ csrf_token }}',
-				action: 'to_comment',
-                success: function(response) {
-                     console.log(response);
-                     if ('{{ request.user.is_authenticated }}' === 'True') {
-						count += 1;
-						console.log('{{request.user}}');
-						commentsCount.innerHTML = count + " comments";
+	$("#comment-button").click(function () {
+		$(document).ready(function () {
+			console.log('ready')
+			$("#comment-form").submit(function (event) {
+				event.preventDefault();
+				console.log('submitted')
+				var commentsCount, commentContainer;
+				form = $("#comment-form");
+				commentsCount = document.getElementById('comments-count');
+				count = $('#comments-count').data("value");
+				commentContainer = document.getElementById('comment-container');
+				$.ajax({
+					data: $("#comment-form").serialize(),
+					type: "POST",
+					url: "",
+					success: function (response) {
+						console.log(response);
+						console.log($("#comment-form").serialize());
+						if ('{{ request.user.is_authenticated }}' === 'True') {
+							count += 1;
+							console.log('{{request.user}}');
+							commentsCount.innerHTML = count + " comments";
 
-						commentContainer.innerHTML +='<div class="comments" style="padding: 10px;"><p class="font-weight-bold">{{ request.user }}<span class=" text-muted font-weight-normal">{{ new_comment.created_on }}</span></p>{{ new_comment.body | linebreaks }}<a href="javascript:void(0)" class="reply-button" id="reply-button" onclick="replyComment(this)" title="Reply to this comment">Reply</a><div class="reply-div" id="reply-div"><form method="post" style="margin-top: 1.3em;">{% csrf_token %}{{ reply_form.as_p }}<input type="hidden" name="parent_id" value="{{new_comment.id}}"><button type="submit" class="btn btn-primary btn-lg reply-button" name="action" value="to_reply">Submit</button></form></div>{% for reply in new_comment.replies.all %}<div class="reply"><p class="font-weight-bold">{{ reply.replier }}<span class="text-muted font-weight-normal">{{ reply.created_on }}</span></p>{{ reply.body | linebreaks }}</div>{% endfor %}</div>';
+							serialized = $("#comment-form").serialize();
+							myArray = serialized.split('body=');
+							frag = myArray[1];
+							newArray = frag.split('&action');
+							encodedTxt = newArray[0];
+							reply_body = decodeURIComponent(encodedTxt);
+							
+							ctime = new Date();
+							ctime = String(ctime).split(' ');
+							ctime[0] = ctime[0] + ',';
+							ctime[2] = ctime[2] + ',';
+							ctime = ctime.join(' ');
+
+							console.log(reply_body);
+							commentContainer.innerHTML +=
+								'<div class="comments" style="padding: 10px;"><p class="font-weight-bold">{{ request.user }} <span class=" text-muted font-weight-normal">' + ctime + '</span></p>' + reply_body +'</br></br><a href="javascript:void(0)" class="reply-button" id="reply-button" onclick="replyComment(this)" title="Reply to this comment">Reply</a><div class="reply-div" id="reply-div"><form method="post" style="margin-top: 1.3em;">{% csrf_token %}{{ reply_form.as_p }}<input type="hidden" name="parent_id" value="{{new_comment.id}}"><button type="submit" class="btn btn-primary btn-lg reply-button" name="action" value="to_reply">Submit</button></form></div>{% for reply in new_comment.replies.all %}<div class="reply"><p class="font-weight-bold">{{ reply.replier }}<span class="text-muted font-weight-normal">{{ reply.created_on }}</span></p>{{ reply.body | linebreaks }}</div>{% endfor %}</div>';
+						}
+					},
+					error: function (request, status, error) {
+						console.log(request.responseText);
 					}
-				},
-				error: function (request, status, error) {
-					console.log(request.responseText);
-				}
-       });
-   });
-})
+				});
+			})
+			$("#comment-form").submit();
+		})
+	})
+
+	$("#reply-button").click(function () {
+		$(document).ready(function () {
+			console.log('ready')
+			$("#reply-form").submit(function (event) {
+				event.preventDefault();
+				console.log('submitted')
+				var commentsCount, commentContainer;
+				form = $("#reply-form");
+				commentsCount = document.getElementById('comments-count');
+				count = $('#comments-count').data("value");
+				parentId = (this).attr('value');
+				commentContainer = document.getElementById(parentId);
+				
+				$.ajax({
+					data: $("#reply-form").serialize(),
+					type: "POST",
+					url: "",
+					success: function (response) {
+						console.log(response);
+						console.log($("#reply-form").serialize());
+						if ('{{ request.user.is_authenticated }}' === 'True') {
+							count += 1;
+							console.log('{{request.user}}');
+							commentsCount.innerHTML = count + " comments";
+
+							serialized = $("#reply-form").serialize();
+							myArray = serialized.split('body=');
+							frag = myArray[1];
+							newArray = frag.split('&action');
+							encodedTxt = newArray[0];
+							reply_body = decodeURIComponent(encodedTxt);
+							
+							ctime = new Date();
+							ctime = String(ctime).split(' ');
+							ctime[0] = ctime[0] + ',';
+							ctime[2] = ctime[2] + ',';
+							ctime = ctime.join(' ');
+
+							console.log(reply_body);
+							commentContainer.innerHTML += '<div class="reply"><p class="font-weight-bold">{{ request.user }}<span class="text-muted font-weight-normal">' + ctime + '</span></p>' + reply_body + '</div>'
+						}
+					},
+					error: function (request, status, error) {
+						console.log(request.responseText);
+					}
+				});
+			})
+			$("#comment-form").submit();
+		})
+	})
 </script>
 {% endblock content %}
