@@ -15,27 +15,44 @@ function deactivateDiv(postContainer) {
 }
 
 function replyComment(object) {
+    // rd = document.getElementById()
+    // object.insertAdjacentHTML('')
     if (
-        (object.nextElementSibling.style.display === "none") |
-        (object.nextElementSibling.style.display === "")
+        document.getElementById("reply-div" + object.id.split("_")[1]).style
+            .display === "none"
     ) {
-        replyButtons = document.getElementsByClassName("reply-button");
+        // console.log("it's none");
+        replyButtons = document.getElementsByClassName("show-reply-form");
         for (var button = 0; button < replyButtons.length; button++) {
-            if (
-                replyButtons[button].nextElementSibling.style.display ===
-                "block"
-            ) {
-                replyButtons[button].nextElementSibling.style.display = "none";
+            let id = replyButtons[button].id.split("_")[1];
+            let replyDiv = document.getElementById("reply-div" + id);
+            // console.log(button);
+            // console.log(replyButtons[button].nextElementSibling);
+            // console.log(replyButtons[button].nextElementSibling.style.display);
+            if (replyDiv.style.display === "block") {
+                console.log("one is block");
+
+                replyDiv.style.display = "none";
                 break;
             }
-            console.log(replyButtons[button].nextElementSibling);
-            console.log(replyButtons[button].nextElementSibling.style.display);
+            // console.log(replyButtons[button].nextElementSibling);
+            // console.log(replyButtons[button].nextElementSibling.style.display);
         }
-        replyDiv = object.nextElementSibling;
-        replyDiv.style.display = "block";
-        console.log(typeof replyDiv.style.display);
+        objectId = object.id.split("_")[1];
+        div = document.getElementById("reply-div" + objectId).style.display =
+            "block";
+        // console.log("now block");
+        // console.log(typeof replyDiv.style.display);
     } else {
-        object.nextElementSibling.style.display = "none";
-        console.log("now none");
+        objectId = object.id.split("_")[1];
+        div = document.getElementById("reply-div" + objectId).style.display =
+            "none";
+        // console.log("now none");
     }
+}
+
+
+function alertMessage(){
+    let message = 'Please refresh this page on your browser to reply to your newly submitted comment.'
+    alert(message)
 }

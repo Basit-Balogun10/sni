@@ -133,60 +133,62 @@
 
 {% concat_all blog_post.date_published.hour|stringformat:"i" '-' blog_post.date_published.minute|stringformat:"i" '-' blog_post.date_published.second|stringformat:"i" '-' blog_post.date_published.microsecond|stringformat:"i"  as blog_time_published %}
 <div class="greed-kontainer">
-    <a class="card-link"
-       href="{% url 'blog:detail' blog_post.category blog_post.date_published.year blog_post.date_published.month blog_post.date_published.day blog_time_published blog_post.id blog_post.title|slugify %}">
+  <a class="card-link"
+    href="{% url 'blog:detail' blog_post.category blog_post.date_published.year blog_post.date_published.month blog_post.date_published.day blog_time_published blog_post.id blog_post.title|slugify %}">
 
 
-        <img class="card-img" src="{{blog_post.image.url}}"/>
-    </a>
+    <img class="card-img" src="{{blog_post.image.url}}" />
+  </a>
 
-    <div class="card-detail">
-        <h2 class="card-title">{{blog_post.title}}</h2>
-        <a
-                href="{% url 'blog:detail' blog_post.category blog_post.date_published.year blog_post.date_published.month blog_post.date_published.day blog_time_published blog_post.id blog_post.title|slugify %}">
-            {% comment %} <a
-                href="{% url 'blog:detail' blog_post.category blog_post.date_published.year blog_post.date_published.month %}">
-            {% endcomment %}
-            <p class="card-text" id="card-text">
-                {% comment %}
-                {% with
+  <div class="card-detail">
+    <h2 class="card-title">{{blog_post.title}}</h2>
+    <a
+      href="{% url 'blog:detail' blog_post.category blog_post.date_published.year blog_post.date_published.month blog_post.date_published.day blog_time_published blog_post.id blog_post.title|slugify %}">
+      {% comment %} <a
+        href="{% url 'blog:detail' blog_post.category blog_post.date_published.year blog_post.date_published.month %}">
+        {% endcomment %}
+        <p class="card-text" id="card-text">
+          {% comment %}
+          {% with
                 blog_post.date_published.hour|addstr:"-"|addstr:blog_post.date_published.minute|addstr:"-"|addstr:blog_post.date_published.second|addstr:"-"|addstr:blog_post.date_published.microsecond
                 as blog_published_time%}
-                {{ blog_published_time}}
-                {% endwith %} {% endcomment %}
-                {{blog_post.body|safe|truncatechars:180}}
-            </p>
-        </a>
+          {{ blog_published_time}}
+          {% endwith %} {% endcomment %}
+          {{blog_post.body|safe|truncatechars:180}}
+        </p>
+      </a>
 
 
-    </div>
-    <div class="card-detail card-footer">
-        {% if blog_post.date_published != blog_post.date_updated %}
-        <span class="published">Date Published: {{blog_post.date_published|myfunc}} <span class="author">by
+  </div>
+  <div class="card-detail card-footer">
+    {% if blog_post.date_published != blog_post.date_updated %}
+    <span class="published">Date Published: {{blog_post.date_published|myfunc}} <span class="author">by
         {{blog_post.author}}</span></span>
-        <br><span class="updated">Last Update: {{blog_post.date_updated|myfunc}} <span class="author">by
+    <br><span class="updated">Last Update: {{blog_post.date_updated|myfunc}} <span class="author">by
         {{blog_post.author}}</span></span>
-        {% else %}
-        <span class="published center">Date Published: {{blog_post.date_published|myfunc}} <span class="author">by
+    {% else %}
+    <span class="published center">Date Published: {{blog_post.date_published|myfunc}} <span class="author">by
         {{blog_post.author}}</span></span>
-        {% endif %}
-    </div>
+    {% endif %}
+    <span class="feedback">{{blog_post.num_likes}}<i class="fa fa-thumbs-up"></i> {{blog_post.num_dislikes}}<i
+        class="fa fa-thumbs-down"></i> {{blog_post.total_comments}}<i class="fa fa-comments"></i>
+  </div>
 
 
 </div>
 {% else %}
 
 <div class="container">
-    <div class="row">
-        <div class="card m-auto">
-            <div class="card-body mt-2 mb-2">
-                <h2 class="card-title">No results</h2>
-                <p class="card-text">
-                    There were no results matching the search: "{{query}}"
-                </p>
-            </div>
-        </div>
+  <div class="row">
+    <div class="card m-auto">
+      <div class="card-body mt-2 mb-2">
+        <h2 class="card-title">No results</h2>
+        <p class="card-text">
+          There were no results matching the search: "{{query}}"
+        </p>
+      </div>
     </div>
+  </div>
 </div>
 
 {% endif %}

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from blog.models import BlogPost, Like, Dislike, Comment, Reply
+from blog.models import BlogPost, Like, Dislike, Comment, Reply, Report
 
 from django.db import models
 
@@ -12,9 +12,9 @@ admin.site.register(Dislike)
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ('commenter', 'body', 'post', 'created_on', 'active', 'new')
-    list_filter = ('active', 'created_on', 'commenter', 'body', 'post', 'new')
-    search_fields = ('commenter', 'body')
+    list_display = ('commenter', 'comment_body', 'post', 'created_on', 'active', 'new')
+    list_filter = ('active', 'created_on', 'commenter', 'comment_body', 'post', 'new')
+    search_fields = ('commenter', 'comment_body')
     actions = ['approve_comments', 'disapprove_comments', 'seen']
 
     def approve_comments(self, request, queryset):
@@ -55,3 +55,38 @@ class BlogPostAdmin(admin.ModelAdmin):
         models.TextField: {'widget': TinyMCE()}
 
     }
+
+@admin.register(Report)
+class ReportAdmin(admin.ModelAdmin):
+    list_display = ('reporter', 'title', 'post', 'created_on', 'new', 'reviewed', 'good', 'bad')
+    list_filter = ('title', 'reviewed', 'new', 'created_on', 'good', 'bad', 'reporter', 'post')
+    search_fields = ('title', 'post')
+    actions = ['seen', 'reviewed', 'good_report', 'bad_report', 'not_reviewed', 'not_good_report', 'not_bad_report']
+
+    def seen(self, request, queryset):
+        queryset.update(new=False)
+
+
+    def reviewed(self, request, queryset):
+        queryset.update(reviewed=True)
+
+
+    def good_report(self, request, queryset):
+        queryset.update(good=True)
+    
+    
+    def bad_report(self, request, queryset):
+        queryset.update(bad=True)
+
+
+    def not_reviewed(self, request, queryset):
+        queryset.update(reviewed=False)
+
+
+    def not_good_report(self, request, queryset):
+        queryset.update(good=False)
+    
+    
+    def not_bad_report(self, request, queryset):
+        queryset.update(bad=False)
+

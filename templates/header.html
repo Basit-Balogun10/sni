@@ -6,7 +6,7 @@
                     src="{% static 'sni_app/images/SNI-Logo-Transparent-1536x368.png' %}" width="290"></a>
             <ul class="navigation" id="myTopnav">
                 <li class="route"><a href="/" title="Go To The Home Page">Home</a></li>
-                <li class="route"><a href="/#about" title="About Us">About</a></li>
+                <li class="route"><a href="{% url 'blog:home' %}" title="">Blog</a></li>
                 <li class="route"><a href="{% url 'sni_app:schedule' %}">Schedule</a></li>
                 <li class="route"><a href="{% url 'sni_app:speakers' %}">Speakers</a></li>
                 <li class="route"><a href="{% url 'sni_app:organizer' %}">Organizer</a></li>

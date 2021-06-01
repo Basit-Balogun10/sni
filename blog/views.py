@@ -54,10 +54,12 @@ def detail_blog_view(request, category, year, month, day, time, identity, title)
     context['comments'] = comments
 
     new_comment = None
-
     new_reply = None
-
     context['new_comment'] = new_comment
+    context['new_reply'] = new_comment
+    
+    total_comments = Comment.objects.all().count() + Reply.objects.all().count()
+    context['total_comments'] = total_comments
 
     if user in blog_post.liked.all():
         like_color = "success"
@@ -115,7 +117,13 @@ def detail_blog_view(request, category, year, month, day, time, identity, title)
                     new_reply.comment = TBR_comment
                     new_reply.replier = request.user
                     new_reply.save()
+                    print('saved')
                     context['new_reply'] = new_reply
+                    return HttpResponse('success')
+                else:
+                    print('failed')
+                    print(reply_form.errors)
+                    return HttpResponse('error')
             else:
                 login_message = "Sorry, you have to be logged in to like or dislike posts"
                 return HttpResponse("Sorry, you have to be logged in to reply to comments")

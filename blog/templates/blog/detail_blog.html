@@ -27,8 +27,6 @@
 		height: 40rem;
 	}
 
-	.post-content {}
-
 	.post-title {
 		font-size: 3rem;
 		text-align: center;
@@ -116,10 +114,6 @@
 	}
 
 	.reply-div {
-		display: none;
-	}
-
-	#reply-div {
 		display: none;
 	}
 
@@ -271,7 +265,7 @@
 					<div class="col-md-8 card mb-4  mt-3 ">
 						<div class="card-body">
 							<!-- comments -->
-							<h2 id="comments-count" data-value={{comments.count}}>{{ comments.count }} comments</h2>
+							<h2 id="comments-count" data-value={{blog_post.total_comments}}>{{ blog_post.total_comments }} comments</h2>
 
                             <div id="comment-container">
                                 {% for comment in comments %}
@@ -282,30 +276,29 @@
 											{{ comment.created_on|myfunc }}
 										</span>
                                     </p>
-                                    {{ comment.body | linebreaks }}
-                                    <a class="reply-button" href="javascript:void(0)" id="show_reply_form"
-                                       onclick="replyComment(this)" title="Reply to this comment">Reply</a>
-                                    <div class="reply-div" id="reply-div">
-                                        <form id="reply-form" method="post" name="r-form" style="margin-top: 1.3em;"
-                                              value="{{comment.id}}">
-                                            {% csrf_token %}
-                                            {{ reply_form.as_p }}
-                                            <input type="hidden" name="parent_id" value="{{comment.id}}">
-                                            <input name="action" type="hidden" value="to_reply">
-                                            <a class="btn btn-primary btn-lg reply-button" href="javascript:void(0)"
-                                               id="reply-button">Submit</a>
-                                        </form>
-                                    </div>
+                                    {{ comment.comment_body | safe | linebreaks }}
+                                    <div>
+										<a class="show-reply-form" onclick="replyComment(this)" href="javascript:void(0)" id="show-reply-form_{{comment.id}}" title="Reply to this comment">Reply</a>
+										<div class="reply-div" id="reply-div{{comment.id}}">
+											<form id="reply-form{{comment.id}}" class="reply-form" method="post" style="margin-top: 1.3em;" name="r-form" value="{{comment.id}}">
+												{% csrf_token %}
+												{{ reply_form.as_p }}
+												<input type="hidden" name="parent_id" value="{{comment.id}}">
+												<input name="action" type="hidden" value="to_reply">
+												<button class="btn btn-primary btn-lg reply-button" id="reply-button{{comment.id}}" type="submit">Submit</button>
+											</form>
+										</div>
+									</div>
 									{% for reply in comment.replies.all %}
 									<div class="reply">
 										<p class="font-weight-bold">
 											{{ reply.replier }}
 											<span class="text-muted font-weight-normal">
-												{{ reply.created_on }}
+												{{ reply.created_on|myfunc }}
 											</span>
 										</p>
 
-										{{ reply.body | linebreaks }}
+										{{ reply.body | safe | linebreaks }}
 									</div>
 									{% endfor %}
 								</div>
@@ -326,8 +319,7 @@
                                 {% csrf_token %}
                                 {{ comment_form.as_p }}
                                 <input name="action" type="hidden" value="to_comment">
-                                <a class="btn btn-primary btn-lg comment-button" href="javascript:void(0)"
-                                   id="comment-button">Submit</a>
+                                <button class="btn btn-primary btn-lg comment-button" id="comment-button" type="submit">Submit</button>
                             </form>
 							{% endif %}
 						</div>
@@ -339,7 +331,7 @@
 		<div class="read-more">
 			<div class="trending-posts">
 				<div class="head">
-					<form action="{% url 'sni_app:home' %}" method="get">
+					<form action="{% url 'blog:home' %}" method="get">
 						<button class="text" type="submit" name="posted-since" id="trending-category"
 							value="{{blog_post.date_updated}}">
 							TRENDING POSTS</button>
@@ -365,7 +357,7 @@
 					</div>
 				</div>
 				{% endfor %}
-				<form action="{% url 'sni_app:home' %}" method="get">
+				<form action="{% url 'blog:home' %}" method="get">
 					<button class="see-more" type="submit" name="posted-since" id="seemore-trending"
 						value="{{blog_post.date_updated}}">
 						See More >>>
@@ -375,7 +367,7 @@
 
 			<div class="related-posts">
 				<div class="head">
-					<form action="{% url 'sni_app:home' %}" method="get">
+					<form action="{% url 'blog:home' %}" method="get">
 						<button class="text" type="submit" name="related-to" id="related-category"
 							value="{{blog_post.title}}">
 							RELATED POSTS</button>
@@ -403,7 +395,7 @@
 
 				</div>
 				{% endfor %}
-				<form action="{% url 'sni_app:home' %}" method="get">
+				<form action="{% url 'blog:home' %}" method="get">
 					<button class="see-more" type="submit" name="related-to" id="seemore-related"
 						value="{{blog_post.title}}">
 						See More >>>
@@ -413,7 +405,7 @@
 
 			<div class="author-posts">
 				<div class="head">
-					<form action="{% url 'sni_app:home' %}" method="get">
+					<form action="{% url 'blog:home' %}" method="get">
 						<button class="text" type="submit" name="posts-from" id="author-category"
 							value="{{blog_post.author}}">MORE
 							POSTS FROM
@@ -440,7 +432,7 @@
 					</div>
 				</div>
 				{% endfor %}
-				<form action="{% url 'sni_app:home' %}" method="get">
+				<form action="{% url 'blog:home' %}" method="get">
 					<button class="see-more" type="submit" name="posts-from" id="seemore-from-author"
 						value="{{blog_post.author}}">
 						See More >>>
@@ -607,16 +599,19 @@
 	// 	}
 	// });
 
-	$("#comment-button").click(function () {
-		$(document).ready(function () {
+	$(document).ready(function () {
+		count = $('#comments-count').data("value");
+		comments = '{{comments.count}}';
+		counter = 0;
+		$("#comment-button").click(function () {
 			console.log('ready')
+			console.log(this.className);
 			$("#comment-form").submit(function (event) {
 				event.preventDefault();
 				console.log('submitted')
 				var commentsCount, commentContainer;
-				form = $("#comment-form");
+				form = document.getElementById('comment-form');
 				commentsCount = document.getElementById('comments-count');
-				count = $('#comments-count').data("value");
 				commentContainer = document.getElementById('comment-container');
 				$.ajax({
 					data: $("#comment-form").serialize(),
@@ -625,7 +620,7 @@
 					success: function (response) {
 						console.log(response);
 						console.log($("#comment-form").serialize());
-						if ('{{ request.user.is_authenticated }}' === 'True') {
+						if ('{{ request.user.is_authenticated }}' === 'True' & decodeURIComponent($("#comment-form").serialize().split('body=')[1].split('&action')[0]) != '') {
 							count += 1;
 							console.log('{{request.user}}');
 							commentsCount.innerHTML = count + " comments";
@@ -643,49 +638,62 @@
 							ctime[2] = ctime[2] + ',';
 							ctime = ctime.join(' ');
 
+							replyButtonId = 'show-reply-form_' + String(Number(comments)+ 1)
+							replyDivId = 'reply-div' + String(Number(comments)+ 1)
 							console.log(reply_body);
-							commentContainer.innerHTML +=
-								'<div class="comments" style="padding: 10px;"><p class="font-weight-bold">{{ request.user }} <span class=" text-muted font-weight-normal">' + ctime + '</span></p>' + reply_body +'</br></br><a href="javascript:void(0)" class="reply-button" id="reply-button" onclick="replyComment(this)" title="Reply to this comment">Reply</a><div class="reply-div" id="reply-div"><form method="post" style="margin-top: 1.3em;">{% csrf_token %}{{ reply_form.as_p }}<input type="hidden" name="parent_id" value="{{new_comment.id}}"><button type="submit" class="btn btn-primary btn-lg reply-button" name="action" value="to_reply">Submit</button></form></div>{% for reply in new_comment.replies.all %}<div class="reply"><p class="font-weight-bold">{{ reply.replier }}<span class="text-muted font-weight-normal">{{ reply.created_on }}</span></p>{{ reply.body | linebreaks }}</div>{% endfor %}</div>';
+							commentContainer.insertAdjacentHTML('beforeEnd', '<div class="comments" id="' + String(Number(comments) + 1) + '" ' + 'style="padding: 10px;"><p class="font-weight-bold">{{ request.user }} <span class=" text-muted font-weight-normal">' + ctime + '</span></p>' + reply_body +'</br><div><a href="javascript:void(0)" class="show-reply-form" id=' + replyButtonId + ' onclick="alertMessage()" title="Reply to this comment">Reply</a><div class="reply-div" id=' + replyDivId + '><form method="post" style="margin-top: 1.3em;" class="reply-form" name="r-form" value="' + String(Number(comments) + 1) + '" ' + 'id="reply-form' + String(Number(comments) + 1) + '">{% csrf_token %}{{ reply_form.as_p }}<input type="hidden" name="parent_id" value="' + String(Number(comments)+ 1) + '"><input name="action" type="hidden" value="to_reply"><button type="submit" class="btn btn-primary btn-lg reply-button" id="reply-button' + String(Number(comments) +1) + '">Submit</button></form></div></div>{% for reply in new_comment.replies.all %}<div class="reply"><p class="font-weight-bold">{{ reply.replier }}<span class="text-muted font-weight-normal">{{ reply.created_on }}</span></p>{{ reply.body | safe | linebreaks }}</div>{% endfor %}</div>');
+							form.removeChild(document.getElementById('comment-button'));
+							form.insertAdjacentHTML('beforeEnd', '<button class="btn btn-primary btn-lg comment-button" id="comment-button" type="submit">Submit</button>');
+						} else {
+							if (decodeURIComponent($("#comment-form").serialize().split('body=')[1].split('&action')[0]) != '') {
+								form.removeChild(document.getElementById('comment-button'));
+								form.insertAdjacentHTML('beforeEnd', '<button class="btn btn-primary btn-lg comment-button" id="comment-button" type="submit">Submit</button>');	
+							}
+							
 						}
 					},
 					error: function (request, status, error) {
 						console.log(request.responseText);
 					}
 				});
-			})
-			$("#comment-form").submit();
-		})
-	})
+			});
+			// $("#comment-form").submit();
+		});
 
-	$("#reply-button").click(function () {
-		$(document).ready(function () {
-			console.log('ready')
-			$("#reply-form").submit(function (event) {
+
+		$(".reply-button").click(function () {
+			console.log('ready');
+			replyButton = this;
+			console.log(replyButton)
+			replyForm = this.parentElement;
+			console.log(replyForm);
+			formId = replyForm.id;
+			console.log(formId)
+			$('#' + formId).submit(function (event) {
 				event.preventDefault();
 				console.log('submitted')
 				var commentsCount, commentContainer;
-				form = $("#reply-form");
+				// form = document.getElementById("reply-form");
 				commentsCount = document.getElementById('comments-count');
-				count = $('#comments-count').data("value");
-				parentId = (this).attr('value');
+				parentId = $('#' + formId).attr('value');
 				commentContainer = document.getElementById(parentId);
 				
 				$.ajax({
-					data: $("#reply-form").serialize(),
+					data: $('#' + formId).serialize(),
 					type: "POST",
 					url: "",
 					success: function (response) {
 						console.log(response);
-						console.log($("#reply-form").serialize());
-						if ('{{ request.user.is_authenticated }}' === 'True') {
+						console.log($('#' + formId).serialize());
+						if ('{{ request.user.is_authenticated }}' === 'True' & decodeURIComponent($('#' + formId).serialize().split('body=')[1].split('&parent_id')[0]) != '') {						
 							count += 1;
 							console.log('{{request.user}}');
 							commentsCount.innerHTML = count + " comments";
 
-							serialized = $("#reply-form").serialize();
+							serialized = $('#' + formId).serialize();
 							myArray = serialized.split('body=');
 							frag = myArray[1];
-							newArray = frag.split('&action');
+							newArray = frag.split('&parent_id');
 							encodedTxt = newArray[0];
 							reply_body = decodeURIComponent(encodedTxt);
 							
@@ -696,16 +704,76 @@
 							ctime = ctime.join(' ');
 
 							console.log(reply_body);
-							commentContainer.innerHTML += '<div class="reply"><p class="font-weight-bold">{{ request.user }}<span class="text-muted font-weight-normal">' + ctime + '</span></p>' + reply_body + '</div>'
+							commentContainer.insertAdjacentHTML('beforeEnd', '<div class="reply"><p class="font-weight-bold">{{ request.user }}<span class="text-muted font-weight-normal">' + ctime + '</span></p>' + reply_body + '</div>');
+							replyForm.removeChild(replyForm.lastElementChild);
+							replyForm.insertAdjacentHTML('beforeEnd', '<button class="btn btn-primary btn-lg reply-button" id="reply-button' + parentId +  '" ' + 'type="submit">Submit</button>');
+						} else {
+							if (decodeURIComponent($('#' + formId).serialize().split('body=')[1].split('&parent_id')[0]) != '') {
+								replyForm.removeChild(replyForm.lastElementChild);
+								replyForm.insertAdjacentHTML('beforeEnd', '<button class="btn btn-primary btn-lg reply-button" id="reply-button' + parentId +  '" ' + 'type="submit">Submit</button>');
+							}
+							
 						}
 					},
 					error: function (request, status, error) {
 						console.log(request.responseText);
 					}
 				});
-			})
-			$("#comment-form").submit();
-		})
-	})
+
+			});
+			// $("#comment-form").submit();
+		});
+
+		// $('.show-reply-form').click( function () {
+		// 	object = this;
+		// 	objectId= Number(object.id.split('_')[1]);
+		// 	parentDiv = object.parentElement;
+
+		// 	replyDiv = document.getElementById('reply-div' + String(objectId));
+		// 	console.log(replyDiv);
+		// 	if (replyDiv) {
+		// 		console.log(replyDiv);
+		// 		console.log('na here');
+		// 		parentDiv.removeChild(replyDiv);
+		// 	} else {
+		// 		for (let element of document.getElementsByClassName('reply-div')) {
+		// 			element.remove();
+		// 		}
+
+		// 		parentDiv.insertAdjacentHTML('beforeEnd', '<div class="reply-div" id="reply-div' + String(objectId) + '" ' + '><form id="reply-form' + String(objectId) + '" ' + 'class="reply-form" method="post" style="margin-top: 1.3em;" name="r-form" value="' + String(objectId) + '"' + '>{% csrf_token %}{{ reply_form.as_p }}<input type="hidden" name="parent_id" value="' + String(objectId) + '"' + '><input name="action" type="hidden" value="to_reply"><button class="btn btn-primary btn-lg reply-button" id="reply-button' + String(objectId) + '" ' + 'type="submit">Submit</button></form>');
+		// 		// parentDiv.insertAdjacentElement('beforeEnd', document.getElementsByClassName('reply-div')[0]);
+		// 		replyDiv = parentDiv.lastElementChild;
+		// 		replyDiv.id = 'reply-div' + String(objectId);
+		// 		replyForm = replyDiv.children[0];
+		// 		replyForm.id = 'reply-form' + String(objectId);
+		// 		replyForm.setAttribute('value', String(objectId))
+		// 		replyForm.children[2].setAttribute('value', String(objectId))
+		// 		replyForm.lastElementChild.id = String(objectId);
+		// 		replyDiv.style.display = 'block';
+		// 		formSelector = '#' + replyForm.id;
+		// 		area = replyForm.children[1].children[1];
+		// 		counter += 1
+		// 		area.className += String(counter);
+		// 		// tinymce.init({
+        //         //         selector: 'textarea#id_body.tinymce' + String(counter)
+        //         // });
+				
+				
+		// 	}
+		// });
+	});
+
+	// $(document).ready(function () {
+		
+	// })
+	// tinymce.init({
+	// 	selector:'.editor',
+	// 	setup: function (editor) {
+	// 		editor.on('submit', function (e) {
+	// 			editor.save();
+	// 		});
+	// 	}
+	// });
+
 </script>
 {% endblock content %}

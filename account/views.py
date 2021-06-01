@@ -15,7 +15,7 @@ def registration_view(request):
             raw_password = form.cleaned_data.get('password1')
             account = authenticate(email=email, password=raw_password)
             login(request, account)
-            return redirect('sni_app:home')
+            return redirect('blog:home')
         else:
             context['registration_form'] = form
 
@@ -35,7 +35,7 @@ def login_view(request):
 
     user = request.user
     if user.is_authenticated:
-        return redirect("sni_app:home")
+        return redirect("blog:home")
 
     if request.method == "POST":
         form = AccountAuthenticationForm(request.POST)
@@ -72,15 +72,27 @@ def account_view(request):
                 "lastname": request.POST.get('lastname'),
             }
             form.save()
+            print('saved')
+            print(request.POST.get('email'))
+            print(request.POST.get('username'))
+            print(request.POST.get('firstname'))
+            print(request.POST.get('lastname'))
             context['success_message'] = "Updated"
+        else:
+            print('failed')
+            print(request.POST.get('email'))
+            print(request.POST.get('username'))
+            print(request.POST.get('firstname'))
+            print(request.POST.get('lastname'))
+            
     else:
         form = AccountUpdateForm(
 
             initial={
                 "email": request.user.email,
                 "username": request.user.username,
-                "firstname": request.POST.get('firstname'),
-                "lastname": request.POST.get('lastname'),
+                "firstname": request.user.firstname,
+                "lastname": request.user.lastname,
             }
         )
 

@@ -42,21 +42,21 @@ class UpdateBlogPostForm(forms.ModelForm):
 
 
 class CommentForm(forms.ModelForm):
-    body = forms.CharField(
-        widget=TinyMCEWidget(
-            attrs={'required': False, 'cols': 30, 'rows': 10}
+    comment_body = forms.CharField(
+        widget=TinyMCE(
+            attrs={'required': False, 'cols': 80, 'rows': 80}
         )
     )
 
     class Meta:
         model = Comment
-        fields = ('body',)
+        fields = ('comment_body',)
 
 
 class ReplyForm(forms.ModelForm):
     body = forms.CharField(
-        widget=TinyMCEWidget(
-            attrs={'required': False, 'cols': 30, 'rows': 10}
+        widget=TinyMCE(
+            attrs={'required': False, 'cols': 80, 'rows': 80}
         )
     )
 

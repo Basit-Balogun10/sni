@@ -22,14 +22,15 @@ class BlogPost(models.Model):
     image = models.ImageField(upload_to=upload_location, null=False, blank=False)
     date_published = models.DateTimeField(auto_now_add=True, verbose_name="date published")
     date_updated = models.DateTimeField(auto_now=True, verbose_name="date updated")
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    liked = models.ManyToManyField(settings.AUTH_USER_MODEL, default=None, blank=True, related_name='liked')
-    disliked = models.ManyToManyField(settings.AUTH_USER_MODEL, default=None, blank=True, related_name='disliked')
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="user_posts")
+    liked = models.ManyToManyField(settings.AUTH_USER_MODEL, default=None, blank=True, related_name='liked', editable=False)
+    disliked = models.ManyToManyField(settings.AUTH_USER_MODEL, default=None, blank=True, related_name='disliked', editable=False)
     AUTHORS = (("history", "HISTORY"), ("politics-and-international-relations", "POLITICS & INTERNATIONAL RELATIONS"),
                ("society-and-culture", "SOCIETY & CULTURE"), ("science-and-technology", "SCIENCE & TECHNOLOGY"),
                ("art-and-literature", "ART & LITERATURE"), ("business-and-economics", "BUSINESS & ECONOMICS"))
 
     category = models.CharField(max_length=50, blank=False, null=False, choices=AUTHORS)
+    reports = models.ManyToManyField(settings.AUTH_USER_MODEL, default=None, blank=True, through='Report', through_fields=('post', 'reporter'), related_name='reports')
 
     def num_likes(self):
         return self.liked.all().count()
@@ -37,12 +38,13 @@ class BlogPost(models.Model):
     def num_dislikes(self):
         return self.disliked.all().count()
 
-    def was_published_when(self, when):
-        time_frame = {"yesterday": 1, "last week": 7, "2 weeks ago": 14, "3 weeks ago": 21, "last month": 28,
-                      "this year": 365}
-        no_of_days = time_frame[when.lower()]
-        now = timezone.now()
-        return now - timedelta(days=1) <= self.date_updated <= now
+    def total_comments(self):
+        total = 0
+        total += self.comments.count()
+        for comment in self.comments.all():
+            total += comment.replies.count()
+        
+        return total
 
     def __str__(self):
         return self.title
@@ -75,16 +77,18 @@ class Dislike(models.Model):
 class Comment(models.Model):
     post = models.ForeignKey(BlogPost, on_delete=models.CASCADE, related_name='comments')
     commenter = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    body = HTMLField(default="Default")
+    comment_body = HTMLField()
     created_on = models.DateTimeField(auto_now_add=True)
-    active = models.BooleanField(default=True)
-    new = models.BooleanField(default=True)
+    active = models.BooleanField(default=True, editable=False)
+    new = models.BooleanField(default=True, editable=False)
+    # reports = models.IntegerField(default=0)
+
 
     class Meta:
-        ordering = ['created_on']
+        ordering = ['created_on', 'commenter']
 
     def __str__(self):
-        return '{} by {}'.format(self.body, self.commenter)
+        return '{} by {}'.format(self.comment_body, self.commenter)
 
 
 class Reply(models.Model):
@@ -92,36 +96,38 @@ class Reply(models.Model):
     replier = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     body = HTMLField()
     created_on = models.DateTimeField(auto_now_add=True)
-    active = models.BooleanField(default=True)
-    new = models.BooleanField(default=True)
+    active = models.BooleanField(default=True, editable=False)
+    new = models.BooleanField(default=True, editable=False)
+    # reports = models.IntegerField(default=0)
 
     class Meta:
-        ordering = ['created_on']
+        ordering = ['created_on', 'replier']
+        verbose_name_plural = 'replies'
 
     def __str__(self):
         return '{} by {}'.format(self.body, self.replier)
 
 
 class Report(models.Model):
-    TITLES = (())
-    title = models.CharField(max_length=50, blank=True, null=True, choices=TITLES)
-    reporter = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    TITLES = (('racism', "Racism"), ("nudity", "Nudity"))
+    title = models.CharField(max_length=50, blank=False, null=False, choices=TITLES)
+    post = models.ForeignKey(BlogPost, on_delete=models.CASCADE, default=None, blank=False, null=False, related_name='post_reports')
+    # reply = models.ForeignKey(Reply, on_delete=models.CASCADE, default=None, blank=False, null=False, related_name='reply_reports')
+    reporter = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='reporter', blank=False, null=False)
     # custom_title = models.CharField(max_length=100, blank=True, null=True)
     created_on = models.DateTimeField(auto_now_add=True)
+    new = models.BooleanField(default=True, editable=False)
+    reviewed = models.BooleanField(default=False, editable=False)
+    good = models.BooleanField(default=True, editable=False)
+    bad = models.BooleanField(default=False, editable=False)
 
 
-active = models.BooleanField(default=True)
-new = models.BooleanField(default=True)
-accepted = models.BooleanField(default=True)
-discarded = models.BooleanField(default=False)
+    class Meta:
+        ordering = ['created_on']
 
 
-class Meta:
-    ordering = ['created_on']
-
-
-def __str__(self):
-    return '{} by {}'.format(self.title, self.reporter)
+    def __str__(self):
+        return '{} by {}'.format(self.title, self.reporter)
 
 
 @receiver(post_delete, sender=BlogPost)

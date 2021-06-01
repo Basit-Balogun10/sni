@@ -1,51 +1,47 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <title>Schedule - Synergy Network International</title>
-    <meta
-      content="Synergy Network International aspires to be the consolidation of global youth leadership and potential. Our vision is to be a center for the empowerment of"
-      name="description"
-    />
-    <link
-      href="{% static 'sni_app/images/cropped-SNI-Favicon-32x32.png' %}"
-      rel="icon"
-      sizes="32x32"
-    />
-    <link
-      href="{% static 'sni_app/css/home.css' %}"
-      rel="stylesheet"
-      type="text/css"
-    />
-    <script
-      crossorigin="anonymous"
-      src="https://kit.fontawesome.com/8e8ce04397.js"
-    ></script>
-  </head>
 
-  <body>
-    <main>
-      {% include "header.html" %}
-      <!-- Calendly inline widget begin -->
-      <div
-        class="calendly-inline-widget"
-        data-url="https://calendly.com/tester86t"
-        style="min-width: 320px; height: 630px"
-      ></div>
-      <!-- Calendly inline widget end -->
+<head>
+  <meta charset="UTF-8" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <title>Schedule - Synergy Network International</title>
+  <meta
+    content="Synergy Network International aspires to be the consolidation of global youth leadership and potential. Our vision is to be a center for the empowerment of"
+    name="description" />
+  <link href="{% static 'sni_app/images/cropped-SNI-Favicon-32x32.png' %}" rel="icon" sizes="32x32" />
+  <link href="{% static 'sni_app/css/home.css' %}" rel="stylesheet" type="text/css" />
+  <script crossorigin="anonymous" src="https://kit.fontawesome.com/8e8ce04397.js"></script>
+</head>
+
+<body>
+
+  <main>
+    {% include "header.html" %}
+    {% if request.user.is_authenticated %}
+    <!-- Calendly inline widget begin -->
+    <div class="calendly-inline-widget"
+      data-url="https://calendly.com/basitworkemail10?text_color=002657&primary_color=d323d3"
+      style="min-width: 320px; height: 630px"></div>
+    <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+    <!-- Calendly inline widget end -->
+    {% else %}
+    <h1>Sorry, You have to be logged in to schedule meetings with us</h3>
+      {% endif %}
       {% include "footer.html" %}
-    </main>
-  </body>
+  </main>
+</body>
 
-  <script
-    type="text/javascript"
-    src="https://assets.calendly.com/assets/external/widget.js"
-    async
-  ></script>
-  <script
-    src="{% static 'sni_app/javascript/home.js' %}"
-    type="text/javascript"
-  ></script>
+<script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+<script src="{% static 'sni_app/javascript/home.js' %}" type="text/javascript"></script>
+<script>
+  Calendly.initInlineWidget({
+    url: 'https://calendly.com/basitworkemail10/first-scheduled-meeting-with-sni',
+    prefill: {
+      name: "{{request.user.firstname}}" + " {{request.user.lastname}}",
+      email: "{{request.user.email}}"
+    }
+  });
+</script>
+
 </html>

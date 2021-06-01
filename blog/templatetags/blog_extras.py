@@ -11,6 +11,11 @@ def concat_all(*args):
     return ''.join(map(str, args))
 
 
+# @register.simple_tag
+# def sum_up(*args):
+#     return sum(args)
+
+
 @register.simple_tag
 def assign(string):
     assignment = string
