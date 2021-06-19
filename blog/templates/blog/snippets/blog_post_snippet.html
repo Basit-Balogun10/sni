@@ -1,5 +1,5 @@
 {% load blog_extras %}
-<style type="text/css">
+{% comment %} <style type="text/css">
   .greed-kontainer {
     width: 100%;
     height: 100%;
@@ -124,7 +124,7 @@
     color: antiquewhite;
     font-size: 1.5rem;
   }
-</style>
+</style> {% endcomment %}
 
 {% if blog_post %}
 <!-- <div class="container">
@@ -132,59 +132,52 @@
 <!-- Blog Post -->
 
 {% concat_all blog_post.date_published.hour|stringformat:"i" '-' blog_post.date_published.minute|stringformat:"i" '-' blog_post.date_published.second|stringformat:"i" '-' blog_post.date_published.microsecond|stringformat:"i"  as blog_time_published %}
-<div class="greed-kontainer">
-  <a class="card-link"
-    href="{% url 'blog:detail' blog_post.category blog_post.date_published.year blog_post.date_published.month blog_post.date_published.day blog_time_published blog_post.id blog_post.title|slugify %}">
 
+<div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+  <div class="post-item">
+    <div><img src="{{blog_post.image.url}}" class="post-image img-fluid" alt="..."></div>
+    <div><a
+        href="{% url 'blog:detail' blog_post.category blog_post.date_published.year blog_post.date_published.month blog_post.date_published.day blog_time_published blog_post.id blog_post.title|slugify %}">
+        <div class="post-content">
+          <div class="d-flex text-uppercase justify-content-around align-items-center mb-3">
+            <h4 style="background: {{blog_post.category|get_color}};">{{blog_post.category|get_readable}}</h4>
+            {% comment %} <p class="price">$169</p> {% endcomment %}
+          </div>
 
-    <img class="card-img" src="{{blog_post.image.url}}" />
-  </a>
-
-  <div class="card-detail">
-    <h2 class="card-title">{{blog_post.title}}</h2>
-    <a
-      href="{% url 'blog:detail' blog_post.category blog_post.date_published.year blog_post.date_published.month blog_post.date_published.day blog_time_published blog_post.id blog_post.title|slugify %}">
-      {% comment %} <a
-        href="{% url 'blog:detail' blog_post.category blog_post.date_published.year blog_post.date_published.month %}">
-        {% endcomment %}
-        <p class="card-text" id="card-text">
-          {% comment %}
-          {% with
-                blog_post.date_published.hour|addstr:"-"|addstr:blog_post.date_published.minute|addstr:"-"|addstr:blog_post.date_published.second|addstr:"-"|addstr:blog_post.date_published.microsecond
-                as blog_published_time%}
-          {{ blog_published_time}}
-          {% endwith %} {% endcomment %}
-          {{blog_post.body|safe|truncatechars:180}}
-        </p>
-      </a>
-
-
+          <h3 class="text-center font-weight-normal">{{blog_post.title}}</h3>
+          <p class="post-body">{{blog_post.body|get_text|truncatechars:130}}</p>
+          <div class="trainer align-items-center">
+            <div class="trainer-profile d-flex justify-content-between align-items-center">
+              <div class="author-detail d-flex">
+                <img src="{{blog_post.author_img.url}}" class="img-fluid" alt="">
+                <span>{{blog_post.author.firstname}} {{ blog_post.author.lastname}}</span>
+              </div>
+              <div class="feedback d-flex">
+                <i class="fa fa-thumbs-up"></i>&nbsp;{{ blog_post.num_likes }}
+                &nbsp;&nbsp;
+                <i class="fa fa-thumbs-down"></i>&nbsp;{{ blog_post.num_dislikes }}&nbsp;&nbsp;
+                <i class="fa fa-comments"></i>&nbsp;{{ blog_post.total_comments }}
+              </div>
+            </div>
+            <div class="trainer-rank d-block text-center align-items-center">
+              <p><span>Published: </span>{{blog_post.date_published|date:"r"}}</p>
+              <p><span>Updated: </span>{{blog_post.date_updated|date:"r"}}</p>
+            </div>
+          </div>
+        </div>
+    </div>
+    </a>
   </div>
-  <div class="card-detail card-footer">
-    {% if blog_post.date_published != blog_post.date_updated %}
-    <span class="published">Date Published: {{blog_post.date_published|myfunc}} <span class="author">by
-        {{blog_post.author}}</span></span>
-    <br><span class="updated">Last Update: {{blog_post.date_updated|myfunc}} <span class="author">by
-        {{blog_post.author}}</span></span>
-    {% else %}
-    <span class="published center">Date Published: {{blog_post.date_published|myfunc}} <span class="author">by
-        {{blog_post.author}}</span></span>
-    {% endif %}
-    <span class="feedback">{{blog_post.num_likes}}<i class="fa fa-thumbs-up"></i> {{blog_post.num_dislikes}}<i
-        class="fa fa-thumbs-down"></i> {{blog_post.total_comments}}<i class="fa fa-comments"></i>
-  </div>
-
-
-</div>
+</div> <!-- End Course Item-->
 {% else %}
 
 <div class="container">
   <div class="row">
     <div class="card m-auto">
-      <div class="card-body mt-2 mb-2">
+        <div class="misc card-body text-center border-5 mt-2 mb-2" style="background: #002657;">
         <h2 class="card-title">No results</h2>
         <p class="card-text">
-          There were no results matching the search: "{{query}}"
+          There were no results matching the search information provided"
         </p>
       </div>
     </div>

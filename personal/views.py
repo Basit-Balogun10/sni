@@ -9,7 +9,7 @@ from blog.models import BlogPost
 
 from datetime import timedelta, datetime
 
-BLOG_POSTS_PER_PAGE = 10
+BLOG_POSTS_PER_PAGE = 18
 
 
 def home_screen_view(request, *args, **kwargs):
@@ -104,7 +104,7 @@ def home_screen_view(request, *args, **kwargs):
         elif request.GET.get('time-filter') and request.GET.get('category-filter'):
             print('time and category')
             time_filter = request.GET.get('time-filter')
-            context['time_filter'] = time_filter
+            context['time_filter'] = time_filter.lower()
             category_filter = request.GET.get('category-filter')
             context['category_filter'] = category_filter
             now = timezone.now()

@@ -12,20 +12,20 @@ class TinyMCEWidget(TinyMCE):
 
 
 class CreateBlogPostForm(forms.ModelForm):
-    AUTHORS = (("1", "HISTORY"), ("2", "POLITICS & INTERNATIONAL RELATIONS"), ("3", "SOCIETY & CULTURE"),
+    CATEGORIES = (("1", "HISTORY"), ("2", "POLITICS & INTERNATIONAL RELATIONS"), ("3", "SOCIETY & CULTURE"),
                ("4", "SCIENCE & TECHNOLOGY"), ("5", "ART & LITERATURE"), ("6", "BUSINESS & ECONOMICS"))
 
-    category = forms.ChoiceField(choices=AUTHORS)
+    category = forms.ChoiceField(choices=CATEGORIES)
 
     class Meta:
         model = BlogPost
-        fields = ['category', 'title', 'body', 'image']
+        fields = ['category', 'title', 'body', 'image', 'author_img']
 
 
 class UpdateBlogPostForm(forms.ModelForm):
     class Meta:
         model = BlogPost
-        fields = ['category', 'title', 'body', 'image']
+        fields = ['category', 'title', 'body', 'image', 'author_img']
 
     def save(self, commit=True):
         blog_post = self.instance
@@ -35,6 +35,9 @@ class UpdateBlogPostForm(forms.ModelForm):
 
         if self.cleaned_data['image']:
             blog_post.image = self.cleaned_data['image']
+        
+        if self.cleaned_data['author_img']:
+            blog_post.image = self.cleaned_data['author_img']
 
         if commit:
             blog_post.save()

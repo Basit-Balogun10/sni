@@ -15,6 +15,11 @@ def upload_location(instance, filename):
         author_id=str(instance.author.id), title=str(instance.title), filename=filename)
     return file_path
 
+def author_img_upload_location(instance, filename):
+    file_path = 'author_img/{post_detail}/{author_id}-{filename}'.format(
+        post_detail=str(instance.title) + '-' + str(instance.id), author_id=str(instance.author.id), filename=filename)
+    return file_path
+
 
 class BlogPost(models.Model):
     title = models.CharField(max_length=80, null=False, blank=False)
@@ -23,13 +28,14 @@ class BlogPost(models.Model):
     date_published = models.DateTimeField(auto_now_add=True, verbose_name="date published")
     date_updated = models.DateTimeField(auto_now=True, verbose_name="date updated")
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="user_posts")
+    author_img = models.ImageField(upload_to=author_img_upload_location, null=False, blank=False)
     liked = models.ManyToManyField(settings.AUTH_USER_MODEL, default=None, blank=True, related_name='liked', editable=False)
     disliked = models.ManyToManyField(settings.AUTH_USER_MODEL, default=None, blank=True, related_name='disliked', editable=False)
-    AUTHORS = (("history", "HISTORY"), ("politics-and-international-relations", "POLITICS & INTERNATIONAL RELATIONS"),
+    CATEGORIES = (("history", "HISTORY"), ("politics-and-international-relations", "POLITICS & INTERNATIONAL RELATIONS"),
                ("society-and-culture", "SOCIETY & CULTURE"), ("science-and-technology", "SCIENCE & TECHNOLOGY"),
                ("art-and-literature", "ART & LITERATURE"), ("business-and-economics", "BUSINESS & ECONOMICS"))
 
-    category = models.CharField(max_length=50, blank=False, null=False, choices=AUTHORS)
+    category = models.CharField(max_length=50, blank=False, null=False, choices=CATEGORIES)
     reports = models.ManyToManyField(settings.AUTH_USER_MODEL, default=None, blank=True, through='Report', through_fields=('post', 'reporter'), related_name='reports')
 
     def num_likes(self):
