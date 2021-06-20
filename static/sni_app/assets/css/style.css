@@ -247,6 +247,7 @@ h6 {
     color: #c582eb;
 }
 
+.navbar .route.active,
 .navbar .route.active a {
     color: skyblue;
     text-decoration: underline;

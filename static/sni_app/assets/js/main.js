@@ -101,47 +101,58 @@
 
     var navLinks = {
         Home: "",
-        blog: ["blog"],
-        about: ["about"],
-        services: ["synergyhub", "schedule"],
-        authentication: ["login", "register"],
-        speakers: ["speakers"],
-        organizer: ["organizer"],
-        venue: ["venue"],
-        sponsors: ["sponsors"],
-        events: ["about"],
+        Blog: ["blog"],
+        About: ["about"],
+        Services: ["synergyhub", "schedule"],
+        Authentication: ["login", "register"],
+        Speakers: ["speakers"],
+        Organizer: ["organizer"],
+        Venue: ["venue"],
+        Sponsors: ["sponsors"],
+        Events: ["about"],
         "My Account": ["account"],
     };
     var url = window.location.href;
 
-    if (
-        url == "http://127.0.0.1:8000/" ||
-        url == "http://localhost:8000/" ||
-        url == "https://sni.world/" ||
-        url == "https://www.sni.world/"
-    ) {
-        routes[0].className += " active";
-    } else {
-        var breakParent = false;
-        for (navLink in navLinks) {
-            console.log(navLinks[navLink]);
-            for (var pos = 0; pos < navLinks[navLink].length; ) {
-                console.log(navLinks[navLink][pos]);
-                if (url.includes(navLinks[navLink][pos])) {
+    // if (
+    //     url == "http://127.0.0.1:8000/" ||
+    //     url == "http://localhost:8000/" ||
+    //     url == "https://sni.world/" ||
+    //     url == "https://www.sni.world/"
+    // ) {
+    //     routes[0].className += " active";
+    // } else {
+    var breakParent = false;
+    for (var navLink in navLinks) {
+        console.log(navLinks[navLink]);
+        for (var pos = 0; pos < navLinks[navLink].length; ) {
+            console.log(navLinks[navLink][pos]);
+            if (url.includes(navLinks[navLink][pos])) {
+                console.log(navLink);
+                for (var i = 0; i < routes.length; i++) {
                     console.log(routes[i]);
-                    routes[i].className += " active";
-                    breakParent = true;
-                    break;
+                    console.log(routes[i].innerText);
+                    if (routes[i].innerText.includes(navLink)) {
+                        routes[i].className += " active";
+                        break;
+                    }
                 }
-
-                pos += 1;
-            }
-
-            i += 1;
-            if (breakParent) {
+                breakParent = true;
                 break;
             }
+
+            pos += 1;
         }
+
+        if (breakParent) {
+            break;
+        }
+    }
+    // }
+
+    if (select(".route.active")) {
+    } else {
+        routes[0].className = "route active";
     }
 
     window.onscroll = function () {
