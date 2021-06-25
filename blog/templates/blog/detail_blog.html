@@ -205,7 +205,33 @@
 	}
 </style>
 
-<div class="container">
+<section id="hero" style="background-image: url('{{blog_post.image.url}}');" class="
+        d-flex justify-content-center align-items-center">
+	<div class="container text-center position-relative" data-aos="zoom-in" data-aos-delay="100">
+		<h1>{{blog_post.title}}</h1>
+		<div class="trainer align-items-center text-center">
+			<div class="trainer-profile d-flex justify-content-between align-items-center">
+				<div class="author-detail d-flex">
+					<img src="{{blog_post.author_img.url}}" class="img-fluid" alt="">
+					<span>{{blog_post.author.firstname}} {{ blog_post.author.lastname}}</span>
+				</div>
+				<div class="feedback d-flex">
+					<i class="fa fa-thumbs-up"></i>&nbsp;{{ blog_post.num_likes }}
+					&nbsp;&nbsp;
+					<i class="fa fa-thumbs-down"></i>&nbsp;{{ blog_post.num_dislikes }}&nbsp;&nbsp;
+					<i class="fa fa-comments"></i>&nbsp;{{ blog_post.total_comments }}
+				</div>
+			</div>
+			<div class="trainer-rank d-block text-center align-items-center">
+				<p><span>Published: </span>{{blog_post.date_published|date:"r"}}</p>
+				<p><span>Updated: </span>{{blog_post.date_updated|date:"r"}}</p>
+			</div>
+		</div>
+		<a href="#about" class="btn-get-started">Jump to Main Content</a>
+	</div>
+</section>
+
+{% comment %} <div class="container"> {% endcomment %}
 	{% comment %} <div class="row">
 
 		<!-- Blog Post -->
@@ -222,31 +248,31 @@
 	</div> {% endcomment %}
 
 
-	{% concat_all blog_post.date_published.hour|stringformat:"i" '-' blog_post.date_published.minute|stringformat:"i" '-' blog_post.date_published.second|stringformat:"i" '-' blog_post.date_published.microsecond|stringformat:"i"  as blog_time_published %}
+	<!-- {% concat_all blog_post.date_published.hour|stringformat:"i" '-' blog_post.date_published.minute|stringformat:"i" '-' blog_post.date_published.second|stringformat:"i" '-' blog_post.date_published.microsecond|stringformat:"i"  as blog_time_published %}
 	<div class="grid-container5">
 		<div class="main-article">
 			<div class="post-header">
-                <div class="post-info">
-                    {% if blog_post.date_published != blog_post.date_updated %}
-                    <p><span class="info-head">Date Published: </span>{{blog_post.date_published|myfunc}} <span
-                            class="published author">by
+				<div class="post-info">
+					{% if blog_post.date_published != blog_post.date_updated %}
+					<p><span class="info-head">Date Published: </span>{{blog_post.date_published|myfunc}} <span
+							class="published author">by
 							{{blog_post.author}}</span></p>
-                    <br>
-                    <p><span class="info-head">Date Updated: </span>{{blog_post.date_updated|myfunc}} <span
-                            class="updated author">by
+					<br>
+					<p><span class="info-head">Date Updated: </span>{{blog_post.date_updated|myfunc}} <span
+							class="updated author">by
 							{{blog_post.author}}</span></p>
-                    {% else %}
-                    <p><span class="info-head">Date Published: </span>{{blog_post.date_published|myfunc}} <span
-                            class="published author">by
+					{% else %}
+					<p><span class="info-head">Date Published: </span>{{blog_post.date_published|myfunc}} <span
+							class="published author">by
 							{{blog_post.author}}</span></p>
-                    {% endif %}
+					{% endif %}
 
-                    <p class="post-category"><span class="info-head">Category: </span><span
-                            class="category">{{ blog_post.category|upper }}</span></p>
-                    <a class="likebutton btn btn-{{like_color}} btn-lg" id="like{{ blog_post.id }}" href="#"
-                       data-catid="{{ blog_post.id }}" data-value="{{blog_post.num_likes}}">{{blog_post.num_likes}} <i
-                            class="fa fa-thumbs-up"></i></a>
-                    <a class="dislikebutton btn btn-{{dislike_color}} btn-lg" id="dislike{{ blog_post.id }}" href="#"
+					<p class="post-category"><span class="info-head">Category: </span><span
+							class="category">{{ blog_post.category|upper }}</span></p>
+					<a class="likebutton btn btn-{{like_color}} btn-lg" id="like{{ blog_post.id }}" href="#"
+						data-catid="{{ blog_post.id }}" data-value="{{blog_post.num_likes}}">{{blog_post.num_likes}} <i
+							class="fa fa-thumbs-up"></i></a>
+					<a class="dislikebutton btn btn-{{dislike_color}} btn-lg" id="dislike{{ blog_post.id }}" href="#"
 						data-catid="{{ blog_post.id }}"
 						data-value="{{blog_post.num_dislikes}}">{{blog_post.num_dislikes}} <i
 							class="fa fa-thumbs-down"></i></a>
@@ -264,28 +290,32 @@
 				<div class="row">
 					<div class="col-md-8 card mb-4  mt-3 ">
 						<div class="card-body">
-							<!-- comments -->
-							<h2 id="comments-count" data-value={{blog_post.total_comments}}>{{ blog_post.total_comments }} comments</h2>
+							<h2 id="comments-count" data-value={{blog_post.total_comments}}>
+								{{ blog_post.total_comments }} comments</h2>
 
-                            <div id="comment-container">
-                                {% for comment in comments %}
-                                <div class="comments" id="{{comment.id}}" style="padding: 10px;">
-                                    <p class="font-weight-bold">
-                                        {{ comment.commenter }}
-                                        <span class=" text-muted font-weight-normal">
+							<div id="comment-container">
+								{% for comment in comments %}
+								<div class="comments" id="{{comment.id}}" style="padding: 10px;">
+									<p class="font-weight-bold">
+										{{ comment.commenter }}
+										<span class=" text-muted font-weight-normal">
 											{{ comment.created_on|myfunc }}
 										</span>
-                                    </p>
-                                    {{ comment.comment_body | safe | linebreaks }}
-                                    <div>
-										<a class="show-reply-form" onclick="replyComment(this)" href="javascript:void(0)" id="show-reply-form_{{comment.id}}" title="Reply to this comment">Reply</a>
+									</p>
+									{{ comment.comment_body | safe | linebreaks }}
+									<div>
+										<a class="show-reply-form" onclick="replyComment(this)"
+											href="javascript:void(0)" id="show-reply-form_{{comment.id}}"
+											title="Reply to this comment">Reply</a>
 										<div class="reply-div" id="reply-div{{comment.id}}">
-											<form id="reply-form{{comment.id}}" class="reply-form" method="post" style="margin-top: 1.3em;" name="r-form" value="{{comment.id}}">
+											<form id="reply-form{{comment.id}}" class="reply-form" method="post"
+												style="margin-top: 1.3em;" name="r-form" value="{{comment.id}}">
 												{% csrf_token %}
 												{{ reply_form.as_p }}
 												<input type="hidden" name="parent_id" value="{{comment.id}}">
 												<input name="action" type="hidden" value="to_reply">
-												<button class="btn btn-primary btn-lg reply-button" id="reply-button{{comment.id}}" type="submit">Submit</button>
+												<button class="btn btn-primary btn-lg reply-button"
+													id="reply-button{{comment.id}}" type="submit">Submit</button>
 											</form>
 										</div>
 									</div>
@@ -315,12 +345,13 @@
 							{% else %}
 							{% concat_all post.date_published.hour|stringformat:"i" '-' post.date_published.minute|stringformat:"i" '-' post.date_published.second|stringformat:"i" '-' post.date_published.microsecond|stringformat:"i"  as blog_time_published %}
 							<h3>Leave a comment</h3>
-                            <form method="post" style="margin-top: 1.3em;" id="comment-form">
-                                {% csrf_token %}
-                                {{ comment_form.as_p }}
-                                <input name="action" type="hidden" value="to_comment">
-                                <button class="btn btn-primary btn-lg comment-button" id="comment-button" type="submit">Submit</button>
-                            </form>
+							<form method="post" style="margin-top: 1.3em;" id="comment-form">
+								{% csrf_token %}
+								{{ comment_form.as_p }}
+								<input name="action" type="hidden" value="to_comment">
+								<button class="btn btn-primary btn-lg comment-button" id="comment-button"
+									type="submit">Submit</button>
+							</form>
 							{% endif %}
 						</div>
 					</div>
@@ -441,339 +472,375 @@
 			</div>
 		</div>
 	</div>
-</div>
-<script type="text/javascript">
-	$('.likebutton').click(function () {
-		if ('{{ request.user.is_authenticated }}' === 'True') {
-			var id;
-			var likes;
-			id = $(this).attr("data-catid");
-			likes = $(this).data("value");
-			dislikes = $('#dislike' + id).data("value");
-			console.log(likes + ' l')
-			console.log(dislikes + 'd')
-			$.ajax({
-				type: "POST",
-				url: "",
-				data: {
-					post_id: id,
-					'csrfmiddlewaretoken': '{{ csrf_token }}',
-					action: 'to_like'
-				},
-				success: function (data) {
-					if ($('#like' + id).hasClass('btn-primary') & $('#dislike' + id).hasClass(
-							'btn-success')) {
-						$('#like' + id).removeClass('btn btn-primary btn-lg');
-						$('#like' + id).addClass('btn btn-success btn-lg');
-						$('#dislike' + id).removeClass('btn btn-success btn-lg');
-						$('#dislike' + id).addClass('btn btn-primary btn-lg');
-
-						dislikes = dislikes - 1;
-						likes = likes + 1;
-						console.log(likes + ',' + dislikes)
-						$("#like" + id).data('value', likes)
-						$("#dislike" + id).data('value', dislikes)
-
-						$('#dislike' + id).html(
-							dislikes + ' <i class="fa fa-thumbs-down"></i>');
-						$('#like' + id).html((likes +
-							' <i class="fa fa-thumbs-up"></i>'));
-					} else if ($('#like' + id).hasClass('btn-success') & $('#dislike' + id).hasClass(
-							'btn-primary')) {
-						$('#like' + id).removeClass('btn btn-success btn-lg');
-						$('#like' + id).addClass('btn btn-primary btn-lg');
-
-						likes = likes - 1;
-						console.log(likes + ' l')
-						$("#like" + id).data('value', likes)
-
-						$('#like' + id).html(
-							likes + ' <i class="fa fa-thumbs-up"></i>');
-					} else if ($('#like' + id).hasClass('btn-primary') & $('#dislike' + id).hasClass(
-							'btn-primary')) {
-						$('#like' + id).removeClass('btn btn-primary btn-lg');
-						$('#like' + id).addClass('btn btn-success btn-lg');
-
-						likes = likes + 1;
-						console.log(likes + ' l')
-						$("#like" + id).data('value', likes)
-
-						$('#like' + id).html(
-							likes + ' <i class="fa fa-thumbs-up"></i>');
-					}
-				}
-			})
-		} else {
-			console.log('NOT AUTHENTICATED')
-			document.getElementById("login-message").style.display = "block";
-		};
-	});
-	$('.dislikebutton').click(function () {
-		if ('{{ request.user.is_authenticated }}' === 'True') {
-			var id;
-			var dislikes;
-			id = $(this).attr("data-catid");
-			dislikes = $(this).data("value");
-			likes = $('#like' + id).data("value");
-			console.log(dislikes + 'd');
-			console.log(likes + ' l')
-			$.ajax({
-				type: "POST",
-				url: "",
-				data: {
-					post_id: id,
-					'csrfmiddlewaretoken': '{{ csrf_token }}',
-					action: 'to_dislike'
-				},
-				success: function (data) {
-					if ($('#like' + id).hasClass('btn-primary') & $('#dislike' + id).hasClass(
-							'btn-success')) {
-						$('#dislike' + id).removeClass('btn btn-success btn-lg');
-						$('#dislike' + id).addClass('btn btn-primary btn-lg');
-
-						dislikes = dislikes - 1;
-						console.log(dislikes + 'd')
-						$("#dislike" + id).data('value', dislikes)
-
-						$('#dislike' + id).html(
-							dislikes + ' <i class="fa fa-thumbs-down"></i>');
-					} else if ($('#like' + id).hasClass('btn-success') & $('#dislike' + id).hasClass(
-							'btn-primary')) {
-						$('#like' + id).removeClass('btn btn-success btn-lg');
-						$('#like' + id).addClass('btn btn-primary btn-lg');
-						$('#dislike' + id).removeClass('btn btn-primary btn-lg');
-						$('#dislike' + id).addClass('btn btn-success btn-lg');
-
-						dislikes = dislikes + 1;
-						likes = likes - 1;
-						console.log(likes + ',' + dislikes)
-						$("#like" + id).data('value', likes)
-						$("#dislike" + id).data('value', dislikes)
-
-						$('#dislike' + id).html(
-							dislikes + ' <i class="fa fa-thumbs-down"></i>');
-						$('#like' + id).html((likes +
-							' <i class="fa fa-thumbs-up"></i>'));
-					} else if ($('#like' + id).hasClass('btn-primary') & $('#dislike' + id).hasClass(
-							'btn-primary')) {
-						$('#dislike' + id).removeClass('btn btn-primary btn-lg');
-						$('#dislike' + id).addClass('btn btn-success btn-lg');
-
-						dislikes = dislikes + 1;
-						$("#dislike" + id).data('value', dislikes)
-
-						console.log(dislikes + 'd')
-						$('#dislike' + id).html(
-							dislikes + ' <i class="fa fa-thumbs-down"></i>');
-					}
-				}
-			})
-		} else {
-			console.log('NOT AUTHENTICATED')
-			document.getElementById("login-message").style.display = "block";
-		}
-	});
-
-	// $('.comment-button').click(function () {
-	// 	if ('{{ request.user.is_authenticated }}' === 'True') {
-	// 		var commentsCount, commentContainer;
-	// 		commentsCount = document.getElementById('comments-count');
-	// 		count = $('#comments-count').data("value");
-	// 		commentContainer = document.getElementById('comment-container');
-	// 		$.ajax({
-	// 			type: "POST",
-	// 			url: "",
-	// 			data: {
-	// 				'csrfmiddlewaretoken': '{{ csrf_token }}',
-	// 				action: 'to_comment'
-	// 			},
-	// 			success: function (data) {
-	// 				count += 1;
-	// 				console.log('{{request.user}}');
-	// 				commentsCount.innerHTML = count + " comments";
-
-	// 				commentContainer.innerHTML +=
-	// 					'<div class="comments" style="padding: 10px;"><p class="font-weight-bold">{{ request.user }}<span class=" text-muted font-weight-normal">{{ new_comment.created_on }}</span></p>{{ new_comment.body | linebreaks }}<a href="javascript:void(0)" class="reply-button" id="reply-button" onclick="replyComment(this)" title="Reply to this comment">Reply</a><div class="reply-div" id="reply-div"><form method="post" style="margin-top: 1.3em;">{% csrf_token %}{{ reply_form.as_p }}<input type="hidden" name="parent_id" value="{{new_comment.id}}"><button type="submit" class="btn btn-primary btn-lg reply-button" name="action" value="to_reply">Submit</button></form></div>{% for reply in new_comment.replies.all %}<div class="reply"><p class="font-weight-bold">{{ reply.replier }}<span class="text-muted font-weight-normal">{{ reply.created_on }}</span></p>{{ reply.body | linebreaks }}</div>{% endfor %}</div>';
-	// 			}
-	// 		})
-	// 	}
-	// });
-
-	$(document).ready(function () {
-		count = $('#comments-count').data("value");
-		comments = '{{comments.count}}';
-		counter = 0;
-		$("#comment-button").click(function () {
-			console.log('ready')
-			console.log(this.className);
-			$("#comment-form").submit(function (event) {
-				event.preventDefault();
-				console.log('submitted')
-				var commentsCount, commentContainer;
-				form = document.getElementById('comment-form');
-				commentsCount = document.getElementById('comments-count');
-				commentContainer = document.getElementById('comment-container');
+</div> -->
+	<script type="text/javascript">
+		$('.likebutton').click(function () {
+			if ('{{ request.user.is_authenticated }}' === 'True') {
+				var id;
+				var likes;
+				id = $(this).attr("data-catid");
+				likes = $(this).data("value");
+				dislikes = $('#dislike' + id).data("value");
+				console.log(likes + ' l')
+				console.log(dislikes + 'd')
 				$.ajax({
-					data: $("#comment-form").serialize(),
 					type: "POST",
 					url: "",
-					success: function (response) {
-						console.log(response);
-						console.log($("#comment-form").serialize());
-						if ('{{ request.user.is_authenticated }}' === 'True' & decodeURIComponent($("#comment-form").serialize().split('body=')[1].split('&action')[0]) != '') {
-							count += 1;
-							console.log('{{request.user}}');
-							commentsCount.innerHTML = count + " comments";
-
-							serialized = $("#comment-form").serialize();
-							myArray = serialized.split('body=');
-							frag = myArray[1];
-							newArray = frag.split('&action');
-							encodedTxt = newArray[0];
-							reply_body = decodeURIComponent(encodedTxt);
-							
-							ctime = new Date();
-							ctime = String(ctime).split(' ');
-							ctime[0] = ctime[0] + ',';
-							ctime[2] = ctime[2] + ',';
-							ctime = ctime.join(' ');
-
-							replyButtonId = 'show-reply-form_' + String(Number(comments)+ 1)
-							replyDivId = 'reply-div' + String(Number(comments)+ 1)
-							console.log(reply_body);
-							commentContainer.insertAdjacentHTML('beforeEnd', '<div class="comments" id="' + String(Number(comments) + 1) + '" ' + 'style="padding: 10px;"><p class="font-weight-bold">{{ request.user }} <span class=" text-muted font-weight-normal">' + ctime + '</span></p>' + reply_body +'</br><div><a href="javascript:void(0)" class="show-reply-form" id=' + replyButtonId + ' onclick="alertMessage()" title="Reply to this comment">Reply</a><div class="reply-div" id=' + replyDivId + '><form method="post" style="margin-top: 1.3em;" class="reply-form" name="r-form" value="' + String(Number(comments) + 1) + '" ' + 'id="reply-form' + String(Number(comments) + 1) + '">{% csrf_token %}{{ reply_form.as_p }}<input type="hidden" name="parent_id" value="' + String(Number(comments)+ 1) + '"><input name="action" type="hidden" value="to_reply"><button type="submit" class="btn btn-primary btn-lg reply-button" id="reply-button' + String(Number(comments) +1) + '">Submit</button></form></div></div>{% for reply in new_comment.replies.all %}<div class="reply"><p class="font-weight-bold">{{ reply.replier }}<span class="text-muted font-weight-normal">{{ reply.created_on }}</span></p>{{ reply.body | safe | linebreaks }}</div>{% endfor %}</div>');
-							form.removeChild(document.getElementById('comment-button'));
-							form.insertAdjacentHTML('beforeEnd', '<button class="btn btn-primary btn-lg comment-button" id="comment-button" type="submit">Submit</button>');
-						} else {
-							if (decodeURIComponent($("#comment-form").serialize().split('body=')[1].split('&action')[0]) != '') {
-								form.removeChild(document.getElementById('comment-button'));
-								form.insertAdjacentHTML('beforeEnd', '<button class="btn btn-primary btn-lg comment-button" id="comment-button" type="submit">Submit</button>');	
-							}
-							
-						}
+					data: {
+						post_id: id,
+						'csrfmiddlewaretoken': '{{ csrf_token }}',
+						action: 'to_like'
 					},
-					error: function (request, status, error) {
-						console.log(request.responseText);
+					success: function (data) {
+						if ($('#like' + id).hasClass('btn-primary') & $('#dislike' + id).hasClass(
+								'btn-success')) {
+							$('#like' + id).removeClass('btn btn-primary btn-lg');
+							$('#like' + id).addClass('btn btn-success btn-lg');
+							$('#dislike' + id).removeClass('btn btn-success btn-lg');
+							$('#dislike' + id).addClass('btn btn-primary btn-lg');
+
+							dislikes = dislikes - 1;
+							likes = likes + 1;
+							console.log(likes + ',' + dislikes)
+							$("#like" + id).data('value', likes)
+							$("#dislike" + id).data('value', dislikes)
+
+							$('#dislike' + id).html(
+								dislikes + ' <i class="fa fa-thumbs-down"></i>');
+							$('#like' + id).html((likes +
+								' <i class="fa fa-thumbs-up"></i>'));
+						} else if ($('#like' + id).hasClass('btn-success') & $('#dislike' + id).hasClass(
+								'btn-primary')) {
+							$('#like' + id).removeClass('btn btn-success btn-lg');
+							$('#like' + id).addClass('btn btn-primary btn-lg');
+
+							likes = likes - 1;
+							console.log(likes + ' l')
+							$("#like" + id).data('value', likes)
+
+							$('#like' + id).html(
+								likes + ' <i class="fa fa-thumbs-up"></i>');
+						} else if ($('#like' + id).hasClass('btn-primary') & $('#dislike' + id).hasClass(
+								'btn-primary')) {
+							$('#like' + id).removeClass('btn btn-primary btn-lg');
+							$('#like' + id).addClass('btn btn-success btn-lg');
+
+							likes = likes + 1;
+							console.log(likes + ' l')
+							$("#like" + id).data('value', likes)
+
+							$('#like' + id).html(
+								likes + ' <i class="fa fa-thumbs-up"></i>');
+						}
 					}
-				});
-			});
-			// $("#comment-form").submit();
+				})
+			} else {
+				console.log('NOT AUTHENTICATED')
+				document.getElementById("login-message").style.display = "block";
+			};
 		});
-
-
-		$(".reply-button").click(function () {
-			console.log('ready');
-			replyButton = this;
-			console.log(replyButton)
-			replyForm = this.parentElement;
-			console.log(replyForm);
-			formId = replyForm.id;
-			console.log(formId)
-			$('#' + formId).submit(function (event) {
-				event.preventDefault();
-				console.log('submitted')
-				var commentsCount, commentContainer;
-				// form = document.getElementById("reply-form");
-				commentsCount = document.getElementById('comments-count');
-				parentId = $('#' + formId).attr('value');
-				commentContainer = document.getElementById(parentId);
-				
+		$('.dislikebutton').click(function () {
+			if ('{{ request.user.is_authenticated }}' === 'True') {
+				var id;
+				var dislikes;
+				id = $(this).attr("data-catid");
+				dislikes = $(this).data("value");
+				likes = $('#like' + id).data("value");
+				console.log(dislikes + 'd');
+				console.log(likes + ' l')
 				$.ajax({
-					data: $('#' + formId).serialize(),
 					type: "POST",
 					url: "",
-					success: function (response) {
-						console.log(response);
-						console.log($('#' + formId).serialize());
-						if ('{{ request.user.is_authenticated }}' === 'True' & decodeURIComponent($('#' + formId).serialize().split('body=')[1].split('&parent_id')[0]) != '') {						
-							count += 1;
-							console.log('{{request.user}}');
-							commentsCount.innerHTML = count + " comments";
-
-							serialized = $('#' + formId).serialize();
-							myArray = serialized.split('body=');
-							frag = myArray[1];
-							newArray = frag.split('&parent_id');
-							encodedTxt = newArray[0];
-							reply_body = decodeURIComponent(encodedTxt);
-							
-							ctime = new Date();
-							ctime = String(ctime).split(' ');
-							ctime[0] = ctime[0] + ',';
-							ctime[2] = ctime[2] + ',';
-							ctime = ctime.join(' ');
-
-							console.log(reply_body);
-							commentContainer.insertAdjacentHTML('beforeEnd', '<div class="reply"><p class="font-weight-bold">{{ request.user }}<span class="text-muted font-weight-normal">' + ctime + '</span></p>' + reply_body + '</div>');
-							replyForm.removeChild(replyForm.lastElementChild);
-							replyForm.insertAdjacentHTML('beforeEnd', '<button class="btn btn-primary btn-lg reply-button" id="reply-button' + parentId +  '" ' + 'type="submit">Submit</button>');
-						} else {
-							if (decodeURIComponent($('#' + formId).serialize().split('body=')[1].split('&parent_id')[0]) != '') {
-								replyForm.removeChild(replyForm.lastElementChild);
-								replyForm.insertAdjacentHTML('beforeEnd', '<button class="btn btn-primary btn-lg reply-button" id="reply-button' + parentId +  '" ' + 'type="submit">Submit</button>');
-							}
-							
-						}
+					data: {
+						post_id: id,
+						'csrfmiddlewaretoken': '{{ csrf_token }}',
+						action: 'to_dislike'
 					},
-					error: function (request, status, error) {
-						console.log(request.responseText);
-					}
-				});
+					success: function (data) {
+						if ($('#like' + id).hasClass('btn-primary') & $('#dislike' + id).hasClass(
+								'btn-success')) {
+							$('#dislike' + id).removeClass('btn btn-success btn-lg');
+							$('#dislike' + id).addClass('btn btn-primary btn-lg');
 
-			});
-			// $("#comment-form").submit();
+							dislikes = dislikes - 1;
+							console.log(dislikes + 'd')
+							$("#dislike" + id).data('value', dislikes)
+
+							$('#dislike' + id).html(
+								dislikes + ' <i class="fa fa-thumbs-down"></i>');
+						} else if ($('#like' + id).hasClass('btn-success') & $('#dislike' + id).hasClass(
+								'btn-primary')) {
+							$('#like' + id).removeClass('btn btn-success btn-lg');
+							$('#like' + id).addClass('btn btn-primary btn-lg');
+							$('#dislike' + id).removeClass('btn btn-primary btn-lg');
+							$('#dislike' + id).addClass('btn btn-success btn-lg');
+
+							dislikes = dislikes + 1;
+							likes = likes - 1;
+							console.log(likes + ',' + dislikes)
+							$("#like" + id).data('value', likes)
+							$("#dislike" + id).data('value', dislikes)
+
+							$('#dislike' + id).html(
+								dislikes + ' <i class="fa fa-thumbs-down"></i>');
+							$('#like' + id).html((likes +
+								' <i class="fa fa-thumbs-up"></i>'));
+						} else if ($('#like' + id).hasClass('btn-primary') & $('#dislike' + id).hasClass(
+								'btn-primary')) {
+							$('#dislike' + id).removeClass('btn btn-primary btn-lg');
+							$('#dislike' + id).addClass('btn btn-success btn-lg');
+
+							dislikes = dislikes + 1;
+							$("#dislike" + id).data('value', dislikes)
+
+							console.log(dislikes + 'd')
+							$('#dislike' + id).html(
+								dislikes + ' <i class="fa fa-thumbs-down"></i>');
+						}
+					}
+				})
+			} else {
+				console.log('NOT AUTHENTICATED')
+				document.getElementById("login-message").style.display = "block";
+			}
 		});
 
-		// $('.show-reply-form').click( function () {
-		// 	object = this;
-		// 	objectId= Number(object.id.split('_')[1]);
-		// 	parentDiv = object.parentElement;
+		// $('.comment-button').click(function () {
+		// 	if ('{{ request.user.is_authenticated }}' === 'True') {
+		// 		var commentsCount, commentContainer;
+		// 		commentsCount = document.getElementById('comments-count');
+		// 		count = $('#comments-count').data("value");
+		// 		commentContainer = document.getElementById('comment-container');
+		// 		$.ajax({
+		// 			type: "POST",
+		// 			url: "",
+		// 			data: {
+		// 				'csrfmiddlewaretoken': '{{ csrf_token }}',
+		// 				action: 'to_comment'
+		// 			},
+		// 			success: function (data) {
+		// 				count += 1;
+		// 				console.log('{{request.user}}');
+		// 				commentsCount.innerHTML = count + " comments";
 
-		// 	replyDiv = document.getElementById('reply-div' + String(objectId));
-		// 	console.log(replyDiv);
-		// 	if (replyDiv) {
-		// 		console.log(replyDiv);
-		// 		console.log('na here');
-		// 		parentDiv.removeChild(replyDiv);
-		// 	} else {
-		// 		for (let element of document.getElementsByClassName('reply-div')) {
-		// 			element.remove();
-		// 		}
-
-		// 		parentDiv.insertAdjacentHTML('beforeEnd', '<div class="reply-div" id="reply-div' + String(objectId) + '" ' + '><form id="reply-form' + String(objectId) + '" ' + 'class="reply-form" method="post" style="margin-top: 1.3em;" name="r-form" value="' + String(objectId) + '"' + '>{% csrf_token %}{{ reply_form.as_p }}<input type="hidden" name="parent_id" value="' + String(objectId) + '"' + '><input name="action" type="hidden" value="to_reply"><button class="btn btn-primary btn-lg reply-button" id="reply-button' + String(objectId) + '" ' + 'type="submit">Submit</button></form>');
-		// 		// parentDiv.insertAdjacentElement('beforeEnd', document.getElementsByClassName('reply-div')[0]);
-		// 		replyDiv = parentDiv.lastElementChild;
-		// 		replyDiv.id = 'reply-div' + String(objectId);
-		// 		replyForm = replyDiv.children[0];
-		// 		replyForm.id = 'reply-form' + String(objectId);
-		// 		replyForm.setAttribute('value', String(objectId))
-		// 		replyForm.children[2].setAttribute('value', String(objectId))
-		// 		replyForm.lastElementChild.id = String(objectId);
-		// 		replyDiv.style.display = 'block';
-		// 		formSelector = '#' + replyForm.id;
-		// 		area = replyForm.children[1].children[1];
-		// 		counter += 1
-		// 		area.className += String(counter);
-		// 		// tinymce.init({
-        //         //         selector: 'textarea#id_body.tinymce' + String(counter)
-        //         // });
-				
-				
+		// 				commentContainer.innerHTML +=
+		// 					'<div class="comments" style="padding: 10px;"><p class="font-weight-bold">{{ request.user }}<span class=" text-muted font-weight-normal">{{ new_comment.created_on }}</span></p>{{ new_comment.body | linebreaks }}<a href="javascript:void(0)" class="reply-button" id="reply-button" onclick="replyComment(this)" title="Reply to this comment">Reply</a><div class="reply-div" id="reply-div"><form method="post" style="margin-top: 1.3em;">{% csrf_token %}{{ reply_form.as_p }}<input type="hidden" name="parent_id" value="{{new_comment.id}}"><button type="submit" class="btn btn-primary btn-lg reply-button" name="action" value="to_reply">Submit</button></form></div>{% for reply in new_comment.replies.all %}<div class="reply"><p class="font-weight-bold">{{ reply.replier }}<span class="text-muted font-weight-normal">{{ reply.created_on }}</span></p>{{ reply.body | linebreaks }}</div>{% endfor %}</div>';
+		// 			}
+		// 		})
 		// 	}
 		// });
-	});
 
-	// $(document).ready(function () {
-		
-	// })
-	// tinymce.init({
-	// 	selector:'.editor',
-	// 	setup: function (editor) {
-	// 		editor.on('submit', function (e) {
-	// 			editor.save();
-	// 		});
-	// 	}
-	// });
+		$(document).ready(function () {
+			count = $('#comments-count').data("value");
+			comments = '{{comments.count}}';
+			counter = 0;
+			$("#comment-button").click(function () {
+				console.log('ready')
+				console.log(this.className);
+				$("#comment-form").submit(function (event) {
+					event.preventDefault();
+					console.log('submitted')
+					var commentsCount, commentContainer;
+					form = document.getElementById('comment-form');
+					commentsCount = document.getElementById('comments-count');
+					commentContainer = document.getElementById('comment-container');
+					$.ajax({
+						data: $("#comment-form").serialize(),
+						type: "POST",
+						url: "",
+						success: function (response) {
+							console.log(response);
+							console.log($("#comment-form").serialize());
+							if ('{{ request.user.is_authenticated }}' === 'True' &
+								decodeURIComponent($("#comment-form").serialize().split(
+									'body=')[1].split('&action')[0]) != '') {
+								count += 1;
+								console.log('{{request.user}}');
+								commentsCount.innerHTML = count + " comments";
 
-</script>
-{% endblock content %}
+								serialized = $("#comment-form").serialize();
+								myArray = serialized.split('body=');
+								frag = myArray[1];
+								newArray = frag.split('&action');
+								encodedTxt = newArray[0];
+								reply_body = decodeURIComponent(encodedTxt);
+
+								ctime = new Date();
+								ctime = String(ctime).split(' ');
+								ctime[0] = ctime[0] + ',';
+								ctime[2] = ctime[2] + ',';
+								ctime = ctime.join(' ');
+
+								replyButtonId = 'show-reply-form_' + String(Number(
+									comments) + 1)
+								replyDivId = 'reply-div' + String(Number(comments) + 1)
+								console.log(reply_body);
+								commentContainer.insertAdjacentHTML('beforeEnd',
+									'<div class="comments" id="' + String(Number(
+										comments) + 1) + '" ' +
+									'style="padding: 10px;"><p class="font-weight-bold">{{ request.user }} <span class=" text-muted font-weight-normal">' +
+									ctime + '</span></p>' + reply_body +
+									'</br><div><a href="javascript:void(0)" class="show-reply-form" id=' +
+									replyButtonId +
+									' onclick="alertMessage()" title="Reply to this comment">Reply</a><div class="reply-div" id=' +
+									replyDivId +
+									'><form method="post" style="margin-top: 1.3em;" class="reply-form" name="r-form" value="' +
+									String(Number(comments) + 1) + '" ' +
+									'id="reply-form' + String(Number(comments) + 1) +
+									'">{% csrf_token %}{{ reply_form.as_p }}<input type="hidden" name="parent_id" value="' +
+									String(Number(comments) + 1) +
+									'"><input name="action" type="hidden" value="to_reply"><button type="submit" class="btn btn-primary btn-lg reply-button" id="reply-button' +
+									String(Number(comments) + 1) +
+									'">Submit</button></form></div></div>{% for reply in new_comment.replies.all %}<div class="reply"><p class="font-weight-bold">{{ reply.replier }}<span class="text-muted font-weight-normal">{{ reply.created_on }}</span></p>{{ reply.body | safe | linebreaks }}</div>{% endfor %}</div>'
+								);
+								form.removeChild(document.getElementById(
+									'comment-button'));
+								form.insertAdjacentHTML('beforeEnd',
+									'<button class="btn btn-primary btn-lg comment-button" id="comment-button" type="submit">Submit</button>'
+								);
+							} else {
+								if (decodeURIComponent($("#comment-form").serialize()
+										.split('body=')[1].split('&action')[0]) != '') {
+									form.removeChild(document.getElementById(
+										'comment-button'));
+									form.insertAdjacentHTML('beforeEnd',
+										'<button class="btn btn-primary btn-lg comment-button" id="comment-button" type="submit">Submit</button>'
+									);
+								}
+
+							}
+						},
+						error: function (request, status, error) {
+							console.log(request.responseText);
+						}
+					});
+				});
+				// $("#comment-form").submit();
+			});
+
+
+			$(".reply-button").click(function () {
+				console.log('ready');
+				replyButton = this;
+				console.log(replyButton)
+				replyForm = this.parentElement;
+				console.log(replyForm);
+				formId = replyForm.id;
+				console.log(formId)
+				$('#' + formId).submit(function (event) {
+					event.preventDefault();
+					console.log('submitted')
+					var commentsCount, commentContainer;
+					// form = document.getElementById("reply-form");
+					commentsCount = document.getElementById('comments-count');
+					parentId = $('#' + formId).attr('value');
+					commentContainer = document.getElementById(parentId);
+
+					$.ajax({
+						data: $('#' + formId).serialize(),
+						type: "POST",
+						url: "",
+						success: function (response) {
+							console.log(response);
+							console.log($('#' + formId).serialize());
+							if ('{{ request.user.is_authenticated }}' === 'True' &
+								decodeURIComponent($('#' + formId).serialize().split(
+									'body=')[1].split('&parent_id')[0]) != '') {
+								count += 1;
+								console.log('{{request.user}}');
+								commentsCount.innerHTML = count + " comments";
+
+								serialized = $('#' + formId).serialize();
+								myArray = serialized.split('body=');
+								frag = myArray[1];
+								newArray = frag.split('&parent_id');
+								encodedTxt = newArray[0];
+								reply_body = decodeURIComponent(encodedTxt);
+
+								ctime = new Date();
+								ctime = String(ctime).split(' ');
+								ctime[0] = ctime[0] + ',';
+								ctime[2] = ctime[2] + ',';
+								ctime = ctime.join(' ');
+
+								console.log(reply_body);
+								commentContainer.insertAdjacentHTML('beforeEnd',
+									'<div class="reply"><p class="font-weight-bold">{{ request.user }}<span class="text-muted font-weight-normal">' +
+									ctime + '</span></p>' + reply_body + '</div>');
+								replyForm.removeChild(replyForm.lastElementChild);
+								replyForm.insertAdjacentHTML('beforeEnd',
+									'<button class="btn btn-primary btn-lg reply-button" id="reply-button' +
+									parentId + '" ' + 'type="submit">Submit</button>');
+							} else {
+								if (decodeURIComponent($('#' + formId).serialize().split(
+										'body=')[1].split('&parent_id')[0]) != '') {
+									replyForm.removeChild(replyForm.lastElementChild);
+									replyForm.insertAdjacentHTML('beforeEnd',
+										'<button class="btn btn-primary btn-lg reply-button" id="reply-button' +
+										parentId + '" ' +
+										'type="submit">Submit</button>');
+								}
+
+							}
+						},
+						error: function (request, status, error) {
+							console.log(request.responseText);
+						}
+					});
+
+				});
+				// $("#comment-form").submit();
+			});
+
+			// $('.show-reply-form').click( function () {
+			// 	object = this;
+			// 	objectId= Number(object.id.split('_')[1]);
+			// 	parentDiv = object.parentElement;
+
+			// 	replyDiv = document.getElementById('reply-div' + String(objectId));
+			// 	console.log(replyDiv);
+			// 	if (replyDiv) {
+			// 		console.log(replyDiv);
+			// 		console.log('na here');
+			// 		parentDiv.removeChild(replyDiv);
+			// 	} else {
+			// 		for (let element of document.getElementsByClassName('reply-div')) {
+			// 			element.remove();
+			// 		}
+
+			// 		parentDiv.insertAdjacentHTML('beforeEnd', '<div class="reply-div" id="reply-div' + String(objectId) + '" ' + '><form id="reply-form' + String(objectId) + '" ' + 'class="reply-form" method="post" style="margin-top: 1.3em;" name="r-form" value="' + String(objectId) + '"' + '>{% csrf_token %}{{ reply_form.as_p }}<input type="hidden" name="parent_id" value="' + String(objectId) + '"' + '><input name="action" type="hidden" value="to_reply"><button class="btn btn-primary btn-lg reply-button" id="reply-button' + String(objectId) + '" ' + 'type="submit">Submit</button></form>');
+			// 		// parentDiv.insertAdjacentElement('beforeEnd', document.getElementsByClassName('reply-div')[0]);
+			// 		replyDiv = parentDiv.lastElementChild;
+			// 		replyDiv.id = 'reply-div' + String(objectId);
+			// 		replyForm = replyDiv.children[0];
+			// 		replyForm.id = 'reply-form' + String(objectId);
+			// 		replyForm.setAttribute('value', String(objectId))
+			// 		replyForm.children[2].setAttribute('value', String(objectId))
+			// 		replyForm.lastElementChild.id = String(objectId);
+			// 		replyDiv.style.display = 'block';
+			// 		formSelector = '#' + replyForm.id;
+			// 		area = replyForm.children[1].children[1];
+			// 		counter += 1
+			// 		area.className += String(counter);
+			// 		// tinymce.init({
+			//         //         selector: 'textarea#id_body.tinymce' + String(counter)
+			//         // });
+
+
+			// 	}
+			// });
+		});
+
+		// $(document).ready(function () {
+
+		// })
+		// tinymce.init({
+		// 	selector:'.editor',
+		// 	setup: function (editor) {
+		// 		editor.on('submit', function (e) {
+		// 			editor.save();
+		// 		});
+		// 	}
+		// });
+	</script>
+	{% endblock content %}

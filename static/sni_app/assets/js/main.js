@@ -103,7 +103,7 @@
         Home: "",
         Blog: ["blog"],
         About: ["about"],
-        Services: ["synergyhub", "schedule"],
+        Schedule: ["schedule"],
         Authentication: ["login", "register"],
         Speakers: ["speakers"],
         Organizer: ["organizer"],
