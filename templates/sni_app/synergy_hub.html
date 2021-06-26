@@ -21,7 +21,7 @@
         {% if request.user.is_authenticated %}
         <a href="https://www.picktime.com/e7368b8f-4b85-4a19-aa69-986d92bd07f4" class="ptbkbtn" target="_blank" style="position: fixed;right: 0px;top: 50%;margin-top: -90px;float:none;z-index: 9999999"><img border="none" src="https://www.picktime.com/bookingPage/img/picktime-book-online-right.png" alt="Book an appointment with PT Sample Company"/></a>
         {% else %}
-        <a class="more-btn" style="float:none; position: fixed; background: white; border: 1px solid white; color: white; right: -87px; top: 50%; display: block; z-index: 20000; transform: rotate(270deg)" href="{% url 'login' %}">Book Now (Log In Required)</a>
+        <a class="more-btn" style="float:none; position: fixed; background: white; border: 1px solid white; right: -87px; top: 50%; display: block; z-index: 20000; transform: rotate(270deg)" href="{% url 'login' %}">Book Now (Log In Required)</a>
         {% endif %}
 
         <section id="synergy-hub" class="synergy-hub">
