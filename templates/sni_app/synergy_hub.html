@@ -19,7 +19,7 @@
             </div>
         </section>
         {% if request.user.is_authenticated %}
-        <a id="Setmore_button_iframe" style="float:none; position: fixed; right: -2px; top: 40%; display: block; z-index: 20000" href="https://my.setmore.com/bookingpage/f061a365-faa7-4579-a9fc-9df4279faf4a"><img border="none" src="https://storage.googleapis.com/full-assets/setmore/images/1.0/Calendar/Setmore-Book-Now.png" alt="Book an appointment with Synergy Network International using Setmore" /></a>
+        <a href="https://www.picktime.com/e7368b8f-4b85-4a19-aa69-986d92bd07f4" class="ptbkbtn" target="_blank" style="position: fixed;right: 0px;top: 50%;margin-top: -90px;float:none;z-index: 9999999"><img border="none" src="https://www.picktime.com/bookingPage/img/picktime-book-online-right.png" alt="Book an appointment with PT Sample Company"/></a>
         {% else %}
         <a class="more-btn" style="float:none; position: fixed; background: white; border: 1px solid white; color: white; right: -87px; top: 50%; display: block; z-index: 20000; transform: rotate(270deg)" href="{% url 'login' %}">Book Now (Log In Required)</a>
         {% endif %}
@@ -212,7 +212,10 @@ continuity during the pandemic.
 
     {% include "footer.html" %}
     {% include "snippets/scripts_attachment.html" %}
-    <!-- Setmore booking widget script -->
-    <script id="setmore_script" type="text/javascript" src="https://my.setmore.com/webapp/js/src/others/setmore_iframe.js"></script>
-    <!-- Setmore booking widget script ends -->
+    <!-- Picktime booking widget script -->
+    <script>
+	!function(e,t,n,s,i,c){i=t.createElement(n),c=t.getElementsByTagName(n)[0],i.async=1,
+	i.src=s,c.parentNode.insertBefore(i,c)}(window,document,"script","https://www.picktime.com/assets/booking.js");
+	</script>
+    <!-- Picktime booking widget script ends -->
 </body>

@@ -205,31 +205,380 @@
 	}
 </style>
 
-<section id="hero" style="background-image: url('{{blog_post.image.url}}');" class="
-        d-flex justify-content-center align-items-center">
-	<div class="container text-center position-relative" data-aos="zoom-in" data-aos-delay="100">
-		<h1>{{blog_post.title}}</h1>
-		<div class="trainer align-items-center text-center">
-			<div class="trainer-profile d-flex justify-content-between align-items-center">
-				<div class="author-detail d-flex">
-					<img src="{{blog_post.author_img.url}}" class="img-fluid" alt="">
-					<span>{{blog_post.author.firstname}} {{ blog_post.author.lastname}}</span>
-				</div>
-				<div class="feedback d-flex">
-					<i class="fa fa-thumbs-up"></i>&nbsp;{{ blog_post.num_likes }}
-					&nbsp;&nbsp;
-					<i class="fa fa-thumbs-down"></i>&nbsp;{{ blog_post.num_dislikes }}&nbsp;&nbsp;
-					<i class="fa fa-comments"></i>&nbsp;{{ blog_post.total_comments }}
-				</div>
+<main>
+	{% concat_all blog_post.date_published.hour|stringformat:"i" '-' blog_post.date_published.minute|stringformat:"i" '-' blog_post.date_published.second|stringformat:"i" '-' blog_post.date_published.microsecond|stringformat:"i"  as blog_time_published %}
+	<section id="blog" class="blog">
+		<div class="container" data-aos="fade-up">
+
+			<div class="row">
+
+				<div class="col-lg-8 entries">
+
+					<article class="entry entry-single">
+
+						<div class="entry-img">
+							<img class="img-fluid" src="{{blog_post.image.url}}" alt="">
+						</div>
+
+						<h2 class="entry-title">
+							{{blog_post.title}}
+						</h2>
+
+						<div class="entry-meta">
+							<ul>
+								<li class="d-flex align-items-center"><i class="bi bi-person"></i>{{blog_post.author}}
+								</li>
+								{% if blog_post.date_published != blog_post.date_updated %}
+								<li class="d-flex align-items-center"><i class="bi bi-clock"></i>Date
+									Published:{{blog_post.date_published|myfunc}}</li>
+								<br>
+								<li class="d-flex align-items-center"><i class="bi bi-clock"></i>Date
+									Updated:{{blog_post.date_updated|myfunc}}</li>
+								{% else %}
+								<li class="d-flex align-items-center"><i class="bi bi-clock"></i>Date
+									Published:{{blog_post.date_published|myfunc}}</li>
+								{% endif %}
+								<li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a
+										href="blog-single.html">12 Comments</a></li>
+								<li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a
+										href="blog-single.html">12 Comments</a></li>
+								<li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a
+										href="blog-single.html">12 Comments</a></li>
+							</ul>
+						</div>
+
+						<div class="entry-content">
+							<p>
+								Similique neque nam consequuntur ad non maxime aliquam quas. Quibusdam animi
+								praesentium. Aliquam et laboriosam eius aut nostrum quidem aliquid dicta.
+								Et eveniet enim. Qui velit est ea dolorem doloremque deleniti aperiam unde soluta. Est
+								cum et quod quos aut ut et sit sunt. Voluptate porro consequatur assumenda perferendis
+								dolore.
+							</p>
+
+							<p>
+								Sit repellat hic cupiditate hic ut nemo. Quis nihil sunt non reiciendis. Sequi in
+								accusamus harum vel aspernatur. Excepturi numquam nihil cumque odio. Et voluptate
+								cupiditate.
+							</p>
+
+							<blockquote>
+								<p>
+									Et vero doloremque tempore voluptatem ratione vel aut. Deleniti sunt animi aut. Aut
+									eos aliquam doloribus minus autem quos.
+								</p>
+							</blockquote>
+
+							<p>
+								Sed quo laboriosam qui architecto. Occaecati repellendus omnis dicta inventore tempore
+								provident voluptas mollitia aliquid. Id repellendus quia. Asperiores nihil magni dicta
+								est suscipit perspiciatis. Voluptate ex rerum assumenda dolores nihil quaerat.
+								Dolor porro tempora et quibusdam voluptas. Beatae aut at ad qui tempore corrupti velit
+								quisquam rerum. Omnis dolorum exercitationem harum qui qui blanditiis neque.
+								Iusto autem itaque. Repudiandae hic quae aspernatur ea neque qui. Architecto voluptatem
+								magni. Vel magnam quod et tempora deleniti error rerum nihil tempora.
+							</p>
+
+							<h3>Et quae iure vel ut odit alias.</h3>
+							<p>
+								Officiis animi maxime nulla quo et harum eum quis a. Sit hic in qui quos fugit ut rerum
+								atque. Optio provident dolores atque voluptatem rem excepturi molestiae qui. Voluptatem
+								laborum omnis ullam quibusdam perspiciatis nulla nostrum. Voluptatum est libero eum
+								nesciunt aliquid qui.
+								Quia et suscipit non sequi. Maxime sed odit. Beatae nesciunt nesciunt accusamus quia aut
+								ratione aspernatur dolor. Sint harum eveniet dicta exercitationem minima. Exercitationem
+								omnis asperiores natus aperiam dolor consequatur id ex sed. Quibusdam rerum dolores sint
+								consequatur quidem ea.
+								Beatae minima sunt libero soluta sapiente in rem assumenda. Et qui odit voluptatem. Cum
+								quibusdam voluptatem voluptatem accusamus mollitia aut atque aut.
+							</p>
+							<img src="assets/img/blog/blog-inside-post.jpg" class="img-fluid" alt="">
+
+							<h3>Ut repellat blanditiis est dolore sunt dolorum quae.</h3>
+							<p>
+								Rerum ea est assumenda pariatur quasi et quam. Facilis nam porro amet nostrum. In
+								assumenda quia quae a id praesentium. Quos deleniti libero sed occaecati aut porro
+								autem. Consectetur sed excepturi sint non placeat quia repellat incidunt labore. Autem
+								facilis hic dolorum dolores vel.
+								Consectetur quasi id et optio praesentium aut asperiores eaque aut. Explicabo omnis
+								quibusdam esse. Ex libero illum iusto totam et ut aut blanditiis. Veritatis numquam ut
+								illum ut a quam vitae.
+							</p>
+							<p>
+								Alias quia non aliquid. Eos et ea velit. Voluptatem maxime enim omnis ipsa voluptas
+								incidunt. Nulla sit eaque mollitia nisi asperiores est veniam.
+							</p>
+
+						</div>
+
+						<div class="entry-footer">
+							<i class="bi bi-folder"></i>
+							<ul class="cats">
+								<li><a href="#">Business</a></li>
+							</ul>
+
+							<i class="bi bi-tags"></i>
+							<ul class="tags">
+								<li><a href="#">Creative</a></li>
+								<li><a href="#">Tips</a></li>
+								<li><a href="#">Marketing</a></li>
+							</ul>
+						</div>
+
+					</article><!-- End blog entry -->
+
+					<div class="blog-author d-flex align-items-center">
+						<img src="assets/img/blog/blog-author.jpg" class="rounded-circle float-left" alt="">
+						<div>
+							<h4>Jane Smith</h4>
+							<div class="social-links">
+								<a href="https://twitters.com/#"><i class="bi bi-twitter"></i></a>
+								<a href="https://facebook.com/#"><i class="bi bi-facebook"></i></a>
+								<a href="https://instagram.com/#"><i class="biu bi-instagram"></i></a>
+							</div>
+							<p>
+								Itaque quidem optio quia voluptatibus dolorem dolor. Modi eum sed possimus accusantium.
+								Quas repellat voluptatem officia numquam sint aspernatur voluptas. Esse et accusantium
+								ut unde voluptas.
+							</p>
+						</div>
+					</div><!-- End blog author bio -->
+
+					<div class="blog-comments">
+
+						<h4 class="comments-count">8 Comments</h4>
+
+						<div id="comment-1" class="comment">
+							<div class="d-flex">
+								<div class="comment-img"><img src="assets/img/blog/comments-1.jpg" alt=""></div>
+								<div>
+									<h5><a href="">Georgia Reader</a> <a href="#" class="reply"><i
+												class="bi bi-reply-fill"></i> Reply</a></h5>
+									<time datetime="2020-01-01">01 Jan, 2020</time>
+									<p>
+										Et rerum totam nisi. Molestiae vel quam dolorum vel voluptatem et et. Est ad aut
+										sapiente quis molestiae est qui cum soluta.
+										Vero aut rerum vel. Rerum quos laboriosam placeat ex qui. Sint qui facilis et.
+									</p>
+								</div>
+							</div>
+						</div><!-- End comment #1 -->
+
+						<div id="comment-2" class="comment">
+							<div class="d-flex">
+								<div class="comment-img"><img src="assets/img/blog/comments-2.jpg" alt=""></div>
+								<div>
+									<h5><a href="">Aron Alvarado</a> <a href="#" class="reply"><i
+												class="bi bi-reply-fill"></i> Reply</a></h5>
+									<time datetime="2020-01-01">01 Jan, 2020</time>
+									<p>
+										Ipsam tempora sequi voluptatem quis sapiente non. Autem itaque eveniet saepe.
+										Officiis illo ut beatae.
+									</p>
+								</div>
+							</div>
+
+							<div id="comment-reply-1" class="comment comment-reply">
+								<div class="d-flex">
+									<div class="comment-img"><img src="assets/img/blog/comments-3.jpg" alt=""></div>
+									<div>
+										<h5><a href="">Lynda Small</a> <a href="#" class="reply"><i
+													class="bi bi-reply-fill"></i> Reply</a></h5>
+										<time datetime="2020-01-01">01 Jan, 2020</time>
+										<p>
+											Enim ipsa eum fugiat fuga repellat. Commodi quo quo dicta. Est ullam
+											aspernatur ut vitae quia mollitia id non. Qui ad quas nostrum rerum sed
+											necessitatibus aut est. Eum officiis sed repellat maxime vero nisi natus.
+											Amet nesciunt nesciunt qui illum omnis est et dolor recusandae.
+
+											Recusandae sit ad aut impedit et. Ipsa labore dolor impedit et natus in
+											porro aut. Magnam qui cum. Illo similique occaecati nihil modi eligendi.
+											Pariatur distinctio labore omnis incidunt et illum. Expedita et dignissimos
+											distinctio laborum minima fugiat.
+
+											Libero corporis qui. Nam illo odio beatae enim ducimus. Harum reiciendis
+											error dolorum non autem quisquam vero rerum neque.
+										</p>
+									</div>
+								</div>
+
+								<div id="comment-reply-2" class="comment comment-reply">
+									<div class="d-flex">
+										<div class="comment-img"><img src="assets/img/blog/comments-4.jpg" alt=""></div>
+										<div>
+											<h5><a href="">Sianna Ramsay</a> <a href="#" class="reply"><i
+														class="bi bi-reply-fill"></i> Reply</a></h5>
+											<time datetime="2020-01-01">01 Jan, 2020</time>
+											<p>
+												Et dignissimos impedit nulla et quo distinctio ex nemo. Omnis quia
+												dolores cupiditate et. Ut unde qui eligendi sapiente omnis ullam.
+												Placeat porro est commodi est officiis voluptas repellat quisquam
+												possimus. Perferendis id consectetur necessitatibus.
+											</p>
+										</div>
+									</div>
+
+								</div><!-- End comment reply #2-->
+
+							</div><!-- End comment reply #1-->
+
+						</div><!-- End comment #2-->
+
+						<div id="comment-3" class="comment">
+							<div class="d-flex">
+								<div class="comment-img"><img src="assets/img/blog/comments-5.jpg" alt=""></div>
+								<div>
+									<h5><a href="">Nolan Davidson</a> <a href="#" class="reply"><i
+												class="bi bi-reply-fill"></i> Reply</a></h5>
+									<time datetime="2020-01-01">01 Jan, 2020</time>
+									<p>
+										Distinctio nesciunt rerum reprehenderit sed. Iste omnis eius repellendus quia
+										nihil ut accusantium tempore. Nesciunt expedita id dolor exercitationem
+										aspernatur aut quam ut. Voluptatem est accusamus iste at.
+										Non aut et et esse qui sit modi neque. Exercitationem et eos aspernatur. Ea est
+										consequuntur officia beatae ea aut eos soluta. Non qui dolorum voluptatibus et
+										optio veniam. Quam officia sit nostrum dolorem.
+									</p>
+								</div>
+							</div>
+
+						</div><!-- End comment #3 -->
+
+						<div id="comment-4" class="comment">
+							<div class="d-flex">
+								<div class="comment-img"><img src="assets/img/blog/comments-6.jpg" alt=""></div>
+								<div>
+									<h5><a href="">Kay Duggan</a> <a href="#" class="reply"><i
+												class="bi bi-reply-fill"></i> Reply</a></h5>
+									<time datetime="2020-01-01">01 Jan, 2020</time>
+									<p>
+										Dolorem atque aut. Omnis doloremque blanditiis quia eum porro quis ut velit
+										tempore. Cumque sed quia ut maxime. Est ad aut cum. Ut exercitationem non in
+										fugiat.
+									</p>
+								</div>
+							</div>
+
+						</div><!-- End comment #4 -->
+
+						<div class="reply-form">
+							<h4>Leave a Reply</h4>
+							<p>Your email address will not be published. Required fields are marked * </p>
+							<form action="">
+								<div class="row">
+									<div class="col-md-6 form-group">
+										<input name="name" type="text" class="form-control" placeholder="Your Name*">
+									</div>
+									<div class="col-md-6 form-group">
+										<input name="email" type="text" class="form-control" placeholder="Your Email*">
+									</div>
+								</div>
+								<div class="row">
+									<div class="col form-group">
+										<input name="website" type="text" class="form-control"
+											placeholder="Your Website">
+									</div>
+								</div>
+								<div class="row">
+									<div class="col form-group">
+										<textarea name="comment" class="form-control"
+											placeholder="Your Comment*"></textarea>
+									</div>
+								</div>
+								<button type="submit" class="btn btn-primary">Post Comment</button>
+
+							</form>
+
+						</div>
+
+					</div><!-- End blog comments -->
+
+				</div><!-- End blog entries list -->
+
+				<div class="col-lg-4">
+
+					<div class="sidebar">
+
+						<h3 class="sidebar-title">Search</h3>
+						<div class="sidebar-item search-form">
+							<form action="">
+								<input type="text">
+								<button type="submit"><i class="bi bi-search"></i></button>
+							</form>
+						</div><!-- End sidebar search formn-->
+
+						<h3 class="sidebar-title">Categories</h3>
+						<div class="sidebar-item categories">
+							<ul>
+								<li><a href="#">General <span>(25)</span></a></li>
+								<li><a href="#">Lifestyle <span>(12)</span></a></li>
+								<li><a href="#">Travel <span>(5)</span></a></li>
+								<li><a href="#">Design <span>(22)</span></a></li>
+								<li><a href="#">Creative <span>(8)</span></a></li>
+								<li><a href="#">Educaion <span>(14)</span></a></li>
+							</ul>
+						</div><!-- End sidebar categories-->
+
+						<h3 class="sidebar-title">Recent Posts</h3>
+						<div class="sidebar-item recent-posts">
+							<div class="post-item clearfix">
+								<img src="assets/img/blog/blog-recent-1.jpg" alt="">
+								<h4><a href="blog-single.html">Nihil blanditiis at in nihil autem</a></h4>
+								<time datetime="2020-01-01">Jan 1, 2020</time>
+							</div>
+
+							<div class="post-item clearfix">
+								<img src="assets/img/blog/blog-recent-2.jpg" alt="">
+								<h4><a href="blog-single.html">Quidem autem et impedit</a></h4>
+								<time datetime="2020-01-01">Jan 1, 2020</time>
+							</div>
+
+							<div class="post-item clearfix">
+								<img src="assets/img/blog/blog-recent-3.jpg" alt="">
+								<h4><a href="blog-single.html">Id quia et et ut maxime similique occaecati ut</a></h4>
+								<time datetime="2020-01-01">Jan 1, 2020</time>
+							</div>
+
+							<div class="post-item clearfix">
+								<img src="assets/img/blog/blog-recent-4.jpg" alt="">
+								<h4><a href="blog-single.html">Laborum corporis quo dara net para</a></h4>
+								<time datetime="2020-01-01">Jan 1, 2020</time>
+							</div>
+
+							<div class="post-item clearfix">
+								<img src="assets/img/blog/blog-recent-5.jpg" alt="">
+								<h4><a href="blog-single.html">Et dolores corrupti quae illo quod dolor</a></h4>
+								<time datetime="2020-01-01">Jan 1, 2020</time>
+							</div>
+
+						</div><!-- End sidebar recent posts-->
+
+						<h3 class="sidebar-title">Tags</h3>
+						<div class="sidebar-item tags">
+							<ul>
+								<li><a href="#">App</a></li>
+								<li><a href="#">IT</a></li>
+								<li><a href="#">Business</a></li>
+								<li><a href="#">Mac</a></li>
+								<li><a href="#">Design</a></li>
+								<li><a href="#">Office</a></li>
+								<li><a href="#">Creative</a></li>
+								<li><a href="#">Studio</a></li>
+								<li><a href="#">Smart</a></li>
+								<li><a href="#">Tips</a></li>
+								<li><a href="#">Marketing</a></li>
+							</ul>
+						</div><!-- End sidebar tags-->
+
+					</div><!-- End sidebar -->
+
+				</div><!-- End blog sidebar -->
+
 			</div>
-			<div class="trainer-rank d-block text-center align-items-center">
-				<p><span>Published: </span>{{blog_post.date_published|date:"r"}}</p>
-				<p><span>Updated: </span>{{blog_post.date_updated|date:"r"}}</p>
-			</div>
+
 		</div>
-		<a href="#about" class="btn-get-started">Jump to Main Content</a>
-	</div>
-</section>
+	</section><!-- End Blog Single Section -->
+</main>
 
 {% comment %} <div class="container"> {% endcomment %}
 	{% comment %} <div class="row">
@@ -248,7 +597,7 @@
 	</div> {% endcomment %}
 
 
-	<!-- {% concat_all blog_post.date_published.hour|stringformat:"i" '-' blog_post.date_published.minute|stringformat:"i" '-' blog_post.date_published.second|stringformat:"i" '-' blog_post.date_published.microsecond|stringformat:"i"  as blog_time_published %}
+	{% concat_all blog_post.date_published.hour|stringformat:"i" '-' blog_post.date_published.minute|stringformat:"i" '-' blog_post.date_published.second|stringformat:"i" '-' blog_post.date_published.microsecond|stringformat:"i"  as blog_time_published %}
 	<div class="grid-container5">
 		<div class="main-article">
 			<div class="post-header">
@@ -472,375 +821,375 @@
 			</div>
 		</div>
 	</div>
-</div> -->
-	<script type="text/javascript">
-		$('.likebutton').click(function () {
-			if ('{{ request.user.is_authenticated }}' === 'True') {
-				var id;
-				var likes;
-				id = $(this).attr("data-catid");
-				likes = $(this).data("value");
-				dislikes = $('#dislike' + id).data("value");
-				console.log(likes + ' l')
-				console.log(dislikes + 'd')
+</div>
+<script type="text/javascript">
+	$('.likebutton').click(function () {
+		if ('{{ request.user.is_authenticated }}' === 'True') {
+			var id;
+			var likes;
+			id = $(this).attr("data-catid");
+			likes = $(this).data("value");
+			dislikes = $('#dislike' + id).data("value");
+			console.log(likes + ' l')
+			console.log(dislikes + 'd')
+			$.ajax({
+				type: "POST",
+				url: "",
+				data: {
+					post_id: id,
+					'csrfmiddlewaretoken': '{{ csrf_token }}',
+					action: 'to_like'
+				},
+				success: function (data) {
+					if ($('#like' + id).hasClass('btn-primary') & $('#dislike' + id).hasClass(
+							'btn-success')) {
+						$('#like' + id).removeClass('btn btn-primary btn-lg');
+						$('#like' + id).addClass('btn btn-success btn-lg');
+						$('#dislike' + id).removeClass('btn btn-success btn-lg');
+						$('#dislike' + id).addClass('btn btn-primary btn-lg');
+
+						dislikes = dislikes - 1;
+						likes = likes + 1;
+						console.log(likes + ',' + dislikes)
+						$("#like" + id).data('value', likes)
+						$("#dislike" + id).data('value', dislikes)
+
+						$('#dislike' + id).html(
+							dislikes + ' <i class="fa fa-thumbs-down"></i>');
+						$('#like' + id).html((likes +
+							' <i class="fa fa-thumbs-up"></i>'));
+					} else if ($('#like' + id).hasClass('btn-success') & $('#dislike' + id).hasClass(
+							'btn-primary')) {
+						$('#like' + id).removeClass('btn btn-success btn-lg');
+						$('#like' + id).addClass('btn btn-primary btn-lg');
+
+						likes = likes - 1;
+						console.log(likes + ' l')
+						$("#like" + id).data('value', likes)
+
+						$('#like' + id).html(
+							likes + ' <i class="fa fa-thumbs-up"></i>');
+					} else if ($('#like' + id).hasClass('btn-primary') & $('#dislike' + id).hasClass(
+							'btn-primary')) {
+						$('#like' + id).removeClass('btn btn-primary btn-lg');
+						$('#like' + id).addClass('btn btn-success btn-lg');
+
+						likes = likes + 1;
+						console.log(likes + ' l')
+						$("#like" + id).data('value', likes)
+
+						$('#like' + id).html(
+							likes + ' <i class="fa fa-thumbs-up"></i>');
+					}
+				}
+			})
+		} else {
+			console.log('NOT AUTHENTICATED')
+			document.getElementById("login-message").style.display = "block";
+		};
+	});
+	$('.dislikebutton').click(function () {
+		if ('{{ request.user.is_authenticated }}' === 'True') {
+			var id;
+			var dislikes;
+			id = $(this).attr("data-catid");
+			dislikes = $(this).data("value");
+			likes = $('#like' + id).data("value");
+			console.log(dislikes + 'd');
+			console.log(likes + ' l')
+			$.ajax({
+				type: "POST",
+				url: "",
+				data: {
+					post_id: id,
+					'csrfmiddlewaretoken': '{{ csrf_token }}',
+					action: 'to_dislike'
+				},
+				success: function (data) {
+					if ($('#like' + id).hasClass('btn-primary') & $('#dislike' + id).hasClass(
+							'btn-success')) {
+						$('#dislike' + id).removeClass('btn btn-success btn-lg');
+						$('#dislike' + id).addClass('btn btn-primary btn-lg');
+
+						dislikes = dislikes - 1;
+						console.log(dislikes + 'd')
+						$("#dislike" + id).data('value', dislikes)
+
+						$('#dislike' + id).html(
+							dislikes + ' <i class="fa fa-thumbs-down"></i>');
+					} else if ($('#like' + id).hasClass('btn-success') & $('#dislike' + id).hasClass(
+							'btn-primary')) {
+						$('#like' + id).removeClass('btn btn-success btn-lg');
+						$('#like' + id).addClass('btn btn-primary btn-lg');
+						$('#dislike' + id).removeClass('btn btn-primary btn-lg');
+						$('#dislike' + id).addClass('btn btn-success btn-lg');
+
+						dislikes = dislikes + 1;
+						likes = likes - 1;
+						console.log(likes + ',' + dislikes)
+						$("#like" + id).data('value', likes)
+						$("#dislike" + id).data('value', dislikes)
+
+						$('#dislike' + id).html(
+							dislikes + ' <i class="fa fa-thumbs-down"></i>');
+						$('#like' + id).html((likes +
+							' <i class="fa fa-thumbs-up"></i>'));
+					} else if ($('#like' + id).hasClass('btn-primary') & $('#dislike' + id).hasClass(
+							'btn-primary')) {
+						$('#dislike' + id).removeClass('btn btn-primary btn-lg');
+						$('#dislike' + id).addClass('btn btn-success btn-lg');
+
+						dislikes = dislikes + 1;
+						$("#dislike" + id).data('value', dislikes)
+
+						console.log(dislikes + 'd')
+						$('#dislike' + id).html(
+							dislikes + ' <i class="fa fa-thumbs-down"></i>');
+					}
+				}
+			})
+		} else {
+			console.log('NOT AUTHENTICATED')
+			document.getElementById("login-message").style.display = "block";
+		}
+	});
+
+	// $('.comment-button').click(function () {
+	// 	if ('{{ request.user.is_authenticated }}' === 'True') {
+	// 		var commentsCount, commentContainer;
+	// 		commentsCount = document.getElementById('comments-count');
+	// 		count = $('#comments-count').data("value");
+	// 		commentContainer = document.getElementById('comment-container');
+	// 		$.ajax({
+	// 			type: "POST",
+	// 			url: "",
+	// 			data: {
+	// 				'csrfmiddlewaretoken': '{{ csrf_token }}',
+	// 				action: 'to_comment'
+	// 			},
+	// 			success: function (data) {
+	// 				count += 1;
+	// 				console.log('{{request.user}}');
+	// 				commentsCount.innerHTML = count + " comments";
+
+	// 				commentContainer.innerHTML +=
+	// 					'<div class="comments" style="padding: 10px;"><p class="font-weight-bold">{{ request.user }}<span class=" text-muted font-weight-normal">{{ new_comment.created_on }}</span></p>{{ new_comment.body | linebreaks }}<a href="javascript:void(0)" class="reply-button" id="reply-button" onclick="replyComment(this)" title="Reply to this comment">Reply</a><div class="reply-div" id="reply-div"><form method="post" style="margin-top: 1.3em;">{% csrf_token %}{{ reply_form.as_p }}<input type="hidden" name="parent_id" value="{{new_comment.id}}"><button type="submit" class="btn btn-primary btn-lg reply-button" name="action" value="to_reply">Submit</button></form></div>{% for reply in new_comment.replies.all %}<div class="reply"><p class="font-weight-bold">{{ reply.replier }}<span class="text-muted font-weight-normal">{{ reply.created_on }}</span></p>{{ reply.body | linebreaks }}</div>{% endfor %}</div>';
+	// 			}
+	// 		})
+	// 	}
+	// });
+
+	$(document).ready(function () {
+		count = $('#comments-count').data("value");
+		comments = '{{comments.count}}';
+		counter = 0;
+		$("#comment-button").click(function () {
+			console.log('ready')
+			console.log(this.className);
+			$("#comment-form").submit(function (event) {
+				event.preventDefault();
+				console.log('submitted')
+				var commentsCount, commentContainer;
+				form = document.getElementById('comment-form');
+				commentsCount = document.getElementById('comments-count');
+				commentContainer = document.getElementById('comment-container');
 				$.ajax({
+					data: $("#comment-form").serialize(),
 					type: "POST",
 					url: "",
-					data: {
-						post_id: id,
-						'csrfmiddlewaretoken': '{{ csrf_token }}',
-						action: 'to_like'
-					},
-					success: function (data) {
-						if ($('#like' + id).hasClass('btn-primary') & $('#dislike' + id).hasClass(
-								'btn-success')) {
-							$('#like' + id).removeClass('btn btn-primary btn-lg');
-							$('#like' + id).addClass('btn btn-success btn-lg');
-							$('#dislike' + id).removeClass('btn btn-success btn-lg');
-							$('#dislike' + id).addClass('btn btn-primary btn-lg');
+					success: function (response) {
+						console.log(response);
+						console.log($("#comment-form").serialize());
+						if ('{{ request.user.is_authenticated }}' === 'True' &
+							decodeURIComponent($("#comment-form").serialize().split(
+								'body=')[1].split('&action')[0]) != '') {
+							count += 1;
+							console.log('{{request.user}}');
+							commentsCount.innerHTML = count + " comments";
 
-							dislikes = dislikes - 1;
-							likes = likes + 1;
-							console.log(likes + ',' + dislikes)
-							$("#like" + id).data('value', likes)
-							$("#dislike" + id).data('value', dislikes)
+							serialized = $("#comment-form").serialize();
+							myArray = serialized.split('body=');
+							frag = myArray[1];
+							newArray = frag.split('&action');
+							encodedTxt = newArray[0];
+							reply_body = decodeURIComponent(encodedTxt);
 
-							$('#dislike' + id).html(
-								dislikes + ' <i class="fa fa-thumbs-down"></i>');
-							$('#like' + id).html((likes +
-								' <i class="fa fa-thumbs-up"></i>'));
-						} else if ($('#like' + id).hasClass('btn-success') & $('#dislike' + id).hasClass(
-								'btn-primary')) {
-							$('#like' + id).removeClass('btn btn-success btn-lg');
-							$('#like' + id).addClass('btn btn-primary btn-lg');
+							ctime = new Date();
+							ctime = String(ctime).split(' ');
+							ctime[0] = ctime[0] + ',';
+							ctime[2] = ctime[2] + ',';
+							ctime = ctime.join(' ');
 
-							likes = likes - 1;
-							console.log(likes + ' l')
-							$("#like" + id).data('value', likes)
-
-							$('#like' + id).html(
-								likes + ' <i class="fa fa-thumbs-up"></i>');
-						} else if ($('#like' + id).hasClass('btn-primary') & $('#dislike' + id).hasClass(
-								'btn-primary')) {
-							$('#like' + id).removeClass('btn btn-primary btn-lg');
-							$('#like' + id).addClass('btn btn-success btn-lg');
-
-							likes = likes + 1;
-							console.log(likes + ' l')
-							$("#like" + id).data('value', likes)
-
-							$('#like' + id).html(
-								likes + ' <i class="fa fa-thumbs-up"></i>');
-						}
-					}
-				})
-			} else {
-				console.log('NOT AUTHENTICATED')
-				document.getElementById("login-message").style.display = "block";
-			};
-		});
-		$('.dislikebutton').click(function () {
-			if ('{{ request.user.is_authenticated }}' === 'True') {
-				var id;
-				var dislikes;
-				id = $(this).attr("data-catid");
-				dislikes = $(this).data("value");
-				likes = $('#like' + id).data("value");
-				console.log(dislikes + 'd');
-				console.log(likes + ' l')
-				$.ajax({
-					type: "POST",
-					url: "",
-					data: {
-						post_id: id,
-						'csrfmiddlewaretoken': '{{ csrf_token }}',
-						action: 'to_dislike'
-					},
-					success: function (data) {
-						if ($('#like' + id).hasClass('btn-primary') & $('#dislike' + id).hasClass(
-								'btn-success')) {
-							$('#dislike' + id).removeClass('btn btn-success btn-lg');
-							$('#dislike' + id).addClass('btn btn-primary btn-lg');
-
-							dislikes = dislikes - 1;
-							console.log(dislikes + 'd')
-							$("#dislike" + id).data('value', dislikes)
-
-							$('#dislike' + id).html(
-								dislikes + ' <i class="fa fa-thumbs-down"></i>');
-						} else if ($('#like' + id).hasClass('btn-success') & $('#dislike' + id).hasClass(
-								'btn-primary')) {
-							$('#like' + id).removeClass('btn btn-success btn-lg');
-							$('#like' + id).addClass('btn btn-primary btn-lg');
-							$('#dislike' + id).removeClass('btn btn-primary btn-lg');
-							$('#dislike' + id).addClass('btn btn-success btn-lg');
-
-							dislikes = dislikes + 1;
-							likes = likes - 1;
-							console.log(likes + ',' + dislikes)
-							$("#like" + id).data('value', likes)
-							$("#dislike" + id).data('value', dislikes)
-
-							$('#dislike' + id).html(
-								dislikes + ' <i class="fa fa-thumbs-down"></i>');
-							$('#like' + id).html((likes +
-								' <i class="fa fa-thumbs-up"></i>'));
-						} else if ($('#like' + id).hasClass('btn-primary') & $('#dislike' + id).hasClass(
-								'btn-primary')) {
-							$('#dislike' + id).removeClass('btn btn-primary btn-lg');
-							$('#dislike' + id).addClass('btn btn-success btn-lg');
-
-							dislikes = dislikes + 1;
-							$("#dislike" + id).data('value', dislikes)
-
-							console.log(dislikes + 'd')
-							$('#dislike' + id).html(
-								dislikes + ' <i class="fa fa-thumbs-down"></i>');
-						}
-					}
-				})
-			} else {
-				console.log('NOT AUTHENTICATED')
-				document.getElementById("login-message").style.display = "block";
-			}
-		});
-
-		// $('.comment-button').click(function () {
-		// 	if ('{{ request.user.is_authenticated }}' === 'True') {
-		// 		var commentsCount, commentContainer;
-		// 		commentsCount = document.getElementById('comments-count');
-		// 		count = $('#comments-count').data("value");
-		// 		commentContainer = document.getElementById('comment-container');
-		// 		$.ajax({
-		// 			type: "POST",
-		// 			url: "",
-		// 			data: {
-		// 				'csrfmiddlewaretoken': '{{ csrf_token }}',
-		// 				action: 'to_comment'
-		// 			},
-		// 			success: function (data) {
-		// 				count += 1;
-		// 				console.log('{{request.user}}');
-		// 				commentsCount.innerHTML = count + " comments";
-
-		// 				commentContainer.innerHTML +=
-		// 					'<div class="comments" style="padding: 10px;"><p class="font-weight-bold">{{ request.user }}<span class=" text-muted font-weight-normal">{{ new_comment.created_on }}</span></p>{{ new_comment.body | linebreaks }}<a href="javascript:void(0)" class="reply-button" id="reply-button" onclick="replyComment(this)" title="Reply to this comment">Reply</a><div class="reply-div" id="reply-div"><form method="post" style="margin-top: 1.3em;">{% csrf_token %}{{ reply_form.as_p }}<input type="hidden" name="parent_id" value="{{new_comment.id}}"><button type="submit" class="btn btn-primary btn-lg reply-button" name="action" value="to_reply">Submit</button></form></div>{% for reply in new_comment.replies.all %}<div class="reply"><p class="font-weight-bold">{{ reply.replier }}<span class="text-muted font-weight-normal">{{ reply.created_on }}</span></p>{{ reply.body | linebreaks }}</div>{% endfor %}</div>';
-		// 			}
-		// 		})
-		// 	}
-		// });
-
-		$(document).ready(function () {
-			count = $('#comments-count').data("value");
-			comments = '{{comments.count}}';
-			counter = 0;
-			$("#comment-button").click(function () {
-				console.log('ready')
-				console.log(this.className);
-				$("#comment-form").submit(function (event) {
-					event.preventDefault();
-					console.log('submitted')
-					var commentsCount, commentContainer;
-					form = document.getElementById('comment-form');
-					commentsCount = document.getElementById('comments-count');
-					commentContainer = document.getElementById('comment-container');
-					$.ajax({
-						data: $("#comment-form").serialize(),
-						type: "POST",
-						url: "",
-						success: function (response) {
-							console.log(response);
-							console.log($("#comment-form").serialize());
-							if ('{{ request.user.is_authenticated }}' === 'True' &
-								decodeURIComponent($("#comment-form").serialize().split(
-									'body=')[1].split('&action')[0]) != '') {
-								count += 1;
-								console.log('{{request.user}}');
-								commentsCount.innerHTML = count + " comments";
-
-								serialized = $("#comment-form").serialize();
-								myArray = serialized.split('body=');
-								frag = myArray[1];
-								newArray = frag.split('&action');
-								encodedTxt = newArray[0];
-								reply_body = decodeURIComponent(encodedTxt);
-
-								ctime = new Date();
-								ctime = String(ctime).split(' ');
-								ctime[0] = ctime[0] + ',';
-								ctime[2] = ctime[2] + ',';
-								ctime = ctime.join(' ');
-
-								replyButtonId = 'show-reply-form_' + String(Number(
-									comments) + 1)
-								replyDivId = 'reply-div' + String(Number(comments) + 1)
-								console.log(reply_body);
-								commentContainer.insertAdjacentHTML('beforeEnd',
-									'<div class="comments" id="' + String(Number(
-										comments) + 1) + '" ' +
-									'style="padding: 10px;"><p class="font-weight-bold">{{ request.user }} <span class=" text-muted font-weight-normal">' +
-									ctime + '</span></p>' + reply_body +
-									'</br><div><a href="javascript:void(0)" class="show-reply-form" id=' +
-									replyButtonId +
-									' onclick="alertMessage()" title="Reply to this comment">Reply</a><div class="reply-div" id=' +
-									replyDivId +
-									'><form method="post" style="margin-top: 1.3em;" class="reply-form" name="r-form" value="' +
-									String(Number(comments) + 1) + '" ' +
-									'id="reply-form' + String(Number(comments) + 1) +
-									'">{% csrf_token %}{{ reply_form.as_p }}<input type="hidden" name="parent_id" value="' +
-									String(Number(comments) + 1) +
-									'"><input name="action" type="hidden" value="to_reply"><button type="submit" class="btn btn-primary btn-lg reply-button" id="reply-button' +
-									String(Number(comments) + 1) +
-									'">Submit</button></form></div></div>{% for reply in new_comment.replies.all %}<div class="reply"><p class="font-weight-bold">{{ reply.replier }}<span class="text-muted font-weight-normal">{{ reply.created_on }}</span></p>{{ reply.body | safe | linebreaks }}</div>{% endfor %}</div>'
-								);
+							replyButtonId = 'show-reply-form_' + String(Number(
+								comments) + 1)
+							replyDivId = 'reply-div' + String(Number(comments) + 1)
+							console.log(reply_body);
+							commentContainer.insertAdjacentHTML('beforeEnd',
+								'<div class="comments" id="' + String(Number(
+									comments) + 1) + '" ' +
+								'style="padding: 10px;"><p class="font-weight-bold">{{ request.user }} <span class=" text-muted font-weight-normal">' +
+								ctime + '</span></p>' + reply_body +
+								'</br><div><a href="javascript:void(0)" class="show-reply-form" id=' +
+								replyButtonId +
+								' onclick="alertMessage()" title="Reply to this comment">Reply</a><div class="reply-div" id=' +
+								replyDivId +
+								'><form method="post" style="margin-top: 1.3em;" class="reply-form" name="r-form" value="' +
+								String(Number(comments) + 1) + '" ' +
+								'id="reply-form' + String(Number(comments) + 1) +
+								'">{% csrf_token %}{{ reply_form.as_p }}<input type="hidden" name="parent_id" value="' +
+								String(Number(comments) + 1) +
+								'"><input name="action" type="hidden" value="to_reply"><button type="submit" class="btn btn-primary btn-lg reply-button" id="reply-button' +
+								String(Number(comments) + 1) +
+								'">Submit</button></form></div></div>{% for reply in new_comment.replies.all %}<div class="reply"><p class="font-weight-bold">{{ reply.replier }}<span class="text-muted font-weight-normal">{{ reply.created_on }}</span></p>{{ reply.body | safe | linebreaks }}</div>{% endfor %}</div>'
+							);
+							form.removeChild(document.getElementById(
+								'comment-button'));
+							form.insertAdjacentHTML('beforeEnd',
+								'<button class="btn btn-primary btn-lg comment-button" id="comment-button" type="submit">Submit</button>'
+							);
+						} else {
+							if (decodeURIComponent($("#comment-form").serialize()
+									.split('body=')[1].split('&action')[0]) != '') {
 								form.removeChild(document.getElementById(
 									'comment-button'));
 								form.insertAdjacentHTML('beforeEnd',
 									'<button class="btn btn-primary btn-lg comment-button" id="comment-button" type="submit">Submit</button>'
 								);
-							} else {
-								if (decodeURIComponent($("#comment-form").serialize()
-										.split('body=')[1].split('&action')[0]) != '') {
-									form.removeChild(document.getElementById(
-										'comment-button'));
-									form.insertAdjacentHTML('beforeEnd',
-										'<button class="btn btn-primary btn-lg comment-button" id="comment-button" type="submit">Submit</button>'
-									);
-								}
-
 							}
-						},
-						error: function (request, status, error) {
-							console.log(request.responseText);
+
 						}
-					});
+					},
+					error: function (request, status, error) {
+						console.log(request.responseText);
+					}
 				});
-				// $("#comment-form").submit();
 			});
+			// $("#comment-form").submit();
+		});
 
 
-			$(".reply-button").click(function () {
-				console.log('ready');
-				replyButton = this;
-				console.log(replyButton)
-				replyForm = this.parentElement;
-				console.log(replyForm);
-				formId = replyForm.id;
-				console.log(formId)
-				$('#' + formId).submit(function (event) {
-					event.preventDefault();
-					console.log('submitted')
-					var commentsCount, commentContainer;
-					// form = document.getElementById("reply-form");
-					commentsCount = document.getElementById('comments-count');
-					parentId = $('#' + formId).attr('value');
-					commentContainer = document.getElementById(parentId);
+		$(".reply-button").click(function () {
+			console.log('ready');
+			replyButton = this;
+			console.log(replyButton)
+			replyForm = this.parentElement;
+			console.log(replyForm);
+			formId = replyForm.id;
+			console.log(formId)
+			$('#' + formId).submit(function (event) {
+				event.preventDefault();
+				console.log('submitted')
+				var commentsCount, commentContainer;
+				// form = document.getElementById("reply-form");
+				commentsCount = document.getElementById('comments-count');
+				parentId = $('#' + formId).attr('value');
+				commentContainer = document.getElementById(parentId);
 
-					$.ajax({
-						data: $('#' + formId).serialize(),
-						type: "POST",
-						url: "",
-						success: function (response) {
-							console.log(response);
-							console.log($('#' + formId).serialize());
-							if ('{{ request.user.is_authenticated }}' === 'True' &
-								decodeURIComponent($('#' + formId).serialize().split(
+				$.ajax({
+					data: $('#' + formId).serialize(),
+					type: "POST",
+					url: "",
+					success: function (response) {
+						console.log(response);
+						console.log($('#' + formId).serialize());
+						if ('{{ request.user.is_authenticated }}' === 'True' &
+							decodeURIComponent($('#' + formId).serialize().split(
+								'body=')[1].split('&parent_id')[0]) != '') {
+							count += 1;
+							console.log('{{request.user}}');
+							commentsCount.innerHTML = count + " comments";
+
+							serialized = $('#' + formId).serialize();
+							myArray = serialized.split('body=');
+							frag = myArray[1];
+							newArray = frag.split('&parent_id');
+							encodedTxt = newArray[0];
+							reply_body = decodeURIComponent(encodedTxt);
+
+							ctime = new Date();
+							ctime = String(ctime).split(' ');
+							ctime[0] = ctime[0] + ',';
+							ctime[2] = ctime[2] + ',';
+							ctime = ctime.join(' ');
+
+							console.log(reply_body);
+							commentContainer.insertAdjacentHTML('beforeEnd',
+								'<div class="reply"><p class="font-weight-bold">{{ request.user }}<span class="text-muted font-weight-normal">' +
+								ctime + '</span></p>' + reply_body + '</div>');
+							replyForm.removeChild(replyForm.lastElementChild);
+							replyForm.insertAdjacentHTML('beforeEnd',
+								'<button class="btn btn-primary btn-lg reply-button" id="reply-button' +
+								parentId + '" ' + 'type="submit">Submit</button>');
+						} else {
+							if (decodeURIComponent($('#' + formId).serialize().split(
 									'body=')[1].split('&parent_id')[0]) != '') {
-								count += 1;
-								console.log('{{request.user}}');
-								commentsCount.innerHTML = count + " comments";
-
-								serialized = $('#' + formId).serialize();
-								myArray = serialized.split('body=');
-								frag = myArray[1];
-								newArray = frag.split('&parent_id');
-								encodedTxt = newArray[0];
-								reply_body = decodeURIComponent(encodedTxt);
-
-								ctime = new Date();
-								ctime = String(ctime).split(' ');
-								ctime[0] = ctime[0] + ',';
-								ctime[2] = ctime[2] + ',';
-								ctime = ctime.join(' ');
-
-								console.log(reply_body);
-								commentContainer.insertAdjacentHTML('beforeEnd',
-									'<div class="reply"><p class="font-weight-bold">{{ request.user }}<span class="text-muted font-weight-normal">' +
-									ctime + '</span></p>' + reply_body + '</div>');
 								replyForm.removeChild(replyForm.lastElementChild);
 								replyForm.insertAdjacentHTML('beforeEnd',
 									'<button class="btn btn-primary btn-lg reply-button" id="reply-button' +
-									parentId + '" ' + 'type="submit">Submit</button>');
-							} else {
-								if (decodeURIComponent($('#' + formId).serialize().split(
-										'body=')[1].split('&parent_id')[0]) != '') {
-									replyForm.removeChild(replyForm.lastElementChild);
-									replyForm.insertAdjacentHTML('beforeEnd',
-										'<button class="btn btn-primary btn-lg reply-button" id="reply-button' +
-										parentId + '" ' +
-										'type="submit">Submit</button>');
-								}
-
+									parentId + '" ' +
+									'type="submit">Submit</button>');
 							}
-						},
-						error: function (request, status, error) {
-							console.log(request.responseText);
+
 						}
-					});
-
+					},
+					error: function (request, status, error) {
+						console.log(request.responseText);
+					}
 				});
-				// $("#comment-form").submit();
+
 			});
-
-			// $('.show-reply-form').click( function () {
-			// 	object = this;
-			// 	objectId= Number(object.id.split('_')[1]);
-			// 	parentDiv = object.parentElement;
-
-			// 	replyDiv = document.getElementById('reply-div' + String(objectId));
-			// 	console.log(replyDiv);
-			// 	if (replyDiv) {
-			// 		console.log(replyDiv);
-			// 		console.log('na here');
-			// 		parentDiv.removeChild(replyDiv);
-			// 	} else {
-			// 		for (let element of document.getElementsByClassName('reply-div')) {
-			// 			element.remove();
-			// 		}
-
-			// 		parentDiv.insertAdjacentHTML('beforeEnd', '<div class="reply-div" id="reply-div' + String(objectId) + '" ' + '><form id="reply-form' + String(objectId) + '" ' + 'class="reply-form" method="post" style="margin-top: 1.3em;" name="r-form" value="' + String(objectId) + '"' + '>{% csrf_token %}{{ reply_form.as_p }}<input type="hidden" name="parent_id" value="' + String(objectId) + '"' + '><input name="action" type="hidden" value="to_reply"><button class="btn btn-primary btn-lg reply-button" id="reply-button' + String(objectId) + '" ' + 'type="submit">Submit</button></form>');
-			// 		// parentDiv.insertAdjacentElement('beforeEnd', document.getElementsByClassName('reply-div')[0]);
-			// 		replyDiv = parentDiv.lastElementChild;
-			// 		replyDiv.id = 'reply-div' + String(objectId);
-			// 		replyForm = replyDiv.children[0];
-			// 		replyForm.id = 'reply-form' + String(objectId);
-			// 		replyForm.setAttribute('value', String(objectId))
-			// 		replyForm.children[2].setAttribute('value', String(objectId))
-			// 		replyForm.lastElementChild.id = String(objectId);
-			// 		replyDiv.style.display = 'block';
-			// 		formSelector = '#' + replyForm.id;
-			// 		area = replyForm.children[1].children[1];
-			// 		counter += 1
-			// 		area.className += String(counter);
-			// 		// tinymce.init({
-			//         //         selector: 'textarea#id_body.tinymce' + String(counter)
-			//         // });
-
-
-			// 	}
-			// });
+			// $("#comment-form").submit();
 		});
 
-		// $(document).ready(function () {
+		// $('.show-reply-form').click( function () {
+		// 	object = this;
+		// 	objectId= Number(object.id.split('_')[1]);
+		// 	parentDiv = object.parentElement;
 
-		// })
-		// tinymce.init({
-		// 	selector:'.editor',
-		// 	setup: function (editor) {
-		// 		editor.on('submit', function (e) {
-		// 			editor.save();
-		// 		});
+		// 	replyDiv = document.getElementById('reply-div' + String(objectId));
+		// 	console.log(replyDiv);
+		// 	if (replyDiv) {
+		// 		console.log(replyDiv);
+		// 		console.log('na here');
+		// 		parentDiv.removeChild(replyDiv);
+		// 	} else {
+		// 		for (let element of document.getElementsByClassName('reply-div')) {
+		// 			element.remove();
+		// 		}
+
+		// 		parentDiv.insertAdjacentHTML('beforeEnd', '<div class="reply-div" id="reply-div' + String(objectId) + '" ' + '><form id="reply-form' + String(objectId) + '" ' + 'class="reply-form" method="post" style="margin-top: 1.3em;" name="r-form" value="' + String(objectId) + '"' + '>{% csrf_token %}{{ reply_form.as_p }}<input type="hidden" name="parent_id" value="' + String(objectId) + '"' + '><input name="action" type="hidden" value="to_reply"><button class="btn btn-primary btn-lg reply-button" id="reply-button' + String(objectId) + '" ' + 'type="submit">Submit</button></form>');
+		// 		// parentDiv.insertAdjacentElement('beforeEnd', document.getElementsByClassName('reply-div')[0]);
+		// 		replyDiv = parentDiv.lastElementChild;
+		// 		replyDiv.id = 'reply-div' + String(objectId);
+		// 		replyForm = replyDiv.children[0];
+		// 		replyForm.id = 'reply-form' + String(objectId);
+		// 		replyForm.setAttribute('value', String(objectId))
+		// 		replyForm.children[2].setAttribute('value', String(objectId))
+		// 		replyForm.lastElementChild.id = String(objectId);
+		// 		replyDiv.style.display = 'block';
+		// 		formSelector = '#' + replyForm.id;
+		// 		area = replyForm.children[1].children[1];
+		// 		counter += 1
+		// 		area.className += String(counter);
+		// 		// tinymce.init({
+		//         //         selector: 'textarea#id_body.tinymce' + String(counter)
+		//         // });
+
+
 		// 	}
 		// });
-	</script>
-	{% endblock content %}
+	});
+
+	// $(document).ready(function () {
+
+	// })
+	// tinymce.init({
+	// 	selector:'.editor',
+	// 	setup: function (editor) {
+	// 		editor.on('submit', function (e) {
+	// 			editor.save();
+	// 		});
+	// 	}
+	// });
+</script>
+{% endblock content %}
