@@ -70,43 +70,6 @@
 </style>
 
 <!-- main content -->
-<div class="col-lg-12 d-block content about-content" data-aos="zoom-in" data-aos-delay="100">
-  <form class="search-form d-flex justify-content-around" style="font-size: 16px;" method="get">
-    <span class="form-group text-search w-50"><input class="search-input w-100 h-100 text-primary border-white" id="id_q" name="q" placeholder="Looking for a post?" type="text" style="border-radius: 7px;" /></span>
-
-    <span class="form-group time-search align-self-center" style="width: 10%;">
-      <label for="time-filter" class="label">Posted Since:</label>
-      <select value="Today" class="text-primary w-100" id="time-filter" name="time-filter">
-        <option selected value="">All</option>
-        <option value="today">Today</option>
-        <option value="yesterday">Yesterday</option>
-        <option value="last week">Last week</option>
-        <option value="2 weeks ago">2 weeks ago</option>
-        <option value="3 weeks ago">3 weeks ago</option>
-        <option value="last month">Last month</option>
-        <option value="this year">This year</option>
-      </select>
-    </span>
-
-    <span class="form-group align-self-center" style="width: 10%;">
-      <label for="category-filter" class="label">Category:</label>
-      <select class="text-primary w-100" id="category-filter" name="category-filter">
-        <option selected value="">All</option>
-        <option value="history">History</option>
-        <option value="politics-and-international-relations">Politics & International Relations</option>
-        <option value="society-and-culture">Society & Culture</option>
-        <option value="science-and-technology">Science & Technology</option>
-        <option value="art-and-literature">Art & Literature</option>
-        <option value="business-and-economics">Business & Economics</option>
-        </select>
-    </span>
-
-    <span class="form-group text-center" style="width: 10%;">
-      <button href="{% url 'blog:home' %}" class="w-100 mt-0 form-control btn sbmt submit px-3" role="button" type="submit"><i class="fa fa-search"></i></button>
-    </span>
-  </form>
-</div>
-<!-- <h3 id="blog-page-title">🔥 Trending Posts From SNI's Blog 🔥</h3> -->
 
 <!-- <div class="container">
   <div class="row" id="posts-grid"> -->
@@ -137,6 +100,47 @@
     <!-- Blog posts-->
 <section id="posts" class="posts">
   <div class="container">
+    <div class="col-lg-12 d-block content about-content" data-aos="zoom-in" data-aos-delay="100">
+	  <form class="search-form d-flex justify-content-around" style="font-size: 16px;" method="get">
+			<span class="form-group text-search w-50"><input class="search-input w-100 h-100 text-primary border-white"
+					id="id_q" name="q" placeholder="Looking for a post?" type="text"
+					style="border-radius: 7px;" /></span>
+
+			<span class="form-group time-search align-self-center" style="width: 10%;">
+				<label for="time-filter" class="label">Posted Since:</label>
+				<select value="Today" class="cursor-pointer text-primary w-100" id="time-filter" name="time-filter">
+					<option selected value="">All</option>
+					<option value="today">Today</option>
+					<option value="yesterday">Yesterday</option>
+					<option value="last week">Last week</option>
+					<option value="2 weeks ago">2 weeks ago</option>
+					<option value="3 weeks ago">3 weeks ago</option>
+					<option value="last month">Last month</option>
+					<option value="this year">This year</option>
+				</select>
+			</span>
+
+			<span class="form-group align-self-center" style="width: 10%;">
+				<label for="category-filter" class="label">Category:</label>
+				<select class="cursor-pointer text-primary w-100" id="category-filter" name="category-filter">
+					<option selected value="">All</option>
+					<option value="history">History</option>
+					<option value="politics-and-international-relations">Politics & International
+						Relations</option>
+					<option value="society-and-culture">Society & Culture</option>
+					<option value="science-and-technology">Science & Technology</option>
+					<option value="art-and-literature">Art & Literature</option>
+					<option value="business-and-economics">Business & Economics</option>
+				</select>
+			</span>
+
+			<span class="form-group text-center" style="width: 10%;">
+				<button href="{% url 'blog:home' %}" class="w-100 mt-0 form-control btn sbmt submit px-3" role="button"
+					type="submit"><i class="fa fa-search"></i></button>
+			</span>
+		</form>
+</div>
+
     {% if blog_posts %}
     <div class="row" data-aos="zoom-in" data-aos-delay="100">
       {% for post in blog_posts %}

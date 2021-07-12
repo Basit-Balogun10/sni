@@ -4,13 +4,47 @@
 * Author: BootstrapMade.com
 * License: https://bootstrapmade.com/license/
 */
+#confirm-report-overlay,
+.report-div {
+    position: fixed;
+    display: none;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    background: rgb(0 38 87 / 66%);
+    z-index: 999;
+}
+
+.report-popup {
+    position: absolute;
+    left: 17.5%;
+    right: 20%;
+    margin: auto;
+}
+
+#confirmation-popup {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    text-align: center;
+    color: #002657;
+    height: min-content;
+    background: rgb(255, 255, 255);
+    border: 5px solid #002657;
+    border-radius: 20px;
+    box-shadow: 0px 0px 80px #002657;
+    padding: 50px;
+    margin: auto;
+}
 
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
 body {
-    font-family: apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-        Helvetica Neue, Arial, Noto Sans, sans-serif;
+    font-family: "Poppins", sans-serif;
     color: #002657;
     background: -webkit-linear-gradient(left top, #c582eb, #002657);
     background: -o-linear-gradient(top right, #c582eb, #002657);
@@ -37,6 +71,18 @@ h5,
 h6 {
     font-family: "Raleway", sans-serif;
 }
+
+/* table.mceLayout,
+textarea.tinyMCE {
+    width: 100% !important;
+}
+
+@media only screen and (min-width: 769px) {
+    table.mceLayout,
+    textarea.richEditor {
+        width: 700px !important;
+    }
+} */
 
 /*--------------------------------------------------------------
 # Back to top button
@@ -212,7 +258,8 @@ h6 {
     padding: 0;
 }
 
-.navbar ul {
+.navbar ul,
+.report-types {
     margin: 0;
     padding: 0;
     display: flex;
@@ -220,11 +267,13 @@ h6 {
     align-items: center;
 }
 
-.navbar li {
+.navbar li,
+.make-comment-report {
     position: relative;
 }
 
-.navbar a {
+.navbar a,
+.rt a {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -243,7 +292,8 @@ h6 {
 }
 
 .navbar a:hover,
-.navbar li:hover > a {
+.navbar li:hover > a,
+.rt a {
     color: #c582eb;
 }
 
@@ -255,27 +305,32 @@ h6 {
     font-size: 16px;
 }
 
-.navbar .dropdown ul {
+.navbar .dropdown ul,
+.report-types ul {
     display: block;
     position: absolute;
+    visibility: hidden;
+    opacity: 0;
     left: 30px;
     top: calc(100% + 30px);
     margin: 0;
     padding: 10px 0;
     z-index: 99;
-    opacity: 0;
-    visibility: hidden;
     background: #002657;
     box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
     transition: 0.3s;
     border-radius: 4px;
 }
 
-.navbar .dropdown ul li {
+.navbar .dropdown ul li,
+.rt {
     min-width: 200px;
+    list-style: none;
+    color: #c582eb;
 }
 
-.navbar .dropdown ul a {
+.navbar .dropdown ul a,
+.rt a {
     padding: 10px 20px;
     font-size: 14px;
     text-transform: none;
@@ -288,11 +343,14 @@ h6 {
 
 .navbar .dropdown ul a:hover,
 .navbar .dropdown ul .active:hover,
-.navbar .dropdown ul li:hover > a {
+.navbar .dropdown ul li:hover > a,
+.rt a:hover {
     color: #c582eb;
+    text-decoration: underline;
 }
 
-.navbar .dropdown:hover > ul {
+.navbar .dropdown:hover > ul,
+.report-div.active-div .report-types ul {
     opacity: 1;
     top: 100%;
     visibility: visible;
@@ -719,7 +777,8 @@ section {
   padding-right: 0;
 } */
 
-a.more-btn {
+a.more-btn,
+button.more-btn {
     color: skyblue;
     border: 1px solid;
     border-radius: 7px;
@@ -727,7 +786,8 @@ a.more-btn {
     transition: all ease-in-out 0.4s;
 }
 
-a.more-btn:hover {
+a.more-btn:hover,
+button.more-btn {
     /* color: white; */
     border: 1px solid white;
     background: white;
@@ -926,7 +986,8 @@ a.more-btn:hover {
     padding-bottom: 5px;
 }
 
-.posts .trainer .trainer-profile img {
+.posts .trainer .trainer-profile img,
+.blog-author-detail img {
     width: 50px;
     height: 50px;
     border-radius: 50px;
@@ -937,6 +998,7 @@ a.more-btn:hover {
     font-weight: 600;
     font-size: 17px;
     color: #002657;
+    margin-top: l0px;
 }
 
 .posts .trainer .trainer-rank {

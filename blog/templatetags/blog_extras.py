@@ -72,7 +72,7 @@ def get_readable(arg):
 @register.filter
 def get_color(arg):
     categories_color = {"history": "deepskyblue", "politics-and-international-relations": "red",
-            "society-and-culture": "orange", "science-and-technology": "lightseagreen",
+            "society-and-culture": "yellow", "science-and-technology": "lightseagreen",
             "art-and-literature": "blue", "business-and-economics": "deeppink"}
     return categories_color[arg]
 
