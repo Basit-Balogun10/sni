@@ -36,7 +36,7 @@ class BlogPost(models.Model):
                ("art-and-literature", "ART & LITERATURE"), ("business-and-economics", "BUSINESS & ECONOMICS"))
 
     category = models.CharField(max_length=50, blank=False, null=False, choices=CATEGORIES)
-    reports = models.ManyToManyField(settings.AUTH_USER_MODEL, default=None, blank=True, through='Report', through_fields=('post', 'reporter'), related_name='reports')
+    reports = models.ManyToManyField(settings.AUTH_USER_MODEL, default=None, blank=True, through='PostReport', through_fields=('post', 'reporter'), related_name='post_reports')
 
     def num_likes(self):
         return self.liked.all().count()
@@ -63,8 +63,8 @@ PREFERENCES = (
 
 
 class Like(models.Model):
-    post = models.ForeignKey(BlogPost, on_delete=models.CASCADE)
-    value = models.CharField(choices=PREFERENCES, default='Like', max_length=10)
+    post = models.ForeignKey(BlogPost, on_delete=models.CASCADE, editable=False)
+    value = models.CharField(choices=PREFERENCES, default='Like', max_length=10, editable=False)
     date_liked = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -72,8 +72,8 @@ class Like(models.Model):
 
 
 class Dislike(models.Model):
-    post = models.ForeignKey(BlogPost, on_delete=models.CASCADE)
-    value = models.CharField(choices=PREFERENCES, default='Like', max_length=10)
+    post = models.ForeignKey(BlogPost, on_delete=models.CASCADE, editable=False)
+    value = models.CharField(choices=PREFERENCES, default='Like', max_length=10, editable=False)
     date_disliked = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -81,12 +81,13 @@ class Dislike(models.Model):
 
 
 class Comment(models.Model):
-    post = models.ForeignKey(BlogPost, on_delete=models.CASCADE, related_name='comments')
-    commenter = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    post = models.ForeignKey(BlogPost, on_delete=models.CASCADE, related_name='comments', editable=False)
+    commenter = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, editable=False)
     comment_body = HTMLField()
     created_on = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField(default=True, editable=False)
     new = models.BooleanField(default=True, editable=False)
+    reports = models.ManyToManyField(settings.AUTH_USER_MODEL, default=None, blank=True, through='CommentReport', through_fields=('comment', 'reporter'), related_name='comment_reports')
     # reports = models.IntegerField(default=0)
 
 
@@ -98,12 +99,13 @@ class Comment(models.Model):
 
 
 class Reply(models.Model):
-    comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name='replies')
-    replier = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name='replies', editable=False)
+    replier = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, editable=False)
     body = HTMLField()
     created_on = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField(default=True, editable=False)
     new = models.BooleanField(default=True, editable=False)
+    reports = models.ManyToManyField(settings.AUTH_USER_MODEL, default=None, blank=True, through='ReplyReport', through_fields=('reply', 'reporter'), related_name='reply_reports')
     # reports = models.IntegerField(default=0)
 
     class Meta:
@@ -114,8 +116,8 @@ class Reply(models.Model):
         return '{} by {}'.format(self.body, self.replier)
 
 
-class Report(models.Model):
-    TITLES = (('racism', "Racism"), ("nudity", "Nudity"))
+class PostReport(models.Model):
+    TITLES = (('racism', "Racism"), ("nudity", "Nudity"), ("sexual harrasment", "Sexual harrasment"), ("false information", "False information"), ("spam", "It's spam"), ("hate speech or symbols", "Hate speech or symbols"), ("bullying", "Bullying"), ("scam or fraud", "Scam or fraud"), ("violence", "Violence"), ("sale of illegal or regulated goods", "Sale of illegal or regulated goods"))
     title = models.CharField(max_length=50, blank=False, null=False, choices=TITLES)
     post = models.ForeignKey(BlogPost, on_delete=models.CASCADE, default=None, blank=False, null=False, related_name='post_reports')
     # reply = models.ForeignKey(Reply, on_delete=models.CASCADE, default=None, blank=False, null=False, related_name='reply_reports')
@@ -125,6 +127,50 @@ class Report(models.Model):
     new = models.BooleanField(default=True, editable=False)
     reviewed = models.BooleanField(default=False, editable=False)
     good = models.BooleanField(default=True, editable=False)
+    bad = models.BooleanField(default=False, editable=False)
+
+
+    class Meta:
+        ordering = ['created_on']
+
+
+    def __str__(self):
+        return '{} by {}'.format(self.title, self.reporter)
+
+
+class CommentReport(models.Model):
+    TITLES = (('racism', "Racism"), ("nudity", "Nudity"), ("sexual harrasment", "Sexual harrasment"), ("false information", "False information"), ("spam", "It's spam"), ("hate speech or symbols", "Hate speech or symbols"), ("bullying", "Bullying"), ("scam or fraud", "Scam or fraud"), ("violence", "Violence"), ("sale of illegal or regulated goods", "Sale of illegal or regulated goods"))
+    title = models.CharField(max_length=50, blank=False, null=False, choices=TITLES)
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE, default=None, blank=False, null=False, related_name='comment_reports')
+    # reply = models.ForeignKey(Reply, on_delete=models.CASCADE, default=None, blank=False, null=False, related_name='reply_reports')
+    reporter = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='comment_reporter', blank=False, null=False)
+    # custom_title = models.CharField(max_length=100, blank=True, null=True)
+    created_on = models.DateTimeField(auto_now_add=True)
+    new = models.BooleanField(default=True, editable=False)
+    reviewed = models.BooleanField(default=False, editable=False)
+    good = models.BooleanField(default=False, editable=False)
+    bad = models.BooleanField(default=False, editable=False)
+
+
+    class Meta:
+        ordering = ['created_on']
+
+
+    def __str__(self):
+        return '{} by {}'.format(self.title, self.reporter)
+
+
+class ReplyReport(models.Model):
+    TITLES = (('racism', "Racism"), ("nudity", "Nudity"), ("sexual harrasment", "Sexual harrasment"), ("false information", "False information"), ("spam", "It's spam"), ("hate speech or symbols", "Hate speech or symbols"), ("bullying", "Bullying"), ("scam or fraud", "Scam or fraud"), ("violence", "Violence"), ("sale of illegal or regulated goods", "Sale of illegal or regulated goods"))
+    title = models.CharField(max_length=50, blank=False, null=False, choices=TITLES)
+    reply = models.ForeignKey(Reply, on_delete=models.CASCADE, default=None, blank=False, null=False, related_name='reply_reports')
+    # reply = models.ForeignKey(Reply, on_delete=models.CASCADE, default=None, blank=False, null=False, related_name='reply_reports')
+    reporter = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='reply_reporter', blank=False, null=False)
+    # custom_title = models.CharField(max_length=100, blank=True, null=True)
+    created_on = models.DateTimeField(auto_now_add=True)
+    new = models.BooleanField(default=True, editable=False)
+    reviewed = models.BooleanField(default=False, editable=False)
+    good = models.BooleanField(default=False, editable=False)
     bad = models.BooleanField(default=False, editable=False)
 
 

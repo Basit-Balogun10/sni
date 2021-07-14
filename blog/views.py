@@ -4,7 +4,7 @@ from django.http import HttpResponse, JsonResponse
 
 from operator import attrgetter
 
-from blog.models import BlogPost, Like, Dislike, Comment, Reply
+from blog.models import BlogPost, Like, Dislike, Comment, Reply, CommentReport, ReplyReport
 from blog.forms import CreateBlogPostForm, UpdateBlogPostForm, CommentForm, ReplyForm
 from account.models import Account
 
@@ -50,7 +50,7 @@ def detail_blog_view(request, category, year, month, day, time, identity, title)
     context['blog_post'] = blog_post
     user = request.user
 
-    comments = blog_post.comments.filter(active=True)
+    comments = blog_post.comments.all()
     context['comments'] = comments
 
     new_comment = None
@@ -60,6 +60,8 @@ def detail_blog_view(request, category, year, month, day, time, identity, title)
     
     total_comments = Comment.objects.all().count() + Reply.objects.all().count()
     context['total_comments'] = total_comments
+    total_replies = Reply.objects.all().count()
+    context['total_replies'] = total_replies
 
     if user in blog_post.liked.all():
         like_color = "success"
@@ -129,6 +131,27 @@ def detail_blog_view(request, category, year, month, day, time, identity, title)
                 return HttpResponse("Sorry, you have to be logged in to reply to comments")
 
 
+        elif action == "to_report":
+            if user.is_authenticated:
+                target = request.POST.get('target')
+                report_title = request.POST.get('title')
+                if target == "comment":
+                    comment_id = int(request.POST.get('target_id'))
+                    comment = get_object_or_404(Comment, id=comment_id)
+                    print(comment)
+                    CommentReport.objects.create(title=report_title, comment=comment, reporter=user)
+                    print(CommentReport.objects.last())
+                    return HttpResponse('success')
+                elif target == "reply":
+                    reply_id = int(request.POST.get('target_id'))
+                    reply = get_object_or_404(Reply, id=reply_id)
+                    print(reply)
+                    ReplyReport.objects.create(title=report_title, reply=reply, reporter=user)
+                    print(ReplyReport.objects.last())
+                    return HttpResponse('success')
+            else:
+                return HttpResponse("Sorry, you have to be logged in to report comments or replies")
+                
         else:
             post_id = request.POST.get('post_id')
             post_obj = BlogPost.objects.get(id=post_id)
@@ -205,16 +228,16 @@ def detail_blog_view(request, category, year, month, day, time, identity, title)
     # print(blog_post.date_updated)
 
     # GET TRENDING POSTS
-    trending_posts = sorted(get_blog_queryset(query), key=attrgetter('date_updated'), reverse=True)[:5]
+    trending_posts = sorted(get_blog_queryset(query), key=attrgetter('date_updated'), reverse=True)[:6]
     context['trending_posts'] = trending_posts
 
     # GET RELATED POSTS
     post_title = blog_post.title
-    related_posts = sorted(get_blog_queryset(post_title), key=attrgetter('date_updated'), reverse=True)[:5]
+    related_posts = sorted(get_blog_queryset(post_title), key=attrgetter('date_updated'), reverse=True)[:6]
     context['related_posts'] = related_posts
 
     # GET MORE POSTS FROM THE SAME AUTHOR
-    author_posts = get_author_posts(blog_post.author)
+    author_posts = get_author_posts(blog_post.author, blog_post.id, 6)
     context['author_posts'] = author_posts
 
     comment_form = CommentForm()
@@ -277,9 +300,12 @@ def get_blog_queryset(query=None):
     return list(set(queryset))
 
 
-def get_author_posts(post_author, limit=None):
+def get_author_posts(post_author, post_id=None, limit=None):
     post_author_id = Account.objects.get(username=post_author).id
-    author_posts = BlogPost.objects.filter(author=post_author_id)[:limit]
+    if post_id:
+        author_posts = BlogPost.objects.filter(author=post_author_id).exclude(id=post_id)[:limit]
+    else:
+        author_posts = BlogPost.objects.filter(author=post_author_id)[:limit]
     md = {}
 
     for post in author_posts:

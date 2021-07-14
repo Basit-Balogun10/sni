@@ -31,68 +31,6 @@ const onscroll = (el, listener) => {
     el.addEventListener("scroll", listener);
 };
 
-function activateDiv(postContainer) {
-    postSummaryContainer = postContainer.children[1];
-    postTime = postSummaryContainer.children[0].children[1];
-
-    postSummaryContainer.style.background = "#002657";
-    postTime.style.color = "#c582eb";
-}
-
-function deactivateDiv(postContainer) {
-    let postSummaryContainer = postContainer.children[1];
-    let postTime = postSummaryContainer.children[0].children[1];
-
-    postSummaryContainer.style.background = "none";
-    postTime.style.color = "#002657";
-}
-
-// on(
-//     "click",
-//     ".rt a",
-//     (confirmReport = function (state) {
-//         /* state can be 1 or 0 */
-//         var containerElement = document.getElementById("main-doc");
-//         var overlayEle = document.getElementById("confirm-report-overlay");
-
-//         if (state) {
-//             overlayEle.style.display = "block";
-//             containerElement.setAttribute("class", "blur");
-//         } else {
-//             overlayEle.style.display = "none";
-//             containerElement.setAttribute("class", null);
-//         }
-//     }),
-//     true
-// );
-
-function confirmReport(state) {
-    /* state can be 1 or 0 */
-    var overlayEle = document.getElementById("confirm-report-overlay");
-    console.log(overlayEle);
-
-    if (state) {
-        reportDivs = select(".report-div", true);
-        reportDivs.forEach((reportDiv) => {
-            reportDiv.style.display = "none";
-            reportDiv.classList.toggle("active-div");
-        });
-        overlayEle.style.display = "block";
-    } else {
-        let popup = select("#confirmation-popup");
-        popup.setAttribute("data-value", "cancel");
-        overlayEle.style.display = "none";
-    }
-}
-
-function makeReport(object) {
-    let popup = select("#confirmation-popup");
-    popup.setAttribute("data-value", "submit");
-    popup.style.padding = "30px";
-    popup.innerHTML =
-        '<h5 class=""><i class="bi text-success bi-check-circle"></i>Your report have been successfully submitted. Our team will review this comment as soon as possible and will take the necessary actions afterwards. Thank you for trying to keep this community safe for everyone!</h5><button class="btn btn-lg btn-success" onclick="closeConfirmationPopup()">Close</button>';
-}
-
 function closeConfirmationPopup() {
     let overlay = select("#confirm-report-overlay");
     let popup = select("#confirmation-popup");
@@ -104,40 +42,68 @@ function closeConfirmationPopup() {
 
 function controlReportDiv(object = null) {
     if (object) {
-        var reportDiv;
         let objectId = object.id.split("_")[1];
+        let reportDiv = document.getElementById("report-div");
+        let reportForm = document.getElementById("report-form");
+        let reportUl = document.getElementById("rt-ul");
         if (object.id.includes("comment")) {
-            reportDiv = document.getElementById(
-                "comment-report-div" + objectId
-            );
+            reportDiv.id = "comment-report-div" + objectId;
+            reportUl.setAttribute("targ", "comment");
         } else if (object.id.includes("reply")) {
-            reportDiv = document.getElementById("reply-report-div" + objectId);
+            reportDiv.id = "reply-report-div" + objectId;
+            reportUl.setAttribute("targ", "reply");
         }
+        reportForm.id = "report-form" + objectId;
+        reportForm.setAttribute("value", objectId);
+        reportUl.setAttribute("data-catid", objectId);
         console.log(reportDiv);
         reportDiv.style.display = "block";
         reportDiv.classList.toggle("active-div");
         console.log(reportDiv.classList);
     } else {
-        let reportDivs = select(".report-div", true);
-        reportDivs.forEach((reportDiv) => {
-            reportDiv.style.display = "none";
-            if (reportDiv.className.split(" ").includes("active-div")) {
-                reportDiv.classList.toggle("active-div");
-            }
-        });
+        let reportUl = document.getElementById("rt-ul");
+        reportUl.setAttribute("data-catid", "");
+
+        let reportDiv = select(".report-div");
+        reportDiv.style.display = "none";
+        reportDiv.id = "report-div";
+
+        if (reportDiv.className.split(" ").includes("active-div")) {
+            reportDiv.classList.toggle("active-div");
+        }
+
+        let reportForm = select(".report-form");
+        reportForm.id = "report-form";
+        reportForm.setAttribute("value", objectId);
     }
+    // if (object) {
+    //     var reportDiv;
+    //     let objectId = object.id.split("_")[1];
+    //     if (object.id.includes("comment")) {
+    //         reportDiv = document.getElementById(
+    //             "comment-report-div" + objectId
+    //         );
+    //     } else if (object.id.includes("reply")) {
+    //         reportDiv = document.getElementById("reply-report-div" + objectId);
+    //     }
+    //     console.log(reportDiv);
+    //     reportDiv.style.display = "block";
+    //     reportDiv.classList.toggle("active-div");
+    //     console.log(reportDiv.classList);
+    // } else {
+    //     let reportDivs = select(".report-div", true);
+    //     reportDivs.forEach((reportDiv) => {
+    //         reportDiv.style.display = "none";
+    //         if (reportDiv.className.split(" ").includes("active-div")) {
+    //             reportDiv.classList.toggle("active-div");
+    //         }
+    //     });
+    // }
     // if (reportDiv.className.split(" ").includes("active-div")) {
     //     reportDiv.style.display = "none";
     // } else {
     //     reportDiv.classList.toggle("active-div");
     // }
-}
-
-function hideReportDiv(object) {
-    console.log(object);
-    object.classList.toggle("d-none");
-    object.classList.toggle("active-div");
-    console.log(object.classList);
 }
 
 function replyComment(object) {

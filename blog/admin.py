@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from blog.models import BlogPost, Like, Dislike, Comment, Reply, Report
+from blog.models import BlogPost, Like, Dislike, Comment, Reply, PostReport, CommentReport, ReplyReport
 
 from django.db import models
 
@@ -56,12 +56,43 @@ class BlogPostAdmin(admin.ModelAdmin):
 
     }
 
-@admin.register(Report)
-class ReportAdmin(admin.ModelAdmin):
-    list_display = ('reporter', 'title', 'post', 'created_on', 'new', 'reviewed', 'good', 'bad')
-    list_filter = ('title', 'reviewed', 'new', 'created_on', 'good', 'bad', 'reporter', 'post')
+# @admin.register(PostReport)
+# class PostReportAdmin(admin.ModelAdmin):
+#     list_display = ('reporter', 'title', 'post', 'created_on', 'new', 'reviewed', 'good', 'bad')
+#     list_filter = ('title', 'reviewed', 'new', 'created_on', 'good', 'bad', 'reporter', 'post')
+#     search_fields = ('title', 'post')
+#     actions = ['seen', 'reviewed', 'good_report', 'bad_report', 'not_reviewed']
+
+#     def seen(self, request, queryset):
+#         queryset.update(new=False)
+
+
+#     def reviewed(self, request, queryset):
+#         queryset.update(reviewed=True)
+
+
+#     def good_report(self, request, queryset):
+#         queryset.update(good=True)
+#         queryset.update(bad=False)
+    
+    
+#     def bad_report(self, request, queryset):
+#         queryset.update(bad=True)
+#         queryset.update(good=False)
+
+
+#     def not_reviewed(self, request, queryset):
+#         queryset.update(reviewed=False)
+#         queryset.update(good=False)
+#         queryset.update(bad=False)
+
+
+@admin.register(CommentReport)
+class CommentReportAdmin(admin.ModelAdmin):
+    list_display = ('reporter', 'title', 'comment', 'created_on', 'new', 'reviewed', 'good', 'bad')
+    list_filter = ('title', 'reviewed', 'new', 'created_on', 'good', 'bad', 'reporter', 'comment')
     search_fields = ('title', 'post')
-    actions = ['seen', 'reviewed', 'good_report', 'bad_report', 'not_reviewed', 'not_good_report', 'not_bad_report']
+    actions = ['seen', 'reviewed', 'good_report', 'bad_report', 'not_reviewed']
 
     def seen(self, request, queryset):
         queryset.update(new=False)
@@ -69,24 +100,72 @@ class ReportAdmin(admin.ModelAdmin):
 
     def reviewed(self, request, queryset):
         queryset.update(reviewed=True)
+        queryset.update(new=False)
 
 
     def good_report(self, request, queryset):
         queryset.update(good=True)
-    
+        queryset.update(bad=False)
+        queryset.update(reviewed=True)
+        queryset.update(new=False)
+        for qs in queryset:
+            qs.comment.active = False
+            qs.comment.save()
+
     
     def bad_report(self, request, queryset):
         queryset.update(bad=True)
+        queryset.update(good=False)
+        queryset.update(reviewed=True)
+        queryset.update(new=False)
+        for qs in queryset:
+            qs.comment.active = True
+            qs.comment.save()
 
 
     def not_reviewed(self, request, queryset):
         queryset.update(reviewed=False)
-
-
-    def not_good_report(self, request, queryset):
         queryset.update(good=False)
+        queryset.update(bad=False)
+
+@admin.register(ReplyReport)
+class ReplyReportAdmin(admin.ModelAdmin):
+    list_display = ('reporter', 'title', 'reply', 'created_on', 'new', 'reviewed', 'good', 'bad')
+    list_filter = ('title', 'reviewed', 'new', 'created_on', 'good', 'bad', 'reporter', 'reply')
+    search_fields = ('title', 'post')
+    actions = ['seen', 'reviewed', 'good_report', 'bad_report', 'not_reviewed']
+
+    def seen(self, request, queryset):
+        queryset.update(new=False)
+
+
+    def reviewed(self, request, queryset):
+        queryset.update(reviewed=True)
+        queryset.update(new=False)
+
+
+    def good_report(self, request, queryset):
+        queryset.update(reviewed=True)
+        queryset.update(good=True)
+        queryset.update(bad=False)
+        queryset.update(new=False)
+        for qs in queryset:
+            qs.reply.active = False
+            qs.reply.save()
     
     
-    def not_bad_report(self, request, queryset):
+    def bad_report(self, request, queryset):
+        queryset.update(reviewed=True)
+        queryset.update(bad=True)
+        queryset.update(good=False)
+        queryset.update(new=False)
+        for qs in queryset:
+            qs.reply.active = True
+            qs.reply.save()
+
+
+    def not_reviewed(self, request, queryset):
+        queryset.update(reviewed=False)
+        queryset.update(good=False)
         queryset.update(bad=False)
 

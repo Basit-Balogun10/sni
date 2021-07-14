@@ -2,7 +2,7 @@ from django import forms
 
 from tinymce.widgets import TinyMCE
 
-from blog.models import BlogPost, Comment, Reply
+from blog.models import BlogPost, Comment, Reply, PostReport
 
 
 class TinyMCEWidget(TinyMCE):
@@ -47,7 +47,7 @@ class UpdateBlogPostForm(forms.ModelForm):
 class CommentForm(forms.ModelForm):
     comment_body = forms.CharField(
         widget=TinyMCE(
-            attrs={'required': False, 'cols': 80, 'rows': 80}
+            attrs={'required': False, 'cols': 50, 'rows': 60}
         )
     )
 
@@ -59,7 +59,7 @@ class CommentForm(forms.ModelForm):
 class ReplyForm(forms.ModelForm):
     body = forms.CharField(
         widget=TinyMCE(
-            attrs={'required': False, 'cols': 80, 'rows': 80}
+            attrs={'required': False, 'cols': 50, 'rows': 60}
         )
     )
 

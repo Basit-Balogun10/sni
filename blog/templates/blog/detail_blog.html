@@ -9,6 +9,7 @@
 	html,
 	body {
 		background: linear-gradient(35deg, #002657, #c582eb);
+		overflow-x: hidden;
 	}
 
 	@media (max-width: 768px) {
@@ -646,7 +647,7 @@
 			</span>
 		</form>
 	</div>
-	<div id="confirm-report-overlay">
+	<div id="confirm-report-overlay" data-aos="zoom-in">
 		<div class="col-lg-6 col-md-6 col-sm-8" id="confirmation-popup">
 			<div>
 				<h5>Are you sure you want to continue with this report?</h5>
@@ -661,17 +662,66 @@
 			</div>
 		</div>
 	</div>
+	<div class="report-div" id="report-div">
+		<div class="report-popup">
+			<form id="report-form" class="report-form" method="post" name="rep-form" value="">
+				{% csrf_token %}
+				<div class="form-group report-types align-self-center">
+					<h5 class="font-weight-bold m-auto text-white">Select report
+						type
+					</h5>
+					<i onclick="controlReportDiv();" class="text-white cursor-pointer bi bi-x"
+						style="font-size: 40px;"></i>
+					<ul id="rt-ul" class="d-flex flex-wrap" data-catid="" targ="">
+						<li class="rt" value="nudity"><a class="confirm-report" state="1"
+								href="javascript:void(0);">Nudity</a>
+						</li>
+						<li class="rt" value="sexual harrasment"><a class="confirm-report" state="1"
+								href="javascript:void(0);">Sexual Harrasment</a>
+						</li>
+						<li class="rt" value="false information"><a class="confirm-report" state="1"
+								href="javascript:void(0);">False Information</a>
+						</li>
+						<li class="rt" value="racism"><a class="confirm-report" state="1"
+								href="javascript:void(0);">Racism
+							</a></li>
+						<li class="rt" value="spam"><a class="confirm-report" state="1" href="javascript:void(0);">It's
+								spam</a>
+						</li>
+						<li class="rt" value="hate speech or symbols"><a class="confirm-report" state="1"
+								href="javascript:void(0);">Hate
+								speech or symbols</a></li>
+						<li class="rt" value="bullying"><a class="confirm-report" state="1"
+								href="javascript:void(0);">Bullying</a>
+						</li>
+						<li class="rt" value="scam or fraud"><a class="confirm-report" state="1"
+								href="javascript:void(0);">Scam
+								or fraud</a></li>
+						<li class="rt" value="violence">
+							<a class="confirm-report" state="1" href="javascript:void(0);">Violence</a></li>
+						<li class="rt" value="sale of illegal or regulated goods"><a class="confirm-report" state="1"
+								href="javascript:void(0);">Sale of
+								illegal or
+								regulated goods</a></li>
+					</ul>
+				</div>
+			</form>
+		</div>
+	</div>
 	{% concat_all blog_post.date_published.hour|stringformat:"i" '-' blog_post.date_published.minute|stringformat:"i" '-' blog_post.date_published.second|stringformat:"i" '-' blog_post.date_published.microsecond|stringformat:"i"  as blog_time_published %}
 	<div class="grid-container5">
 		<div class="main-article">
 			<div class="post-header">
-				<h2 class="post-title">{{blog_post.title}}</h2>
+				<h2 class="post-title" data-aos="fade-down" data-aos-duration="1500" data-aos-once="true"
+					data-aos-mirror="false">
+					{{blog_post.title}}</h2>
 			</div>
 			<div class="post-content">
-				<img class="post-img" src="{{blog_post.image.url}}">
+				<img class="post-img" src="{{blog_post.image.url}}" data-aos="zoom-in-up" data-aos-easing="linear"
+					data-aos-duration="1500">
 
-				<div class="post-info">
-					<div class="d-flex justify-content-around">
+				<div class="post-info" data-aos="fade-right" data-aos-duration="1500">
+					<div class="d-flex justify-content-around flex-wrap">
 						<span class="blog-author-detail d-flex">
 							<img src="{{blog_post.author_img.url}}" class="img-fluid" alt="">
 							<span class="author">{{blog_post.author.firstname|upper}}
@@ -692,7 +742,8 @@
 						</span>
 					</div>
 					{% if blog_post.date_published != blog_post.date_updated %}
-					<div><span class="info-head">Date Published: </span>{{blog_post.date_published|myfunc}}</div>
+					<div style="border-top: 2px solid #002657;"><span class="info-head">Date Published:
+						</span>{{blog_post.date_published|myfunc}}</div>
 					<div><span class="info-head">Date Updated: </span>{{blog_post.date_updated|myfunc}}</div>
 					{% else %}
 					<p><span class="info-head">Date Published: </span>{{blog_post.date_published|myfunc}}</p>
@@ -763,14 +814,16 @@
 			{% endcomment %}
 
 			{% if related_posts|length > 0 %}
-			<div class="head">
+			<div class="head" data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-offset="0"
+				data-aos-delay="300">
 				<form action="{% url 'blog:home' %}" method="get">
 					<button class="text" type="submit" name="related-to" id="related-category"
 						value="{{blog_post.title}}">
 						RELATED POSTS</button>
 				</form>
 			</div>
-			<div class="post-group d-flex justify-content-between related-posts">
+			<div data-aos="zoom-in" data-aos-easing="linear" data-aos-duration="1500"
+				class="post-group d-flex justify-content-between related-posts" data-aos="fade-zoom-in">
 				{% for post in related_posts %}
 				{% concat_all post.date_published.hour|stringformat:"i" '-' post.date_published.minute|stringformat:"i" '-' post.date_published.second|stringformat:"i" '-' post.date_published.microsecond|stringformat:"i"  as blog_time_published %}
 				<div class="col-lg-4 col-md-6 d-flex align-items-stretch">
@@ -821,7 +874,8 @@
 			{% endif %}
 
 			{% if author_posts|length > 0 %}
-			<div class="head">
+			<div class="head" data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-offset="0"
+				data-aos-delay="300">
 				<form action="{% url 'blog:home' %}" method="get">
 					<button class="text" type="submit" name="posts-from" id="author-category"
 						value="{{blog_post.author}}">MORE
@@ -829,7 +883,8 @@
 						<span>{{blog_post.author.firstname|upper}} {{blog_post.author.lastname|upper}}</span></button>
 				</form>
 			</div>
-			<div class="post-group author-posts">
+			<div class="post-group author-posts" data-aos="fade-zoom-in" data-aos-easing="linear"
+				data-aos-duration="1500">
 				{% for post in author_posts %}
 				{% concat_all post.date_published.hour|stringformat:"i" '-' post.date_published.minute|stringformat:"i" '-' post.date_published.second|stringformat:"i" '-' post.date_published.microsecond|stringformat:"i"  as blog_time_published %}
 				<div class="col-lg-4 col-md-6 d-flex align-items-stretch">
@@ -878,8 +933,8 @@
 		</div>
 	</div>
 
-	<div class="container">
-		<div class="row">
+	<div class="container" data-aos="fade-in">
+		<div class="row" data-aos="fade-in">
 			<div class="card-item col-lg-8 card mb-4 mt-3 col-sm-12 col-md-12 d-flex align-items-stretch">
 				<div class="card-body">
 					{% if blog_post.total_comments > 1 %}
@@ -892,11 +947,11 @@
 
 					<div id="comment-container">
 						{% for comment in comments %}
-						<div class="comments" id="{{comment.id}}" style="padding: 10px;">
+						<div class="comments" id="{{comment.id}}" style="padding: 10px;" data-aos="">
 							{% if comment.active %}
-							<div class="comment">
+							<div class="comment" data-aos="fade-right" data-aos-offset="300">
 								<div class="font-weight-bold">
-									<div class="d-flex justify-content-between">
+									<div class="d-flex justify-content-between flex-wrap">
 										<p class="commenter">{{ comment.commenter }}</p>
 										<div class="d-flex font-weight-normal">
 											<p>{{comment.replies.count}} <i class="mr-3 fa fa-comments"></i></p>
@@ -909,62 +964,6 @@
 														id="comment-report-button_{{comment.id}}"
 														onclick="controlReportDiv(this)">Report</a></span></div>
 										</div>
-										<div class="report-div" id="comment-report-div{{comment.id}}">
-											<div class="report-popup">
-												<form id="report-form{{comment.id}}" class="report-form" method="post"
-													name="rep-form" value="{{comment.id}}">
-													{% csrf_token %}
-													<div class="form-group report-types align-self-center">
-														<h5 class="font-weight-bold m-auto text-white">Select report
-															type
-														</h5>
-														<i onclick="controlReportDiv();"
-															class="text-white cursor-pointer bi bi-x"
-															style="font-size: 40px;"></i>
-														<ul class="d-flex flex-wrap" data-catid="{{ comment.id }}"
-															targ="comment">
-															<li class="rt" value="nudity"><a class="confirm-report"
-																	state="1" href="javascript:void(0);">Nudity</a>
-															</li>
-															<li class="rt" value="sexual harrasment"><a
-																	class="confirm-report" state="1"
-																	href="javascript:void(0);">Sexual Harrasment</a>
-															</li>
-															<li class="rt" value="false information"><a
-																	class="confirm-report" state="1"
-																	href="javascript:void(0);">False Information</a>
-															</li>
-															<li class="rt" value="racism"><a class="confirm-report"
-																	state="1" href="javascript:void(0);">Racism
-																</a></li>
-															<li class="rt" value="spam"><a class="confirm-report"
-																	state="1" href="javascript:void(0);">It's
-																	spam</a>
-															</li>
-															<li class="rt" value="hate speech or symbols"><a
-																	class="confirm-report" state="1"
-																	href="javascript:void(0);">Hate
-																	speech or symbols</a></li>
-															<li class="rt" value="bullying"><a class="confirm-report"
-																	state="1" href="javascript:void(0);">Bullying</a>
-															</li>
-															<li class="rt" value="scam or fraud"><a
-																	class="confirm-report" state="1"
-																	href="javascript:void(0);">Scam
-																	or fraud</a></li>
-															<li class="rt" value="violence">
-																<a class="confirm-report" state="1"
-																	href="javascript:void(0);">Violence</a></li>
-															<li class="rt" value="sale of illegal or regulated goods"><a
-																	class="confirm-report" state="1"
-																	href="javascript:void(0);">Sale of
-																	illegal or
-																	regulated goods</a></li>
-														</ul>
-													</div>
-												</form>
-											</div>
-										</div>
 									</div>
 									<p class=" comment-info font-weight-normal">
 										{{ comment.created_on|myfunc }}
@@ -974,7 +973,7 @@
 								{{ comment.comment_body | safe | linebreaks }}
 							</div>
 							<div>
-								<div class="reply-div" id="reply-div{{comment.id}}">
+								<div class="reply-div" data-aos="zoom-in-up" id="reply-div{{comment.id}}">
 									<form id="reply-form{{comment.id}}" class="reply-form" method="post"
 										style="margin-top: 1.3em;" name="r-form" value="{{comment.id}}">
 										{% csrf_token %}
@@ -987,7 +986,7 @@
 								</div>
 							</div>
 							{% else %}
-							<div class="comment">
+							<div class="comment" data-aos="fade-right" data-aos-offset="300">
 								<p class=" font-weight-bold" style="color: #002657;">
 									This comment no longer exist as it is considered dangerous to the mental and
 									psychological health of members of this community
@@ -996,69 +995,13 @@
 							{% endif %}
 							{% for reply in comment.replies.all %}
 							{% if reply.active %}
-							<div class="reply ml-5">
+							<div class="reply ml-5" data-aos="fade-left" data-aos-offset="300">
 								<div class="reply-info font-weight-bold">
 									<div class="d-flex justify-content-between">
 										<p class="replier">{{ reply.replier }}</p>
 										<span style="float: right;"><a class="font-weight-normal make-comment-report"
 												href="javascript:void(0)" id="reply-report-button_{{reply.id}}"
 												onclick="controlReportDiv(this)">Report</a></span>
-										<div class="report-div" id="reply-report-div{{reply.id}}">
-											<div class="report-popup">
-												<form id="report-form{{reply.id}}" class="report-form" method="post"
-													name="rep-form" value="{{reply.id}}">
-													{% csrf_token %}
-													<div class="form-group report-types align-self-center">
-														<h5 class="font-weight-bold m-auto text-white">Select report
-															type
-														</h5>
-														<i onclick="controlReportDiv();"
-															class="text-white cursor-pointer bi bi-x"
-															style="font-size: 40px;"></i>
-														<ul class="d-flex flex-wrap" data-catid="{{ reply.id }}"
-															targ="reply">
-															<li class="rt" value="nudity"><a class="confirm-report"
-																	state="1" href="javascript:void(0);">Nudity</a>
-															</li>
-															<li class="rt" value="sexual harrasment"><a
-																	class="confirm-report" state="1"
-																	href="javascript:void(0);">Sexual Harrasment</a>
-															</li>
-															<li class="rt" value="false information"><a
-																	class="confirm-report" state="1"
-																	href="javascript:void(0);">False Information</a>
-															</li>
-															<li class="rt" value="racism"><a class="confirm-report"
-																	state="1" href="javascript:void(0);">Racism
-																</a></li>
-															<li class="rt" value="spam"><a class="confirm-report"
-																	state="1" href="javascript:void(0);">It's
-																	spam</a>
-															</li>
-															<li class="rt" value="hate speech or symbols"><a
-																	class="confirm-report" state="1"
-																	href="javascript:void(0);">Hate
-																	speech or symbols</a></li>
-															<li class="rt" value="bullying"><a class="confirm-report"
-																	state="1" href="javascript:void(0);">Bullying</a>
-															</li>
-															<li class="rt" value="scam or fraud"><a
-																	class="confirm-report" state="1"
-																	href="javascript:void(0);">Scam
-																	or fraud</a></li>
-															<li class="rt" value="violence">
-																<a class="confirm-report" state="1"
-																	href="javascript:void(0);">Violence</a></li>
-															<li class="rt" value="sale of illegal or regulated goods"><a
-																	class="confirm-report" state="1"
-																	href="javascript:void(0);">Sale of
-																	illegal or
-																	regulated goods</a></li>
-														</ul>
-													</div>
-												</form>
-											</div>
-										</div>
 									</div>
 									<p class="font-weight-normal">
 										{{ reply.created_on|myfunc }}
@@ -1068,7 +1011,7 @@
 								{{ reply.body | safe | linebreaks }}
 							</div>
 							{% else %}
-							<div class="reply ml-5">
+							<div class="reply ml-5" data-aos="fade-left" data-aos-offset="300">
 								<p class=" font-weight-bold" style="color: #002657;">
 									This reply no longer exist as it is considered dangerous to the mental and
 									psychological health of members of this community</p>
@@ -1080,7 +1023,8 @@
 					</div>
 				</div>
 			</div>
-			<div class="card-item col-lg-8 col-sm-12 col-md-12 mb-4 mt-3 card d-flex align-items-stretch">
+			<div class="card-item col-lg-8 col-sm-12 col-md-12 mb-4 mt-3 card d-flex align-items-stretch"
+				data-aos="zoom-in" data-aos-duration="1500">
 				<div class="card-body">
 					{% if new_comment %}
 					<div class="alert alert-success" role="alert">
@@ -1265,6 +1209,21 @@
 			popup.setAttribute("data-value", "cancel");
 			overlayEle.style.display = "none";
 			$('.selected').removeClass('selected');
+			let reportUl = document.getElementById("rt-ul");
+			reportUl.setAttribute("data-catid", "");
+
+			let reportDiv = select(".report-div");
+			reportDiv.style.display = "none";
+			reportDiv.id = "report-div";
+
+			if (reportDiv.className.split(" ").includes("active-div")) {
+				reportDiv.classList.toggle("active-div");
+			}
+
+			let reportForm = select(".report-form");
+			reportForm.id = "report-form";
+			reportForm.setAttribute("value", objectId);
+
 		}
 	})
 	$('#make-report').click(function (object) {
@@ -1292,11 +1251,27 @@
 					popup.children[0].classList.toggle('d-none');
 					popup.children[1].classList.toggle('d-none');
 					reportType.removeClass('selected');
+					let reportUl = document.getElementById("rt-ul");
+					reportUl.setAttribute("data-catid", "");
+
+					let reportDiv = select(".report-div");
+					reportDiv.style.display = "none";
+					reportDiv.id = "report-div";
+
+					if (reportDiv.className.split(" ").includes("active-div")) {
+						reportDiv.classList.toggle("active-div");
+					}
+
+					let reportForm = select(".report-form");
+					reportForm.id = "report-form";
+					reportForm.setAttribute("value", objectId);
 				},
 				error: function (request, status, error) {
 					console.log(request.responseText);
 				}
 			});
+		} else {
+			alert("Sorry, you have to be logged in to submit reports")
 		}
 	});
 	// $('.comment-button').click(function () {
@@ -1389,20 +1364,13 @@
 							commentContainer.insertAdjacentHTML(
 								'beforeEnd',
 								'<div class="comments" id="' + newCommentId +
-								'" style="padding: 10px;"> {% if True %} <div class="comment"> <div class="font-weight-bold"> <div class="d-flex justify-content-between"> <p class="commenter">{{ request.user }}</p> <div class="d-flex font-weight-normal"><p>0 <i class="mr-3 fa fa-comments"></i></p><div><a class="show-reply-form" href="javascript:alert(\'Please refresh this page on your browser to reply to your newly submitted comment.\')" id="' +
+								'" style="padding: 10px;"> {% if True %} <div class="comment" data-aos="fade-right" data-aos-offset="300" > <div class="font-weight-bold"> <div class="d-flex justify-content-between flex-wrap"> <p class="commenter">{{ request.user }}</p> <div class="d-flex font-weight-normal"><p>0 <i class="mr-3 fa fa-comments"></i></p><div><a class="show-reply-form" href="javascript:alert(\'Please refresh this page on your browser to reply to your newly submitted comment.\')" id="' +
 								replyButtonId +
 								'" title="Reply to this comment">Reply</a><span style="float: right;"><a class="make-comment-report" href="javascript: alert(\'Please refresh this page on your browser to report your newly submitted comment.\')" id="' +
 								reportButtonId +
-								'">Report</a></span></div></div><div class="report-div" id="' +
-								reportDivId +
-								'"><div class="report-popup"><form class="report-form" method="post" name="rep-form" value="' +
-								newCommentId + '" ' + 'id="reply-form' +
-								newCommentId +
-								'">{% csrf_token %}<div class="form-group report-types align-self-center"><h5 class="font-weight-bold m-auto text-white">Select report type</h5><i onclick="controlReportDiv();" class="text-white cursor-pointer bi bi-x" style="font-size: 40px;"></i><ul class="d-flex flex-wrap" data-catid="' +
-								newCommentId +
-								'" targ="comment"><li class="rt" value="nudity"><a class="confirm-report" state="1" href="javascript:void(0);">Nudity</a></li><li class="rt" value="sexual harrasment"><a class="confirm-report" state="1" href="javascript:void(0);">Sexual Harrasment</a></li><li class="rt" value="false information"><a class="confirm-report" state="1" href="javascript:void(0);">False Information</a></li><li class="rt" value="racism"><a class="confirm-report" state="1" href="javascript:void(0);">Racism</a></li><li class="rt" value="spam"><a class="confirm-report" state="1" href="javascript:void(0);">It\'s spam</a></li><li class="rt" value="hate speech or symbols"><a class="confirm-report" state="1" href="javascript:void(0);">Hate speech or symbols</a></li><li class="rt" value="bullying"><a class="confirm-report" state="1" href="javascript:void(0);">Bullying</a></li><li class="rt" value="scam or fraud"><a class="confirm-report" state="1" href="javascript:void(0);">Scam or fraud</a></li><li class="rt" value="violence"><a class="confirm-report" state="1" href="javascript:void(0);">Violence</a></li><li class="rt" value="sale of illegal or regulated goods"><a class="confirm-report" state="1" href="javascript:void(0);">Sale of illegal or regulated goods</a></li></ul></div></form></div></div></div><p class=" comment-info font-weight-normal">' +
+								'">Report</a></span></div></div></div><p class=" comment-info font-weight-normal">' +
 								ctime + '</p></div>' + comment_body +
-								'</div><div><div class="reply-div" id="' +
+								'</div><div><div class="reply-div" data-aos="zoom-in-up" id="' +
 								replyDivId + '"><form id="reply-form' +
 								newCommentId +
 								'" class="reply-form" method="post" style="margin-top: 1.3em;"name="r-form" value="' +
@@ -1411,7 +1379,7 @@
 								newCommentId +
 								'"><input name="action" type="hidden" value="to_reply"><button class="btn btn-primary btn-lg reply-button" id="reply-button' +
 								newCommentId +
-								'" type="submit">Submit</button></form></div></div>{% else %}<div class="comment"><p class=" font-weight-bold" style="color: #002657;">This comment no longer exist as it is considered dangerous to the mental and psychological health of members of this community</p></div>{% endif %}{% for reply in comment.replies.all %}{% if reply.active %}<div class="reply ml-5"><div class="reply-info font-weight-bold"><div class="d-flex justify-content-between"><p class="replier">{{ reply.replier }}</p><span style="float: right;"><a class="font-weight-normal make-comment-report" href="javascript:void(0)" onclick="controlReportDiv(this)">Report</a></span><div class="report-div"><div class="report-popup"><form id="report-form{{comment.id}}" class="report-form" method="post" name="rep-form" value="{{comment.id}}">{% csrf_token %}<div class="form-group report-types align-self-center"><h5 class="font-weight-bold m-auto text-white">Select report type</h5><i onclick="controlReportDiv();" class="text-white cursor-pointer bi bi-x" style="font-size: 40px;"></i><ul class="d-flex flex-wrap" data-catid="{{ reply.id }}" targ="reply"><li class="rt" value="nudity"><a class="confirm-report" state="1" href="javascript:void(0);">Nudity</a></li><li class="rt" value="sexual harrasment"><a class="confirm-report" state="1" href="javascript:void(0);">Sexual Harrasment</a></li><li class="rt" value="false information"><a class="confirm-report" state="1" href="javascript:void(0);">False Information</a></li><li class="rt" value="racism"><a class="confirm-report" state="1" href="javascript:void(0);">Racism</a></li><li class="rt" value="spam"><a class="confirm-report" state="1" href="javascript:void(0);">It\'s spam</a></li><li class="rt" value="hate speech or symbols"><a class="confirm-report" state="1" href="javascript:void(0);">Hate speech or symbols</a></li><li class="rt" value="bullying"><a class="confirm-report" state="1" href="javascript:void(0);">Bullying</a></li><li class="rt" value="scam or fraud"><a class="confirm-report" state="1" href="javascript:void(0);">Scam or fraud</a></li><li class="rt" value="violence"><a class="confirm-report" state="1" href="javascript:void(0);">Violence</a></li><li class="rt" value="sale of illegal or regulated goods"><a class="confirm-report" state="1" href="javascript:void(0);">Sale of illegal or regulated goods</a></li></ul></div></form></div></div></div><p class="font-weight-normal">{{ reply.created_on|myfunc }}</p></div>{{ reply.body | safe | linebreaks }}</div>{% else %}<div class="reply ml-5"><p class=" font-weight-bold" style="color: #002657;">This reply no longer exist as it is considered dangerous to the mental and psychological health of members of this community</p></div>{% endif %}{% endfor %}</div>'
+								'" type="submit">Submit</button></form></div></div>{% else %}<div class="comment" data-aos="fade-right" data-aos-offset="300" ><p class=" font-weight-bold" style="color: #002657;">This comment no longer exist as it is considered dangerous to the mental and psychological health of members of this community</p></div>{% endif %}{% for reply in comment.replies.all %}{% if reply.active %}<div class="reply ml-5" data-aos="fade-left" data-aos-offset="300" ><div class="reply-info font-weight-bold"><div class="d-flex justify-content-between"><p class="replier">{{ reply.replier }}</p><span style="float: right;"><a class="font-weight-normal make-comment-report" href="javascript:void(0)" onclick="controlReportDiv(this)">Report</a></span></div><p class="font-weight-normal">{{ reply.created_on|myfunc }}</p></div>{{ reply.body | safe | linebreaks }}</div>{% else %}<div class="reply ml-5" data-aos="fade-left" data-aos-offset="300" ><p class=" font-weight-bold" style="color: #002657;">This reply no longer exist as it is considered dangerous to the mental and psychological health of members of this community</p></div>{% endif %}{% endfor %}</div>'
 							);
 							// commentContainer.insertAdjacentHTML(
 							// 	'beforeEnd',
@@ -1439,12 +1407,19 @@
 							if (decodeURIComponent($("#comment-form")
 									.serialize()
 									.split('body=')[1].split('&action')[0]
-								) != '') {
+								) === '') {
 								form.removeChild(document.getElementById(
 									'comment-button'));
 								form.insertAdjacentHTML('beforeEnd',
 									'<button class="btn btn-primary btn-lg comment-button" id="comment-button" type="submit">Submit</button>'
 								);
+								alert(
+									"The comment form you attempted to submit is empty"
+									)
+							} else {
+								alert(
+									"Sorry, you have to be logged in to submit comments"
+									)
 							}
 
 						}
@@ -1513,17 +1488,9 @@
 							console.log(reply_body);
 							commentContainer.insertAdjacentHTML(
 								'beforeEnd',
-								'<div class="reply ml-5"><div class="reply-info font-weight-bold"><div class="d-flex justify-content-between"><p class="replier">{{ request.user }}</p><span style="float: right;"><a class="font-weight-normal make-comment-report" id="reply-report-button_' +
+								'<div class="reply ml-5" data-aos="fade-left" data-aos-offset="300" ><div class="reply-info font-weight-bold"><div class="d-flex justify-content-between"><p class="replier">{{ request.user }}</p><span style="float: right;"><a class="font-weight-normal make-comment-report" id="reply-report-button_' +
 								newReplyId +
-								'" href="javascript:alert(\'Please refresh this page on your browser to report your newly submitted reply.\')">Report</a></span><div class="report-div" id="reply-report-div' +
-								newReplyId +
-								'"><div class="report-popup"><form id="report-form' +
-								newReplyId +
-								'" class="report-form" method="post" name="rep-form" value="' +
-								newReplyId +
-								'">{% csrf_token %}<div class="form-group report-types align-self-center"><h5 class="font-weight-bold m-auto text-white">Select report type</h5><i onclick="controlReportDiv();" class="text-white cursor-pointer bi bi-x" style="font-size: 40px;"></i><ul class="d-flex flex-wrap" data-catid="' +
-								newReplyId +
-								'" targ="reply"><li class="rt" value="nudity"><a class="confirm-report" state="1" href="javascript:void(0);">Nudity</a></li><li class="rt" value="sexual harrasment"><a class="confirm-report" state="1" href="javascript:void(0);">Sexual Harrasment</a></li><li class="rt" value="false information"><a class="confirm-report" state="1" href="javascript:void(0);">False Information</a></li><li class="rt" value="racism"><a class="confirm-report" state="1" href="javascript:void(0);">Racism</a></li><li class="rt" value="spam"><a class="confirm-report" state="1" href="javascript:void(0);">It\'s spam</a></li><li class="rt" value="hate speech or symbols"><a class="confirm-report" state="1" href="javascript:void(0);">Hate speech or symbols</a></li><li class="rt" value="bullying"><a class="confirm-report" state="1" href="javascript:void(0);">Bullying</a></li><li class="rt" value="scam or fraud"><a class="confirm-report" state="1" href="javascript:void(0);">Scam or fraud</a></li><li class="rt" value="violence"><a class="confirm-report" state="1" href="javascript:void(0);">Violence</a></li><li class="rt" value="sale of illegal or regulated goods"><a class="confirm-report" state="1" href="javascript:void(0);">Sale of illegal or regulated goods</a></li></ul></div></form></div></div></div><p class="font-weight-normal">' +
+								'" href="javascript:alert(\'Please refresh this page on your browser to report your newly submitted reply.\')">Report</a></span></div><p class="font-weight-normal">' +
 								ctime + '</p></div>' + reply_body + '</div>');
 							// commentContainer.insertAdjacentHTML(
 							// 	'beforeEnd',
@@ -1540,13 +1507,20 @@
 							if (decodeURIComponent($('#' + formId)
 									.serialize().split(
 										'body=')[1].split('&parent_id')[0]
-								) != '') {
+								) === '') {
 								replyForm.removeChild(replyForm
 									.lastElementChild);
 								replyForm.insertAdjacentHTML('beforeEnd',
 									'<button class="btn btn-primary btn-lg reply-button" id="reply-button' +
 									parentId + '" ' +
 									'type="submit">Submit</button>');
+								alert(
+									"The reply form you attempted to submit is empty"
+									)
+							} else {
+								alert(
+									"Sorry, you have to be logged in to submit replies"
+									)
 							}
 
 						}
