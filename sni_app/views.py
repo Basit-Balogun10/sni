@@ -10,9 +10,19 @@ def home(request):
     # return HttpResponse('View is working')
 
 
+def about(request):
+    return render(request, 'sni_app/about.html')
+    # return HttpResponse('Organizer View is working')
+
+
 def organizer(request):
     return render(request, 'sni_app/organizer.html')
     # return HttpResponse('Organizer View is working')
+
+
+# def synergy_hub(request):
+#     return render(request, 'sni_app/synergy_hub.html')
+#     # return HttpResponse('Schedule View is working')
 
 
 def schedule(request):

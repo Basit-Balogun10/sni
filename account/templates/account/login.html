@@ -3,7 +3,7 @@
 
 {% block content %}
 
-<style type="text/css">
+<!-- <style type="text/css">
   .form-signin {
     width: 100%;
     max-width: 330px;
@@ -35,43 +35,55 @@
     text-align: center;
   }
 
-</style>
+</style> -->
 
+<section class="ftco-section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-7 col-lg-5">
+        <div class="login-wrap">
+          <h3 class="text-center mb-4">Welcome</h3>
+          <form action="#" method="post" class="login-form">{% csrf_token %}
+            <div class="form-group mb-3">
+              <label class="label" for="email">Email Address</label>
+              <input type="text" name="email" id="inputEmail" class="form-control" value="{{login_form.initial.email}}" required>
+              <span class="icon fa fa-paper-plane-o"></span>
+            </div>
+            <div class="form-group mb-3">
+              <label class="label" for="password">Password</label>
+              <input type="password" name="password" id="inputPassword" class="form-control" value="{{login_form.initial.password}}" required>
+              <span toggle="#password" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+              <span class="icon fa fa-lock"></span>
+            </div>
+            {% for field in login_form %}
+            <p>
+                {% for error in field.errors %}
+            <p style="color: red; font-size: 15px;">{{ error }}</p>
+            {% endfor %}
+            </p>
+            {% endfor %}
+            {% if login_form.non_field_errors %}
+            <div style="color: red; font-size: 15px;">
+                <p>{{login_form.non_field_errors}}</p>
+            </div>
 
-<form class="form-signin" method="post">{% csrf_token %}
-    <div class="d-flex flex-column pb-3">
-        <img alt="Codignwithmitch logo image" class="img-fluid mx-auto d-block" height="72"
-             src="{% static 'codingwithmitch_logo.png' %}" width="72">
+            {% endif %}
+
+            <div class="form-group text-center">
+              <button type="submit" class="form-control btn sbmt submit px-3">Log In</button>
+            </div>
+          </form>
+          <div class="d-flex flex-column">
+          </div>
+          <div class="footer text-center">
+            <a class="m-auto" href="{% url 'password_reset' %}">Reset password</a>
+            <p>Yet to own an account? <a data-toggle="tab" href="{% url 'register' %}">Sign Up</a></p>
+          </div>
+        </div>
+      </div>
     </div>
-
-    <h1 class="h3 mb-3 font-weight-normal">Login</h1>
-
-    <input autofocus class="form-control" id="inputEmail" name="email" placeholder="Email address" required
-           type="email">
-
-    <input class="form-control" id="inputPassword" name="password" placeholder="Password" required type="password">
-
-    {% for field in login_form %}
-    <p>
-        {% for error in field.errors %}
-    <p style="color: red">{{ error }}</p>
-    {% endfor %}
-    </p>
-    {% endfor %}
-    {% if login_form.non_field_errors %}
-    <div style="color: red">
-        <p>{{login_form.non_field_errors}}</p>
-    </div>
-
-    {% endif %}
-
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
-
-</form>
-
-<div class="d-flex flex-column">
-    <a class="m-auto" href="{% url 'password_reset' %}">Reset password</a>
-</div>
+  </div>
+</section>
 
 
 {% endblock content %}

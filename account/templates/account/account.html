@@ -4,7 +4,7 @@
 
 {% block content %}
 
-<style type="text/css">
+<!-- <style type="text/css">
   .form-signin {
     width: 100%;
     max-width: 330px;
@@ -42,49 +42,7 @@
     margin: 20px auto 20px auto;
   }
 
-</style>
-
-
-<form class="form-signin" method="post">{% csrf_token %}
-
-    <h1 class="h3 mb-3 font-weight-normal">Account</h1>
-
-    <input autofocus class="form-control" id="inputEmail" name="email" placeholder="Email address" required type="email"
-           value={{account_form.initial.email}}>
-
-    <input class="form-control" id="inputUsername" name="username" placeholder="Username" required type="text"
-           value="{{account_form.initial.username}}">
-
-    <input class="form-control" id="inputFirstname" name="firstname" placeholder="First name" type="text" value={{account_form.initial.firstname}}>
-
-    <input class="form-control" id="inputLastname" name="lastname" placeholder="Last name" type="text"
-           value="{{account_form.initial.lastname}}">
-
-    {% for field in account_form %}
-    <p>
-        {% for error in field.errors %}
-    <p style="color: red">{{ error }}</p>
-    {% endfor %}
-    </p>
-    {% endfor %}
-    {% if account_form.non_field_errors %}
-    <div style="color: red">
-        <p>{{account_form.non_field_errors}}</p>
-    </div>
-
-    {% endif %}
-
-    {% if success_message %}
-    <p style="color:green; text-align: center;">{{success_message}}</p>
-    {% endif %}
-
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Save changes</button>
-
-</form>
-
-<div class="d-flex flex-column">
-    <a class="m-auto" href="{% url 'password_change' %}">Change password</a>
-</div>
+</style> -->
 
 <!-- <div class="container mt-4 p-4">
     <div class="row">
@@ -101,12 +59,65 @@
                 {% endfor %}
             </ul>
             {% else %}
-            <p>You have no blog posts. Create a post <a href="{% url 'blog:create' %}">here</a>.</p>
             {% endif %}
         </div>
     </div>
 </div> -->
+<section class="ftco-section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-7 col-lg-5">
+        <div class="login-wrap">
+          <h3 class="text-center mb-4">Account Details</h3>
+          <form method="post" class="account-edit-form">{% csrf_token %}
+            <div class="form-group mb-3">
+              <label class="label" for="email">Email Address</label>
+              <input type="text" name="email" id="inputEmail" class="form-control" value="{{account_form.initial.email}}" required>
+              <span class="icon fa fa-paper-plane-o"></span>
+            </div>
+            <div class="form-group mb-3">
+              <label class="label" for="name">First Name</label>
+              <input type="text" name="firstname" id="inputFirstName" class="form-control" value="{{account_form.initial.firstname}}" required>
+              <span class="icon fa fa-user-o"></span>
+            </div>
+            <div class="form-group mb-3">
+              <label class="label" for="name">Last Name</label>
+              <input type="text" name="lastname" id="inputLastName" class="form-control" value="{{account_form.initial.lastname}}" required>
+              <span class="icon fa fa-user-o"></span>
+            </div>
+            <div class="form-group mb-3">
+              <label class="label" for="name">Username</label>
+              <input type="text" name="username" id="inputUsername" class="form-control" value="{{account_form.initial.username}}" required>
+              <span class="icon fa fa-user-o"></span>
+            </div>
+            {% for field in account_form %}
+            <p>
+                {% for error in field.errors %}
+            <p style="color: red; font-size: 15px;">{{ error }}</p>
+            {% endfor %}
+            </p>
+            {% endfor %}
+            {% if account_form.non_field_errors %}
+            <div style="color: red; font-size: 15px;">
+                <p>{{account_form.non_field_errors}}</p>
+            </div>
 
+            {% endif %}
+
+            <div class="form-group text-center">
+              <button type="submit" class="form-control btn sbmt submit px-3">Save Changes</button>
+            </div>
+
+            <div class="misc d-flex flex-column">
+              <a class="m-auto" href="{% url 'password_change' %}">Change password</a>
+          </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 {% endblock content %}
 

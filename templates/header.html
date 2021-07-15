@@ -1,65 +1,115 @@
 {% load static %}
-<header id="header">
-    <nav id="navBar">
-        <div class="wrapper" id="nav-wrapper">
-            <a href="/"><img alt="SNI-Logo" height="69.47" id="logo"
-                    src="{% static 'sni_app/images/SNI-Logo-Transparent-1536x368.png' %}" width="290"></a>
-            <ul class="navigation" id="myTopnav">
-                <li class="route"><a href="/" title="Go To The Home Page">Home</a></li>
-                <li class="route"><a href="{% url 'blog:home' %}" title="">Blog</a></li>
-                <li class="route"><a href="{% url 'sni_app:schedule' %}">Schedule</a></li>
-                <li class="route"><a href="{% url 'sni_app:speakers' %}">Speakers</a></li>
-                <li class="route"><a href="{% url 'sni_app:organizer' %}">Organizer</a></li>
-                <li class="route"><a href="{% url 'sni_app:venue' %}">Venue</a></li>
-                <li class="route"><a href="{% url 'sni_app:sponsors' %}">Sponsors</a></li>
-            </ul>
-            <a class="icon" href="javascript:void(0);" id="dropdownIcon" onclick="routesDisplay()"><i
-                    class="fas fa-bars fa-5x"></i></a>
+<header id="header" class="fixed-top">
+    <div class="container d-flex justify-content-around">
+        <a class="full-logo" sytle="max-width: 270px" href="/"
+            ><img
+                alt="SNI-Logo"
+                height="69.47"
+                id="logo"
+                src="{% static 'sni_app/images/SNI-Logo-Transparent-1536x368.png' %}"
+                width="270"
+        /></a>
+        <a class="cropped-logo" href="/"
+            ><img
+                alt="SNI-Logo"
+                id="logo"
+                src="{% static 'sni_app/images/SNI-Logo-cropped.png' %}"
+        /></a>
+        <!-- <h1 class="logo me-auto"><a href="index.html">Mentor</a></h1> -->
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
-            <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 border-bottom shadow-sm"
-                id="blog-nav-container">
-                {% comment %}
-                <h5 class="my-0 mr-md-auto font-weight-normal">
-
-                    {% if request.user.is_authenticated %}
-                    <p class="m-auto" id="greeting">Hello, {{request.user.username}}</p>
-                    {% endif %}
-                </h5>
-                {% endcomment %}
-                {% comment %}
-                <nav class="my-2 my-md-0 mr-md-3" id="blog-nav">
-                    {% if request.user.is_authenticated %}
-                    {% comment %} <a class="p-2" href="{% url 'home' %}">Home</a> {% endcomment %}
-                    {% comment %} <a class="p-2" href="{% url 'account' %}">Account</a>
-                    <a class="p-2" href="{% url 'logout' %}">Logout</a>
-                    {% else %}
-                    {% comment %} <a class="p-2" href="{% url 'home' %}">Home</a>
-                    <a class="p-2" href="{% url 'login' %}">Login</a>
-                    <a class="btn btn-outline-primary" href="{% url 'register' %}">Sign Up</a>
-                    {% endif %}
-                </nav>
-                {% endcomment %}
-            </div>
-
-            <ul class="auth">
-                {% if request.user.is_authenticated %}
-                {% comment %} <a class="p-2" href="{% url 'home' %}">Home</a> {% endcomment %}
-                {% comment %} <a class="p-2" href="{% url 'account' %}">Account</a> {% endcomment %}
-                <li class="greeting">
-                    <p class="m-auto" id="greeting">Hello, {{request.user.username}}</p>
+        <nav id="navbar" class="navbar order-last order-lg-0">
+            <ul>
+                <li class="route">
+                    <a href="/" title="Go To The Home Page">Home</a>
                 </li>
-                <li><a class="auth" href="{% url 'account' %}">Account</a></li>
-                <li><a class="auth" href="{% url 'logout' %}">Logout</a></li>
-                {% else %}
-                {% comment %} <a class="p-2" href="{% url 'home' %}">Home</a> {% endcomment %}
-                <li><a class="auth" href="{% url 'login' %}">Login</a></li>
-                <li><a class="auth" href="{% url 'register' %}">Sign Up</a></li>
-                {% endif %}
+                <li class="route">
+                    <a href="{% url 'sni_app:about' %}" title="">About</a>
+                </li>
+                <li class="route">
+                    <a href="{% url 'blog:home' %}" title="">Blog</a>
+                </li>
+                <li class="route">
+                    <a href="{% url 'sni_app:organizer' %}">Organizer</a>
+                </li>
+                <li class="route">
+                    <a href="{% url 'sni_app:speakers' %}">Speakers</a>
+                </li>
+                <li class="route">
+                    <a href="{% url 'sni_app:sponsors' %}">Sponsors</a>
+                </li>
+                <li class="dropdown">
+                    <a class="route" href="#"
+                        ><span>Authentication </span>
+                        <i class="bi bi-chevron-down"></i
+                    ></a>
+                    <ul>
+                        {% if request.user.is_authenticated %}
+                        <!-- <p class="m-auto" id="greeting">Hello, {{request.user.username}}</p> -->
+                        <li><a href="{% url 'logout' %}">Logout</a></li>
+                        > {% else %}
+                        <li><a href="{% url 'login' %}">Login</a></li>
+                        <li><a href="{% url 'register' %}">Signup</a></li>
+                        {% endif %}
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="route" href="#"
+                        ><span>Events </span> <i class="bi bi-chevron-down"></i
+                    ></a>
+                    <ul>
+                        <li><a href="#">Model United Nations (MUN)</a></li>
+                        <li><a href="#">Sustainbility Conference</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="route" href="#"
+                        ><span>My Account </span>
+                        <i class="bi bi-chevron-down"></i
+                    ></a>
+                    <ul>
+                        {% if request.user.is_authenticated %}
+                        <li style="color: white">
+                            <p style="font-size: 15px">
+                                <i
+                                    style="color: #c582eb; margin-left: 10%"
+                                    class="bx bx-user"
+                                ></i
+                                >{{request.user.username}}
+                            </p>
+                        </li>
+                        <li>
+                            <a href="{% url 'account' %}"
+                                >Edit Account Details</a
+                            >
+                        </li>
+                        {% else %}
+                        <li>
+                            <p
+                                style="
+                                    color: white;
+                                    font-weight: bold;
+                                    font-size: 15px;
+                                "
+                            >
+                                YOU'RE NOT LOGGED IN
+                            </p>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </li>
+                <li class="route">
+                    <a href="{% url 'sni_app:schedule' %}">Schedule</a>
+                </li>
+                <li class="route">
+                    <a href="{% url 'sni_app:venue' %}">Venue</a>
+                </li>
             </ul>
-        </div>
-
-
-        <div class="clear"></div>
-    </nav>
+            <!-- <i class="fas fa-bars fa-3x mobile-nav-toggle"></i> -->
+            <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav>
+        <!-- .navbar -->
+    </div>
 </header>
 <!-- c:/Users/acer/Documents/PycharmProjects/pythonProject/venv/Scripts/activate.bat -->

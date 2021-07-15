@@ -66,6 +66,3 @@ urlpatterns = [
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-# Todo: Give images a fixed size
-# FixMe: When a user posts, and navigates to the previous page, to repost the same posted he/she just posted: Integrity error is returned

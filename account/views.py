@@ -6,7 +6,11 @@ from blog.models import BlogPost
 
 
 def registration_view(request):
+    user = request.user
+    if user.is_authenticated:
+        return redirect("sni_app:sni_home")
     context = {}
+
     if request.method == "POST":
         form = RegistrationForm(request.POST)
         if form.is_valid():
@@ -17,11 +21,27 @@ def registration_view(request):
             login(request, account)
             return redirect('blog:home')
         else:
+            print('failed')
+            form.initial = {
+                "email": request.POST.get('email'),
+                "username": request.POST.get('username'),
+                "password1": request.POST.get('password1'),
+                "password2": request.POST.get('password2'),
+                "firstname": request.POST.get('firstname'),
+                "lastname": request.POST.get('lastname'),
+            }
+            print(request.POST.get('email'))
+            print(request.POST.get('username'))
+            print(request.POST.get('password1'))
+            print(request.POST.get('password2'))
+            print(request.POST.get('firstname'))
+            print(request.POST.get('lastname'))
             context['registration_form'] = form
-
+            
     else:
         form = RegistrationForm()
         context['registration_form'] = form
+
     return render(request, 'account/register.html', context)
 
 
@@ -35,7 +55,7 @@ def login_view(request):
 
     user = request.user
     if user.is_authenticated:
-        return redirect("blog:home")
+        return redirect("sni_app:sni_home")
 
     if request.method == "POST":
         form = AccountAuthenticationForm(request.POST)
@@ -43,10 +63,14 @@ def login_view(request):
             email = request.POST['email']
             password = request.POST['password']
             user = authenticate(email=email, password=password)
-
             if user:
                 login(request, user)
                 return redirect("/")
+        else:
+            form.initial = {
+                "email": request.POST.get('email'),
+                "password": request.POST.get('password')
+            }
 
     else:
         form = AccountAuthenticationForm()
@@ -105,4 +129,7 @@ def account_view(request):
 
 
 def must_authenticate_view(request):
+    user = request.user
+    if user.is_authenticated:
+        return redirect("sni_app:sni_home")
     return render(request, 'account/must_authenticate.html', {})
