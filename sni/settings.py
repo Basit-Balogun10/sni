@@ -31,8 +31,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'sni.world', 'www.sni.world']
 
-if DEBUG:
-    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # During development only
+# if DEBUG:
+#     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # During development only
 
 # Application definition
 
@@ -227,3 +227,18 @@ MEDIA_ROOT = BASE_DIR / 'media_cdn'
 # STATIC_URL = 'https://%s/%s/' % (AWS_S3_ENDPOINT_URL, AWS_LOCATION)
 # STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 # DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'workemail1086@gmail.com'
+EMAIL_HOST_PASSWORD = 'yhrthlqvmvugwcfd'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+# EMAIL_HOST = 'smtp.sendgrid.net'
+# EMAIL_HOST_USER = 'apikey'
+# EMAIL_HOST_PASSWORD = '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'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
