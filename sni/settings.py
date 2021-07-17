@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
-# from decouple import config
+from decouple import config
 from pathlib import Path
 import os
 
@@ -22,14 +22,13 @@ TEMPLATE_DIR = BASE_DIR / 'templates'
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'zkeh2o32!chn^=+lgz8!7^x-+1izt83)dtey+lh7z5b$pru8&l'
-# SECRET_KEY = config('SECRET_KEY')
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 # DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'sni.world', 'www.sni.world']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 # if DEBUG:
 #     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # During development only
@@ -199,46 +198,11 @@ STATIC_ROOT = BASE_DIR / 'static_cdn'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media_cdn'
-# print(MEDIA_ROOT)
-
-# # TINYMCE_JS_URL = os.path.join(MEDIA_ROOT, "js/tiny_mce/tiny_mce.js")
-# TINYMCE_JS_URL = os.path.join(MEDIA_ROOT, "js/tiny_mce/tiny_mce.js")
-# print(TINYMCE_JS_URL)
-# TINYMCE_JS_ROOT = os.path.join(MEDIA_ROOT, "js/tiny_mce")
-# TINYMCE_DEFAULT_CONFIG = {
-#     'plugins': "table,spellchecker,paste,searchreplace",
-#     'theme': "advanced",
-#     'cleanup_on_startup': True,
-#     'custom_undo_redo_levels': 10,
-# }
-
-
-# AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
-# AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
-# AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
-# AWS_S3_ENDPOINT_URL = config('AWS_S3_ENDPOINT_URL')
-# AWS_S3_OBJECT_PARAMETERS = {
-#     'CacheControl': 'max-age=86400',
-# }
-# AWS_LOCATION = config('AWS_LOCATION')
-
-
-# STATICFILES_DIRS = (BASE_DIR / 'static',)
-# STATIC_URL = 'https://%s/%s/' % (AWS_S3_ENDPOINT_URL, AWS_LOCATION)
-# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'workemail1086@gmail.com'
-EMAIL_HOST_PASSWORD = 'yhrthlqvmvugwcfd'
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-
-# EMAIL_HOST = 'smtp.sendgrid.net'
-# EMAIL_HOST_USER = 'apikey'
-# EMAIL_HOST_PASSWORD = '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'
-# EMAIL_PORT = 587
-# EMAIL_USE_TLS = True
