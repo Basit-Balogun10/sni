@@ -76,72 +76,33 @@ function controlReportDiv(object = null) {
         reportForm.id = "report-form";
         reportForm.setAttribute("value", objectId);
     }
-    // if (object) {
-    //     var reportDiv;
-    //     let objectId = object.id.split("_")[1];
-    //     if (object.id.includes("comment")) {
-    //         reportDiv = document.getElementById(
-    //             "comment-report-div" + objectId
-    //         );
-    //     } else if (object.id.includes("reply")) {
-    //         reportDiv = document.getElementById("reply-report-div" + objectId);
-    //     }
-    //     console.log(reportDiv);
-    //     reportDiv.style.display = "block";
-    //     reportDiv.classList.toggle("active-div");
-    //     console.log(reportDiv.classList);
-    // } else {
-    //     let reportDivs = select(".report-div", true);
-    //     reportDivs.forEach((reportDiv) => {
-    //         reportDiv.style.display = "none";
-    //         if (reportDiv.className.split(" ").includes("active-div")) {
-    //             reportDiv.classList.toggle("active-div");
-    //         }
-    //     });
-    // }
-    // if (reportDiv.className.split(" ").includes("active-div")) {
-    //     reportDiv.style.display = "none";
-    // } else {
-    //     reportDiv.classList.toggle("active-div");
-    // }
 }
 
 function replyComment(object) {
-    // rd = document.getElementById()
-    // object.insertAdjacentHTML('')
     if (
         document.getElementById("reply-div" + object.id.split("_")[1]).style
             .display === "none"
     ) {
-        // console.log("it's none");
         replyButtons = document.getElementsByClassName("show-reply-form");
         for (var button = 0; button < replyButtons.length; button++) {
             let id = replyButtons[button].id.split("_")[1];
             let replyDiv = document.getElementById("reply-div" + id);
-            // console.log(button);
-            // console.log(replyButtons[button].nextElementSibling);
-            // console.log(replyButtons[button].nextElementSibling.style.display);
             if (replyDiv.style.display === "block") {
                 console.log("one is block");
 
                 replyDiv.style.display = "none";
                 break;
             }
-            // console.log(replyButtons[button].nextElementSibling);
-            // console.log(replyButtons[button].nextElementSibling.style.display);
         }
         let objectId = object.id.split("_")[1];
         let div = (document.getElementById(
             "reply-div" + objectId
         ).style.display = "block");
-        // console.log("now block");
-        // console.log(typeof replyDiv.style.display);
     } else {
         let objectId = object.id.split("_")[1];
         let div = (document.getElementById(
             "reply-div" + objectId
         ).style.display = "none");
-        // console.log("now none");
     }
 }
 

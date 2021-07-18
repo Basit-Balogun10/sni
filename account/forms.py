@@ -55,19 +55,9 @@ class AccountUpdateForm(forms.ModelForm):
 	
 	def clean_firstname(self):
 		firstname = self.cleaned_data['firstname']
-		# try:
-		# 	account = Account.objects.exclude(pk=self.instance.pk).get(firstname=firstname)
-		# except Account.DoesNotExist:
-		# 	return firstname
-		# raise forms.ValidationError('First name "%s" is already in use.' % firstname)
 		return firstname
 	
 	
 	def clean_lastname(self):
 		lastname = self.cleaned_data['lastname']
-		# try:
-		# 	account = Account.objects.exclude(pk=self.instance.pk).get(lastname=lastname)
-		# except Account.DoesNotExist:
-		# 	return lastname
-		# raise forms.ValidationError('Last name "%s" is already in use.' % lastname)
 		return lastname

@@ -19,11 +19,6 @@ def get_trending(*args):
     return ''.join(map(str, args))
 
 
-# @register.simple_tag
-# def sum_up(*args):
-#     return sum(args)
-
-
 @register.simple_tag
 def assign(string):
     assignment = string
@@ -56,9 +51,6 @@ def full_datetime(arg):
 
 @register.filter
 def get_time(arg):
-    print(datetime.now())
-
-    print(myfunc(datetime.now()))
     return datetime.now()
 
 
@@ -80,5 +72,4 @@ def get_color(arg):
 @register.filter
 def get_text(arg):
     soup = BeautifulSoup(arg, features="lxml")
-    print(soup.get_text())
     return soup.get_text()

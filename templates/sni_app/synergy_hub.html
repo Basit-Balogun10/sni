@@ -4,7 +4,7 @@
 
 
 <head>
-    <title>Home - Synergy Network International</title>
+    <title>Synergy Hub - Synergy Network International</title>
     {% include "snippets/head_snippet.html" %}
 </head>
 
@@ -12,16 +12,22 @@
     {% include "header.html" %}
 
     <main id="main">
-        <section id="hero" style="background-image: url('{% static '/sni_app/images/Hero-Home-page-new.png' %}');" class="
+        <section id="hero" style="background-image: url('{% static '/sni_app/images/Hero-Home-page-new.png' %}');"
+            class="
             d-flex justify-content-center align-items-center">
             <div class="container position-relative" data-aos="zoom-in" data-aos-delay="100">
                 <h1 class="text-center">All you need to know about our mentoring service...</h1>
             </div>
         </section>
         {% if request.user.is_authenticated %}
-        <a href="https://www.picktime.com/e7368b8f-4b85-4a19-aa69-986d92bd07f4" class="ptbkbtn" target="_blank" style="position: fixed;right: 0px;top: 50%;margin-top: -90px;float:none;z-index: 9999999"><img border="none" src="https://www.picktime.com/bookingPage/img/picktime-book-online-right.png" alt="Book an appointment with PT Sample Company"/></a>
+        <a href="https://www.picktime.com/e7368b8f-4b85-4a19-aa69-986d92bd07f4" class="ptbkbtn" target="_blank"
+            style="position: fixed;right: 0px;top: 50%;margin-top: -90px;float:none;z-index: 9999999"><img border="none"
+                src="https://www.picktime.com/bookingPage/img/picktime-book-online-right.png"
+                alt="Book an appointment with PT Sample Company" /></a>
         {% else %}
-        <a class="more-btn" style="float:none; position: fixed; background: white; border: 1px solid white; right: -87px; top: 50%; display: block; z-index: 20000; transform: rotate(270deg)" href="{% url 'login' %}">Book Now (Log In Required)</a>
+        <a class="more-btn"
+            style="float:none; position: fixed; background: white; border: 1px solid white; right: -87px; top: 50%; display: block; z-index: 20000; transform: rotate(270deg)"
+            href="{% url 'login' %}">Book Now (Log In Required)</a>
         {% endif %}
 
         <section id="synergy-hub" class="synergy-hub">
@@ -63,11 +69,14 @@
                                                     teams virtually</li>
                                                 <li><i class="bi bi-check-circle"></i> Process chart & work-flow
                                                     creation (online versions)</li>
-                                                <li><i class="bi bi-check-circle"></i> Creating an organizational culture that supersedes ‘artificial-ness’ &
-formalities of online communication</li>
-                                                <li><i class="bi bi-check-circle"></i> How to attract your target audience to an online event?</li>
-                                                <li><i class="bi bi-check-circle"></i> How to foster individual accountability & keep motivation at a high?
-</li>
+                                                <li><i class="bi bi-check-circle"></i> Creating an organizational
+                                                    culture that supersedes ‘artificial-ness’ &
+                                                    formalities of online communication</li>
+                                                <li><i class="bi bi-check-circle"></i> How to attract your target
+                                                    audience to an online event?</li>
+                                                <li><i class="bi bi-check-circle"></i> How to foster individual
+                                                    accountability & keep motivation at a high?
+                                                </li>
                                             </ul>
                                         </p>
                                     </div>
@@ -84,15 +93,18 @@ formalities of online communication</li>
                                                     Organizational Culture</li>
                                                 <li><i class="bi bi-check-circle"></i> Organizational Design</li>
                                                 <li><i class="bi bi-check-circle"></i> Recruitment Management</li>
-                                                <li><i class="bi bi-check-circle"></i> Performance & Rewards Management Systems</li>
-                                                <li><i class="bi bi-check-circle"></i> Professional Development Mechanism (Training)</li>
-                                                <li><i class="bi bi-check-circle"></i> Dealing with different types of people & situations
-</li>
+                                                <li><i class="bi bi-check-circle"></i> Performance & Rewards Management
+                                                    Systems</li>
+                                                <li><i class="bi bi-check-circle"></i> Professional Development
+                                                    Mechanism (Training)</li>
+                                                <li><i class="bi bi-check-circle"></i> Dealing with different types of
+                                                    people & situations
+                                                </li>
                                             </ul>
                                         </p>
                                     </div>
                                 </div>
-                                
+
                                 <div class="col-xl-12 d-flex align-items-stretch stretch-mod" data-aos="fade-left">
                                     <div class="service hub mt-4 mt-xl-0">
                                         <div class="head">
@@ -107,7 +119,8 @@ formalities of online communication</li>
                                                     journey)</li>
                                                 <li><i class="bi bi-check-circle"></i> Leadership vs. Management, &
                                                     followers (exploration journey)</li>
-                                                <li><i class="bi bi-check-circle"></i> Starting your leadership discovery journey</li>
+                                                <li><i class="bi bi-check-circle"></i> Starting your leadership
+                                                    discovery journey</li>
                                             </ul>
                                         </p>
                                     </div>
@@ -122,41 +135,54 @@ formalities of online communication</li>
                                         <p>
                                             <ul class="mentors">
                                                 <li class="mentor">
-                                                   <h2><i class="bi bi-check-circle"></i> Marwan Al Lamki</h2>
-                                                   <ul class="mentor-profile">
-                                                        <li> Marwan is an IB Diploma Graduate and is currently in his second year of
-studying Law & Politics at the University of Edinburgh.</li>
-                                                        <li>Marwan’s leadership experience include being Vice President of Edinburgh's
-BAME Law Society in its founding year during 2019/2020, Forum & Content
-Manager at The Macmillan, Director of uniO-MUN at MUN Impact, as well as
-being the co-founder & Executive Director of External Affairs at SNI.</li>
-                                                        <li>Youngest Certified Human Resources Practitioner in Oman, was certified with a
-level-1 practitioner credential by OPAL (an leading Oil company in Oman), he
-was bestowed these credentials in August 2016, at the time he was aged 14.</li>
-                                                        <li>Former Director General of Online Model United Nations, the world's first Online
-Model UN debating organisation, where he oversaw O-MUN’s most challenging
-administrative period since it was established, leading him to ensure O-MUNs
-continuity during the pandemic.
-</li>
-                                                   </ul>
-                                                   
-                                                   <div class="times text-center"><h2>
-                                                       When is Marwan available?
-                                                   </h2>
-                                                   <ul>
-                                                        <li>
-                                                            <p>15:30- 16:00 UTC</p>
-                                                            <p>22:00- 22:30 UTC</p>
-                                                            <p>22:30- 23:00 UTC</p>
-                                                            <p>23:00- 23:30 UTC</p>
-                                                            <p>23:30- 24:00 UTC</p>
+                                                    <h2><i class="bi bi-check-circle"></i> Marwan Al Lamki</h2>
+                                                    <ul class="mentor-profile">
+                                                        <li> Marwan is an IB Diploma Graduate and is currently in his
+                                                            second year of
+                                                            studying Law & Politics at the University of Edinburgh.</li>
+                                                        <li>Marwan’s leadership experience include being Vice President
+                                                            of Edinburgh's
+                                                            BAME Law Society in its founding year during 2019/2020,
+                                                            Forum & Content
+                                                            Manager at The Macmillan, Director of uniO-MUN at MUN
+                                                            Impact, as well as
+                                                            being the co-founder & Executive Director of External
+                                                            Affairs at SNI.</li>
+                                                        <li>Youngest Certified Human Resources Practitioner in Oman, was
+                                                            certified with a
+                                                            level-1 practitioner credential by OPAL (an leading Oil
+                                                            company in Oman), he
+                                                            was bestowed these credentials in August 2016, at the time
+                                                            he was aged 14.</li>
+                                                        <li>Former Director General of Online Model United Nations, the
+                                                            world's first Online
+                                                            Model UN debating organisation, where he oversaw O-MUN’s
+                                                            most challenging
+                                                            administrative period since it was established, leading him
+                                                            to ensure O-MUNs
+                                                            continuity during the pandemic.
                                                         </li>
-                                                   </ul></div>
+                                                    </ul>
+
+                                                    <div class="times text-center">
+                                                        <h2>
+                                                            When is Marwan available?
+                                                        </h2>
+                                                        <ul>
+                                                            <li>
+                                                                <p>15:30- 16:00 UTC</p>
+                                                                <p>22:00- 22:30 UTC</p>
+                                                                <p>22:30- 23:00 UTC</p>
+                                                                <p>23:00- 23:30 UTC</p>
+                                                                <p>23:30- 24:00 UTC</p>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
                                                 </li>
 
                                                 <li class="mentor">
                                                     <h2><i class="bi bi-check-circle"></i> Tovia Woods</h2>
-                                                   <ul class="mentor-profile">
+                                                    <ul class="mentor-profile">
                                                         <li>Leadership Traits (exploration
                                                             journey)</li>
                                                         <li>Types of Leadership (exploration
@@ -164,20 +190,22 @@ continuity during the pandemic.
                                                         <li>Leadership vs. Management, &
                                                             followers (exploration journey)</li>
                                                         <li>Starting your leadership discovery journey</li>
-                                                   </ul>
+                                                    </ul>
 
-                                                   <div class="times text-center"><h2>
-                                                       When is Tovia available?
-                                                   </h2>
-                                                   <ul>
-                                                        <li>
-                                                            <p>15:30- 16:00 UTC</p>
-                                                            <p>22:00- 22:30 UTC</p>
-                                                            <p>22:30- 23:00 UTC</p>
-                                                            <p>23:00- 23:30 UTC</p>
-                                                            <p>23:30- 24:00 UTC</p>
-                                                        </li>
-                                                   </ul></div>
+                                                    <div class="times text-center">
+                                                        <h2>
+                                                            When is Tovia available?
+                                                        </h2>
+                                                        <ul>
+                                                            <li>
+                                                                <p>15:30- 16:00 UTC</p>
+                                                                <p>22:00- 22:30 UTC</p>
+                                                                <p>22:30- 23:00 UTC</p>
+                                                                <p>23:00- 23:30 UTC</p>
+                                                                <p>23:30- 24:00 UTC</p>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
                                                 </li>
                                             </ul>
                                         </p>
@@ -188,9 +216,12 @@ continuity during the pandemic.
                                     <div class="service hub mt-4 mt-xl-0">
                                         <div class="head">
                                             <h4>Do You Want to Join the Discussion?</h2>
-                                            <p>
-                                                Easy! Create an account with us and login. Then book a session by filling in required the information in the window that pops up when you click the 'Book Now' button floating on the right side of your screen.
-                                            </p>
+                                                <p>
+                                                    Easy! Create an account with us and login. Then book a session by
+                                                    filling in required the information in the window that pops up when
+                                                    you click the 'Book Now' button floating on the right side of your
+                                                    screen.
+                                                </p>
                                         </div>
                                         <div class="text-center">
                                             <a href="{% url 'register' %}" class="more-btn">Sign Up
@@ -214,8 +245,10 @@ continuity during the pandemic.
     {% include "snippets/scripts_attachment.html" %}
     <!-- Picktime booking widget script -->
     <script>
-	!function(e,t,n,s,i,c){i=t.createElement(n),c=t.getElementsByTagName(n)[0],i.async=1,
-	i.src=s,c.parentNode.insertBefore(i,c)}(window,document,"script","https://www.picktime.com/assets/booking.js");
-	</script>
+        ! function (e, t, n, s, i, c) {
+            i = t.createElement(n), c = t.getElementsByTagName(n)[0], i.async = 1,
+                i.src = s, c.parentNode.insertBefore(i, c)
+        }(window, document, "script", "https://www.picktime.com/assets/booking.js");
+    </script>
     <!-- Picktime booking widget script ends -->
 </body>

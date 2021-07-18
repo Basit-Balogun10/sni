@@ -3,3 +3,4 @@ tinymce/
 store.txt
 workshop.py
 vendor/
+.env

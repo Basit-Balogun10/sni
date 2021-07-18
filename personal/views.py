@@ -20,22 +20,23 @@ def home_screen_view(request, *args, **kwargs):
 
     if request.method == "GET":
         if request.GET.get('posted-since'):
-            print(request.GET.get('posted-since'))
+            pass
+            # print(request.GET.get('posted-since'))
 
 
         elif request.GET.get('related-to'):
-            print(request.GET.get('related-to'))
+            # print(request.GET.get('related-to'))
             post_title = request.GET.get('related-to')
             related_posts = sorted(get_blog_queryset(post_title), key=attrgetter('date_updated'), reverse=True)
             blog_posts = related_posts
 
         elif request.GET.get('posts-from'):
-            print(request.GET.get('posts-from'))
+            # print(request.GET.get('posts-from'))
             author = request.GET.get('posts-from')
             blog_posts = get_author_posts(author)
 
         elif request.GET.get('time-filter') and not request.GET.get('category-filter'):
-            print('time only')
+            # print('time only')
             time_filter = request.GET.get('time-filter')
             context['time_filter'] = time_filter
             category_filter = request.GET.get('category-filter')
@@ -50,7 +51,7 @@ def home_screen_view(request, *args, **kwargs):
                 time_delta = timedelta(days=no_of_days)
 
             query = request.GET.get('q', '')
-            print("TIME-QUERY: ", query)
+            # print("TIME-QUERY: ", query)
             context['query'] = str(query)
             queryset = []
             # query = "and"
@@ -73,14 +74,14 @@ def home_screen_view(request, *args, **kwargs):
             blog_posts = sorted(raw_blog_posts, key=attrgetter('date_updated'), reverse=True)
 
         elif request.GET.get('category-filter') and not request.GET.get('time-filter'):
-            print('category only')
+            # print('category only')
             time_filter = request.GET.get('time-filter')
             context['time_filter'] = time_filter
             category_filter = request.GET.get('category-filter')
             context['category_filter'] = category_filter
 
             query = request.GET.get('q', '')
-            print("CAT-QUERY: ", query)
+            # print("CAT-QUERY: ", query)
             context['query'] = str(query)
             queryset = []
             # query = "and"
@@ -102,7 +103,7 @@ def home_screen_view(request, *args, **kwargs):
             blog_posts = sorted(raw_blog_posts, key=attrgetter('date_updated'), reverse=True)
 
         elif request.GET.get('time-filter') and request.GET.get('category-filter'):
-            print('time and category')
+            # print('time and category')
             time_filter = request.GET.get('time-filter')
             context['time_filter'] = time_filter.lower()
             category_filter = request.GET.get('category-filter')
@@ -114,7 +115,7 @@ def home_screen_view(request, *args, **kwargs):
             time_delta = timedelta(days=no_of_days)
 
             query = request.GET.get('q', '')
-            print("BOTH-QUERY: ", query)
+            # print("BOTH-QUERY: ", query)
             context['query'] = str(query)
             queryset = []
             # query = "and"
@@ -138,8 +139,8 @@ def home_screen_view(request, *args, **kwargs):
 
         else:
             query = request.GET.get('q', '')
-            print("QUERY ", query)
-            print(request.GET.get('test'))
+            # print("QUERY ", query)
+            # print(request.GET.get('test'))
             context['query'] = str(query)
             blog_posts = sorted(get_blog_queryset(query), key=attrgetter('date_updated'), reverse=True)
     else:

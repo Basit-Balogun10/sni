@@ -19,9 +19,8 @@ def registration_view(request):
             raw_password = form.cleaned_data.get('password1')
             account = authenticate(email=email, password=raw_password)
             login(request, account)
-            return redirect('blog:home')
+            return redirect('blog:index')
         else:
-            print('failed')
             form.initial = {
                 "email": request.POST.get('email'),
                 "username": request.POST.get('username'),
@@ -30,12 +29,6 @@ def registration_view(request):
                 "firstname": request.POST.get('firstname'),
                 "lastname": request.POST.get('lastname'),
             }
-            print(request.POST.get('email'))
-            print(request.POST.get('username'))
-            print(request.POST.get('password1'))
-            print(request.POST.get('password2'))
-            print(request.POST.get('firstname'))
-            print(request.POST.get('lastname'))
             context['registration_form'] = form
             
     else:
@@ -77,7 +70,6 @@ def login_view(request):
 
     context['login_form'] = form
 
-    # print(form)
     return render(request, "account/login.html", context)
 
 
@@ -96,18 +88,9 @@ def account_view(request):
                 "lastname": request.POST.get('lastname'),
             }
             form.save()
-            print('saved')
-            print(request.POST.get('email'))
-            print(request.POST.get('username'))
-            print(request.POST.get('firstname'))
-            print(request.POST.get('lastname'))
             context['success_message'] = "Updated"
         else:
-            print('failed')
-            print(request.POST.get('email'))
-            print(request.POST.get('username'))
-            print(request.POST.get('firstname'))
-            print(request.POST.get('lastname'))
+            pass
             
     else:
         form = AccountUpdateForm(

@@ -4,1047 +4,380 @@
 
 {% block content %}
 
-
-<style type="text/css">
-	html,
-	body {
-		background: linear-gradient(35deg, #002657, #c582eb);
-		overflow-x: hidden;
-	}
-
-	@media (max-width: 768px) {
-		.main-article {
-			margin: 5%;
-		}
-
-		img.post-img {
-			width: 100%;
-			height: 50vw;
-			margin-bottom: 20px;
-		}
-	}
-
-	@media (min-width: 769px) {
-		.main-article {
-			margin: 5% 15% 5% 15%;
-		}
-
-		img.post-img {
-			width: 100%;
-			height: 30vw;
-			margin-bottom: 40px;
-		}
-	}
-
-	.post-title {
-		text-align: center;
-		font-weight: bold;
-	}
-
-	.post-category {
-		margin-top: 10px;
-	}
-
-	.post-info {
-		color: #002657;
-		font-weight: bold;
-		border-bottom: 2px solid #002659;
-		margin-bottom: 10px;
-		text-align: center;
-	}
-
-	.post-header {
-		margin-bottom: 3rem;
-		color: #002657;
-		text-align: center;
-
-	}
-
-	.post-content {
-		color: white;
-		padding: 10px;
-	}
-
-	.comment-section {
-		margin-top: 10rem;
-		font-size: 1.6rem;
-	}
-
-	button.submit-comment {
-		color: #c582eb;
-		padding: 9px;
-		border-radius: 7px;
-		border: 2px solid #002657;
-		transition: background-color, border 1s;
-		cursor: pointer;
-		text-align: center;
-		font-size: 2.3rem;
-		margin-top: 10px;
-		background: #002657;
-	}
-
-	button.submit-comment:hover {
-		color: #002657;
-		background: #c582eb;
-		border: #c582eb;
-		padding: 9px;
-	}
-
-	span.info-head,
-	span.author {
-		color: white;
-	}
-
-	.author {
-		margin-top: 10px;
-		padding-left: 5px;
-	}
-
-	span.category {
-		color: #002657;
-		padding: 7px 14px;
-		margin-left: 1.2rem;
-		border-radius: 5px;
-	}
-
-	.commenter,
-	.replier {
-		color: #002657;
-	}
-
-	.comment-info,
-	.reply-info {
-		color: skyblue;
-	}
-
-	.show-reply-form,
-	.make-comment-report {
-		cursor: pointer;
-		transition: 0.3s ease-in-out all;
-		background: #002657;
-		padding: 7px;
-		border: 1px solid;
-		box-shadow: 0px 0px 10px #002657;
-		border-radius: 5px;
-	}
-
-	.show-reply-form:hover,
-	.make-comment-report:hover {
-		font-size: 17px;
-		color: #002657;
-		background: #c582eb;
-	}
-
-	.reply,
-	.comment {
-		border: 2px solid #4d4a91;
-		padding: 5px;
-		color: white;
-		border-radius: 10px;
-		background: #4d4a91;
-		margin-bottom: 2%;
-		box-shadow: 0px 0px 20px #002657;
-	}
-
-	.comment img {
-		max-height: 50vh;
-		max-width: 100%;
-	}
-
-	.reply-div {
-		display: none;
-	}
-
-	.head {
-		display: flex;
-		justify-content: center;
-		margin-top: 20px;
-	}
-
-	form {
-		text-align: center;
-	}
-
-	button.text {
-		cursor: pointer;
-		padding-top: 1.5rem;
-		border: 0.1rem solid #002657;
-		padding: 0.9rem;
-		text-align: center;
-		border-radius: 3rem;
-		background: #002657;
-		color: #c582eb;
-		font-weight: bold;
-		transition: 0.3s ease-in-out all;
-	}
-
-	button.text span {
-		color: skyblue;
-	}
-
-	button.text:hover {
-		background: #c582eb;
-		color: #002657;
-	}
-
-	.post-group {
-		display: flex;
-		justify-content: space-around;
-		flex-wrap: wrap;
-	}
-
-	.post-image {
-		width: 100%;
-		height: 100px;
-	}
-
-	.post-ttl {
-		color: white;
-	}
-
-	p.post-time {
-		color: #002657;
-		font-weight: bold;
-	}
-
-	p.post-author {
-		color: #91d9f7;
-	}
-
-	.card-item {
-		margin: auto;
-	}
-</style>
-
-{% comment %} <main>
-	{% concat_all blog_post.date_published.hour|stringformat:"i" '-' blog_post.date_published.minute|stringformat:"i" '-' blog_post.date_published.second|stringformat:"i" '-' blog_post.date_published.microsecond|stringformat:"i"  as blog_time_published %}
-	<section id="blog" class="blog">
-		<div class="container" data-aos="fade-up">
-
-			<div class="row">
-
-				<div class="col-lg-8 entries">
-
-					<article class="entry entry-single">
-
-						<div class="entry-img">
-							<img class="img-fluid" src="{{blog_post.image.url}}" alt="">
-						</div>
-
-						<h2 class="entry-title">
-							{{blog_post.title}}
-						</h2>
-
-						<div class="entry-meta">
-							<ul>
-								<li class="d-flex align-items-center"><i class="bi bi-person"></i>{{blog_post.author}}
-								</li>
-								{% if blog_post.date_published != blog_post.date_updated %}
-								<li class="d-flex align-items-center"><i class="bi bi-clock"></i>Date
-									Published:{{blog_post.date_published|myfunc}}</li>
-								<br>
-								<li class="d-flex align-items-center"><i class="bi bi-clock"></i>Date
-									Updated:{{blog_post.date_updated|myfunc}}</li>
-								{% else %}
-								<li class="d-flex align-items-center"><i class="bi bi-clock"></i>Date
-									Published:{{blog_post.date_published|myfunc}}</li>
-								{% endif %}
-								<li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a
-										href="blog-single.html">12 Comments</a></li>
-								<li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a
-										href="blog-single.html">12 Comments</a></li>
-								<li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a
-										href="blog-single.html">12 Comments</a></li>
-							</ul>
-						</div>
-
-						<div class="entry-content">
-							<p>
-								Similique neque nam consequuntur ad non maxime aliquam quas. Quibusdam animi
-								praesentium. Aliquam et laboriosam eius aut nostrum quidem aliquid dicta.
-								Et eveniet enim. Qui velit est ea dolorem doloremque deleniti aperiam unde soluta. Est
-								cum et quod quos aut ut et sit sunt. Voluptate porro consequatur assumenda perferendis
-								dolore.
-							</p>
-
-							<p>
-								Sit repellat hic cupiditate hic ut nemo. Quis nihil sunt non reiciendis. Sequi in
-								accusamus harum vel aspernatur. Excepturi numquam nihil cumque odio. Et voluptate
-								cupiditate.
-							</p>
-
-							<blockquote>
-								<p>
-									Et vero doloremque tempore voluptatem ratione vel aut. Deleniti sunt animi aut. Aut
-									eos aliquam doloribus minus autem quos.
-								</p>
-							</blockquote>
-
-							<p>
-								Sed quo laboriosam qui architecto. Occaecati repellendus omnis dicta inventore tempore
-								provident voluptas mollitia aliquid. Id repellendus quia. Asperiores nihil magni dicta
-								est suscipit perspiciatis. Voluptate ex rerum assumenda dolores nihil quaerat.
-								Dolor porro tempora et quibusdam voluptas. Beatae aut at ad qui tempore corrupti velit
-								quisquam rerum. Omnis dolorum exercitationem harum qui qui blanditiis neque.
-								Iusto autem itaque. Repudiandae hic quae aspernatur ea neque qui. Architecto voluptatem
-								magni. Vel magnam quod et tempora deleniti error rerum nihil tempora.
-							</p>
-
-							<h3>Et quae iure vel ut odit alias.</h3>
-							<p>
-								Officiis animi maxime nulla quo et harum eum quis a. Sit hic in qui quos fugit ut rerum
-								atque. Optio provident dolores atque voluptatem rem excepturi molestiae qui. Voluptatem
-								laborum omnis ullam quibusdam perspiciatis nulla nostrum. Voluptatum est libero eum
-								nesciunt aliquid qui.
-								Quia et suscipit non sequi. Maxime sed odit. Beatae nesciunt nesciunt accusamus quia aut
-								ratione aspernatur dolor. Sint harum eveniet dicta exercitationem minima. Exercitationem
-								omnis asperiores natus aperiam dolor consequatur id ex sed. Quibusdam rerum dolores sint
-								consequatur quidem ea.
-								Beatae minima sunt libero soluta sapiente in rem assumenda. Et qui odit voluptatem. Cum
-								quibusdam voluptatem voluptatem accusamus mollitia aut atque aut.
-							</p>
-							<img src="assets/img/blog/blog-inside-post.jpg" class="img-fluid" alt="">
-
-							<h3>Ut repellat blanditiis est dolore sunt dolorum quae.</h3>
-							<p>
-								Rerum ea est assumenda pariatur quasi et quam. Facilis nam porro amet nostrum. In
-								assumenda quia quae a id praesentium. Quos deleniti libero sed occaecati aut porro
-								autem. Consectetur sed excepturi sint non placeat quia repellat incidunt labore. Autem
-								facilis hic dolorum dolores vel.
-								Consectetur quasi id et optio praesentium aut asperiores eaque aut. Explicabo omnis
-								quibusdam esse. Ex libero illum iusto totam et ut aut blanditiis. Veritatis numquam ut
-								illum ut a quam vitae.
-							</p>
-							<p>
-								Alias quia non aliquid. Eos et ea velit. Voluptatem maxime enim omnis ipsa voluptas
-								incidunt. Nulla sit eaque mollitia nisi asperiores est veniam.
-							</p>
-
-						</div>
-
-						<div class="entry-footer">
-							<i class="bi bi-folder"></i>
-							<ul class="cats">
-								<li><a href="#">Business</a></li>
-							</ul>
-
-							<i class="bi bi-tags"></i>
-							<ul class="tags">
-								<li><a href="#">Creative</a></li>
-								<li><a href="#">Tips</a></li>
-								<li><a href="#">Marketing</a></li>
-							</ul>
-						</div>
-
-					</article><!-- End blog entry -->
-
-					<div class="blog-author d-flex align-items-center">
-						<img src="assets/img/blog/blog-author.jpg" class="rounded-circle float-left" alt="">
-						<div>
-							<h4>Jane Smith</h4>
-							<div class="social-links">
-								<a href="https://twitters.com/#"><i class="bi bi-twitter"></i></a>
-								<a href="https://facebook.com/#"><i class="bi bi-facebook"></i></a>
-								<a href="https://instagram.com/#"><i class="biu bi-instagram"></i></a>
-							</div>
-							<p>
-								Itaque quidem optio quia voluptatibus dolorem dolor. Modi eum sed possimus accusantium.
-								Quas repellat voluptatem officia numquam sint aspernatur voluptas. Esse et accusantium
-								ut unde voluptas.
-							</p>
-						</div>
-					</div><!-- End blog author bio -->
-
-					<div class="blog-comments">
-
-						<h4 class="comments-count">8 Comments</h4>
-
-						<div id="comment-1" class="comment">
-							<div class="d-flex">
-								<div class="comment-img"><img src="assets/img/blog/comments-1.jpg" alt=""></div>
-								<div>
-									<h5><a href="">Georgia Reader</a> <a href="#" class="reply"><i
-												class="bi bi-reply-fill"></i> Reply</a></h5>
-									<time datetime="2020-01-01">01 Jan, 2020</time>
-									<p>
-										Et rerum totam nisi. Molestiae vel quam dolorum vel voluptatem et et. Est ad aut
-										sapiente quis molestiae est qui cum soluta.
-										Vero aut rerum vel. Rerum quos laboriosam placeat ex qui. Sint qui facilis et.
-									</p>
-								</div>
-							</div>
-						</div><!-- End comment #1 -->
-
-						<div id="comment-2" class="comment">
-							<div class="d-flex">
-								<div class="comment-img"><img src="assets/img/blog/comments-2.jpg" alt=""></div>
-								<div>
-									<h5><a href="">Aron Alvarado</a> <a href="#" class="reply"><i
-												class="bi bi-reply-fill"></i> Reply</a></h5>
-									<time datetime="2020-01-01">01 Jan, 2020</time>
-									<p>
-										Ipsam tempora sequi voluptatem quis sapiente non. Autem itaque eveniet saepe.
-										Officiis illo ut beatae.
-									</p>
-								</div>
-							</div>
-
-							<div id="comment-reply-1" class="comment comment-reply">
-								<div class="d-flex">
-									<div class="comment-img"><img src="assets/img/blog/comments-3.jpg" alt=""></div>
-									<div>
-										<h5><a href="">Lynda Small</a> <a href="#" class="reply"><i
-													class="bi bi-reply-fill"></i> Reply</a></h5>
-										<time datetime="2020-01-01">01 Jan, 2020</time>
-										<p>
-											Enim ipsa eum fugiat fuga repellat. Commodi quo quo dicta. Est ullam
-											aspernatur ut vitae quia mollitia id non. Qui ad quas nostrum rerum sed
-											necessitatibus aut est. Eum officiis sed repellat maxime vero nisi natus.
-											Amet nesciunt nesciunt qui illum omnis est et dolor recusandae.
-
-											Recusandae sit ad aut impedit et. Ipsa labore dolor impedit et natus in
-											porro aut. Magnam qui cum. Illo similique occaecati nihil modi eligendi.
-											Pariatur distinctio labore omnis incidunt et illum. Expedita et dignissimos
-											distinctio laborum minima fugiat.
-
-											Libero corporis qui. Nam illo odio beatae enim ducimus. Harum reiciendis
-											error dolorum non autem quisquam vero rerum neque.
-										</p>
-									</div>
-								</div>
-
-								<div id="comment-reply-2" class="comment comment-reply">
-									<div class="d-flex">
-										<div class="comment-img"><img src="assets/img/blog/comments-4.jpg" alt=""></div>
-										<div>
-											<h5><a href="">Sianna Ramsay</a> <a href="#" class="reply"><i
-														class="bi bi-reply-fill"></i> Reply</a></h5>
-											<time datetime="2020-01-01">01 Jan, 2020</time>
-											<p>
-												Et dignissimos impedit nulla et quo distinctio ex nemo. Omnis quia
-												dolores cupiditate et. Ut unde qui eligendi sapiente omnis ullam.
-												Placeat porro est commodi est officiis voluptas repellat quisquam
-												possimus. Perferendis id consectetur necessitatibus.
-											</p>
-										</div>
-									</div>
-
-								</div><!-- End comment reply #2-->
-
-							</div><!-- End comment reply #1-->
-
-						</div><!-- End comment #2-->
-
-						<div id="comment-3" class="comment">
-							<div class="d-flex">
-								<div class="comment-img"><img src="assets/img/blog/comments-5.jpg" alt=""></div>
-								<div>
-									<h5><a href="">Nolan Davidson</a> <a href="#" class="reply"><i
-												class="bi bi-reply-fill"></i> Reply</a></h5>
-									<time datetime="2020-01-01">01 Jan, 2020</time>
-									<p>
-										Distinctio nesciunt rerum reprehenderit sed. Iste omnis eius repellendus quia
-										nihil ut accusantium tempore. Nesciunt expedita id dolor exercitationem
-										aspernatur aut quam ut. Voluptatem est accusamus iste at.
-										Non aut et et esse qui sit modi neque. Exercitationem et eos aspernatur. Ea est
-										consequuntur officia beatae ea aut eos soluta. Non qui dolorum voluptatibus et
-										optio veniam. Quam officia sit nostrum dolorem.
-									</p>
-								</div>
-							</div>
-
-						</div><!-- End comment #3 -->
-
-						<div id="comment-4" class="comment">
-							<div class="d-flex">
-								<div class="comment-img"><img src="assets/img/blog/comments-6.jpg" alt=""></div>
-								<div>
-									<h5><a href="">Kay Duggan</a> <a href="#" class="reply"><i
-												class="bi bi-reply-fill"></i> Reply</a></h5>
-									<time datetime="2020-01-01">01 Jan, 2020</time>
-									<p>
-										Dolorem atque aut. Omnis doloremque blanditiis quia eum porro quis ut velit
-										tempore. Cumque sed quia ut maxime. Est ad aut cum. Ut exercitationem non in
-										fugiat.
-									</p>
-								</div>
-							</div>
-
-						</div><!-- End comment #4 -->
-
-						<div class="reply-form">
-							<h4>Leave a Reply</h4>
-							<p>Your email address will not be published. Required fields are marked * </p>
-							<form action="">
-								<div class="row">
-									<div class="col-md-6 form-group">
-										<input name="name" type="text" class="form-control" placeholder="Your Name*">
-									</div>
-									<div class="col-md-6 form-group">
-										<input name="email" type="text" class="form-control" placeholder="Your Email*">
-									</div>
-								</div>
-								<div class="row">
-									<div class="col form-group">
-										<input name="website" type="text" class="form-control"
-											placeholder="Your Website">
-									</div>
-								</div>
-								<div class="row">
-									<div class="col form-group">
-										<textarea name="comment" class="form-control"
-											placeholder="Your Comment*"></textarea>
-									</div>
-								</div>
-								<button type="submit" class="btn btn-primary">Post Comment</button>
-
-							</form>
-
-						</div>
-
-					</div><!-- End blog comments -->
-
-				</div><!-- End blog entries list -->
-
-				<div class="col-lg-4">
-
-					<div class="sidebar">
-
-						<h3 class="sidebar-title">Search</h3>
-						<div class="sidebar-item search-form">
-							<form action="">
-								<input type="text">
-								<button type="submit"><i class="bi bi-search"></i></button>
-							</form>
-						</div><!-- End sidebar search formn-->
-
-						<h3 class="sidebar-title">Categories</h3>
-						<div class="sidebar-item categories">
-							<ul>
-								<li><a href="#">General <span>(25)</span></a></li>
-								<li><a href="#">Lifestyle <span>(12)</span></a></li>
-								<li><a href="#">Travel <span>(5)</span></a></li>
-								<li><a href="#">Design <span>(22)</span></a></li>
-								<li><a href="#">Creative <span>(8)</span></a></li>
-								<li><a href="#">Educaion <span>(14)</span></a></li>
-							</ul>
-						</div><!-- End sidebar categories-->
-
-						<h3 class="sidebar-title">Recent Posts</h3>
-						<div class="sidebar-item recent-posts">
-							<div class="post-item clearfix">
-								<img src="assets/img/blog/blog-recent-1.jpg" alt="">
-								<h4><a href="blog-single.html">Nihil blanditiis at in nihil autem</a></h4>
-								<time datetime="2020-01-01">Jan 1, 2020</time>
-							</div>
-
-							<div class="post-item clearfix">
-								<img src="assets/img/blog/blog-recent-2.jpg" alt="">
-								<h4><a href="blog-single.html">Quidem autem et impedit</a></h4>
-								<time datetime="2020-01-01">Jan 1, 2020</time>
-							</div>
-
-							<div class="post-item clearfix">
-								<img src="assets/img/blog/blog-recent-3.jpg" alt="">
-								<h4><a href="blog-single.html">Id quia et et ut maxime similique occaecati ut</a></h4>
-								<time datetime="2020-01-01">Jan 1, 2020</time>
-							</div>
-
-							<div class="post-item clearfix">
-								<img src="assets/img/blog/blog-recent-4.jpg" alt="">
-								<h4><a href="blog-single.html">Laborum corporis quo dara net para</a></h4>
-								<time datetime="2020-01-01">Jan 1, 2020</time>
-							</div>
-
-							<div class="post-item clearfix">
-								<img src="assets/img/blog/blog-recent-5.jpg" alt="">
-								<h4><a href="blog-single.html">Et dolores corrupti quae illo quod dolor</a></h4>
-								<time datetime="2020-01-01">Jan 1, 2020</time>
-							</div>
-
-						</div><!-- End sidebar recent posts-->
-
-						<h3 class="sidebar-title">Tags</h3>
-						<div class="sidebar-item tags">
-							<ul>
-								<li><a href="#">App</a></li>
-								<li><a href="#">IT</a></li>
-								<li><a href="#">Business</a></li>
-								<li><a href="#">Mac</a></li>
-								<li><a href="#">Design</a></li>
-								<li><a href="#">Office</a></li>
-								<li><a href="#">Creative</a></li>
-								<li><a href="#">Studio</a></li>
-								<li><a href="#">Smart</a></li>
-								<li><a href="#">Tips</a></li>
-								<li><a href="#">Marketing</a></li>
-							</ul>
-						</div><!-- End sidebar tags-->
-
-					</div><!-- End sidebar -->
-
-				</div><!-- End blog sidebar -->
-
-			</div>
-
+<head>
+	<title>{{blog_post.title}} - Synergy Network International</title>
+	{% include "snippets/head_snippet.html" %}
+</head>
+<div class="col-lg-12 d-block content about-content" data-aos="zoom-in" data-aos-delay="100">
+	<form class="search-form d-flex justify-content-around" style="font-size: 16px;" method="get">
+		<span class="form-group text-search w-50"><input class="search-input w-100 h-100 text-primary border-white"
+				id="id_q" name="q" placeholder="Looking for a post?" type="text" style="border-radius: 7px;" /></span>
+
+		<span class="form-group time-search align-self-center" style="width: 10%;">
+			<label for="time-filter" class="label">Posted Since:</label>
+			<select value="Today" class="cursor-pointer text-primary w-100" id="time-filter" name="time-filter">
+				<option selected value="">All</option>
+				<option value="today">Today</option>
+				<option value="yesterday">Yesterday</option>
+				<option value="last week">Last week</option>
+				<option value="2 weeks ago">2 weeks ago</option>
+				<option value="3 weeks ago">3 weeks ago</option>
+				<option value="last month">Last month</option>
+				<option value="this year">This year</option>
+			</select>
+		</span>
+
+		<span class="form-group align-self-center" style="width: 10%;">
+			<label for="category-filter" class="label">Category:</label>
+			<select class="cursor-pointer text-primary w-100" id="category-filter" name="category-filter">
+				<option selected value="">All</option>
+				<option value="history">History</option>
+				<option value="politics-and-international-relations">Politics & International
+					Relations</option>
+				<option value="society-and-culture">Society & Culture</option>
+				<option value="science-and-technology">Science & Technology</option>
+				<option value="art-and-literature">Art & Literature</option>
+				<option value="business-and-economics">Business & Economics</option>
+			</select>
+		</span>
+
+		<span class="form-group text-center" style="width: 10%;">
+			<button href="{% url 'blog:index' %}" class="w-100 mt-0 form-control btn sbmt submit px-3" role="button"
+				type="submit"><i class="fa fa-search"></i></button>
+		</span>
+	</form>
+</div>
+<div id="confirm-report-overlay" data-aos="zoom-in">
+	<div class="col-lg-6 col-md-6 col-sm-8" id="confirmation-popup">
+		<div>
+			<h5>Are you sure you want to continue with this report?</h5>
+			<button id="make-report" class="btn m-2 btn-success btn-lg" type="submit">Submit</button>
+			<button class="confirm-report btn m-2 btn-danger btn-lg" state="0" type="submit">Cancel</button>
 		</div>
-	</section><!-- End Blog Single Section -->
-</main> {% endcomment %}
-
-{% comment %} <div class="container"> {% endcomment %}
-	{% comment %} <div class="row">
-
-		<!-- Blog Post -->
-		<div class="card m-auto">
-			<img class="card-img-top" src="{{blog_post.image.url}}">
-			<div class="card-body mt-2 mb-2">
-				<h2 class="card-title">{{blog_post.title}}</h2>
-				<p class="card-text">{{blog_post.body|safe}}</p>
-			</div>
-			<div class="card-footer text-muted">
-				Updated on {{blog_post.date_updated}} by {{blog_post.author}}
-			</div>
+		<div class="d-none">
+			<h5 class=""><i class="bi text-success bi-check-circle"></i>Your report have been successfully
+				submitted. Our team will review this as soon as possible and will take the necessary
+				actions afterwards. Thank you for trying to keep this community safe for everyone!</h5>
+			<button class="btn btn-lg btn-success" onclick="closeConfirmationPopup()">Close</button>
 		</div>
-	</div> {% endcomment %}
-
-	<div class="col-lg-12 d-block content about-content" data-aos="zoom-in" data-aos-delay="100">
-		<form class="search-form d-flex justify-content-around" style="font-size: 16px;" method="get">
-			<span class="form-group text-search w-50"><input class="search-input w-100 h-100 text-primary border-white"
-					id="id_q" name="q" placeholder="Looking for a post?" type="text"
-					style="border-radius: 7px;" /></span>
-
-			<span class="form-group time-search align-self-center" style="width: 10%;">
-				<label for="time-filter" class="label">Posted Since:</label>
-				<select value="Today" class="cursor-pointer text-primary w-100" id="time-filter" name="time-filter">
-					<option selected value="">All</option>
-					<option value="today">Today</option>
-					<option value="yesterday">Yesterday</option>
-					<option value="last week">Last week</option>
-					<option value="2 weeks ago">2 weeks ago</option>
-					<option value="3 weeks ago">3 weeks ago</option>
-					<option value="last month">Last month</option>
-					<option value="this year">This year</option>
-				</select>
-			</span>
-
-			<span class="form-group align-self-center" style="width: 10%;">
-				<label for="category-filter" class="label">Category:</label>
-				<select class="cursor-pointer text-primary w-100" id="category-filter" name="category-filter">
-					<option selected value="">All</option>
-					<option value="history">History</option>
-					<option value="politics-and-international-relations">Politics & International
-						Relations</option>
-					<option value="society-and-culture">Society & Culture</option>
-					<option value="science-and-technology">Science & Technology</option>
-					<option value="art-and-literature">Art & Literature</option>
-					<option value="business-and-economics">Business & Economics</option>
-				</select>
-			</span>
-
-			<span class="form-group text-center" style="width: 10%;">
-				<button href="{% url 'blog:home' %}" class="w-100 mt-0 form-control btn sbmt submit px-3" role="button"
-					type="submit"><i class="fa fa-search"></i></button>
-			</span>
+	</div>
+</div>
+<div class="report-div" id="report-div">
+	<div class="report-popup">
+		<form id="report-form" class="report-form" method="post" name="rep-form" value="">
+			{% csrf_token %}
+			<div class="form-group report-types align-self-center">
+				<h5 class="font-weight-bold m-auto text-white">Select report
+					type
+				</h5>
+				<i onclick="controlReportDiv();" class="text-white cursor-pointer bi bi-x" style="font-size: 40px;"></i>
+				<ul id="rt-ul" class="d-flex flex-wrap" data-catid="" targ="">
+					<li class="rt" value="nudity"><a class="confirm-report" state="1"
+							href="javascript:void(0);">Nudity</a>
+					</li>
+					<li class="rt" value="sexual harrasment"><a class="confirm-report" state="1"
+							href="javascript:void(0);">Sexual Harrasment</a>
+					</li>
+					<li class="rt" value="false information"><a class="confirm-report" state="1"
+							href="javascript:void(0);">False Information</a>
+					</li>
+					<li class="rt" value="racism"><a class="confirm-report" state="1" href="javascript:void(0);">Racism
+						</a></li>
+					<li class="rt" value="spam"><a class="confirm-report" state="1" href="javascript:void(0);">It's
+							spam</a>
+					</li>
+					<li class="rt" value="hate speech or symbols"><a class="confirm-report" state="1"
+							href="javascript:void(0);">Hate
+							speech or symbols</a></li>
+					<li class="rt" value="bullying"><a class="confirm-report" state="1"
+							href="javascript:void(0);">Bullying</a>
+					</li>
+					<li class="rt" value="scam or fraud"><a class="confirm-report" state="1"
+							href="javascript:void(0);">Scam
+							or fraud</a></li>
+					<li class="rt" value="violence">
+						<a class="confirm-report" state="1" href="javascript:void(0);">Violence</a></li>
+					<li class="rt" value="sale of illegal or regulated goods"><a class="confirm-report" state="1"
+							href="javascript:void(0);">Sale of
+							illegal or
+							regulated goods</a></li>
+				</ul>
+			</div>
 		</form>
 	</div>
-	<div id="confirm-report-overlay" data-aos="zoom-in">
-		<div class="col-lg-6 col-md-6 col-sm-8" id="confirmation-popup">
-			<div>
-				<h5>Are you sure you want to continue with this report?</h5>
-				<button id="make-report" class="btn m-2 btn-success btn-lg" type="submit">Submit</button>
-				<button class="confirm-report btn m-2 btn-danger btn-lg" state="0" type="submit">Cancel</button>
-			</div>
-			<div class="d-none">
-				<h5 class=""><i class="bi text-success bi-check-circle"></i>Your report have been successfully
-					submitted. Our team will review this as soon as possible and will take the necessary
-					actions afterwards. Thank you for trying to keep this community safe for everyone!</h5>
-				<button class="btn btn-lg btn-success" onclick="closeConfirmationPopup()">Close</button>
-			</div>
+</div>
+{% concat_all blog_post.date_published.hour|stringformat:"i" '-' blog_post.date_published.minute|stringformat:"i" '-' blog_post.date_published.second|stringformat:"i" '-' blog_post.date_published.microsecond|stringformat:"i"  as blog_time_published %}
+<div class="grid-container5">
+	<div class="main-article">
+		<div class="post-header">
+			<h2 class="post-title" data-aos="fade-down" data-aos-duration="1500" data-aos-once="true"
+				data-aos-mirror="false">
+				{{blog_post.title}}</h2>
 		</div>
-	</div>
-	<div class="report-div" id="report-div">
-		<div class="report-popup">
-			<form id="report-form" class="report-form" method="post" name="rep-form" value="">
-				{% csrf_token %}
-				<div class="form-group report-types align-self-center">
-					<h5 class="font-weight-bold m-auto text-white">Select report
-						type
-					</h5>
-					<i onclick="controlReportDiv();" class="text-white cursor-pointer bi bi-x"
-						style="font-size: 40px;"></i>
-					<ul id="rt-ul" class="d-flex flex-wrap" data-catid="" targ="">
-						<li class="rt" value="nudity"><a class="confirm-report" state="1"
-								href="javascript:void(0);">Nudity</a>
-						</li>
-						<li class="rt" value="sexual harrasment"><a class="confirm-report" state="1"
-								href="javascript:void(0);">Sexual Harrasment</a>
-						</li>
-						<li class="rt" value="false information"><a class="confirm-report" state="1"
-								href="javascript:void(0);">False Information</a>
-						</li>
-						<li class="rt" value="racism"><a class="confirm-report" state="1"
-								href="javascript:void(0);">Racism
-							</a></li>
-						<li class="rt" value="spam"><a class="confirm-report" state="1" href="javascript:void(0);">It's
-								spam</a>
-						</li>
-						<li class="rt" value="hate speech or symbols"><a class="confirm-report" state="1"
-								href="javascript:void(0);">Hate
-								speech or symbols</a></li>
-						<li class="rt" value="bullying"><a class="confirm-report" state="1"
-								href="javascript:void(0);">Bullying</a>
-						</li>
-						<li class="rt" value="scam or fraud"><a class="confirm-report" state="1"
-								href="javascript:void(0);">Scam
-								or fraud</a></li>
-						<li class="rt" value="violence">
-							<a class="confirm-report" state="1" href="javascript:void(0);">Violence</a></li>
-						<li class="rt" value="sale of illegal or regulated goods"><a class="confirm-report" state="1"
-								href="javascript:void(0);">Sale of
-								illegal or
-								regulated goods</a></li>
-					</ul>
-				</div>
-			</form>
-		</div>
-	</div>
-	{% concat_all blog_post.date_published.hour|stringformat:"i" '-' blog_post.date_published.minute|stringformat:"i" '-' blog_post.date_published.second|stringformat:"i" '-' blog_post.date_published.microsecond|stringformat:"i"  as blog_time_published %}
-	<div class="grid-container5">
-		<div class="main-article">
-			<div class="post-header">
-				<h2 class="post-title" data-aos="fade-down" data-aos-duration="1500" data-aos-once="true"
-					data-aos-mirror="false">
-					{{blog_post.title}}</h2>
-			</div>
-			<div class="post-content">
-				<img class="post-img" src="{{blog_post.image.url}}" data-aos="zoom-in-up" data-aos-easing="linear"
-					data-aos-duration="1500">
-
-				<div class="post-info" data-aos="fade-right" data-aos-duration="1500">
-					<div class="d-flex justify-content-around flex-wrap">
-						<span class="blog-author-detail d-flex">
-							<img src="{{blog_post.author_img.url}}" class="img-fluid" alt="">
-							<span class="author">{{blog_post.author.firstname|upper}}
-								{{ blog_post.author.lastname|upper}}</span>
-						</span>
-						<p class="post-category"><span class="info-head">Category: </span><span class="category" style="background: {{blog_post.category|get_color}}; border: 1px solid
-								{{blog_post.category|get_color}}">{{ blog_post.category|get_readable }}</span>
-						</p>
-						<span>
-							<a style="font-size: 15px" class="likebutton btn btn-{{like_color}} btn-lg"
-								id="like{{ blog_post.id }}" href="#" data-catid="{{ blog_post.id }}"
-								data-value="{{blog_post.num_likes}}">{{blog_post.num_likes}}
-								<i class="fa fa-thumbs-up"></i></a>
-							<a style="font-size: 15px" class="dislikebutton btn btn-{{dislike_color}} btn-lg"
-								id="dislike{{ blog_post.id }}" href="#" data-catid="{{ blog_post.id }}"
-								data-value="{{blog_post.num_dislikes}}">{{blog_post.num_dislikes}} <i
-									class="fa fa-thumbs-down"></i></a>
-						</span>
-					</div>
-					{% if blog_post.date_published != blog_post.date_updated %}
-					<div style="border-top: 2px solid #002657;"><span class="info-head">Date Published:
-						</span>{{blog_post.date_published|myfunc}}</div>
-					<div><span class="info-head">Date Updated: </span>{{blog_post.date_updated|myfunc}}</div>
-					{% else %}
-					<p><span class="info-head">Date Published: </span>{{blog_post.date_published|myfunc}}</p>
-					{% endif %}
-				</div>
-				{{blog_post.body|safe}}
-			</div>
-
-
-		</div>
-
-		<div class="posts">
-			{% comment %}
-			{% if trending_posts|length > 0 %}
-			<div class="head">
-				<form action="{% url 'blog:home' %}" method="get">
-					<button class="text" type="submit" name="posted-since" id="trending-category"
-						value="{{blog_post.date_updated}}">
-						TRENDING POSTS</button>
-				</form>
-			</div>
-			<div class="post-group trending-posts">
-				{% for post in trending_posts %}
-				{% concat_all post.date_published.hour|stringformat:"i" '-' post.date_published.minute|stringformat:"i" '-' post.date_published.second|stringformat:"i" '-' post.date_published.microsecond|stringformat:"i"  as blog_time_published %}
-				<div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-					<div class="post-item">
-						<div><a
-								href="{% url 'blog:detail' post.category post.date_published.year post.date_published.month post.date_published.day blog_time_published post.id post.title|slugify %}"><img
-									class="post-image" style="height: 150px;" src="{{post.image.url}}"></a></div>
-						<div>
-							<a
-								href="{% url 'blog:detail' post.category post.date_published.year post.date_published.month post.date_published.day blog_time_published post.id post.title|slugify %}">
-								<div class="post-content">
-									<h3 class="post-ttl text-center font-weight-normal">{{post.title}}</h3>
-									<div class="trainer align-items-center">
-										<div
-											class="trainer-rank d-block font-weight-bold text-center align-items-center">
-											<p><span>Published: </span>{{post.date_published|date:"r"}}</p>
-											<p><span>Updated: </span>{{post.date_updated|date:"r"}}</p>
-											<div
-												class="trainer-profile d-flex justify-content-around align-items-center">
-												<p><span>Author:</span> {{post.author.firstname | upper}}
-													{{ post.author.lastname | upper}}</p>
-												<div class="feedback d-flex" style="color: skyblue;">
-													<i class="fa fa-thumbs-up"></i>&nbsp;{{ post.num_likes }}
-													&nbsp;&nbsp;
-													<i
-														class="fa fa-thumbs-down"></i>&nbsp;{{ post.num_dislikes }}&nbsp;&nbsp;
-													<i class="fa fa-comments"></i>&nbsp;{{ post.total_comments }}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</a>
-						</div>
-					</div>
-				</div> <!-- End Course Item-->
-				{% endfor %}
-			</div>
-			<form action="{% url 'blog:home' %}" method="get">
-				<button class="more-btn" type="submit" name="posted-since" id="seemore-trending"
-					value="{{blog_post.date_updated}}">
-					See More >>>
-				</button>
-			</form>
-			{% endif %}
-			{% endcomment %}
-
-			{% if related_posts|length > 0 %}
-			<div class="head" data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-offset="0"
-				data-aos-delay="300">
-				<form action="{% url 'blog:home' %}" method="get">
-					<button class="text" type="submit" name="related-to" id="related-category"
-						value="{{blog_post.title}}">
-						RELATED POSTS</button>
-				</form>
-			</div>
-			<div data-aos="zoom-in" data-aos-easing="linear" data-aos-duration="1500"
-				class="post-group d-flex justify-content-between related-posts" data-aos="fade-zoom-in">
-				{% for post in related_posts %}
-				{% concat_all post.date_published.hour|stringformat:"i" '-' post.date_published.minute|stringformat:"i" '-' post.date_published.second|stringformat:"i" '-' post.date_published.microsecond|stringformat:"i"  as blog_time_published %}
-				<div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-					<div class="post-item">
-						<div><a
-								href="{% url 'blog:detail' post.category post.date_published.year post.date_published.month post.date_published.day blog_time_published post.id post.title|slugify %}"><img
-									class="post-image" style="height: 150px;" src="{{post.image.url}}"></a></div>
-						<div>
-							<a
-								href="{% url 'blog:detail' post.category post.date_published.year post.date_published.month post.date_published.day blog_time_published post.id post.title|slugify %}">
-								<div class="post-content">
-									<p class="text-center mb-3 post-category"><span class="ml-0 category" style="background: {{post.category|get_color}}; border: 1px solid
-								{{post.category|get_color}}">{{ post.category|get_readable }}</span></p>
-									<h3 class="post-ttl text-center font-weight-normal">{{post.title}}</h3>
-									<div class="trainer align-items-center">
-										<div
-											class="trainer-rank d-block font-weight-bold text-center align-items-center">
-											<p><span>Published: </span>{{post.date_published|date:"r"}}</p>
-											<p><span>Updated: </span>{{post.date_updated|date:"r"}}</p>
-											<div
-												class="trainer-profile d-flex justify-content-around align-items-center">
-												<p><span>Author:</span> {{post.author.firstname | upper}}
-													{{ post.author.lastname | upper}}</p>
-												<div class="feedback d-flex" style="color: skyblue;">
-													<i class="fa fa-thumbs-up"></i>&nbsp;{{ post.num_likes }}
-													&nbsp;&nbsp;
-													<i
-														class="fa fa-thumbs-down"></i>&nbsp;{{ post.num_dislikes }}&nbsp;&nbsp;
-													<i class="fa fa-comments"></i>&nbsp;{{ post.total_comments }}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</a>
-						</div>
-					</div> <!-- End Course Item-->
-				</div>
-				{% endfor %}
-			</div>
-
-			<form action="{% url 'blog:home' %}" method="get">
-				<button class="more-btn" type="submit" name="related-to" id="seemore-related"
-					value="{{blog_post.title}}">
-					See More >>>
-				</button>
-			</form>
-			{% endif %}
-
-			{% if author_posts|length > 0 %}
-			<div class="head" data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-offset="0"
-				data-aos-delay="300">
-				<form action="{% url 'blog:home' %}" method="get">
-					<button class="text" type="submit" name="posts-from" id="author-category"
-						value="{{blog_post.author}}">MORE
-						POSTS FROM
-						<span>{{blog_post.author.firstname|upper}} {{blog_post.author.lastname|upper}}</span></button>
-				</form>
-			</div>
-			<div class="post-group author-posts" data-aos="fade-zoom-in" data-aos-easing="linear"
+		<div class="post-content">
+			<img class="post-img" src="{{blog_post.image.url}}" data-aos="zoom-in-up" data-aos-easing="linear"
 				data-aos-duration="1500">
-				{% for post in author_posts %}
-				{% concat_all post.date_published.hour|stringformat:"i" '-' post.date_published.minute|stringformat:"i" '-' post.date_published.second|stringformat:"i" '-' post.date_published.microsecond|stringformat:"i"  as blog_time_published %}
-				<div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-					<div class="post-item">
-						<div><a
-								href="{% url 'blog:detail' post.category post.date_published.year post.date_published.month post.date_published.day blog_time_published post.id post.title|slugify %}"><img
-									class="post-image" style="height: 150px;" src="{{post.image.url}}"></a></div>
-						<div>
-							<a
-								href="{% url 'blog:detail' post.category post.date_published.year post.date_published.month post.date_published.day blog_time_published post.id post.title|slugify %}">
-								<div class="post-content">
-									<h3 class="post-ttl text-center font-weight-normal">{{post.title}}</h3>
-									<div class="trainer align-items-center">
-										<div
-											class="trainer-rank d-block font-weight-bold text-center align-items-center">
-											<p><span>Published: </span>{{post.date_published|date:"r"}}</p>
-											<p><span>Updated: </span>{{post.date_updated|date:"r"}}</p>
-											<div
-												class="trainer-profile d-flex justify-content-around align-items-center">
-												<p><span>Author:</span> {{post.author.firstname | upper}}
-													{{ post.author.lastname | upper}}</p>
-												<div class="feedback d-flex" style="color: skyblue;">
-													<i class="fa fa-thumbs-up"></i>&nbsp;{{ post.num_likes }}
-													&nbsp;&nbsp;
-													<i
-														class="fa fa-thumbs-down"></i>&nbsp;{{ post.num_dislikes }}&nbsp;&nbsp;
-													<i class="fa fa-comments"></i>&nbsp;{{ post.total_comments }}
-												</div>
+
+			<div class="post-info" data-aos="fade-right" data-aos-duration="1500">
+				<div class="d-flex justify-content-around flex-wrap">
+					<span class="blog-author-detail d-flex">
+						<img src="{{blog_post.author_img.url}}" class="img-fluid" alt="">
+						<span class="author">{{blog_post.author.firstname|upper}}
+							{{ blog_post.author.lastname|upper}}</span>
+					</span>
+					<p class="post-category"><span class="info-head">Category: </span><span class="category" style="background: {{blog_post.category|get_color}}; border: 1px solid
+								{{blog_post.category|get_color}}">{{ blog_post.category|get_readable }}</span>
+					</p>
+					<span>
+						<a style="font-size: 15px" class="likebutton btn btn-{{like_color}} btn-lg"
+							id="like{{ blog_post.id }}" href="#" data-catid="{{ blog_post.id }}"
+							data-value="{{blog_post.num_likes}}">{{blog_post.num_likes}}
+							<i class="fa fa-thumbs-up"></i></a>
+						<a style="font-size: 15px" class="dislikebutton btn btn-{{dislike_color}} btn-lg"
+							id="dislike{{ blog_post.id }}" href="#" data-catid="{{ blog_post.id }}"
+							data-value="{{blog_post.num_dislikes}}">{{blog_post.num_dislikes}} <i
+								class="fa fa-thumbs-down"></i></a>
+					</span>
+				</div>
+				{% if blog_post.date_published != blog_post.date_updated %}
+				<div style="border-top: 2px solid #002657;"><span class="info-head">Date Published:
+					</span>{{blog_post.date_published|myfunc}}</div>
+				<div><span class="info-head">Date Updated: </span>{{blog_post.date_updated|myfunc}}</div>
+				{% else %}
+				<p><span class="info-head">Date Published: </span>{{blog_post.date_published|myfunc}}</p>
+				{% endif %}
+			</div>
+			{{blog_post.body|safe}}
+		</div>
+
+
+	</div>
+
+	<div class="posts">
+		{% if related_posts|length > 0 %}
+		<div class="head" data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-offset="0"
+			data-aos-delay="300">
+			<form action="{% url 'blog:index' %}" method="get">
+				<button class="text" type="submit" name="related-to" id="related-category" value="{{blog_post.title}}">
+					RELATED POSTS</button>
+			</form>
+		</div>
+		<div data-aos="zoom-in" data-aos-easing="linear" data-aos-duration="1500"
+			class="post-group d-flex justify-content-between related-posts" data-aos="fade-zoom-in">
+			{% for post in related_posts %}
+			{% concat_all post.date_published.hour|stringformat:"i" '-' post.date_published.minute|stringformat:"i" '-' post.date_published.second|stringformat:"i" '-' post.date_published.microsecond|stringformat:"i"  as blog_time_published %}
+			<div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+				<div class="post-item">
+					<div><a
+							href="{% url 'blog:detail' post.category post.date_published.year post.date_published.month post.date_published.day blog_time_published post.id post.title|slugify %}"><img
+								class="post-image" style="height: 150px;" src="{{post.image.url}}"></a></div>
+					<div>
+						<a
+							href="{% url 'blog:detail' post.category post.date_published.year post.date_published.month post.date_published.day blog_time_published post.id post.title|slugify %}">
+							<div class="post-content">
+								<p class="text-center mb-3 post-category"><span class="ml-0 category" style="background: {{post.category|get_color}}; border: 1px solid
+								{{post.category|get_color}}">{{ post.category|get_readable }}</span></p>
+								<h3 class="post-ttl text-center font-weight-normal">{{post.title}}</h3>
+								<div class="trainer align-items-center">
+									<div class="trainer-rank d-block font-weight-bold text-center align-items-center">
+										<p><span>Published: </span>{{post.date_published|date:"r"}}</p>
+										<p><span>Updated: </span>{{post.date_updated|date:"r"}}</p>
+										<div class="trainer-profile d-flex justify-content-around align-items-center">
+											<p><span>Author:</span> {{post.author.firstname | upper}}
+												{{ post.author.lastname | upper}}</p>
+											<div class="feedback d-flex" style="color: skyblue;">
+												<i class="fa fa-thumbs-up"></i>&nbsp;{{ post.num_likes }}
+												&nbsp;&nbsp;
+												<i
+													class="fa fa-thumbs-down"></i>&nbsp;{{ post.num_dislikes }}&nbsp;&nbsp;
+												<i class="fa fa-comments"></i>&nbsp;{{ post.total_comments }}
 											</div>
 										</div>
 									</div>
 								</div>
-							</a>
-						</div>
+							</div>
+						</a>
 					</div>
-				</div> <!-- End Course Item-->
-				{% endfor %}
+				</div>
 			</div>
-			<form action="{% url 'blog:home' %}" method="get">
-				<button class="more-btn" type="submit" name="posts-from" id="seemore-from-author"
-					value="{{blog_post.author}}">
-					See More >>>
-				</button>
-			</form>
-			{% endif %}
+			{% endfor %}
 		</div>
-	</div>
 
-	<div class="container" data-aos="fade-in">
-		<div class="row" data-aos="fade-in">
-			<div class="card-item col-lg-8 card mb-4 mt-3 col-sm-12 col-md-12 d-flex align-items-stretch">
-				<div class="card-body">
-					{% if blog_post.total_comments > 1 %}
-					<h2 id="comments-count" data-value={{blog_post.total_comments}}>
-						{{ blog_post.total_comments }} Comments</h2>
-					{% else %}
-					<h2 id="comments-count" data-value={{blog_post.total_comments}}>
-						{{ blog_post.total_comments }} Comment</h2>
-					{% endif %}
+		<form action="{% url 'blog:index' %}" method="get">
+			<button class="more-btn" type="submit" name="related-to" id="seemore-related" value="{{blog_post.title}}">
+				See More >>>
+			</button>
+		</form>
+		{% endif %}
 
-					<div id="comment-container">
-						{% for comment in comments %}
-						<div class="comments" id="{{comment.id}}" style="padding: 10px;" data-aos="">
-							{% if comment.active %}
-							<div class="comment" data-aos="fade-right" data-aos-offset="300">
-								<div class="font-weight-bold">
-									<div class="d-flex justify-content-between flex-wrap">
-										<p class="commenter">{{ comment.commenter }}</p>
-										<div class="d-flex font-weight-normal">
-											<p>{{comment.replies.count}} <i class="mr-3 fa fa-comments"></i></p>
-											<div>
-												<a class="show-reply-form" onclick="replyComment(this)"
-													href="javascript:void(0)" id="show-reply-form_{{comment.id}}"
-													title="Reply to this comment">Reply</a>
-												<span style="float: right;"><a class="make-comment-report"
-														href="javascript:void(0)"
-														id="comment-report-button_{{comment.id}}"
-														onclick="controlReportDiv(this)">Report</a></span></div>
+		{% if author_posts|length > 0 %}
+		<div class="head" data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-offset="0"
+			data-aos-delay="300">
+			<form action="{% url 'blog:index' %}" method="get">
+				<button class="text" type="submit" name="posts-from" id="author-category"
+					value="{{blog_post.author}}">MORE
+					POSTS FROM
+					<span>{{blog_post.author.firstname|upper}} {{blog_post.author.lastname|upper}}</span></button>
+			</form>
+		</div>
+		<div class="post-group author-posts" data-aos="fade-zoom-in" data-aos-easing="linear" data-aos-duration="1500">
+			{% for post in author_posts %}
+			{% concat_all post.date_published.hour|stringformat:"i" '-' post.date_published.minute|stringformat:"i" '-' post.date_published.second|stringformat:"i" '-' post.date_published.microsecond|stringformat:"i"  as blog_time_published %}
+			<div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+				<div class="post-item">
+					<div><a
+							href="{% url 'blog:detail' post.category post.date_published.year post.date_published.month post.date_published.day blog_time_published post.id post.title|slugify %}"><img
+								class="post-image" style="height: 150px;" src="{{post.image.url}}"></a></div>
+					<div>
+						<a
+							href="{% url 'blog:detail' post.category post.date_published.year post.date_published.month post.date_published.day blog_time_published post.id post.title|slugify %}">
+							<div class="post-content">
+								<h3 class="post-ttl text-center font-weight-normal">{{post.title}}</h3>
+								<div class="trainer align-items-center">
+									<div class="trainer-rank d-block font-weight-bold text-center align-items-center">
+										<p><span>Published: </span>{{post.date_published|date:"r"}}</p>
+										<p><span>Updated: </span>{{post.date_updated|date:"r"}}</p>
+										<div class="trainer-profile d-flex justify-content-around align-items-center">
+											<p><span>Author:</span> {{post.author.firstname | upper}}
+												{{ post.author.lastname | upper}}</p>
+											<div class="feedback d-flex" style="color: skyblue;">
+												<i class="fa fa-thumbs-up"></i>&nbsp;{{ post.num_likes }}
+												&nbsp;&nbsp;
+												<i
+													class="fa fa-thumbs-down"></i>&nbsp;{{ post.num_dislikes }}&nbsp;&nbsp;
+												<i class="fa fa-comments"></i>&nbsp;{{ post.total_comments }}
+											</div>
 										</div>
 									</div>
-									<p class=" comment-info font-weight-normal">
-										{{ comment.created_on|myfunc }}
-									</p>
 								</div>
+							</div>
+						</a>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+		<form action="{% url 'blog:index' %}" method="get">
+			<button class="more-btn" type="submit" name="posts-from" id="seemore-from-author"
+				value="{{blog_post.author}}">
+				See More >>>
+			</button>
+		</form>
+		{% endif %}
+	</div>
+</div>
 
-								{{ comment.comment_body | safe | linebreaks }}
-							</div>
-							<div>
-								<div class="reply-div" data-aos="zoom-in-up" id="reply-div{{comment.id}}">
-									<form id="reply-form{{comment.id}}" class="reply-form" method="post"
-										style="margin-top: 1.3em;" name="r-form" value="{{comment.id}}">
-										{% csrf_token %}
-										{{ reply_form.as_p }}
-										<input type="hidden" name="parent_id" value="{{comment.id}}">
-										<input name="action" type="hidden" value="to_reply">
-										<button class="btn btn-primary btn-lg reply-button"
-											id="reply-button{{comment.id}}" type="submit">Submit</button>
-									</form>
+<div class="container" data-aos="fade-in">
+	<div class="row" data-aos="fade-in">
+		<div class="card-item col-lg-8 card mb-4 mt-3 col-sm-12 col-md-12 d-flex align-items-stretch">
+			<div class="card-body">
+				{% if blog_post.total_comments > 1 %}
+				<h2 id="comments-count" data-value={{blog_post.total_comments}}>
+					{{ blog_post.total_comments }} Comments</h2>
+				{% else %}
+				<h2 id="comments-count" data-value={{blog_post.total_comments}}>
+					{{ blog_post.total_comments }} Comment</h2>
+				{% endif %}
+
+				<div id="comment-container">
+					{% for comment in comments %}
+					<div class="comments" id="{{comment.id}}" style="padding: 10px;" data-aos="">
+						{% if comment.active %}
+						<div class="comment" data-aos="fade-right" data-aos-offset="300">
+							<div class="font-weight-bold">
+								<div class="d-flex justify-content-between flex-wrap">
+									<p class="commenter">{{ comment.commenter }}</p>
+									<div class="d-flex font-weight-normal">
+										<p>{{comment.replies.count}} <i class="mr-3 fa fa-comments"></i></p>
+										<div>
+											<a class="show-reply-form" onclick="replyComment(this)"
+												href="javascript:void(0)" id="show-reply-form_{{comment.id}}"
+												title="Reply to this comment">Reply</a>
+											<span style="float: right;"><a class="make-comment-report"
+													href="javascript:void(0)" id="comment-report-button_{{comment.id}}"
+													onclick="controlReportDiv(this)">Report</a></span></div>
+									</div>
 								</div>
-							</div>
-							{% else %}
-							<div class="comment" data-aos="fade-right" data-aos-offset="300">
-								<p class=" font-weight-bold" style="color: #002657;">
-									This comment no longer exist as it is considered dangerous to the mental and
-									psychological health of members of this community
+								<p class=" comment-info font-weight-normal">
+									{{ comment.created_on|myfunc }}
 								</p>
 							</div>
-							{% endif %}
-							{% for reply in comment.replies.all %}
-							{% if reply.active %}
-							<div class="reply ml-5" data-aos="fade-left" data-aos-offset="300">
-								<div class="reply-info font-weight-bold">
-									<div class="d-flex justify-content-between">
-										<p class="replier">{{ reply.replier }}</p>
-										<span style="float: right;"><a class="font-weight-normal make-comment-report"
-												href="javascript:void(0)" id="reply-report-button_{{reply.id}}"
-												onclick="controlReportDiv(this)">Report</a></span>
-									</div>
-									<p class="font-weight-normal">
-										{{ reply.created_on|myfunc }}
-									</p>
-								</div>
 
-								{{ reply.body | safe | linebreaks }}
-							</div>
-							{% else %}
-							<div class="reply ml-5" data-aos="fade-left" data-aos-offset="300">
-								<p class=" font-weight-bold" style="color: #002657;">
-									This reply no longer exist as it is considered dangerous to the mental and
-									psychological health of members of this community</p>
-							</div>
-							{% endif %}
-							{% endfor %}
+							{{ comment.comment_body | safe | linebreaks }}
 						</div>
+						<div>
+							<div class="reply-div" data-aos="zoom-in-up" id="reply-div{{comment.id}}">
+								<form id="reply-form{{comment.id}}" class="reply-form" method="post"
+									style="margin-top: 1.3em;" name="r-form" value="{{comment.id}}">
+									{% csrf_token %}
+									{{ reply_form.as_p }}
+									<input type="hidden" name="parent_id" value="{{comment.id}}">
+									<input name="action" type="hidden" value="to_reply">
+									<button class="btn btn-primary btn-lg reply-button" id="reply-button{{comment.id}}"
+										type="submit">Submit</button>
+								</form>
+							</div>
+						</div>
+						{% else %}
+						<div class="comment" data-aos="fade-right" data-aos-offset="300">
+							<p class=" font-weight-bold" style="color: #002657;">
+								This comment no longer exist as it is considered dangerous to the mental and
+								psychological health of members of this community
+							</p>
+						</div>
+						{% endif %}
+						{% for reply in comment.replies.all %}
+						{% if reply.active %}
+						<div class="reply ml-5" data-aos="fade-left" data-aos-offset="300">
+							<div class="reply-info font-weight-bold">
+								<div class="d-flex justify-content-between">
+									<p class="replier">{{ reply.replier }}</p>
+									<span style="float: right;"><a class="font-weight-normal make-comment-report"
+											href="javascript:void(0)" id="reply-report-button_{{reply.id}}"
+											onclick="controlReportDiv(this)">Report</a></span>
+								</div>
+								<p class="font-weight-normal">
+									{{ reply.created_on|myfunc }}
+								</p>
+							</div>
+
+							{{ reply.body | safe | linebreaks }}
+						</div>
+						{% else %}
+						<div class="reply ml-5" data-aos="fade-left" data-aos-offset="300">
+							<p class=" font-weight-bold" style="color: #002657;">
+								This reply no longer exist as it is considered dangerous to the mental and
+								psychological health of members of this community</p>
+						</div>
+						{% endif %}
 						{% endfor %}
 					</div>
-				</div>
-			</div>
-			<div class="card-item col-lg-8 col-sm-12 col-md-12 mb-4 mt-3 card d-flex align-items-stretch"
-				data-aos="zoom-in" data-aos-duration="1500">
-				<div class="card-body">
-					{% if new_comment %}
-					<div class="alert alert-success" role="alert">
-						Your comment is awaiting moderation
-					</div>
-					{% else %}
-					{% concat_all post.date_published.hour|stringformat:"i" '-' post.date_published.minute|stringformat:"i" '-' post.date_published.second|stringformat:"i" '-' post.date_published.microsecond|stringformat:"i"  as blog_time_published %}
-					<h3 class="text-center">Leave a comment</h3>
-					<form method="post" style="margin-top: 1.3em;" id="comment-form">
-						{% csrf_token %}
-						{{ comment_form.as_p }}
-						<input name="action" type="hidden" value="to_comment">
-						<button class="btn btn-primary btn-lg comment-button" id="comment-button"
-							type="submit">Submit</button>
-					</form>
-					{% endif %}
+					{% endfor %}
 				</div>
 			</div>
 		</div>
+		<div class="card-item col-lg-8 col-sm-12 col-md-12 mb-4 mt-3 card d-flex align-items-stretch" data-aos="zoom-in"
+			data-aos-duration="1500">
+			<div class="card-body">
+				{% if new_comment %}
+				<div class="alert alert-success" role="alert">
+					Your comment is awaiting moderation
+				</div>
+				{% else %}
+				{% concat_all post.date_published.hour|stringformat:"i" '-' post.date_published.minute|stringformat:"i" '-' post.date_published.second|stringformat:"i" '-' post.date_published.microsecond|stringformat:"i"  as blog_time_published %}
+				<h3 class="text-center">Leave a comment</h3>
+				<form method="post" style="margin-top: 1.3em;" id="comment-form">
+					{% csrf_token %}
+					{{ comment_form.as_p }}
+					<input name="action" type="hidden" value="to_comment">
+					<button class="btn btn-primary btn-lg comment-button" id="comment-button"
+						type="submit">Submit</button>
+				</form>
+				{% endif %}
+			</div>
+		</div>
 	</div>
+</div>
 </div>
 <script type="text/javascript">
 	$('.likebutton').click(function () {
@@ -1274,30 +607,6 @@
 			alert("Sorry, you have to be logged in to submit reports")
 		}
 	});
-	// $('.comment-button').click(function () {
-	// 	if ('{{ request.user.is_authenticated }}' === 'True') {
-	// 		var commentsCount, commentContainer;
-	// 		commentsCount = document.getElementById('comments-count');
-	// 		count = $('#comments-count').data("value");
-	// 		commentContainer = document.getElementById('comment-container');
-	// 		$.ajax({
-	// 			type: "POST",
-	// 			url: "",
-	// 			data: {
-	// 				'csrfmiddlewaretoken': '{{ csrf_token }}',
-	// 				action: 'to_comment'
-	// 			},
-	// 			success: function (data) {
-	// 				count += 1;
-	// 				console.log('{{request.user}}');
-	// 				commentsCount.innerHTML = count + " comments";
-
-	// 				commentContainer.innerHTML +=
-	// 					'<div class="comments" style="padding: 10px;"><p class="font-weight-bold">{{ request.user }}<span class=" text-muted font-weight-normal">{{ new_comment.created_on }}</span></p>{{ new_comment.body | linebreaks }}<a href="javascript:void(0)" class="reply-button" id="reply-button" onclick="replyComment(this)" title="Reply to this comment">Reply</a><div class="reply-div" id="reply-div"><form method="post" style="margin-top: 1.3em;">{% csrf_token %}{{ reply_form.as_p }}<input type="hidden" name="parent_id" value="{{new_comment.id}}"><button type="submit" class="btn btn-primary btn-lg reply-button" name="action" value="to_reply">Submit</button></form></div>{% for reply in new_comment.replies.all %}<div class="reply"><p class="font-weight-bold">{{ reply.replier }}<span class="text-muted font-weight-normal">{{ reply.created_on }}</span></p>{{ reply.body | linebreaks }}</div>{% endfor %}</div>';
-	// 			}
-	// 		})
-	// 	}
-	// });
 
 	$(document).ready(function () {
 		count = $('#comments-count').data("value");
@@ -1381,23 +690,7 @@
 								newCommentId +
 								'" type="submit">Submit</button></form></div></div>{% else %}<div class="comment" data-aos="fade-right" data-aos-offset="300" ><p class=" font-weight-bold" style="color: #002657;">This comment no longer exist as it is considered dangerous to the mental and psychological health of members of this community</p></div>{% endif %}{% for reply in comment.replies.all %}{% if reply.active %}<div class="reply ml-5" data-aos="fade-left" data-aos-offset="300" ><div class="reply-info font-weight-bold"><div class="d-flex justify-content-between"><p class="replier">{{ reply.replier }}</p><span style="float: right;"><a class="font-weight-normal make-comment-report" href="javascript:void(0)" onclick="controlReportDiv(this)">Report</a></span></div><p class="font-weight-normal">{{ reply.created_on|myfunc }}</p></div>{{ reply.body | safe | linebreaks }}</div>{% else %}<div class="reply ml-5" data-aos="fade-left" data-aos-offset="300" ><p class=" font-weight-bold" style="color: #002657;">This reply no longer exist as it is considered dangerous to the mental and psychological health of members of this community</p></div>{% endif %}{% endfor %}</div>'
 							);
-							// commentContainer.insertAdjacentHTML(
-							// 	'beforeEnd',
-							// 	'<div class="comments" id="' + String(Number(comments) + 1) + '" ' +
-							// 	'style="padding: 10px;"><p class="font-weight-bold">{{ request.user }} <span class=" text-muted font-weight-normal">' +
-							// 	ctime + '</span></p>' + comment_body +
-							// 	'</br><div><a href="javascript:void(0)" class="show-reply-form" id=' +
-							// 	replyButtonId +
-							// 	' onclick="alertMessage()" title="Reply to this comment">Reply</a><div class="reply-div" id=' +
-							// 	replyDivId +
-							// 	'><form method="post" style="margin-top: 1.3em;" class="reply-form" name="r-form" value="' +
-							// 	String(Number(comments) + 1) + '" ' + 'id="reply-form' + String(Number(comments) + 1) +
-							// 	'">{% csrf_token %}{{ reply_form.as_p }}<input type="hidden" name="parent_id" value="' +
-							// 	String(Number(comments) + 1) +
-							// 	'"><input name="action" type="hidden" value="to_reply"><button type="submit" class="btn btn-primary btn-lg reply-button" id="reply-button' +
-							// 	String(Number(comments) + 1) +
-							// 	'">Submit</button></form></div></div>{% for reply in new_comment.replies.all %}<div class="reply"><p class="font-weight-bold">{{ reply.replier }}<span class="text-muted font-weight-normal">{{ reply.created_on }}</span></p>{{ reply.body | safe | linebreaks }}</div>{% endfor %}</div>'
-							// );
+
 							form.removeChild(document.getElementById(
 								'comment-button'));
 							form.insertAdjacentHTML('beforeEnd',
@@ -1415,11 +708,11 @@
 								);
 								alert(
 									"The comment form you attempted to submit is empty"
-									)
+								)
 							} else {
 								alert(
 									"Sorry, you have to be logged in to submit comments"
-									)
+								)
 							}
 
 						}
@@ -1429,7 +722,6 @@
 					}
 				});
 			});
-			// $("#comment-form").submit();
 		});
 
 
@@ -1445,7 +737,6 @@
 				event.preventDefault();
 				console.log('submitted')
 				var commentsCount, commentContainer;
-				// form = document.getElementById("reply-form");
 				commentsCount = document.getElementById('comments-count');
 				parentId = $('#' + formId).attr('value');
 				commentContainer = document.getElementById(parentId);
@@ -1492,11 +783,6 @@
 								newReplyId +
 								'" href="javascript:alert(\'Please refresh this page on your browser to report your newly submitted reply.\')">Report</a></span></div><p class="font-weight-normal">' +
 								ctime + '</p></div>' + reply_body + '</div>');
-							// commentContainer.insertAdjacentHTML(
-							// 	'beforeEnd',
-							// 	'<div class="reply"><p class="font-weight-bold">{{ request.user }}<span class="text-muted font-weight-normal">' +
-							// 	ctime + '</span></p>' + reply_body +
-							// 	'</div>');
 							replyForm.removeChild(replyForm
 								.lastElementChild);
 							replyForm.insertAdjacentHTML('beforeEnd',
@@ -1516,11 +802,11 @@
 									'type="submit">Submit</button>');
 								alert(
 									"The reply form you attempted to submit is empty"
-									)
+								)
 							} else {
 								alert(
 									"Sorry, you have to be logged in to submit replies"
-									)
+								)
 							}
 
 						}
@@ -1531,58 +817,8 @@
 				});
 
 			});
-			// $("#comment-form").submit();
 		});
 
-		// $('.show-reply-form').click( function () {
-		// 	object = this;
-		// 	objectId= Number(object.id.split('_')[1]);
-		// 	parentDiv = object.parentElement;
-
-		// 	replyDiv = document.getElementById('reply-div' + String(objectId));
-		// 	console.log(replyDiv);
-		// 	if (replyDiv) {
-		// 		console.log(replyDiv);
-		// 		console.log('na here');
-		// 		parentDiv.removeChild(replyDiv);
-		// 	} else {
-		// 		for (let element of document.getElementsByClassName('reply-div')) {
-		// 			element.remove();
-		// 		}
-
-		// 		parentDiv.insertAdjacentHTML('beforeEnd', '<div class="reply-div" id="reply-div' + String(objectId) + '" ' + '><form id="reply-form' + String(objectId) + '" ' + 'class="reply-form" method="post" style="margin-top: 1.3em;" name="r-form" value="' + String(objectId) + '"' + '>{% csrf_token %}{{ reply_form.as_p }}<input type="hidden" name="parent_id" value="' + String(objectId) + '"' + '><input name="action" type="hidden" value="to_reply"><button class="btn btn-primary btn-lg reply-button" id="reply-button' + String(objectId) + '" ' + 'type="submit">Submit</button></form>');
-		// 		// parentDiv.insertAdjacentElement('beforeEnd', document.getElementsByClassName('reply-div')[0]);
-		// 		replyDiv = parentDiv.lastElementChild;
-		// 		replyDiv.id = 'reply-div' + String(objectId);
-		// 		replyForm = replyDiv.children[0];
-		// 		replyForm.id = 'reply-form' + String(objectId);
-		// 		replyForm.setAttribute('value', String(objectId))
-		// 		replyForm.children[2].setAttribute('value', String(objectId))
-		// 		replyForm.lastElementChild.id = String(objectId);
-		// 		replyDiv.style.display = 'block';
-		// 		formSelector = '#' + replyForm.id;
-		// 		area = replyForm.children[1].children[1];
-		// 		counter += 1
-		// 		area.className += String(counter);
-		// 		// tinymce.init({
-		//         //         selector: 'textarea#id_body.tinymce' + String(counter)
-		//         // });
-
-
-		// 	}
-		// });
 	});
-
-	// $(document).ready(function () {
-
-	// })
-	// tinymce.init({
-	// 	selector:'.editor',
-	// 	setup: function (editor) {
-	// 		editor.on('submit', function (e) {
-	// 			editor.save();
-	// 		});
-	// 	}
-	// });
 </script>
 {% endblock content %}

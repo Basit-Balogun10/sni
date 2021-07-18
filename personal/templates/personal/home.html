@@ -1,150 +1,55 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
-<!--<style type="text/css">
-  @media (max-width: 768px) {
-    .right-column {
-      margin-left: 0px;
-    }
-  }
 
-  @media (min-width: 768px) {
-    .right-column {
-      margin-left: 20px;
-    }
-  }
-
-  input.search-input {
-    font-size: 1.6rem;
-    width: 50%;
-    height: 35px;
-    border-radius: 5px;
-    border: none;
-    overflow: visible;
-    font-family: apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif;
-    line-height: inherit;
-  }
-
-  .top-bar {
-    width: 100%;
-    text-align: center
-  }
-
-  .blog-post-container {
-    margin: 20px auto 20px auto;
-    width: 50rem;
-    overflow-wrap: break-word;
-    box-shadow: 10px 10px 5px #755388;
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 15px;
-  }
-
-  .create-post-bar {
-    background-color: #fff;
-    margin-bottom: 20px;
-  }
-
-  .left-column {
-    padding: 0px;
-  }
-
-  .right-column {
-    padding: 0px;
-  }
-
-  .lead {
-    font-size: 17px;
-  }
-
-  div.row#posts-grid {
-    justify-content: space-around;
-    display: inline-grid;
-    grid-template-columns: 50% 50%;
-    width: 100%;
-  }
-
-  h3#blog-page-title {
-    font-size: 2.5rem;
-    text-align: center;
-  }
-
-    -->
-</style>
-
-<!-- main content -->
-
-<!-- <div class="container">
-  <div class="row" id="posts-grid"> -->
-    <!-- blog feed -->
-    <!-- <div class="left-column col-lg-7 offset-lg-1"> -->
-    <!-- Top 'create post' bar -->
-    <!-- <div class="d-lg-none mb-3">
-            <div class="card m-auto d-flex flex-column p-3">
-              <img
-                class="img-fluid d-block m-auto pb-2"
-                src="{% static 'codingwithmitch_logo.png' %}"
-                width="72"
-                height="72"
-              />
-              <p class="lead">
-                In this course you'll learn how to build a simple blog with user
-                registration and blog CRUD functionality. Django is a powerful
-                framework and you'll see why in this course.
-              </p>
-              <p class="m-auto">
-                  >Create post</a
-                >
-              </p>
-            </div>
-          </div> -->
-    <!-- end Top 'create post' bar -->
-
-    <!-- Blog posts-->
+<head>
+  <title>Blog Index - Synergy Network International</title>
+  {% include "snippets/head_snippet.html" %}
+</head>
 <section id="posts" class="posts">
   <div class="container">
     <div class="col-lg-12 d-block content about-content" data-aos="zoom-in" data-aos-delay="100">
-	  <form class="search-form d-flex justify-content-around" style="font-size: 16px;" method="get">
-			<span class="form-group text-search w-50"><input class="search-input w-100 h-100 text-primary border-white"
-					id="id_q" name="q" placeholder="Looking for a post?" type="text"
-					style="border-radius: 7px;" /></span>
+      <form class="search-form d-flex justify-content-around" style="font-size: 16px;" method="get">
+        <span class="form-group text-search w-50"><input class="search-input w-100 h-100 text-primary border-white"
+            id="id_q" name="q" placeholder="Looking for a post?" type="text" style="border-radius: 7px;" /></span>
 
-			<span class="form-group time-search align-self-center" style="width: 10%;">
-				<label for="time-filter" class="label">Posted Since:</label>
-				<select value="Today" class="cursor-pointer text-primary w-100" id="time-filter" name="time-filter">
-					<option selected value="">All</option>
-					<option value="today">Today</option>
-					<option value="yesterday">Yesterday</option>
-					<option value="last week">Last week</option>
-					<option value="2 weeks ago">2 weeks ago</option>
-					<option value="3 weeks ago">3 weeks ago</option>
-					<option value="last month">Last month</option>
-					<option value="this year">This year</option>
-				</select>
-			</span>
+        <span class="form-group time-search align-self-center" style="width: 10%;">
+          <label for="time-filter" class="label">Posted Since:</label>
+          <select value="Today" class="cursor-pointer text-primary w-100" id="time-filter" name="time-filter">
+            <option selected value="">All</option>
+            <option value="today">Today</option>
+            <option value="yesterday">Yesterday</option>
+            <option value="last week">Last week</option>
+            <option value="2 weeks ago">2 weeks ago</option>
+            <option value="3 weeks ago">3 weeks ago</option>
+            <option value="last month">Last month</option>
+            <option value="this year">This year</option>
+          </select>
+        </span>
 
-			<span class="form-group align-self-center" style="width: 10%;">
-				<label for="category-filter" class="label">Category:</label>
-				<select class="cursor-pointer text-primary w-100" id="category-filter" name="category-filter">
-					<option selected value="">All</option>
-					<option value="history">History</option>
-					<option value="politics-and-international-relations">Politics & International
-						Relations</option>
-					<option value="society-and-culture">Society & Culture</option>
-					<option value="science-and-technology">Science & Technology</option>
-					<option value="art-and-literature">Art & Literature</option>
-					<option value="business-and-economics">Business & Economics</option>
-				</select>
-			</span>
+        <span class="form-group align-self-center" style="width: 10%;">
+          <label for="category-filter" class="label">Category:</label>
+          <select class="cursor-pointer text-primary w-100" id="category-filter" name="category-filter">
+            <option selected value="">All</option>
+            <option value="history">History</option>
+            <option value="politics-and-international-relations">Politics & International
+              Relations</option>
+            <option value="society-and-culture">Society & Culture</option>
+            <option value="science-and-technology">Science & Technology</option>
+            <option value="art-and-literature">Art & Literature</option>
+            <option value="business-and-economics">Business & Economics</option>
+          </select>
+        </span>
 
-			<span class="form-group text-center" style="width: 10%;">
-				<button href="{% url 'blog:home' %}" class="w-100 mt-0 form-control btn sbmt submit px-3" role="button"
-					type="submit"><i class="fa fa-search"></i></button>
-			</span>
-		</form>
-</div>
+        <span class="form-group text-center" style="width: 10%;">
+          <button href="{% url 'blog:index' %}" class="w-100 mt-0 form-control btn sbmt submit px-3" role="button"
+            type="submit"><i class="fa fa-search"></i></button>
+        </span>
+      </form>
+    </div>
 
     {% if blog_posts %}
     <div class="row" data-aos="zoom-in" data-aos-delay="100">
       {% for post in blog_posts %}
-        {% include 'blog/snippets/blog_post_snippet.html' with blog_post=post %}
+      {% include 'blog/snippets/blog_post_snippet.html' with blog_post=post %}
       {% endfor %}
     </div>
     {% else %}
@@ -152,46 +57,22 @@
     {% endif %}
   </div>
 </section>
-        <!-- End Blog posts-->
+{% include 'blog/snippets/blog_post_pagination.html' with blog_posts=blog_posts %}
 
-        <!-- Pagination -->
-        {% include 'blog/snippets/blog_post_pagination.html' with blog_posts=blog_posts %}
-  <!-- </div> -->
-  <!-- end blog feed -->
-
-  <!-- Right 'create post' column  -->
-  <!-- <div class="right-column col-lg-3 d-lg-flex d-none flex-column">
-        <div class="card create-post-bar d-flex flex-column p-3">
-          <img
-            class="img-fluid d-block m-auto pb-2"
-            src="{% static 'codingwithmitch_logo.png' %}"
-            width="72"
-            height="72"
-          />
-          <p class="lead">
-            In this course you'll learn how to build a simple blog with user
-            registration and blog CRUD functionality. Django is a powerful
-            framework and you'll see why in this course.
-          </p>
-          <p class="m-auto">
-              >Create post</a
-            >
-          </p>
-        </div>
-      </div> -->
-  <!-- end Right 'create post' column  -->
-  <!-- </div> -->
-<!-- </div> -->
 {{cap}}
 <script type="text/javascript">
   document.getElementById("id_q").value = "{{query}}";
   document.getElementById("time-filter").value = "{{time_filter}}";
-  // $("#time-filter").val("{{time_filter}}").change()
   console.log("{{category_filter}}")
   console.log("{{category_filter}}")
-  var categories_readable = {"history": "history", "politics-and-international-relations": "POLITICS & INTERNATIONAL RELATIONS",
-               "society-and-culture": "SOCIETY & CULTURE", "science-and-technology": "SCIENCE & TECHNOLOGY",
-               "art-and-literature": "ART & LITERATURE", "business-and-economics": "BUSINESS & ECONOMICS"}
+  var categories_readable = {
+    "history": "history",
+    "politics-and-international-relations": "POLITICS & INTERNATIONAL RELATIONS",
+    "society-and-culture": "SOCIETY & CULTURE",
+    "science-and-technology": "SCIENCE & TECHNOLOGY",
+    "art-and-literature": "ART & LITERATURE",
+    "business-and-economics": "BUSINESS & ECONOMICS"
+  }
   document.getElementById("category-filter").value = "{{category_filter}}";
 </script>
 {% endblock content %}

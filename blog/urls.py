@@ -15,7 +15,7 @@ urlpatterns = [
     # path('create/', create_blog_view, name="create"),
     # path('like/', like, name='like'),
     # path('<category>/<year>/<month>/', detail_blog_view, name="detail"),
-    path('trending', home_screen_view, name="home"),
+    path('index', home_screen_view, name="index"),
     path('<category>/<year>/<month>/<day>/<time>/<identity>/<title>/', detail_blog_view, name="detail"),
     # path('<category>/edit/', edit_blog_view, name="edit"),
 ]

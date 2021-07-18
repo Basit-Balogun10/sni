@@ -1,17 +1,14 @@
-(function($) {
-
-	"use strict";
-
-	$(".toggle-password").click(function() {
-
-	  $(this).toggleClass("fa-eye fa-eye-slash");
-	  var input = $($(this).attr("toggle"));
-	  if (input.attr("type") == "password") {
-	    input.attr("type", "text");
-	  } else {
-	    input.attr("type", "password");
-	  }
-	});
-
-
-})(jQuery);
+function toggleVisibility(object) {
+    console.log(object);
+    input = object.previousElementSibling;
+    console.log(input);
+    if (input.getAttribute("type") === "password") {
+        input.setAttribute("type", "text");
+        object.classList.toggle("fa-eye-slash");
+        object.classList.toggle("fa-eye");
+    } else {
+        input.setAttribute("type", "password");
+        object.classList.toggle("fa-eye");
+        object.classList.toggle("fa-eye-slash");
+    }
+}

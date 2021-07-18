@@ -15,9 +15,6 @@
                 id="logo"
                 src="{% static 'sni_app/images/SNI-Logo-cropped.png' %}"
         /></a>
-        <!-- <h1 class="logo me-auto"><a href="index.html">Mentor</a></h1> -->
-        <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
         <nav id="navbar" class="navbar order-last order-lg-0">
             <ul>
@@ -28,7 +25,7 @@
                     <a href="{% url 'sni_app:about' %}" title="">About</a>
                 </li>
                 <li class="route">
-                    <a href="{% url 'blog:home' %}" title="">Blog</a>
+                    <a href="{% url 'blog:index' %}" title="">Blog</a>
                 </li>
                 <li class="route">
                     <a href="{% url 'sni_app:organizer' %}">Organizer</a>
@@ -46,7 +43,6 @@
                     ></a>
                     <ul>
                         {% if request.user.is_authenticated %}
-                        <!-- <p class="m-auto" id="greeting">Hello, {{request.user.username}}</p> -->
                         <li><a href="{% url 'logout' %}">Logout</a></li>
                         > {% else %}
                         <li><a href="{% url 'login' %}">Login</a></li>
@@ -106,10 +102,7 @@
                     <a href="{% url 'sni_app:venue' %}">Venue</a>
                 </li>
             </ul>
-            <!-- <i class="fas fa-bars fa-3x mobile-nav-toggle"></i> -->
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav>
-        <!-- .navbar -->
     </div>
 </header>
-<!-- c:/Users/acer/Documents/PycharmProjects/pythonProject/venv/Scripts/activate.bat -->

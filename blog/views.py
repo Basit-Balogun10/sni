@@ -77,7 +77,7 @@ def detail_blog_view(request, category, year, month, day, time, identity, title)
     context['dislike_color'] = dislike_color
 
     action = request.POST.get('action')
-    print(action)
+    # print(action)
     context['CommentModel'] = Comment.objects
 
     if request.method == 'POST':
@@ -94,12 +94,12 @@ def detail_blog_view(request, category, year, month, day, time, identity, title)
                     new_comment.commenter = request.user
                     # Save the comment to the database
                     new_comment.save()
-                    print('saved')
+                    # print('saved')
                     context['new_comment'] = new_comment
                     return HttpResponse('success')
                 else:
-                    print('failed')
-                    print(comment_form.errors)
+                    # print('failed')
+                    # print(comment_form.errors)
                     return HttpResponse('error')
             else:
                 login_message = "Sorry, you have to be logged in to like or dislike posts"
@@ -112,19 +112,19 @@ def detail_blog_view(request, category, year, month, day, time, identity, title)
 
                 TBR_id = int(request.POST.get('parent_id'))
                 TBR_comment = get_object_or_404(Comment, id=TBR_id)
-                print(TBR_comment)
+                # print(TBR_comment)
 
                 if reply_form.is_valid():
                     new_reply = reply_form.save(commit=False)
                     new_reply.comment = TBR_comment
                     new_reply.replier = request.user
                     new_reply.save()
-                    print('saved')
+                    # print('saved')
                     context['new_reply'] = new_reply
                     return HttpResponse('success')
                 else:
-                    print('failed')
-                    print(reply_form.errors)
+                    # print('failed')
+                    # print(reply_form.errors)
                     return HttpResponse('error')
             else:
                 login_message = "Sorry, you have to be logged in to like or dislike posts"
@@ -138,16 +138,16 @@ def detail_blog_view(request, category, year, month, day, time, identity, title)
                 if target == "comment":
                     comment_id = int(request.POST.get('target_id'))
                     comment = get_object_or_404(Comment, id=comment_id)
-                    print(comment)
+                    # print(comment)
                     CommentReport.objects.create(title=report_title, comment=comment, reporter=user)
-                    print(CommentReport.objects.last())
+                    # print(CommentReport.objects.last())
                     return HttpResponse('success')
                 elif target == "reply":
                     reply_id = int(request.POST.get('target_id'))
                     reply = get_object_or_404(Reply, id=reply_id)
-                    print(reply)
+                    # print(reply)
                     ReplyReport.objects.create(title=report_title, reply=reply, reporter=user)
-                    print(ReplyReport.objects.last())
+                    # print(ReplyReport.objects.last())
                     return HttpResponse('success')
             else:
                 return HttpResponse("Sorry, you have to be logged in to report comments or replies")

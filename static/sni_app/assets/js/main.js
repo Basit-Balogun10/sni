@@ -1,9 +1,3 @@
-/**
- * Template Name: Mentor - v4.2.0
- * Template URL: https://bootstrapmade.com/mentor-free-education-bootstrap-theme/
- * Author: BootstrapMade.com
- * License: https://bootstrapmade.com/license/
- */
 (function () {
     "use strict";
 
@@ -83,10 +77,8 @@
                 window.innerHeight
             ) {
                 if (entries[0].isIntersecting === true) {
-                    // select("#header").style.display = "none";
                     select("#header").style.top = "-100px";
                 } else {
-                    // select("#header").style.display = "block";
                     select("#header").style.top = "0";
                 }
             }
@@ -96,7 +88,6 @@
 
     observer.observe(select("#footer"));
 
-    // Show acitve route (nav link)
     var routes = select(".route", true);
 
     var navLinks = {
@@ -114,14 +105,6 @@
     };
     var url = window.location.href;
 
-    // if (
-    //     url == "http://127.0.0.1:8000/" ||
-    //     url == "http://localhost:8000/" ||
-    //     url == "https://sni.world/" ||
-    //     url == "https://www.sni.world/"
-    // ) {
-    //     routes[0].className += " active";
-    // } else {
     var breakParent = false;
     for (var navLink in navLinks) {
         console.log(navLinks[navLink]);
@@ -148,7 +131,6 @@
             break;
         }
     }
-    // }
 
     if (select(".route.active")) {
     } else {
@@ -172,6 +154,21 @@
             }
         }
     }
+
+    on("click", ".toggle-password", function () {
+        console.log(this);
+        input = this.previousElementSibling;
+        console.log(input);
+        if (input.getAttribute("type") === "password") {
+            input.setAttribute("type", "text");
+            this.classList.toggle("fa-eye-slash");
+            this.classList.toggle("fa-eye");
+        } else {
+            input.setAttribute("type", "password");
+            this.classList.toggle("fa-eye");
+            this.classList.toggle("fa-eye-slash");
+        }
+    });
 
     /**
      * Animation on scroll

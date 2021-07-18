@@ -127,9 +127,6 @@
 </style> {% endcomment %}
 
 {% if blog_post %}
-<!-- <div class="container">
-  <div class="row"> -->
-<!-- Blog Post -->
 
 {% concat_all blog_post.date_published.hour|stringformat:"i" '-' blog_post.date_published.minute|stringformat:"i" '-' blog_post.date_published.second|stringformat:"i" '-' blog_post.date_published.microsecond|stringformat:"i"  as blog_time_published %}
 
@@ -168,13 +165,13 @@
     </div>
     </a>
   </div>
-</div> <!-- End Course Item-->
+</div>
 {% else %}
 
 <div class="container">
   <div class="row">
     <div class="card m-auto">
-        <div class="misc card-body text-center border-5 mt-2 mb-2" style="background: #002657;">
+      <div class="misc card-body text-center border-5 mt-2 mb-2" style="background: #002657;">
         <h2 class="card-title">No results</h2>
         <p class="card-text">
           There were no results matching the search information provided"
