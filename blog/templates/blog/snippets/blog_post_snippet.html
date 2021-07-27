@@ -6,12 +6,11 @@
 <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
   <div class="post-item">
     <div><img src="{{blog_post.image.url}}" class="post-image img-fluid" alt="..."></div>
-    <div><a
+    <div><a style="text-decoration: none;"
         href="{% url 'blog:detail' blog_post.category blog_post.date_published.year blog_post.date_published.month blog_post.date_published.day blog_time_published blog_post.id blog_post.title|slugify %}">
         <div class="post-content">
           <div class="d-flex text-uppercase justify-content-around align-items-center mb-3">
             <h4 style="background: {{blog_post.category|get_color}};">{{blog_post.category|get_readable}}</h4>
-            {% comment %} <p class="price">$169</p> {% endcomment %}
           </div>
 
           <h3 class="text-center font-weight-normal">{{blog_post.title}}</h3>
@@ -19,8 +18,8 @@
           <div class="trainer align-items-center">
             <div class="trainer-profile d-flex justify-content-between align-items-center">
               <div class="author-detail d-flex">
-                <img src="{{blog_post.author_img.url}}" class="img-fluid" alt="">
-                <span>{{blog_post.author.firstname}} {{ blog_post.author.lastname}}</span>
+                <img src="{{blog_post.author.user.image.url}}" class="img-fluid" alt="">
+                <span>{{blog_post.author.user.firstname}} {{ blog_post.author.user.lastname}}</span>
               </div>
               <div class="feedback d-flex">
                 <i class="fa fa-thumbs-up"></i>&nbsp;{{ blog_post.num_likes }}

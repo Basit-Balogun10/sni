@@ -9,16 +9,18 @@ from django.dispatch import receiver
 
 from tinymce.models import HTMLField
 
+from account.models import WriterProfile
+
 
 def upload_location(instance, filename):
     file_path = 'blog/{author_id}/{title}-{filename}'.format(
-        author_id=str(instance.author.id), title=str(instance.title), filename=filename)
+        author_id=str(instance.author.user.id), title=str(instance.title), filename=filename)
     return file_path
 
-def author_img_upload_location(instance, filename):
-    file_path = 'author_img/{post_detail}/{author_id}-{filename}'.format(
-        post_detail=str(instance.title) + '-' + str(instance.id), author_id=str(instance.author.id), filename=filename)
-    return file_path
+# def author_img_upload_location(instance, filename):
+#     file_path = 'author_img/{post_detail}/{author_id}-{filename}'.format(
+#         post_detail=str(instance.title) + '-' + str(instance.id), author_id=str(instance.author.user.id), filename=filename)
+#     return file_path
 
 
 class BlogPost(models.Model):
@@ -27,8 +29,7 @@ class BlogPost(models.Model):
     image = models.ImageField(upload_to=upload_location, null=False, blank=False)
     date_published = models.DateTimeField(auto_now_add=True, verbose_name="date published")
     date_updated = models.DateTimeField(auto_now=True, verbose_name="date updated")
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="user_posts")
-    author_img = models.ImageField(upload_to=author_img_upload_location, null=False, blank=False)
+    author = models.ForeignKey(WriterProfile, on_delete=models.CASCADE, related_name="user_posts")
     liked = models.ManyToManyField(settings.AUTH_USER_MODEL, default=None, blank=True, related_name='liked', editable=False)
     disliked = models.ManyToManyField(settings.AUTH_USER_MODEL, default=None, blank=True, related_name='disliked', editable=False)
     CATEGORIES = (("history", "HISTORY"), ("politics-and-international-relations", "POLITICS & INTERNATIONAL RELATIONS"),
@@ -189,7 +190,7 @@ def submission_delete(sender, instance, **kwargs):
 
 def pre_save_blog_post_receiver(sender, instance, *args, **kwargs):
     if not instance.category:
-        instance.category = slugify(instance.author.username + "-" + instance.title)
+        instance.category = slugify(instance.author.user.username + "-" + instance.title)
 
 
 pre_save.connect(pre_save_blog_post_receiver, sender=BlogPost)

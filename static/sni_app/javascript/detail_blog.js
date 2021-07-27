@@ -40,6 +40,16 @@ function closeConfirmationPopup() {
     popup.style.padding = "50px";
 }
 
+function controlAboutDiv(state = null) {
+    if (state) {
+        let overlay = select("#about-div");
+        overlay.style.display = "block";
+    } else {
+        let overlay = select("#about-div");
+        overlay.style.display = "none";
+    }
+}
+
 function controlReportDiv(object = null) {
     if (object) {
         let objectId = object.id.split("_")[1];
@@ -117,3 +127,17 @@ function selectThis(object) {
     console.log(object);
     console.log(object.classList);
 }
+
+//Changer heade bg-color on scrolling away from hero section
+var observer = new IntersectionObserver(
+    function (entries) {
+        if (entries[0].isIntersecting === false) {
+            select("#header").style.backgroundColor = "#002657";
+        } else {
+            select("#header").style.backgroundColor = "rgb(255, 255, 255, 0)";
+        }
+    },
+    { threshold: [0] }
+);
+
+observer.observe(select("#hero"));

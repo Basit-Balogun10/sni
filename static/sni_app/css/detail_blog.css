@@ -1,7 +1,146 @@
 html,
 body {
-    background: linear-gradient(35deg, #002657, #c582eb);
+    background: rgb(255, 255, 255, 0);
     overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+#header {
+    background-color: rgb(255, 255, 255, 0);
+}
+
+@-webkit-keyframes animate-background {
+    50% {
+        background-position: right;
+    }
+}
+
+@keyframes animate-background {
+    50% {
+        background-position: right;
+    }
+}
+
+#hero {
+    top: -100px;
+    background-size: cover;
+    height: fit-content;
+    -webkit-animation: animate-background 5s infinite;
+    animation: animate-background 5s infinite;
+}
+
+@-webkit-keyframes animate-arrow {
+    0% {
+        -webkit-transform: translate3d(0, 10px, 0);
+        transform: translate3d(0, 10px, 0);
+    }
+    50% {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+    100% {
+        -webkit-transform: translate3d(0, 10px, 0);
+        transform: translate3d(0, 10px, 0);
+    }
+}
+
+@-moz-keyframes animate-arrow {
+    0% {
+        -moz-transform: translate3d(0, 10px, 0);
+        transform: translate3d(0, 10px, 0);
+    }
+    50% {
+        -moz-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+    100% {
+        -moz-transform: translate3d(0, 10px, 0);
+        transform: translate3d(0, 10px, 0);
+    }
+}
+
+@-webkit-keyframes animate-link {
+    0% {
+        -webkit-transform: scale(1, 1);
+        transform: scale(1, 1);
+    }
+    50% {
+        -webkit-transform: scale(1.2, 1.2);
+        transform: scale(1.2, 1.2);
+    }
+    100% {
+        -webkit-transform: scale(1, 1);
+        transform: scale(1, 1);
+    }
+}
+
+#about-link {
+    animation: animate-link 1.5s ease-in-out infinite;
+}
+#jump-to-content,
+#jump-to-content:hover,
+#about-link {
+    color: #002657;
+}
+
+#jump-to-content svg {
+    margin: 20px auto auto auto;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    animation: animate-arrow 1s ease-in-out infinite;
+    -webkit-animation: animate-arrow 1s ease-in-out infiinte;
+    -moz-animation: animate-arrow 1s ease-in-out infiinte;
+}
+
+#post-feedback {
+    position: fixed;
+    z-index: 999;
+    bottom: 15px;
+    right: 15px;
+}
+
+#main-content {
+    padding: 0px;
+    color: #002657;
+}
+
+#main-content h3 {
+    background: deepskyblue;
+}
+
+.post-body {
+    padding-left: 250;
+}
+
+#post-body * {
+    color: #002657!important;
+}
+
+.posts .post-content.blog-detail,
+.posts .post-content.blog-detail:hover {
+    background: #935ae4;
+}
+
+.post-item {
+    transition: all 0.3s;
+}
+
+.post-item:hover {
+    transform: scale3d(1.03, 1.03, 1.03);
+}
+
+.see-more {
+    padding: 10px;
+    color: #002657;
+    border: 3px solid #002657;
+    background: white;
+    transition: all 0.3s;
+    border-radius: 5px;
+}
+
+.see-more:hover {
+    color: white;
+    background: #002657;
+    border: 1px solid #002657;
 }
 
 @media (max-width: 768px) {
@@ -28,6 +167,11 @@ body {
     }
 }
 
+.blog-author-detail img.about-author {
+    width: 200px;
+    height: 200px;
+    border-radius: 200px;
+}
 .post-title {
     text-align: center;
     font-weight: bold;
@@ -40,7 +184,6 @@ body {
 .post-info {
     color: #002657;
     font-weight: bold;
-    border-bottom: 2px solid #002659;
     margin-bottom: 10px;
     text-align: center;
 }
@@ -81,8 +224,7 @@ button.submit-comment:hover {
     padding: 9px;
 }
 
-span.info-head,
-span.author {
+span.info-head {
     color: white;
 }
 

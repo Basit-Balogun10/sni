@@ -19,13 +19,13 @@ class CreateBlogPostForm(forms.ModelForm):
 
     class Meta:
         model = BlogPost
-        fields = ['category', 'title', 'body', 'image', 'author_img']
+        fields = ['category', 'title', 'body', 'image']
 
 
 class UpdateBlogPostForm(forms.ModelForm):
     class Meta:
         model = BlogPost
-        fields = ['category', 'title', 'body', 'image', 'author_img']
+        fields = ['category', 'title', 'body', 'image']
 
     def save(self, commit=True):
         blog_post = self.instance
@@ -35,9 +35,6 @@ class UpdateBlogPostForm(forms.ModelForm):
 
         if self.cleaned_data['image']:
             blog_post.image = self.cleaned_data['image']
-        
-        if self.cleaned_data['author_img']:
-            blog_post.image = self.cleaned_data['author_img']
 
         if commit:
             blog_post.save()

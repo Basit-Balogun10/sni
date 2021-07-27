@@ -3,6 +3,7 @@ from . import views
 from personal.views import (
     home_screen_view,
 )
+from account.views import (ActivateAccount, ResendActivationEmail)
 
 app_name = 'sni_app'
 
@@ -15,4 +16,7 @@ urlpatterns = [
     path('speakers', views.speakers, name='speakers'),
     path('sponsors', views.sponsors, name='sponsors'),
     path('venue', views.venue, name='venue'),
+    
+    path('resend_activation_email/<target>', ResendActivationEmail.as_view(), name='resend'),
+    path('activate/<uidb64>/<token>/', ActivateAccount.as_view(), name='activate'),
 ]

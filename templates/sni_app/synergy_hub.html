@@ -23,11 +23,16 @@
         <a href="https://www.picktime.com/e7368b8f-4b85-4a19-aa69-986d92bd07f4" class="ptbkbtn" target="_blank"
             style="position: fixed;right: 0px;top: 50%;margin-top: -90px;float:none;z-index: 9999999"><img border="none"
                 src="https://www.picktime.com/bookingPage/img/picktime-book-online-right.png"
-                alt="Book an appointment with PT Sample Company" /></a>
+                alt="Book a spot now" /></a>
         {% else %}
-        <a class="more-btn"
-            style="float:none; position: fixed; background: white; border: 1px solid white; right: -87px; top: 50%; display: block; z-index: 20000; transform: rotate(270deg)"
+        <a class="more-btn sticky font-weight-bold"
             href="{% url 'login' %}">Book Now (Log In Required)</a>
+        <div class="text-center sticky-auth font-weight-bold">
+            <a href="{% url 'register' %}" class="more-btn">Sign Up
+                <i class="bx bx-chevron-right"></i></a>
+            <a href="{% url 'login' %}" class="more-btn">Log In
+                <i class="bx bx-chevron-right"></i></a>
+        </div>
         {% endif %}
 
         <section id="synergy-hub" class="synergy-hub">
@@ -212,10 +217,11 @@
                                     </div>
                                 </div>
 
+                                {% if not request.user.is_authenticated %}
                                 <div class="col-xl-12 d-flex align-items-stretch stretch-mod" data-aos="zoom-in">
                                     <div class="service hub mt-4 mt-xl-0">
                                         <div class="head">
-                                            <h4>Do You Want to Join the Discussion?</h2>
+                                            <h4>Are You Ready to Join the Discussion?</h2>
                                                 <p>
                                                     Easy! Create an account with us and login. Then book a session by
                                                     filling in required the information in the window that pops up when
@@ -223,14 +229,9 @@
                                                     screen.
                                                 </p>
                                         </div>
-                                        <div class="text-center">
-                                            <a href="{% url 'register' %}" class="more-btn">Sign Up
-                                                <i class="bx bx-chevron-right"></i></a>
-                                            <a href="{% url 'login' %}" class="more-btn">Log In
-                                                <i class="bx bx-chevron-right"></i></a>
-                                        </div>
                                     </div>
                                 </div>
+                                {% endif %}
                             </div>
                         </div>
                         <!-- End .content-->

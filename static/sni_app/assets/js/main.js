@@ -68,6 +68,17 @@
         });
     }
 
+    const scrollProgress = document.getElementById("scroll-progress");
+    const height =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
+
+    window.addEventListener("scroll", () => {
+        const scrollTop =
+            document.body.scrollTop || document.documentElement.scrollTop;
+        scrollProgress.style.width = `${(scrollTop / height) * 100}%`;
+    });
+
     //Hide header on footer apperance
     var observer = new IntersectionObserver(
         function (entries) {
@@ -168,6 +179,26 @@
             this.classList.toggle("fa-eye");
             this.classList.toggle("fa-eye-slash");
         }
+    });
+
+    on("click", "#open-search-div", function () {
+        let overlay = select("#search-div");
+        overlay.style.display = "block";
+    });
+
+    on("mouseover", "#open-search-div", function () {
+        this.innerHTML = "Looking for a blog post?";
+        this.style.width = "250px";
+    });
+
+    on("mouseout", "#open-search-div", function () {
+        this.innerHTML = '<i class="fa fa-search"></i>';
+        this.style.width = "50px";
+    });
+
+    on("click", "#close-search-div", function () {
+        let overlay = select("#search-div");
+        overlay.style.display = "none";
     });
 
     /**

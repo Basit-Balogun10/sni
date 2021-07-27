@@ -24,7 +24,7 @@ def create_blog_view(request):
     if form.is_valid():
         obj = form.save(commit=False)
         author = Account.objects.filter(email=user.email).first()
-        obj.author = author
+        obj.author.user = author
         obj.save()
         form = CreateBlogPostForm()
 
@@ -237,7 +237,7 @@ def detail_blog_view(request, category, year, month, day, time, identity, title)
     context['related_posts'] = related_posts
 
     # GET MORE POSTS FROM THE SAME AUTHOR
-    author_posts = get_author_posts(blog_post.author, blog_post.id, 6)
+    author_posts = get_author_posts(blog_post.author.user, blog_post.id, 6)
     context['author_posts'] = author_posts
 
     comment_form = CommentForm()
@@ -257,7 +257,7 @@ def edit_blog_view(request, category):
 
     blog_post = get_object_or_404(BlogPost, category=category)
 
-    if blog_post.author != user:
+    if blog_post.author.user != user:
         return HttpResponse('You are not the author of that post.')
 
     if request.POST:

@@ -14,6 +14,11 @@
     <section id="hero" style="background-image: url('{% static '/sni_app/images/Hero-Home-page-new.png' %}');" class="
         d-flex justify-content-center align-items-center">
         <div class="container position-relative" data-aos="zoom-in" data-aos-delay="100">
+            {% if messages %}
+            {% for message in messages %}
+                <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
+            {% endfor %}
+            {% endif %}
             <h2>Empowering Youth.</h2>
             <h1>Change. Progress. Success.</h1>
             <a href="#about" class="btn-get-started">About Us</a>
