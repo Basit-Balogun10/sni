@@ -1,0 +1,13 @@
+{% autoescape off %}
+Hi {{ user.firstname }},
+
+Thank you for signing up with us, a few more steps and you're good to go. Please click on the link below to confirm your
+registration and activate your account.
+
+http://{{ domain }}{% url 'sni_app:activate' uidb64=uid token=token %}
+
+If clicking on the link above doesn't work, you may copy and paste the URL in your browser.
+
+Sincerely,
+With love, the Synergy Network International team.
+{% endautoescape %}
