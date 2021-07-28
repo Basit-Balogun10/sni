@@ -118,14 +118,9 @@
 
     var breakParent = false;
     for (var navLink in navLinks) {
-        console.log(navLinks[navLink]);
         for (var pos = 0; pos < navLinks[navLink].length; ) {
-            console.log(navLinks[navLink][pos]);
             if (url.includes(navLinks[navLink][pos])) {
-                console.log(navLink);
                 for (var i = 0; i < routes.length; i++) {
-                    console.log(routes[i]);
-                    console.log(routes[i].innerText);
                     if (routes[i].innerText.includes(navLink)) {
                         routes[i].className += " active";
                         break;
@@ -165,21 +160,6 @@
             }
         }
     }
-
-    on("click", ".toggle-password", function () {
-        console.log(this);
-        input = this.previousElementSibling;
-        console.log(input);
-        if (input.getAttribute("type") === "password") {
-            input.setAttribute("type", "text");
-            this.classList.toggle("fa-eye-slash");
-            this.classList.toggle("fa-eye");
-        } else {
-            input.setAttribute("type", "password");
-            this.classList.toggle("fa-eye");
-            this.classList.toggle("fa-eye-slash");
-        }
-    });
 
     on("click", "#open-search-div", function () {
         let overlay = select("#search-div");

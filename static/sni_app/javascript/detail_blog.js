@@ -66,10 +66,8 @@ function controlReportDiv(object = null) {
         reportForm.id = "report-form" + objectId;
         reportForm.setAttribute("value", objectId);
         reportUl.setAttribute("data-catid", objectId);
-        console.log(reportDiv);
         reportDiv.style.display = "block";
         reportDiv.classList.toggle("active-div");
-        console.log(reportDiv.classList);
     } else {
         let reportUl = document.getElementById("rt-ul");
         reportUl.setAttribute("data-catid", "");
@@ -98,7 +96,6 @@ function replyComment(object) {
             let id = replyButtons[button].id.split("_")[1];
             let replyDiv = document.getElementById("reply-div" + id);
             if (replyDiv.style.display === "block") {
-                console.log("one is block");
 
                 replyDiv.style.display = "none";
                 break;
@@ -124,8 +121,6 @@ function alertMessage() {
 
 function selectThis(object) {
     object.classList.toggle("selected");
-    console.log(object);
-    console.log(object.classList);
 }
 
 //Changer heade bg-color on scrolling away from hero section
