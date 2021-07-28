@@ -1,20 +1,60 @@
 #confirm-report-overlay,
-.report-div {
+.report-div,
+#about-div,
+#search-div,
+#feedback-div {
     position: fixed;
     display: none;
     left: 0px;
     top: 0px;
     right: 0px;
     bottom: 0px;
-    background: rgb(0 38 87 / 66%);
+    background: rgb(0 38 87 / 90%);
     z-index: 999;
 }
 
-.report-popup {
+.report-popup,
+.post-info.about-author,
+#search-popup,
+#feedback-popup {
     position: absolute;
     left: 17.5%;
     right: 20%;
     margin: auto;
+}
+
+.search-popup#search-popup,
+#feedback-popup {
+    left: 0;
+    right: 0;
+    top: 50px;
+}
+
+#find-post {
+    left: 15px;
+    position: fixed;
+    bottom: 15px;
+    z-index: 999;
+}
+
+#find-post button {
+    box-shadow: 0px 0px 10px #002657;
+    border-radius: 10px;
+    padding: 10px;
+    width: 50px;
+    height: 50px;
+    background: #002657;
+    border: 2px solid #002657;
+    transition: 0.3s all;
+    color: white;
+}
+
+#find-post button:focus,
+#send-feedback button {
+    background: #002657;
+    color: white;
+    border: 1px solid #002657;
+    padding: 8px;
 }
 
 #confirmation-popup {
@@ -34,6 +74,15 @@
     margin: auto;
 }
 
+#scroll-progress {
+    position: fixed;
+    top: 0;
+    width: 0%;
+    height: 4px;
+    background: #c582eb;
+    z-index: 10000;
+}
+
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
@@ -44,16 +93,12 @@ body {
     background: -o-linear-gradient(top right, #c582eb, #002657);
     background: -moz-linear-gradient(top right, #c582eb, #002657);
     background: linear-gradient(5deg, #f85ff0, #002657);
+    scroll-behavior: smooth;
     background: linear-gradient(75deg, #e666e0, #002657);
 }
 
 a {
     color: #c582eb;
-    text-decoration: none;
-}
-
-a:hover {
-    color: #86db9f;
     text-decoration: none;
 }
 
@@ -714,6 +759,33 @@ section {
     transition: all ease-in-out 0.4s;
 }
 
+.more-btn.sticky,
+.sticky-auth {
+    float: none;
+    position: fixed;
+    top: 50%;
+    display: block;
+    z-index: 20000;
+    transform: rotate(270deg);
+}
+
+.more-btn.sticky {
+    border: 3px solid;
+    right: -99px;
+}
+
+.sticky-auth {
+    left: -70px;
+    margin-top: 10px;
+}
+
+.sticky-auth a.more-btn {
+    border: 3px solid;
+}
+.sticky-auth a:hover {
+    border: 3px solid white;
+}
+
 .synergy-hub .content .more-btn i {
     font-size: 14px;
 }
@@ -747,7 +819,7 @@ button.more-btn {
 
 @media (min-width: 769px) {
     .synergy-hub .services .service .head {
-        height: 200px;
+        height: fit-content;
     }
 
     .synergy-hub .services .service ul {
@@ -780,6 +852,7 @@ button.more-btn {
 
 .synergy-hub .services .service i.default {
     font-size: 32px;
+    height: fit-content;
     padding: 18px;
     margin-bottom: 30px;
     border-radius: 50px;
@@ -899,6 +972,7 @@ button.more-btn {
     font-size: 14px;
     box-shadow: 0px 0px 20px #002657;
     background: #b87ce1;
+    font-weight: bold;
     padding: 7px 14px;
     color: #fff;
     margin: 0;
