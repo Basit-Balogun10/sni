@@ -71,5 +71,5 @@ def get_color(arg):
 
 @register.filter
 def get_text(arg):
-    soup = BeautifulSoup(arg, features="hmtl.parser")
+    soup = BeautifulSoup(arg, features="html.parser")
     return soup.get_text()
