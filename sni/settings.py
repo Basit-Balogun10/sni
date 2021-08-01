@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'account',
     'blog',
     'tinymce',
+    'widget_tweaks',
 
 ]
 

@@ -3,6 +3,7 @@
 <html lang="en">
 
 <head>
+    <title>{% block title %} {% endblock title %}</title>
 	<meta charset="utf-8" />
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 	<meta
@@ -13,6 +14,7 @@
 	<link href="{% static 'sni_app/images/cropped-SNI-Favicon-32x32.png' %}" rel="icon" sizes="32x32" />
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	{% block link %} {% endblock link %}
 
 	<link
 		href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
@@ -36,27 +38,21 @@
 	a {
 		text-decoration: none;
 	}
+
+	.main {
+		min-height: 100vh;
+		height: 100%;
+	}
 </style>
+{% block stylesheet %} {% endblock stylesheet %}
 
 <body>
 	{% include 'header.html' %}
-	<!-- Body -->
-	<style type="text/css">
-		.main {
-			min-height: 100vh;
-			height: 100%;
-		}
-	</style>
 	<div class="main">
-		<div id="find-post">
-			<button title="Search for a blog post" class="btn" id="open-search-div"><i
-					class="fa fa-search"></i></button>
-		</div>
 		{% block content %}
 
 		{% endblock content %}
 	</div>
-	<!-- End Body -->
 
 	{% include 'footer.html' %}
 
@@ -93,6 +89,7 @@
 	<script src="{% static 'sni_app/javascript/home.js' %}" type="text/javascript"></script>
 
 	<script src="{% static 'sni_app/assets/js/signup.js' %}"></script>
+	{% block script %} {% endblock script %}
 </body>
 
 </html>
