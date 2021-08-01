@@ -1,16 +1,13 @@
 <!DOCTYPE html>
+{% extends 'base.html' %}
 {% load static %}
-<html lang="en">
 
 
-<head>
-    <title>Schedule - Synergy Network International</title>
-    {% include "snippets/head_snippet.html" %}
-</head>
+{% block title %}
+Schedule - Synergy Network International
+{% endblock %}
 
-<body>
-    {% include "header.html" %}
-
+{% block content %}
     <main id="main">
         <section id="hero" style="background-image: url('{% static '/sni_app/images/Hero-Home-page-new.png' %}');"
             class="
@@ -254,9 +251,9 @@
         </section>
         <!-- End Synergy Hub Section -->
     </main>
-
-    {% include "footer.html" %}
-    {% include "snippets/scripts_attachment.html" %}
+{% endblock %}
+    
+    {% block script %}
     <!-- Picktime booking widget script -->
     <script>
         ! function (e, t, n, s, i, c) {
@@ -265,4 +262,4 @@
         }(window, document, "script", "https://www.picktime.com/assets/booking.js");
     </script>
     <!-- Picktime booking widget script ends -->
-</body>
+    {% endblock %}

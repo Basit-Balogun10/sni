@@ -60,11 +60,11 @@ def registration_view(request):
                 "firstname": request.POST.get('firstname'),
                 "lastname": request.POST.get('lastname'),
             }
-            context['registration_form'] = form
+            context['form'] = form
     
     else:
         form = RegistrationForm()
-        context['registration_form'] = form
+        context['form'] = form
 
     return render(request, 'account/register.html', context)
 
@@ -135,23 +135,30 @@ def login_view(request):
                 "password": request.POST.get('password')
             }
             email = request.POST['email']
-            acct = Account.objects.get(email=email)
-            if acct.profile.email_confirmed == False:
-                current_site = get_current_site(request)
-                domain = current_site.domain
-                encoded_email = urlsafe_base64_encode(force_bytes(email))
-                messages.error(request, "Sorry, you cannot sign in with these details as the email is yet to be confirmed.<br><br>Didn't see the email? <a class=\"font-weight-bold\" href=\"http://" + domain + "/resend_activation_email/" + encoded_email + "\">Resend email activation link</a>", extra_tags='safe')
+            print(email)
+            try:
+                acct = Account.objects.get(email=email)
+                print(acct)
+                if acct.profile.email_confirmed == False:
+                    current_site = get_current_site(request)
+                    domain = current_site.domain
+                    encoded_email = urlsafe_base64_encode(force_bytes(email))
+                    messages.error(request, "Sorry, you cannot sign in with these details as the email is yet to be confirmed.<br><br>Didn't see the email? <a class=\"font-weight-bold\" href=\"http://" + domain + "/resend_activation_email/" + encoded_email + "\">Resend email activation link</a>", extra_tags='safe')
+            except Account.DoesNotExist:
+                form = AccountAuthenticationForm()
+                messages.error(request, "No email account is registered with the email provided")
 
     else:
         form = AccountAuthenticationForm()
 
-    context['login_form'] = form
+    context['form'] = form
 
     return render(request, "account/login.html", context)
 
 
 def account_view(request):
     if not request.user.is_authenticated:
+        messages.error(request, "Sorry, You have to be logged in to access your account view")
         return redirect("login")
 
     context = {}
@@ -165,9 +172,9 @@ def account_view(request):
                 "lastname": request.POST.get('lastname'),
             }
             form.save()
-            context['success_message'] = "Updated"
+            messages.success(request, "Your account details have been successfully updated!")
         else:
-            pass
+            messages.error(request, "Account details update failed!")
             
     else:
         form = AccountUpdateForm(
@@ -180,9 +187,13 @@ def account_view(request):
             }
         )
 
-    context['account_form'] = form
+    context['form'] = form
 
-    blog_posts = BlogPost.objects.filter(author=request.user)
+    try:
+        blog_posts = BlogPost.objects.filter(author=request.user.writer_profile)
+    except Account.DoesNotExist:
+        blog_posts = []
+
     context['blog_posts'] = blog_posts
 
     return render(request, "account/account.html", context)

@@ -24,8 +24,8 @@ body {
     top: -100px;
     background-size: cover;
     height: fit-content;
-    -webkit-animation: animate-background 5s infinite;
-    animation: animate-background 5s infinite;
+    -webkit-animation: animate-background 10s infinite;
+    animation: animate-background 10s infinite;
 }
 
 @-webkit-keyframes animate-arrow {

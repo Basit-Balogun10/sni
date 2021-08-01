@@ -1,9 +1,13 @@
-{% extends 'base.html' %} {% load static %} {% block content %}
+{% extends 'base.html' %} {% load static %}
 
-<head>
-	<title>Blog Index - Synergy Network International</title>
-	{% include "snippets/head_snippet.html" %}
-</head>
+{% block title %}
+Blog Index - Synergy Network International
+{% endblock %}
+
+{% block content %}
+<div id="find-post">
+  <button title="Search for a blog post" class="btn" id="open-search-div"><i class="fa fa-search"></i></button>
+</div>
 <section id="posts" class="posts">
 	<div class="container">
 		<div id="search-div" class="search-div">
@@ -66,6 +70,9 @@
 {% include 'blog/snippets/blog_post_pagination.html' with blog_posts=blog_posts %}
 
 {{cap}}
+{% endblock %}
+
+{% block script %}
 <script type="text/javascript">
 	document.getElementById("id_q").value = "{{query}}";
 	document.getElementById("time-filter").value = "{{time_filter}}";
@@ -81,4 +88,4 @@
 	}
 	document.getElementById("category-filter").value = "{{category_filter}}";
 </script>
-{% endblock content %}
+{% endblock %}

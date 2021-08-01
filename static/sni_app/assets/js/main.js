@@ -166,21 +166,6 @@
         }
     }
 
-    on("click", ".toggle-password", function () {
-        console.log(this);
-        input = this.previousElementSibling;
-        console.log(input);
-        if (input.getAttribute("type") === "password") {
-            input.setAttribute("type", "text");
-            this.classList.toggle("fa-eye-slash");
-            this.classList.toggle("fa-eye");
-        } else {
-            input.setAttribute("type", "password");
-            this.classList.toggle("fa-eye");
-            this.classList.toggle("fa-eye-slash");
-        }
-    });
-
     on("click", "#open-search-div", function () {
         let overlay = select("#search-div");
         overlay.style.display = "block";
