@@ -118,9 +118,14 @@
 
     var breakParent = false;
     for (var navLink in navLinks) {
+        console.log(navLinks[navLink]);
         for (var pos = 0; pos < navLinks[navLink].length; ) {
+            console.log(navLinks[navLink][pos]);
             if (url.includes(navLinks[navLink][pos])) {
+                console.log(navLink);
                 for (var i = 0; i < routes.length; i++) {
+                    console.log(routes[i]);
+                    console.log(routes[i].innerText);
                     if (routes[i].innerText.includes(navLink)) {
                         routes[i].className += " active";
                         break;
