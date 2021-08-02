@@ -82,7 +82,7 @@ body {
     color: #002657;
 }
 
-#jump-to-content i {
+#jump-to-content svg {
     margin: 20px auto auto auto;
     transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
