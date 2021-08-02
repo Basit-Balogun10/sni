@@ -1,71 +1,31 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block title %}
+Log In - Synergy Network International
+{% endblock %}
+
 {% block content %}
-
-<section class="ftco-section">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-md-7 col-lg-5">
-        <div class="login-wrap">
-          <h3 class="text-center mb-4">Welcome</h3>
-          {% if messages %}
-          {% for message in messages %}
-          {% if 'safe' in message.tags %}
-          <div
-            class="alert {% if message.tags %}{% if 'success' in message.tags %}alert-success{% elif 'error' in message.tags %}alert-danger{% elif 'warning' in message.tags %}alert-warning{% elif 'info' in message.tags %}{% endif %}{% endif %}"
-            role="alert">{{ message|safe }}
-          </div>
-          {% else %}
-          <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
-          {% endif %}
-          {% endfor %}
-          {% endif %}
-
-          <form action="#" method="post" class="login-form">{% csrf_token %}
-            <div class="form-group mb-3">
-              <label class="label" for="email">Email Address</label>
-              <input type="text" name="email" id="inputEmail" class="form-control" value="{{login_form.initial.email}}"
-                required>
-              <span class="icon fa fa-user"></span>
-            </div>
-            <div class="form-group mb-3">
-              <label class="label" for="password">Password</label>
-              <input type="password" name="password" id="inputPassword" class="form-control"
-                value="{{login_form.initial.password}}" required>
-              <span toggle="#password" class="cursor-pointer fa fa-fw fa-eye field-icon toggle-password"
-                onclick="javascript: toggleVisibility(this);"></span>
-              <span class="icon fa fa-lock"></span>
-            </div>
-            {% for field in login_form %}
-            <p>
-              {% for error in field.errors %}
-              <p style="color: red; font-size: 15px;">{{ error }}</p>
-              {% endfor %}
-            </p>
-            {% endfor %}
-            {% if login_form.non_field_errors %}
-            <div style="color: red; font-size: 15px;">
-              <p>{{login_form.non_field_errors}}</p>
-            </div>
-
-            {% endif %}
-
-            <div class="form-group text-center">
-              <button type="submit" class="form-control btn sbmt submit px-3">Log In</button>
-            </div>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-6 col-md-6 col-sm-8">
+      <div class="card my-5">
+        <div class="card-body">
+          <h3 class="card-title text-center font-weight-bold">Welcome</h3>
+          <form method="post" novalidate>
+            {% csrf_token %}
+            {% include 'registration/form.html' %}
+            <div class="text-center"><button type="submit" class="btn btn-primary btn-block mt-3">Log in</button></div>
           </form>
-          <div class="d-flex flex-column">
-          </div>
-          <div class="footer text-center">
-            <a class="m-auto" href="{% url 'password_reset' %}">Reset password</a>
-            <p>Yet to own an account? <a href="{% url 'register' %}">Sign Up</a></p>
-          </div>
+        </div>
+        <div class="card-footer text-muted text-center">
+          <p class="font-weight-bold">Yet to own an account? <a class="text-primary" href="{% url 'register' %}">Sign
+              up</a></p>
+          <p class="font-weight-bold"><a class=" text-primary font-weight-bold" href="{% url 'password_reset' %}">Forgot
+              your password?</a></p>
         </div>
       </div>
     </div>
   </div>
-</section>
-
-
-{% endblock content %}
+</div>
+{% endblock %}

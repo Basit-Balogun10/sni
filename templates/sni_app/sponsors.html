@@ -1,19 +1,9 @@
 <!DOCTYPE html>
+{% extends 'base.html' %}
 {% load static %}
-<html lang="en">
-  <head>
-    <title>Sponsors - Synergy Network International</title>
-    {% include "snippets/head_snippet.html" %}
-  </head>
 
-  <body>
-    <main>{% include "header.html" %} {% include "footer.html" %}</main>
-  </body>
+{% block title %}
+Sponsors - Synergy Network International
+{% endblock %}
 
-  <script
-    src="{% static 'sni_app/javascript/home.js' %}"
-    type="text/javascript"
-  ></script>
-  {% include "snippets/scripts_attachment.html" %}
-
-</html>
+{% block content %} {% endblock %}
