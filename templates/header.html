@@ -38,20 +38,6 @@
                 </li>
                 <li class="dropdown">
                     <a class="route" href="#"
-                        ><span>Authentication </span>
-                        <i class="bi bi-chevron-down"></i
-                    ></a>
-                    <ul>
-                        {% if request.user.is_authenticated %}
-                        <li><a href="{% url 'logout' %}">Logout</a></li>
-                        > {% else %}
-                        <li><a href="{% url 'login' %}">Login</a></li>
-                        <li><a href="{% url 'register' %}">Signup</a></li>
-                        {% endif %}
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a class="route" href="#"
                         ><span>Events </span> <i class="bi bi-chevron-down"></i
                     ></a>
                     <ul>
@@ -80,18 +66,10 @@
                                 >Edit Account Details</a
                             >
                         </li>
+                        <li><a href="{% url 'logout' %}">Logout</a></li>
                         {% else %}
-                        <li>
-                            <p
-                                style="
-                                    color: white;
-                                    font-weight: bold;
-                                    font-size: 15px;
-                                "
-                            >
-                                YOU'RE NOT LOGGED IN
-                            </p>
-                        </li>
+                        <li><a href="{% url 'login' %}">Login</a></li>
+                        <li><a href="{% url 'register' %}">Signup</a></li>
                         {% endif %}
                     </ul>
                 </li>
