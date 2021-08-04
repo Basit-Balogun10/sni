@@ -106,13 +106,12 @@
         Blog: ["blog"],
         About: ["about"],
         Schedule: ["schedule"],
-        Authentication: ["login", "register"],
         Speakers: ["speakers"],
         Organizer: ["organizer"],
         Venue: ["venue"],
         Sponsors: ["sponsors"],
         Events: ["about"],
-        "My Account": ["account"],
+        "My Account": ["account", "login", "register"],
     };
     var url = window.location.href;
 
