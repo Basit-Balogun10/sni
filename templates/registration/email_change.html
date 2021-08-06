@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Change email{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-4 col-md-6 col-sm-8">
+            <div class="card my-5">
+                <div class="card-body">
+                    <h3 class="card-title text-center font-weight-bold">Change associated email account</h3>
+                    <p>Enter your new email address and we will send a verification link to this new email account.</p>
+                    <form method="post" novalidate>
+                        {% csrf_token %}
+                        {% include 'registration/form.html' %}
+                        <div class="text-center"><button type="submit" class="btn btn-success btn-block mt-3">Request
+                                for email account change</button></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
