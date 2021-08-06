@@ -4,3 +4,4 @@ store.txt
 workshop.py
 vendor/
 .env
+.pyc
