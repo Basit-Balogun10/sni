@@ -34,15 +34,7 @@ class AccountUpdateForm(forms.ModelForm):
 	
 	class Meta:
 		model = Account
-		fields = ('email', 'username', 'firstname', 'lastname')
-
-	def clean_email(self):
-		email = self.cleaned_data['email']
-		try:
-			account = Account.objects.exclude(pk=self.instance.pk).get(email=email)
-		except Account.DoesNotExist:
-			return email
-		raise forms.ValidationError('Email "%s" is already in use.' % account)
+		fields = ('username', 'firstname', 'lastname')
 
 	def clean_username(self):
 		username = self.cleaned_data['username']
@@ -61,3 +53,19 @@ class AccountUpdateForm(forms.ModelForm):
 	def clean_lastname(self):
 		lastname = self.cleaned_data['lastname']
 		return lastname
+
+
+class EmailUpdateForm(forms.ModelForm):
+	email = forms.EmailField(max_length=254, help_text='Required. Add a valid email address.')
+
+	class Meta:
+		model = Account
+		fields = ('email', )
+
+	def clean_email(self):
+		email = self.cleaned_data['email']
+		try:
+			account = Account.objects.exclude(pk=self.instance.pk).get(email=email)
+		except Account.DoesNotExist:
+			return email
+		raise forms.ValidationError('Email "%s" is already in use.' % account)

@@ -3,7 +3,7 @@ from . import views
 from personal.views import (
     home_screen_view,
 )
-from account.views import (ActivateAccount, ResendActivationEmail)
+from account.views import (ActivateAccount, ResendActivationEmail, VerifyNewEmail, ChangeEmail, )
 
 app_name = 'sni_app'
 
@@ -17,6 +17,8 @@ urlpatterns = [
     path('sponsors', views.sponsors, name='sponsors'),
     path('venue', views.venue, name='venue'),
     
-    path('resend_activation_email/<target>', ResendActivationEmail.as_view(), name='resend'),
+    path('resend_activation_email/<uidb64>/<token>/<target>', ResendActivationEmail.as_view(), name='resend'),
     path('activate/<uidb64>/<token>/', ActivateAccount.as_view(), name='activate'),
+    path('verify_new_email/<uidb64>/<token>/<to>', VerifyNewEmail.as_view(), name='verify_new_email'),
+    path('email_change', ChangeEmail.as_view(), name='email_change'),
 ]
