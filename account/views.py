@@ -160,7 +160,7 @@ class VerifyNewEmail(View):
         except (TypeError, ValueError, OverflowError, Account.DoesNotExist):
             user = None
 
-        if user is not None and account_activation_token.check_token(user, token):
+        if (user is not None) and (account_activation_token.check_token(user, token)):
             user.email = new_email
             user.save()
             messages.success(request, ('New Email Account Verified Successfully'))
