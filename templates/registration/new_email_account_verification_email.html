@@ -1,8 +1,7 @@
 {% autoescape off %}
 Hi {{ user.firstname }},
 
-You requested to change the email account registered with your Synergy Network International account, a few more steps
-and your request gets done. Please click on the link below to complete the process.
+You requested to change the email account registered with your Synergy Network International account, a few more steps and your request gets done. Please click on the link below to complete the process.
 
 http://{{ domain }}{% url 'sni_app:verify_new_email' uidb64=uid token=token to=new_email_account %}
 
