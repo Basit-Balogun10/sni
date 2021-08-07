@@ -16,7 +16,7 @@ from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 from django.template.loader import render_to_string
 
-from account.models import Account
+from account.models import Account, WriterProfile
 from account.forms import RegistrationForm, AccountAuthenticationForm, AccountUpdateForm, EmailUpdateForm
 from blog.models import BlogPost
 
@@ -36,7 +36,7 @@ def send_activation_email(request, user, domain, new=True, new_email=None):
         messages.success(request, "A verification link has been sent to the email you provided, please use the link sent to confirm your email and complete registration.<br><br>Didn't see the email? <a class=\"font-weight-bold\" href=\"http://" + domain + "/resend_activation_email/" + encoded_email + "\">Resend email activation link</a>", extra_tags='safe')
 
         return redirect('login')
-    
+
     else:
         subject = 'Verify your New Email Account'
         encoded_new_email = urlsafe_base64_encode(force_bytes(new_email))
@@ -77,7 +77,7 @@ def registration_view(request):
                 "lastname": request.POST.get('lastname'),
             }
             context['form'] = form
-    
+
     else:
         form = RegistrationForm()
         context['form'] = form
@@ -86,7 +86,7 @@ def registration_view(request):
 
 
 class ActivateAccount(View):
-    
+
     def get(self, request, uidb64, token, *args, **kwargs):
         try:
             uid = force_text(urlsafe_base64_decode(uidb64))
@@ -115,7 +115,7 @@ class ActivateAccount(View):
             return redirect('home')
 
 class ResendActivationEmail(View):
-    
+
     def get(self, request, uidb64, token, target, *args, **kwargs):
         user_email = force_text(urlsafe_base64_decode(target))
         user = Account.objects.get(email=user_email)
@@ -130,9 +130,9 @@ class ChangeEmail(UpdateView):
         context = {}
         form = EmailUpdateForm()
         context['form'] = form
-        
+
         return render(request, 'registration/email_change.html', context)
-    
+
 
     def post(self, request):
         context = {}
@@ -148,10 +148,10 @@ class ChangeEmail(UpdateView):
             }
             context['form'] = form
             return render(request, 'registration/email_change.html', context)
-        
+
 
 class VerifyNewEmail(View):
-    
+
     def get(self, request, uidb64, token, to, *args, **kwargs):
         try:
             uid = force_text(urlsafe_base64_decode(uidb64))
@@ -243,7 +243,7 @@ def account_view(request):
             messages.success(request, "Your account details have been successfully updated!")
         else:
             messages.error(request, "Account details update failed!")
-            
+
     else:
         form = AccountUpdateForm(
 
@@ -259,7 +259,7 @@ def account_view(request):
 
     try:
         blog_posts = BlogPost.objects.filter(author=request.user.writer_profile)
-    except Account.DoesNotExist:
+    except (Account.DoesNotExist, WriterProfile.DoesNotExist):
         blog_posts = []
 
     context['blog_posts'] = blog_posts
