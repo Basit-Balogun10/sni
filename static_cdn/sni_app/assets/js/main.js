@@ -59,6 +59,14 @@
     );
 
     /**
+     * Quick log in
+     */
+    on("click", "#quick-login-toggle", function () {
+        let quickLoginDiv = select("#quick-login");
+        quickLoginDiv.style.display = "none";
+    });
+
+    /**
      * Preloader
      */
     let preloader = select("#preloader");
@@ -165,6 +173,9 @@
         }
     }
 
+    /**
+     * Blog post search
+     */
     on("click", "#open-search-div", function () {
         let overlay = select("#search-div");
         overlay.style.display = "block";
