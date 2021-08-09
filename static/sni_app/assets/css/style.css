@@ -102,6 +102,10 @@ a {
     text-decoration: none;
 }
 
+a:hover {
+    text-decoration: none;
+}
+
 h1,
 h2,
 h3,
@@ -147,6 +151,41 @@ h6 {
     visibility: visible;
     opacity: 1;
 }
+
+/*--------------------------------------------------------------
+# Quick log in
+--------------------------------------------------------------*/
+#quick-login-toggle i:hover {
+    border-radius: 5px;
+    padding: 2px;
+    transition: all 0.3s;
+    background: #6f98ce96;
+}
+
+.quick-login-bolt {
+    transition: 0.3s all;
+    -webkit-animation: bolt-fadeIn-fadeOut 1s linear infinite;
+    animation: bolt-fadeIn-fadeOut 1s linear infinite;
+}
+
+@-webkit-keyframes bolt-fadeIn-fadeOut {
+    0%, 100% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+@keyframes bolt-fadeIn-fadeOut {
+    0%, 100% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
 
 /*--------------------------------------------------------------
 # Preloader
@@ -211,6 +250,7 @@ h6 {
     background: #002657;
     transition: all 0.5s;
     z-index: 997;
+    position: relative;
     padding: 10px 0;
     box-shadow: 0px 0 18px rgba(55, 66, 59, 0.08);
 }
@@ -920,12 +960,8 @@ button.more-btn {
 .posts .post-item {
     border-radius: 5px;
     box-shadow: 0px 0px 20px #002657;
-    max-width: 100%;
+    max-width: 95%;
     margin: 25px 10px 25px 10px;
-}
-
-.main {
-    margin-top: 100px;
 }
 
 .posts .post-image {
@@ -940,6 +976,10 @@ button.more-btn {
 
 .posts .post-content:hover {
     background: #8c67c0;
+}
+
+.posts .post-content:hover h3 {
+    color: #033b84;
 }
 
 .posts .post-content h3 {

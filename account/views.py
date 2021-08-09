@@ -24,16 +24,18 @@ from blog.models import BlogPost
 def send_activation_email(request, user, domain, new=True, new_email=None):
     if new:
         subject = 'Activate Your Synergy Network International Account'
+        user_id = urlsafe_base64_encode(force_bytes(user.pk))
         message = render_to_string('registration/account_activation_email.html', {
             'user': user,
             'domain': domain,
-            'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+            'uid': user_id,
             'token': account_activation_token.make_token(user),
         })
         send_mail(subject, message, settings.EMAIL_HOST_USER, [user.email, ])
 
         encoded_email = urlsafe_base64_encode(force_bytes(user.email))
-        messages.success(request, "A verification link has been sent to the email you provided, please use the link sent to confirm your email and complete registration.<br><br>Didn't see the email? <a class=\"font-weight-bold\" href=\"http://" + domain + "/resend_activation_email/" + encoded_email + "\">Resend email activation link</a>", extra_tags='safe')
+        token = account_activation_token.make_token(user)
+        messages.success(request, "A verification link has been sent to the email you provided, please use the link sent to confirm your email and complete registration.<br><br>Didn't see the email? <a class=\"font-weight-bold\" href=\"http://" + domain + "/resend_activation_email/" + user_id + "/" + token + "/" + encoded_email + "\">Resend email activation link</a>", extra_tags='safe')
 
         return redirect('login')
 
@@ -52,6 +54,7 @@ def send_activation_email(request, user, domain, new=True, new_email=None):
         messages.success(request, "Your request to change the email registered with this account is been processed, please check the inbox of your newly proposed email account for a verification email to continue.")
 
         return redirect('account')
+
 
 def registration_view(request):
     user = request.user
@@ -111,18 +114,25 @@ class ActivateAccount(View):
             login(request, user)
             return redirect('home')
         else:
-            messages.warning(request, ('The confirmation link was invalid, possibly because it has already been used or your account has already been confirmed.'))
+            messages.warning(request, ('The confirmation link was invalid, possibly because it has already been used.'))
             return redirect('home')
+
 
 class ResendActivationEmail(View):
 
     def get(self, request, uidb64, token, target, *args, **kwargs):
         user_email = force_text(urlsafe_base64_decode(target))
         user = Account.objects.get(email=user_email)
-        # uid = urlsafe_base64_encode(force_bytes(user.pk))
-        # token = account_activation_token.make_token(user)
-        current_site = get_current_site(request)
-        return send_activation_email(request, user, current_site.domain)
+        if user and account_activation_token.check_token(user, token):
+            # uid = urlsafe_base64_encode(force_bytes(user.pk))
+            # token = account_activation_token.make_token(user)
+            current_site = get_current_site(request)
+            return send_activation_email(request, user, current_site.domain)
+        else:
+            messages.warning(request, (
+                'The activation email resend link was invalid, possibly because it has already been used.'))
+            return redirect('login')
+
 
 class ChangeEmail(UpdateView):
 
@@ -132,7 +142,6 @@ class ChangeEmail(UpdateView):
         context['form'] = form
 
         return render(request, 'registration/email_change.html', context)
-
 
     def post(self, request):
         context = {}
@@ -169,10 +178,46 @@ class VerifyNewEmail(View):
             send_mail(subject, message, settings.EMAIL_HOST_USER, [user.email, ])
             return redirect('account')
         else:
-            messages.warning(request, ('The verification link was invalid, possibly because it has already been used or your account has already been confirmed.'))
+            messages.warning(request, ('The verification link was invalid, possibly because it has already been used.'))
             return redirect('account')
 
 
+# class DeactivateAccount(View):
+#
+#     def get(self, request):
+#         user = Account.objects.get(id=request.user.id)
+#         current_site = get_current_site(request)
+#         domain = current_site.domain
+#         subject = 'Deactivate Your Synergy Network International Account'
+#         message = render_to_string('registration/account_deactivation_email.html', {
+#             'user': user,
+#             'domain': domain,
+#             'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+#             'token': account_activation_token.make_token(user),
+#         })
+#         send_mail(subject, message, settings.EMAIL_HOST_USER, [user.email, ])
+#
+#         messages.info(request, 'Please check the inbox or spam folder in your email account for a verification link to continue the deactivation process')
+#         return redirect('account')
+#
+#
+# class VerifyDeactivateAccount(View):
+#
+#     def get(self, request, uidb64, token, *args, **kwargs):
+#         uid = force_text(urlsafe_base64_decode(uidb64))
+#         try:
+#             user = Account.objects.get(pk=uid)
+#         except (TypeError, ValueError, OverflowError, Account.DoesNotExist):
+#             user = None
+#
+#         if user is not None and account_activation_token.check_token(user, token):
+#             Account.objects.get(id=uid).delete()
+#             messages.success(request, ('Your account has been successfully deactivated'))
+#         else:
+#             messages.warning(request, ('The verification link was invalid, possibly because it has already been used.'))
+#         return redirect("sni_app:sni_home")
+#
+#
 def logout_view(request):
     logout(request)
     return redirect('/')
@@ -204,11 +249,13 @@ def login_view(request):
             try:
                 acct = Account.objects.get(email=email)
                 print(acct)
-                if acct.profile.email_confirmed == False:
+                if not acct.profile.email_confirmed:
                     current_site = get_current_site(request)
                     domain = current_site.domain
+                    user_id = urlsafe_base64_encode(force_bytes(acct.pk))
+                    token = account_activation_token.make_token(acct)
                     encoded_email = urlsafe_base64_encode(force_bytes(email))
-                    messages.error(request, "Sorry, you cannot sign in with these details as the email is yet to be confirmed.<br><br>Didn't see the email? <a class=\"font-weight-bold\" href=\"http://" + domain + "/resend_activation_email/" + encoded_email + "\">Resend email activation link</a>", extra_tags='safe')
+                    messages.error(request, "Sorry, you cannot sign in with these details as the email is yet to be confirmed.<br><br>Didn't see the email? <a class=\"font-weight-bold\" href=\"http://" + domain + "/resend_activation_email/" + user_id + "/" + token + "/" + encoded_email + "\">Resend email activation link</a>", extra_tags='safe')
             except Account.DoesNotExist:
                 form = AccountAuthenticationForm()
                 messages.error(request, "No email account is registered with the email provided")

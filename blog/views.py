@@ -7,6 +7,7 @@ from operator import attrgetter
 from blog.models import BlogPost, Like, Dislike, Comment, Reply, CommentReport, ReplyReport
 from blog.forms import CreateBlogPostForm, UpdateBlogPostForm, CommentForm, ReplyForm
 from account.models import Account
+from account.forms import AccountAuthenticationForm
 
 
 # from personal.views import (
@@ -34,14 +35,7 @@ def create_blog_view(request):
 
 
 def like(request):
-    if request.method == 'GET':
-        post_id = request.GET['post_id']
-        # likedpost = Post.objects.get(id=post_id)
-        m = Like(post=likedpost)
-        m.save()
-        return HttpResponse('success')
-    else:
-        return HttpResponse("unsuccesful")
+    pass
 
 
 def detail_blog_view(request, category, year, month, day, time, identity, title):
@@ -49,6 +43,11 @@ def detail_blog_view(request, category, year, month, day, time, identity, title)
     blog_post = get_object_or_404(BlogPost, category=category, id=identity)
     context['blog_post'] = blog_post
     user = request.user
+    if not user.is_authenticated:
+        quick_login = True
+        login_form = AccountAuthenticationForm()
+        context['login_form'] = login_form
+        context['quick_login'] = quick_login
 
     comments = blog_post.comments.all()
     context['comments'] = comments

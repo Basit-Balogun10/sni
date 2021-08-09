@@ -45,6 +45,13 @@
 	}
 </style>
 {% block stylesheet %} {% endblock stylesheet %}
+{% if quick_login %}
+<style>
+    input.form-control {
+        height: 50%;
+    }
+</style>
+{% endif %}
 
 <body>
 	{% include 'header.html' %}
