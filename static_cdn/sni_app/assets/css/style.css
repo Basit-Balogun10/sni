@@ -164,8 +164,8 @@ h6 {
 
 .quick-login-bolt {
     transition: 0.3s all;
-    -webkit-animation: bolt-fadeIn-fadeOut 0.1s linear infinite;
-    animation: bolt-fadeIn-fadeOut 0.1s linear infinite;
+    -webkit-animation: bolt-fadeIn-fadeOut 0.4s linear infinite;
+    animation: bolt-fadeIn-fadeOut 0.4s linear infinite;
 }
 
 @-webkit-keyframes bolt-fadeIn-fadeOut {
@@ -279,7 +279,7 @@ h6 {
 }
 
 /**
-* Get Started Button 
+* Get Started Button
 */
 .get-started-btn {
     margin-left: 22px;
@@ -309,7 +309,7 @@ h6 {
 # Navigation Menu
 --------------------------------------------------------------*/
 /**
-* Desktop Navigation 
+* Desktop Navigation
 */
 @media (min-width: 1053px) {
     .full-logo {
@@ -446,7 +446,7 @@ h6 {
 }
 
 /**
-* Mobile Navigation 
+* Mobile Navigation
 */
 @media (max-width: 1052px) {
     .cropped-logo {
