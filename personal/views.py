@@ -7,6 +7,8 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from blog.views import get_blog_queryset, get_author_posts
 from blog.models import BlogPost
 
+from account.forms import AccountAuthenticationForm
+
 from datetime import timedelta, datetime
 
 BLOG_POSTS_PER_PAGE = 18
@@ -14,6 +16,12 @@ BLOG_POSTS_PER_PAGE = 18
 
 def home_screen_view(request, *args, **kwargs):
     context = {}
+    user = request.user
+    if not user.is_authenticated:
+        quick_login = True
+        login_form = AccountAuthenticationForm()
+        context['login_form'] = login_form
+        context['quick_login'] = quick_login
 
     # Search
     query = ""

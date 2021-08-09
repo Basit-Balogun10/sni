@@ -6,9 +6,16 @@ and your request gets done. Please click on the link below to complete the proce
 
 http://{{ domain }}{% url 'sni_app:verify_new_email' uidb64=uid token=token to=new_email_account %}
 
-If clicking the link above doesn't work, please copy and paste the URL in your browser.
+If you didn't initiate the request, it's likely that someone gained access to your account maliciously and made this request.
+Please click the link below to change your account's password to a strong and keep it safe afterwards.
 
-If you initiated this request by mistake, you don't need to take any further action and can safely disregard this email.
+http://{{ domain }}{% url 'password_change' %}
+
+Also, if you no find it difficult to change your account password using the link above probably because you lost or forgot you log in details, please consider resetting it using the link below.
+
+http://{{domain}}{% url 'password_reset' %}
+
+If clicking the link on any of the links above doesn't work, please copy and paste the URL in your browser.
 
 Sincerely,
 With love, the Synergy Network International team.

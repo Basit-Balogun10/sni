@@ -18,7 +18,10 @@ urlpatterns = [
     path('venue', views.venue, name='venue'),
     
     path('resend_activation_email/<uidb64>/<token>/<target>', ResendActivationEmail.as_view(), name='resend'),
-    path('activate/<uidb64>/<token>/', ActivateAccount.as_view(), name='activate'),
+    path('activate/<uidb64>/<token>', ActivateAccount.as_view(), name='activate'),
     path('verify_new_email/<uidb64>/<token>/<to>', VerifyNewEmail.as_view(), name='verify_new_email'),
     path('email_change', ChangeEmail.as_view(), name='email_change'),
+    #
+    # path('deactivate_account', DeactivateAccount.as_view(), name='deactivate_account'),
+    # path('deactivate_account/verify/<uidb64>/<token>', VerifyDeactivateAccount.as_view(), name='verify_deactivate_account'),
 ]
