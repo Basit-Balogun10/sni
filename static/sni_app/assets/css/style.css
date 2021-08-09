@@ -164,8 +164,8 @@ h6 {
 
 .quick-login-bolt {
     transition: 0.3s all;
-    -webkit-animation: bolt-fadeIn-fadeOut 0.5s linear infinite;
-    animation: bolt-fadeIn-fadeOut 0.5s linear infinite;
+    -webkit-animation: bolt-fadeIn-fadeOut 0.1s linear infinite;
+    animation: bolt-fadeIn-fadeOut 0.1s linear infinite;
 }
 
 @-webkit-keyframes bolt-fadeIn-fadeOut {
