@@ -86,15 +86,30 @@
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
-body {
-    font-family: "Poppins", sans-serif;
-    color: #002657;
-    background: -webkit-linear-gradient(left top, #c582eb, #002657);
-    background: -o-linear-gradient(top right, #c582eb, #002657);
-    background: -moz-linear-gradient(top right, #c582eb, #002657);
-    background: linear-gradient(5deg, #f85ff0, #002657);
-    scroll-behavior: smooth;
-    background: linear-gradient(75deg, #e666e0, #002657);
+@media screen and (min-width: 769px) {
+    body {
+        font-family: "Poppins", sans-serif;
+        color: #002657;
+        background: -webkit-linear-gradient(left top, #c582eb, #002657);
+        background: -o-linear-gradient(top right, #c582eb, #002657);
+        background: -moz-linear-gradient(top right, #c582eb, #002657);
+        background: linear-gradient(5deg, #f85ff0, #002657);
+        scroll-behavior: smooth;
+        background: linear-gradient(75deg, #e666e0, #002657);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    body {
+        font-family: "Poppins", sans-serif;
+        color: #002657;
+        background: -webkit-linear-gradient(left top, #c582eb, #002657c7);
+        background: -o-linear-gradient(top right, #c582eb, #002657c7);
+        background: -moz-linear-gradient(top right, #c582eb, #002657c7);
+        background: linear-gradient(5deg, #f85ff0, #002657c7);
+        scroll-behavior: smooth;
+        background: linear-gradient(75deg, #e666e0, #002657c7);
+    }
 }
 
 a {
@@ -155,6 +170,36 @@ h6 {
 /*--------------------------------------------------------------
 # Quick log in
 --------------------------------------------------------------*/
+@media screen and (max-width: 768px) {
+    #quick-login-shortcut {
+        display: block;
+    }
+
+    #quick-login {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    #quick-login-shortcut {
+        display: none;
+    }
+
+    #quick-login {
+        display: block;
+    }
+}
+
+#quick-login-shortcut {
+    right: 0px;
+}
+
+#expand-quick-login {
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+}
+
 #quick-login-toggle i:hover {
     border-radius: 5px;
     padding: 2px;
@@ -250,7 +295,6 @@ h6 {
     background: #002657;
     transition: all 0.5s;
     z-index: 997;
-    position: relative;
     padding: 10px 0;
     box-shadow: 0px 0 18px rgba(55, 66, 59, 0.08);
 }
@@ -298,7 +342,7 @@ h6 {
     color: #c582eb;
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
     .get-started-btn {
         margin: 0 15px 0 0;
         padding: 4px 10px;
@@ -311,7 +355,7 @@ h6 {
 /**
 * Desktop Navigation
 */
-@media (min-width: 1053px) {
+@media screen and (min-width: 1053px) {
     .full-logo {
         display: none;
     }
@@ -436,7 +480,7 @@ h6 {
     visibility: visible;
 }
 
-@media (max-width: 1366px) {
+@media screen and (max-width: 1366px) {
     .navbar .dropdown .dropdown ul {
         left: -90%;
     }
@@ -448,7 +492,7 @@ h6 {
 /**
 * Mobile Navigation
 */
-@media (max-width: 1052px) {
+@media screen and (max-width: 1052px) {
     .cropped-logo {
         display: none;
     }
@@ -578,7 +622,7 @@ h6 {
     padding-top: 72px;
 }
 
-@media (max-width: 992px) {
+@media screen and (max-width: 992px) {
     #hero .container {
         padding-top: 62px;
     }
@@ -618,13 +662,13 @@ h6 {
     border: 2px solid #c582eb;
 }
 
-@media (min-width: 1024px) {
+@media screen and (min-width: 1024px) {
     #hero {
         background-attachment: fixed;
     }
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
     #hero {
         height: 100vh;
     }
@@ -698,7 +742,7 @@ section {
     color: #fff;
 }
 
-@media (max-width: 992px) {
+@media screen and (max-width: 992px) {
     .breadcrumbs {
         margin-top: 63px;
     }
@@ -758,7 +802,7 @@ section {
     color: #fff;
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
     .about .content .learn-more-btn {
         margin: 0 48px 0 0;
         padding: 6px 18px;
@@ -799,13 +843,22 @@ section {
     transition: all ease-in-out 0.4s;
 }
 
+#booking-button {
+    transform: rotate(90deg);
+    left: -71px;
+    border-radius: 5px;
+    color: #002657;
+    top: 50%;
+    z-index: 99;
+}
+
 .more-btn.sticky,
 .sticky-auth {
     float: none;
     position: fixed;
     top: 50%;
     display: block;
-    z-index: 20000;
+    z-index: 99;
     transform: rotate(270deg);
 }
 
@@ -857,7 +910,7 @@ button.more-btn {
     width: 100%;
 }
 
-@media (min-width: 769px) {
+@media screen and (min-width: 769px) {
     .synergy-hub .services .service .head {
         height: fit-content;
     }
@@ -869,7 +922,7 @@ button.more-btn {
     }
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
     .synergy-hub .services .service .head {
         height: auto;
     }
@@ -1188,7 +1241,7 @@ button.more-btn {
     background-color: #c582eb;
 }
 
-@media (max-width: 767px) {
+@media screen and (max-width: 767px) {
     .testimonials .testimonial-wrap {
         padding-left: 0;
     }
@@ -1309,7 +1362,7 @@ button.more-btn {
     margin-bottom: 0;
 }
 
-@media (max-width: 992px) {
+@media screen and (max-width: 992px) {
     .course-details-tabs .nav-link {
         border: 0;
         padding: 15px;

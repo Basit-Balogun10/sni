@@ -1,7 +1,11 @@
 {% extends 'base.html' %} {% load static %}
 
 {% block title %}
-Blog Index - Synergy Network International
+Blog Index: Stay up to Date with our Blog Posts | SNI
+{% endblock %}
+
+{% block meta %}
+<meta content="The home of all blog posts published in Synergy Network International's blog. Dive in to read and explore the top quality contents of various categories in our blog." name="description" />
 {% endblock %}
 
 {% block content %}
@@ -76,8 +80,6 @@ Blog Index - Synergy Network International
 <script type="text/javascript">
 	document.getElementById("id_q").value = "{{query}}";
 	document.getElementById("time-filter").value = "{{time_filter}}";
-	console.log("{{category_filter}}")
-	console.log("{{category_filter}}")
 	var categories_readable = {
 		"history": "history",
 		"politics-and-international-relations": "POLITICS & INTERNATIONAL RELATIONS",

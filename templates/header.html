@@ -1,18 +1,18 @@
 {% load static %}
 <header id="header" class="fixed-top">
     <div class="container d-flex justify-content-around">
-        <a class="full-logo" sytle="max-width: 270px" href="/"
+        <a class="full-logo" href="/"
             ><img
                 alt="SNI-Logo"
                 height="69.47"
-                id="logo"
+                id="img-full-logo"
                 src="{% static 'sni_app/images/SNI-Logo-Transparent-1536x368.png' %}"
                 width="270"
         /></a>
         <a class="cropped-logo" href="/"
             ><img
                 alt="SNI-Logo"
-                id="logo"
+                id="img-cropped-logo"
                 src="{% static 'sni_app/images/SNI-Logo-cropped.png' %}"
         /></a>
 
@@ -68,7 +68,7 @@
                         </li>
                         <li><a href="{% url 'logout' %}">Logout</a></li>
                         {% else %}
-                        <li><a href="{% url 'login' %}">Login</a></li>
+                        <li><a href="{% url 'login' %}?next={{request.path|urlencode}}">Login</a></li>
                         <li><a href="{% url 'register' %}">Signup</a></li>
                         {% endif %}
                     </ul>
@@ -84,9 +84,12 @@
         </nav>
     </div>
     {% if quick_login %}
-    <div class="container position-absolute" id="quick-login">
+    <div id="quick-login-shortcut" class="position-fixed">
+      <button title="Quick Log In" class="btn btn-light mt-3" id="expand-quick-login"><i class="fa fa-bolt quick-login-bolt fa-2x text-warning"></i></button>
+    </div>
+    <div class="container position-fixed" id="quick-login" style="right:0px;">
       <div class="row justify-content-end">
-        <div class="col-lg-4 col-md-6 col-sm-8">
+        <div>
           <div class="card mt-2" data-aos="fade-up" data-aos-delay="100">
             <div class="card-body">
               <div class="d-flex justify-content-between">
@@ -95,6 +98,7 @@
               </div>
               <form method="post" action="{% url 'login' %}" novalidate>
                 {% csrf_token %}
+                <input type="hidden" name="next" value="{{ request.path|urlencode }}">
                 {% include 'registration/form.html' %}
                 <div class="text-center">
                   <span class="text-center"><button type="submit" class="btn btn-success mx-1">Log in</button></span>

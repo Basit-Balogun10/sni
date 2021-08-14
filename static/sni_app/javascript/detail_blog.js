@@ -96,7 +96,6 @@ function replyComment(object) {
             let id = replyButtons[button].id.split("_")[1];
             let replyDiv = document.getElementById("reply-div" + id);
             if (replyDiv.style.display === "block") {
-
                 replyDiv.style.display = "none";
                 break;
             }

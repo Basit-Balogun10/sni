@@ -6,10 +6,7 @@
     <title>{% block title %} {% endblock title %}</title>
 	<meta charset="utf-8" />
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
-	<meta
-		content="Synergy Network International aspires to be the consolidation of global youth leadership and potential. Our vision is to be a center for the empowerment of"
-		name="description" />
-	<meta content="" name="keywords" />
+	{% block meta %} {% endblock meta %}
 
 	<link href="{% static 'sni_app/images/cropped-SNI-Favicon-32x32.png' %}" rel="icon" sizes="32x32" />
 
@@ -39,9 +36,10 @@
 		text-decoration: none;
 	}
 
-	.main {
+	#main {
 		min-height: 100vh;
 		height: 100%;
+		margin-top: 90px;
 	}
 </style>
 {% block stylesheet %} {% endblock stylesheet %}
@@ -55,11 +53,11 @@
 
 <body>
 	{% include 'header.html' %}
-	<div class="main">
+	<main id="main">
 		{% block content %}
 
 		{% endblock content %}
-	</div>
+	</main>
 
 	{% include 'footer.html' %}
 
@@ -68,7 +66,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 	<script crossorigin=" anonymous" src="https://kit.fontawesome.com/8e8ce04397.js"></script>
-	<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+	<script src="https://cdn.tiny.cloud/1/lc0ww1pcmzoakmu85s7rieseuwlk57esfd6uj4thtz6lcy9a/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 	<script type="text/javascript">
 		tinymce.init({
 			selector: '.tinymce',
