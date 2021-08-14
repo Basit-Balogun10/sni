@@ -3,7 +3,11 @@
 {% load static %}
 
 {% block title %}
-{{blog_post.title}} - Synergy Network International
+{{blog_post.title}}
+{% endblock %}
+
+{% block meta %}
+<meta content="Last updated: {{blog_post.date_updated}} | {{blog_post.body|get_text|truncatechars:160}}" name="description" />
 {% endblock %}
 
 {% block link %}
@@ -34,13 +38,13 @@
 			<div class="d-flex justify-content-around flex-wrap">
 				<span class="blog-author-detail d-flex">
 					<img src="{{blog_post.author.user.image.url}}" class="img-fluid" alt="">
-					<span class="author">
+					<div class="author">
 						<h3 class="text-white">{{blog_post.author.user.firstname}} {{blog_post.author.user.lastname}}
 						</h3>
 						<div id="about-link" onclick="controlAboutDiv(1)" title="Read about the author"
 							class="cursor-pointer text-white">About the Author<i class="bx bx-chevron-right"></i><i
 								class="bx bx-chevron-right"></i><i class="bx bx-chevron-right"></i></div>
-					</span>
+					</div>
 				</span>
 			</div>
 		</div>
@@ -421,8 +425,6 @@
 			id = $(this).attr("data-catid");
 			likes = $(this).data("value");
 			dislikes = $('#dislike' + id).data("value");
-			console.log(likes + ' l')
-			console.log(dislikes + 'd')
 			$.ajax({
 				type: "POST",
 				url: "",
@@ -441,7 +443,6 @@
 
 						dislikes = dislikes - 1;
 						likes = likes + 1;
-						console.log(likes + ',' + dislikes)
 						$("#like" + id).data('value', likes)
 						$("#dislike" + id).data('value', dislikes)
 
@@ -455,7 +456,6 @@
 						$('#like' + id).addClass('btn btn-primary btn-lg');
 
 						likes = likes - 1;
-						console.log(likes + ' l')
 						$("#like" + id).data('value', likes)
 
 						$('#like' + id).html(
@@ -466,7 +466,6 @@
 						$('#like' + id).addClass('btn btn-success btn-lg');
 
 						likes = likes + 1;
-						console.log(likes + ' l')
 						$("#like" + id).data('value', likes)
 
 						$('#like' + id).html(
@@ -475,7 +474,6 @@
 				}
 			})
 		} else {
-			console.log('NOT AUTHENTICATED')
 			alert("Sorry, you have to be logged in to like or dislike posts")
 		};
 	});
@@ -486,8 +484,6 @@
 			id = $(this).attr("data-catid");
 			dislikes = $(this).data("value");
 			likes = $('#like' + id).data("value");
-			console.log(dislikes + 'd');
-			console.log(likes + ' l')
 			$.ajax({
 				type: "POST",
 				url: "",
@@ -503,7 +499,6 @@
 						$('#dislike' + id).addClass('btn btn-primary btn-lg');
 
 						dislikes = dislikes - 1;
-						console.log(dislikes + 'd')
 						$("#dislike" + id).data('value', dislikes)
 
 						$('#dislike' + id).html(
@@ -517,7 +512,6 @@
 
 						dislikes = dislikes + 1;
 						likes = likes - 1;
-						console.log(likes + ',' + dislikes)
 						$("#like" + id).data('value', likes)
 						$("#dislike" + id).data('value', dislikes)
 
@@ -533,23 +527,19 @@
 						dislikes = dislikes + 1;
 						$("#dislike" + id).data('value', dislikes)
 
-						console.log(dislikes + 'd')
 						$('#dislike' + id).html(
 							dislikes + ' <i class="fa fa-thumbs-down"></i>');
 					}
 				}
 			})
 		} else {
-			console.log('NOT AUTHENTICATED')
 			alert("Sorry, you have to be logged in to like or dislike posts")
 		}
 	});
 	$('.rt').click(function () {
 		if ('{{ request.user.is_authenticated }}' === 'True') {
 			var ele = this;
-			console.log(ele);
 			ele.classList.toggle('selected');
-			console.log(ele.classList);
 
 			confirmation = $('#confirmation-popup').data('value');
 		}
@@ -557,11 +547,8 @@
 	$('.confirm-report').click(function (state) {
 		var overlayEle = document.getElementById("confirm-report-overlay");
 		var ele = this;
-		console.log(ele);
-		console.log(overlayEle);
 
 		if (parseInt($(this).attr('state'))) {
-			console.log($(this).attr('state'));
 			reportDivs = select(".report-div", true);
 			reportDivs.forEach((reportDiv) => {
 				reportDiv.style.display = "none";
@@ -571,7 +558,6 @@
 			});
 			overlayEle.style.display = "block";
 		} else {
-			console.log('no state');
 			let popup = select("#confirmation-popup");
 			popup.setAttribute("data-value", "cancel");
 			overlayEle.style.display = "none";
@@ -633,9 +619,7 @@
 					reportForm.id = "report-form";
 					reportForm.setAttribute("value", objectId);
 				},
-				error: function (request, status, error) {
-					console.log(request.responseText);
-				}
+				error: function (request, status, error) {}
 			});
 		} else {
 			alert("Sorry, you have to be logged in to submit reports")
@@ -648,11 +632,8 @@
 		replies = '{{total_replies}}'
 		counter = 0;
 		$("#comment-button").click(function () {
-			console.log('ready')
-			console.log(this.className);
 			$("#comment-form").submit(function (event) {
 				event.preventDefault();
-				console.log('submitted')
 				var commentsCount, commentContainer;
 				form = document.getElementById('comment-form');
 				commentsCount = document.getElementById('comments-count');
@@ -662,8 +643,6 @@
 					type: "POST",
 					url: "",
 					success: function (response) {
-						console.log(response);
-						console.log($("#comment-form").serialize());
 						if ('{{ request.user.is_authenticated }}' ===
 							'True' &
 							decodeURIComponent($("#comment-form")
@@ -671,7 +650,6 @@
 									'body=')[1].split('&action')[0]) != ''
 						) {
 							count += 1;
-							console.log('{{request.user}}');
 							if (count > 1) {
 								commentsCount.innerHTML = count + " Comments";
 							} else {
@@ -702,7 +680,6 @@
 							reportDivId = 'comment-report-div' + String(Number(
 								comments) + 1);
 							newCommentId = String(Number(comments) + 1);
-							console.log(comment_body);
 
 							commentContainer.insertAdjacentHTML(
 								'beforeEnd',
@@ -751,25 +728,18 @@
 
 						}
 					},
-					error: function (request, status, error) {
-						console.log(request.responseText);
-					}
+					error: function (request, status, error) {}
 				});
 			});
 		});
 
 
 		$(".reply-button").click(function () {
-			console.log('ready');
 			replyButton = this;
-			console.log(replyButton)
 			replyForm = this.parentElement;
-			console.log(replyForm);
 			formId = replyForm.id;
-			console.log(formId)
 			$('#' + formId).submit(function (event) {
 				event.preventDefault();
-				console.log('submitted')
 				var commentsCount, commentContainer;
 				commentsCount = document.getElementById('comments-count');
 				parentId = $('#' + formId).attr('value');
@@ -780,8 +750,6 @@
 					type: "POST",
 					url: "",
 					success: function (response) {
-						console.log(response);
-						console.log($('#' + formId).serialize());
 						if ('{{ request.user.is_authenticated }}' ===
 							'True' &
 							decodeURIComponent($('#' + formId).serialize()
@@ -789,7 +757,6 @@
 									'body=')[1].split('&parent_id')[0]) !=
 							'') {
 							count += 1;
-							console.log('{{request.user}}');
 							if (count > 1) {
 								commentsCount.innerHTML = count + " Comments";
 							} else {
@@ -810,7 +777,6 @@
 							ctime = ctime.join(' ');
 
 							newReplyId = String(Number(replies) + 1);
-							console.log(reply_body);
 							commentContainer.insertAdjacentHTML(
 								'beforeEnd',
 								'<div class="reply ml-5" data-aos="fade-left" data-aos-offset="300" ><div class="reply-info font-weight-bold"><div class="d-flex justify-content-between"><p class="replier">{{ request.user }}</p><span style="float: right;"><a class="font-weight-normal make-comment-report" id="reply-report-button_' +
@@ -845,9 +811,7 @@
 
 						}
 					},
-					error: function (request, status, error) {
-						console.log(request.responseText);
-					}
+					error: function (request, status, error) {}
 				});
 
 			});
