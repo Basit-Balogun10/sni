@@ -220,17 +220,21 @@ class VerifyNewEmail(View):
 #
 def logout_view(request):
     logout(request)
-    return redirect('/')
+    previous_url = request.META.get('HTTP_REFERER', '/')
+    return redirect(previous_url)
 
 
 def login_view(request):
+    previous_url = request.GET.get('next', '/')
+    # print('previous', previous_url)
     context = {}
 
     user = request.user
     if user.is_authenticated:
-        return redirect("sni_app:sni_home")
+        return redirect(previous_url)
 
     if request.method == "POST":
+        previous_url = request.POST.get('next', '/')
         form = AccountAuthenticationForm(request.POST)
         if form.is_valid():
             email = request.POST['email']
@@ -238,17 +242,17 @@ def login_view(request):
             user = authenticate(email=email, password=password)
             if user:
                 login(request, user)
-                return redirect("/")
+                return redirect(previous_url)
         else:
             form.initial = {
                 "email": request.POST.get('email'),
                 "password": request.POST.get('password')
             }
             email = request.POST['email']
-            print(email)
+            # print(email)
             try:
                 acct = Account.objects.get(email=email)
-                print(acct)
+                # print(acct)
                 if not acct.profile.email_confirmed:
                     current_site = get_current_site(request)
                     domain = current_site.domain

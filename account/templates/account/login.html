@@ -14,6 +14,7 @@ Log In - Synergy Network International
           <h3 class="card-title text-center font-weight-bold">Welcome</h3>
           <form method="post" novalidate>
             {% csrf_token %}
+            <input type="hidden" name="next" value="{{ request.GET.next }}">
             {% include 'registration/form.html' %}
             <div class="text-center"><button type="submit" class="btn btn-primary btn-block mt-3">Log in</button></div>
           </form>
