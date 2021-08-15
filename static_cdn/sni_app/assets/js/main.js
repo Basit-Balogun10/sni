@@ -63,7 +63,14 @@
      */
     on("click", "#quick-login-toggle", function () {
         let quickLoginDiv = select("#quick-login");
+        let quickLoginShortcut = select("#quick-login-shortcut");
         quickLoginDiv.style.display = "none";
+        quickLoginShortcut.style.display = "block";
+    });
+
+    on("click", "#expand-quick-login", function () {
+        let quickLoginDiv = select("#quick-login");
+        quickLoginDiv.style.display = "block";
     });
 
     /**
@@ -125,14 +132,9 @@
 
     var breakParent = false;
     for (var navLink in navLinks) {
-        console.log(navLinks[navLink]);
         for (var pos = 0; pos < navLinks[navLink].length; ) {
-            console.log(navLinks[navLink][pos]);
             if (url.includes(navLinks[navLink][pos])) {
-                console.log(navLink);
                 for (var i = 0; i < routes.length; i++) {
-                    console.log(routes[i]);
-                    console.log(routes[i].innerText);
                     if (routes[i].innerText.includes(navLink)) {
                         routes[i].className += " active";
                         break;
