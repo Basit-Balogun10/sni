@@ -9,63 +9,123 @@
 
 <url>
   <loc>https://synergynetworkinternational.pythonanywhere.com/</loc>
-  <lastmod>2021-08-11T09:55:32+00:00</lastmod>
+  <lastmod>2021-08-14T23:50:10+00:00</lastmod>
   <priority>1.00</priority>
 </url>
 <url>
   <loc>https://synergynetworkinternational.pythonanywhere.com/about</loc>
-  <lastmod>2021-08-11T09:55:32+00:00</lastmod>
+  <lastmod>2021-08-14T23:50:10+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://synergynetworkinternational.pythonanywhere.com/blog/index</loc>
-  <lastmod>2021-08-11T09:55:32+00:00</lastmod>
+  <lastmod>2021-08-14T23:50:10+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://synergynetworkinternational.pythonanywhere.com/organizer</loc>
-  <lastmod>2021-08-11T09:55:32+00:00</lastmod>
+  <lastmod>2021-08-14T23:50:10+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://synergynetworkinternational.pythonanywhere.com/speakers</loc>
-  <lastmod>2021-08-11T09:55:32+00:00</lastmod>
+  <lastmod>2021-08-14T23:50:10+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://synergynetworkinternational.pythonanywhere.com/sponsors</loc>
-  <lastmod>2021-08-11T09:55:32+00:00</lastmod>
+  <lastmod>2021-08-14T23:50:10+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://synergynetworkinternational.pythonanywhere.com/login/</loc>
-  <lastmod>2021-08-11T09:55:32+00:00</lastmod>
+  <loc>https://synergynetworkinternational.pythonanywhere.com/login/?next=/</loc>
+  <lastmod>2021-08-14T23:50:10+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://synergynetworkinternational.pythonanywhere.com/register/</loc>
-  <lastmod>2021-08-11T09:55:32+00:00</lastmod>
+  <lastmod>2021-08-14T23:50:10+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://synergynetworkinternational.pythonanywhere.com/schedule</loc>
-  <lastmod>2021-08-11T09:55:32+00:00</lastmod>
+  <lastmod>2021-08-14T23:50:10+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://synergynetworkinternational.pythonanywhere.com/venue</loc>
-  <lastmod>2021-08-11T09:55:32+00:00</lastmod>
+  <lastmod>2021-08-14T23:50:10+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
+  <loc>https://synergynetworkinternational.pythonanywhere.com/login/?next=/about</loc>
+  <lastmod>2021-08-14T23:50:10+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://synergynetworkinternational.pythonanywhere.com/login/?next=/blog/index</loc>
+  <lastmod>2021-08-14T23:50:10+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
   <loc>https://synergynetworkinternational.pythonanywhere.com/blog/science-and-technology/2021/7/25/15-35-50-926297/1/django-sign-up-and-login-with-confirmation-email-python/</loc>
-  <lastmod>2021-08-11T09:55:32+00:00</lastmod>
+  <lastmod>2021-08-14T23:50:10+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://synergynetworkinternational.pythonanywhere.com/login/?next=/organizer</loc>
+  <lastmod>2021-08-14T23:50:10+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://synergynetworkinternational.pythonanywhere.com/login/?next=/speakers</loc>
+  <lastmod>2021-08-14T23:50:10+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://synergynetworkinternational.pythonanywhere.com/login/?next=/sponsors</loc>
+  <lastmod>2021-08-14T23:50:10+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://synergynetworkinternational.pythonanywhere.com/login/?next=/login/</loc>
+  <lastmod>2021-08-14T23:50:10+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://synergynetworkinternational.pythonanywhere.com/password_reset/</loc>
-  <lastmod>2021-08-11T09:55:32+00:00</lastmod>
+  <lastmod>2021-08-14T23:50:10+00:00</lastmod>
   <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://synergynetworkinternational.pythonanywhere.com/login/?next=/register/</loc>
+  <lastmod>2021-08-14T23:50:10+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://synergynetworkinternational.pythonanywhere.com/login/</loc>
+  <lastmod>2021-08-14T23:50:10+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://synergynetworkinternational.pythonanywhere.com/login/?next=/schedule</loc>
+  <lastmod>2021-08-14T23:50:10+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://synergynetworkinternational.pythonanywhere.com/login/?next=/venue</loc>
+  <lastmod>2021-08-14T23:50:10+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://synergynetworkinternational.pythonanywhere.com/login/?next=/blog/science-and-technology/2021/7/25/15-35-50-926297/1/django-sign-up-and-login-with-confirmation-email-python/</loc>
+  <lastmod>2021-08-14T23:50:10+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://synergynetworkinternational.pythonanywhere.com/login/?next=/password_reset/</loc>
+  <lastmod>2021-08-14T23:50:10+00:00</lastmod>
+  <priority>0.51</priority>
 </url>
 
 
