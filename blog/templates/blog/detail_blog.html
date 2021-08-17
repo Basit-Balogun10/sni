@@ -37,7 +37,7 @@
 			{% endif %}
 			<div class="d-flex justify-content-around flex-wrap">
 				<span class="blog-author-detail d-flex">
-					<img src="{{blog_post.author.user.image.url}}" class="img-fluid" alt="">
+					<img src="{{blog_post.author.user.image.url}}" class="img-fluid" alt="{{blog_post.author.user.firstname}} {{blog_post.author.user.lastname}} - Blog post author's image | SNI">
 					<div class="author">
 						<h3 class="text-white">{{blog_post.author.user.firstname}} {{blog_post.author.user.lastname}}
 						</h3>
@@ -114,7 +114,7 @@
 			data-aos-duration="1500">
 			<div class="d-flex justify-content-around flex-wrap">
 				<span class="blog-author-detail justify-content-around d-flex flex-wrap">
-					<img src="{{blog_post.author.user.image.url}}" class="about-author img-fluid" alt="">
+					<img src="{{blog_post.author.user.image.url}}" class="about-author img-fluid" alt="{{blog_post.author.user.firstname}} {{blog_post.author.user.lastname}} - Blog post author's image | SNI">
 					<i onclick="controlAboutDiv();" class="text-white cursor-pointer bi bi-x"
 						style="font-size: 40px;"></i>
 					<span class="author">
@@ -206,7 +206,7 @@
 			<div class="post-item">
 				<div><a
 						href="{% url 'blog:detail' post.category post.date_published.year post.date_published.month post.date_published.day blog_time_published post.id post.title|slugify %}"><img
-							class="post-image" style="height: 150px;" src="{{post.image.url}}"></a></div>
+							class="post-image" alt="{{post.title}} - Blog post's image | SNI" style="height: 150px;" src="{{post.image.url}}"></a></div>
 				<div>
 					<a
 						href="{% url 'blog:detail' post.category post.date_published.year post.date_published.month post.date_published.day blog_time_published post.id post.title|slugify %}">
@@ -262,7 +262,7 @@
 			<div class="post-item">
 				<div><a
 						href="{% url 'blog:detail' post.category post.date_published.year post.date_published.month post.date_published.day blog_time_published post.id post.title|slugify %}"><img
-							class="post-image" style="height: 150px;" src="{{post.image.url}}"></a></div>
+							class="post-image" alt="{{post.title}} - Blog post's image | SNI" style="height: 150px;" src="{{post.image.url}}"></a></div>
 				<div>
 					<a
 						href="{% url 'blog:detail' post.category post.date_published.year post.date_published.month post.date_published.day blog_time_published post.id post.title|slugify %}">
