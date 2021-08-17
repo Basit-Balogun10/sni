@@ -1,0 +1,1 @@
+Sitemap: https://synergynetworkinternational.pythonanywhere.com/sitemap.xml
