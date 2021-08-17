@@ -5,7 +5,7 @@
 
 <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
   <div class="post-item">
-    <div><img src="{{blog_post.image.url}}" class="post-image img-fluid" alt="..."></div>
+    <div><img src="{{blog_post.image.url}}" class="post-image img-fluid" alt="{{blog_post.title}} - Blog post's image | SNI"></div>
     <div><a style="text-decoration: none;"
         href="{% url 'blog:detail' blog_post.category blog_post.date_published.year blog_post.date_published.month blog_post.date_published.day blog_time_published blog_post.id blog_post.title|slugify %}">
         <div class="post-content">
@@ -18,7 +18,7 @@
           <div class="trainer align-items-center">
             <div class="trainer-profile d-flex justify-content-between align-items-center">
               <div class="author-detail d-flex">
-                <img src="{{blog_post.author.user.image.url}}" class="img-fluid" alt="">
+                <img src="{{blog_post.author.user.image.url}}" class="img-fluid" alt="{{blog_post.author.user.firstname}} {{blog_post.author.user.lastname}} - Blog post author's image | SNI">
                 <span>{{blog_post.author.user.firstname}} {{ blog_post.author.user.lastname}}</span>
               </div>
               <div class="feedback d-flex">
