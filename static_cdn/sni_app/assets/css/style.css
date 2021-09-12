@@ -121,15 +121,6 @@ a:hover {
     text-decoration: none;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    font-family: "Raleway", sans-serif;
-}
-
 /*--------------------------------------------------------------
 # Back to top button
 --------------------------------------------------------------*/
@@ -644,7 +635,6 @@ h6 {
 }
 
 #hero .btn-get-started {
-    font-family: "Raleway", sans-serif;
     font-weight: 500;
     font-size: 15px;
     letter-spacing: 1px;
@@ -1560,7 +1550,6 @@ button.more-btn {
     font-size: 14px;
     line-height: 24px;
     margin-bottom: 10px;
-    font-family: "Raleway", sans-serif;
     color: #ffffffa6;
 }
 
